@@ -18,6 +18,7 @@ export const clientURL = {
     SHOW_IN_PROFILE_MENU: true,
     SHOW_IN_HEADER: true,
     WITH_BADGE: false,
+    NEED_AUTHORIZATION: false,
   },
   CART: {
     LINK: '/cart',
@@ -27,6 +28,7 @@ export const clientURL = {
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
     WITH_BADGE: true,
+    NEED_AUTHORIZATION: true,
   },
   USER_LIST: {
     LINK: '/agnetClients',
@@ -36,6 +38,7 @@ export const clientURL = {
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
     WITH_BADGE: false,
+    NEED_AUTHORIZATION: true,
   },
   NOTIFICATIONS: {
     LINK: '',
@@ -45,6 +48,7 @@ export const clientURL = {
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
     WITH_BADGE: true,
+    NEED_AUTHORIZATION: true,
   },
   DOCUMENTS: {
     LINK: '/documentPage',
@@ -54,6 +58,7 @@ export const clientURL = {
     SHOW_IN_PROFILE_MENU: true,
     SHOW_IN_HEADER: false,
     WITH_BADGE: false,
+    NEED_AUTHORIZATION: true,
   },
 }
 

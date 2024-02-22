@@ -44,82 +44,39 @@ const RightComponent = () => {
   }
 
   return (
-    <>
-      {/* <nav
-      className={
-        openSideBar
-          ? 'header-right-cont-main-bigRes opened'
-          : 'header-right-cont-main-bigRes closed'
-      }
-    >
-      {isAdmin && (
-        <div
-          onClick={() => setAdminRightSideBar(!adminRightSideBar)}
-          className="menu-new"
-        >
-          <span
-            className="material-symbols-outlined googleIconHover"
-            style={{ fontSize: '30px' }}
-          >
-            widgets
-          </span>
-        </div>
-      )}
-      <div className="header-right-cont">
-        <nav className={false ? 'site-nav active' : 'site-nav'}>
-          <div className="flex-container">
-            <div className="reg-menu">
-              <ul>
-                <li>
-                  <div className="img" style={{ cursor: 'pointer' }}>
-                    <Link to={'/'}>
-                      <img src={`${process.env.REACT_APP_MEDIA}/logo.png`} alt="" />
-                    </Link>
-                  </div>
-                </li>
-                {isAgent && (
-                  <li className="about-li-hover ">
-                    <AgentMenu />
-                  </li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </nav> */}
-      <Box sx={{ display: 'flex', gap: '20px' }} className="centered">
-        <Link to={'/'}>
-          <img
-            src={`${process.env.REACT_APP_MEDIA}/logo.png`}
-            alt=""
-            style={{ width: '80%' }}
-          />
-        </Link>
+    <Box sx={{ display: 'flex', gap: '20px' }} className="centered">
+      <Link to={'/'}>
+        <img
+          src={`${process.env.REACT_APP_MEDIA}/logo.png`}
+          alt=""
+          style={{ width: '80%' }}
+        />
+      </Link>
+      {isAgent && (
         <IconButton
           onClick={handleClick}
           sx={{ height: '50px', width: '50px', backgroundColor: '#f3f5f9' }}
         >
           <MenuIcon sx={{ height: '30px', width: '30px' }} />
         </IconButton>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          {Object.entries(agentURL).map(([key, value]) => (
-            <MenuItem onClick={() => handleClose(value.LINK)} key={key}>
-              <ListItemIcon>{value.ICON}</ListItemIcon>
-              <ListItemText>{value.LABEL}</ListItemText>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-    </>
+      )}
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        {Object.entries(agentURL).map(([key, value]) => (
+          <MenuItem onClick={() => handleClose(value.LINK)} key={key}>
+            <ListItemIcon>{value.ICON}</ListItemIcon>
+            <ListItemText>{value.LABEL}</ListItemText>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
   )
 }
 
