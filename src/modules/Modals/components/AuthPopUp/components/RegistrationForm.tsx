@@ -1,17 +1,30 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from '@mui/material'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 
 type RegistrationForm = {
+  email: string
   password: string
   confirmPassword: string
   token: string
+  privacy: string | boolean
 }
 
 const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<RegistrationForm>()
   const [acceptCondition, setAcceptCondition] = useState(false)
@@ -21,78 +34,145 @@ const RegistrationForm = () => {
     // if(!acceptCondition) {
     //     onErrorAlert('אנא אשר את תנאי שימוש')
     // }
-    registration(userExtId, phone, data.password, phone, data.token)
+    registration(userExtId, data.email, data.password, phone, data.token)
   }
 
   return (
     <form className="login" onSubmit={handleSubmit(handleLogin)}>
-      <div>
-        <span
-          className="material-symbols-outlined"
-          style={{ fontSize: '50px' }}
-        >
-          person
-        </span>
-      </div>
-      <h3>{'הרשמה'}</h3>
-      <div className="input-cont">
-        <p>{'סיסמה'}</p>
-        <input
-          id="password"
-          type="password"
-          {...register('password', { required: `סיסמא שדה חובה` })}
-        />
-      </div>
-      <div className="input-cont">
-        <p>{'אימות סיסמא'}</p>
-        <input
-          id="password"
-          type="password"
-          {...register('confirmPassword', { required: `סיסמא שדה חובה` })}
-        />
-      </div>
-      <div className="input-cont">
-        <p>{'קוד סודי'}</p>
-        <input
-          id="token"
-          type="text"
-          {...register('token', { required: `קוד סודי שדה חובה` })}
-        />
-      </div>
-      <div className="terms-and-conditions">
-        <div className="checkboxes-and-radios">
-          <input
-            type="checkbox"
-            onChange={(e) => setAcceptCondition(!acceptCondition)}
-            name="checkbox-cats"
-            checked={acceptCondition}
-            id="checkbox-3"
-            value="3"
+      <Box className="centered" sx={{ marginTop: '40px' }}>
+        <PersonOutlineOutlinedIcon sx={{ fontSize: '50px' }} />
+      </Box>
+      <Box className="centered" sx={{ marginTop: '40px' }}>
+        <Typography variant="h4">הרשמה</Typography>
+      </Box>
+      <Box sx={{ margin: '20px 50px' }}>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="email"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: 'מייל שדה חובה',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'מייל אינו תקין',
+              },
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="מייל"
+                type="mail"
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+            )}
           />
-          <label htmlFor="checkbox-3"></label>
-        </div>
-        <span>
-          אנא קרא והסכם{' '}
-          <a
-            target="_blank"
-            href={process.env.REACT_APP_MEDIA + '/privacy_policy.pdf'}
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: 'סיסמא שדה חובה',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="סיסמא"
+                type="password"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            )}
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="confirmPassword"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: 'סיסמא שדה חובה',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="סיסמא"
+                type="password"
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+              />
+            )}
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="token"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: 'קוד סודי שדה חובה',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="קוד סודי"
+                type="mail"
+                error={!!errors.token}
+                helperText={errors.token?.message}
+              />
+            )}
+          />
+        </FormControl>
+        <FormControlLabel
+          control={
+            <Controller
+              name="privacy"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => <Checkbox {...field} color="primary" />}
+            />
+          }
+          label="אנא קרא והסכם לתנאי שימוש"
+        />
+        <Button
+          sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+          fullWidth={true}
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          הרשמה
+        </Button>
+        <Box className="centered" sx={{ marginTop: '30px' }}>
+          <Typography
+            onClick={() => setAction('forgotPassordStepOne')}
+            variant="body2"
+            sx={{ cursor: 'pointer', textDecoration: 'underline' }}
+            color={'primary'}
           >
-            לתנאי השימוש
-          </a>
-        </span>
-      </div>
-
-      <div className="actions">
-        <div className="send btn-cont">
-          <button type="submit">הרשמה</button>
-        </div>
-      </div>
-      <p
-        onClick={() => setAction('forgotPassordStepOne')}
-        className="forgot-pass"
-      >
-        {'שחזר סיסמה'}
-      </p>
+            שחזר סיסמה
+          </Typography>
+        </Box>
+        <Box sx={{ marginTop: '30px' }}>
+          <Button
+            sx={{ borderRadius: '12px', marginTop: '10px' }}
+            fullWidth={true}
+            type="submit"
+            variant="outlined"
+            color="primary"
+            onClick={() => setAction('login')}
+          >
+            יש כבר משתמש?
+          </Button>
+        </Box>
+      </Box>
     </form>
   )
 }

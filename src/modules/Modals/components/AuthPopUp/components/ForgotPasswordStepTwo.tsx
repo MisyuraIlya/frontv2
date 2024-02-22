@@ -1,7 +1,9 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { useModals } from '../../../provider/ModalProvider'
+import { Box, Button, FormControl, TextField, Typography } from '@mui/material'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 
 type ForgotPasswordStepTwo = {
   token: string
@@ -14,6 +16,7 @@ const ForgotPasswordStepTwo = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<ForgotPasswordStepTwo>()
   const { restorePasswordStepTwo, email, setAction } = useAuth()
   const { setOpenAuthModal } = useModals()
@@ -25,34 +28,83 @@ const ForgotPasswordStepTwo = () => {
 
   return (
     <form className="login" onSubmit={handleSubmit(handleLogin)}>
-      <div className="forgot-pass-wrapp">
-        <div className="forgot-password">
-          <div className="cancel">
-            <div onClick={() => setOpenAuthModal(false)}>
-              <span className="material-symbols-outlined">close</span>
-            </div>
-          </div>
-          <div>
-            <h3>{'אנא הקלד קוד הבקשה וסיסמה חדשה'} </h3>
-            <input
-              type="text"
-              {...register('token', { required: `קוד שדה חובה` })}
-              placeholder={'קוד הבקשה'}
-            />
-            <input
-              type="text"
-              {...register('password', { required: `סיסמה שדה חובה` })}
-              placeholder={'סיסמה חדשה'}
-            />
-            <input
-              type="text"
-              {...register('confirmPassword', { required: `אימות שדה חובה` })}
-              placeholder={'אימות סיסמה חדשה'}
-            />
-            <button type="submit">{'שלח'}</button>
-          </div>
-        </div>
-      </div>
+      <Box className="centered" sx={{ marginTop: '40px' }}>
+        <PersonOutlineOutlinedIcon sx={{ fontSize: '50px' }} />
+      </Box>
+      <Box className="centered" sx={{ marginTop: '40px' }}>
+        <Typography variant="h4">שחזור סיסמא</Typography>
+      </Box>
+      <Box sx={{ margin: '20px 50px' }}>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="token"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: 'קוד סודי שדה חובה',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="קוד סודי"
+                type="text"
+                error={!!errors.token}
+                helperText={errors.token?.message}
+              />
+            )}
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: ' סיסמא שדה חובה',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="סיסמא"
+                type="text"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            )}
+          />
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <Controller
+            name="confirmPassword"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: ' אימות סיסמא שדה חובה',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                variant="standard"
+                label="אימות סיסמא"
+                type="text"
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+              />
+            )}
+          />
+        </FormControl>
+        <Button
+          sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+          fullWidth={true}
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          שינוי סיסמא
+        </Button>
+      </Box>
     </form>
   )
 }

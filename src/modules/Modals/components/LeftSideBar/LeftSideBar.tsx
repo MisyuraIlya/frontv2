@@ -5,6 +5,7 @@ type LeftSideBarProps = {
   setActive: (bool: boolean) => void
 }
 const LeftSideBar: FC<LeftSideBarProps> = ({ active, setActive }) => {
+  //DELETE
   return (
     <div
       className={

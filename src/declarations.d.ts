@@ -30,3 +30,13 @@ interface IMediaObject {
   filePath: string
   createdAt: string
 }
+
+interface IURL {
+  LINK: string
+  LABEL: string
+  ICON: JSX.Element
+  FOR_AGENT: boolean
+  SHOW_IN_PROFILE_MENU: boolean
+  SHOW_IN_HEADER: boolean
+  WITH_BADGE: boolean
+}

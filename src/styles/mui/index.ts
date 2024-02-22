@@ -195,6 +195,8 @@ const theme = createTheme({
       },
     },
 
+    // MODAL
+
     // MuiBackdrop: {
     //     styleOverrides: {
     //         root: {

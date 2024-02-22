@@ -4,12 +4,21 @@ import { useModals } from '../../../Modals/provider/ModalProvider'
 import ProfileMenu from './components/ProfileMenu'
 import { useCart } from '../../../Cart/store/cart.store'
 import { Link, useNavigate } from 'react-router-dom'
-import { Badge, Box, IconButton } from '@mui/material'
+import {
+  Badge,
+  Box,
+  Drawer,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 
-import PersonIcon from '@mui/icons-material/Person'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import CampaignIcon from '@mui/icons-material/Campaign'
-import StorefrontIcon from '@mui/icons-material/Storefront'
+import { clientURL } from '../../../../enums/url'
+import NotificationContainer from '../../../PushNotifications/components/NotificationContainer/NotificationContainer'
 const LeftComponent = () => {
   const { user, isAgent, setAction } = useAuth()
   const { cart } = useCart()
@@ -22,102 +31,99 @@ const LeftComponent = () => {
     setAction('login')
   }
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const [openDrawver, setOpenDrawver] = useState(false)
+
+  const handleClose = (value: IURL) => {
+    if (!user && value.LABEL === clientURL.PROFILE.LABEL) {
+      setOpenAuthModal(true)
+    }
+    if (typeof value.LINK === 'string') navigate(value.LINK)
+    setAnchorEl(null)
+  }
+
+  const handleOnMouseOver = (
+    value: IURL,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (value.LABEL === clientURL.PROFILE.LABEL) {
+      setAnchorEl(event.currentTarget)
+    }
+  }
+
+  const handleClick = (value: IURL) => {
+    if (value.LINK) {
+      navigate(value.LINK)
+    }
+
+    if (value.LABEL === clientURL.NOTIFICATIONS.LABEL) {
+      setOpenDrawver(true)
+    }
+  }
+
   return (
     <>
-      {/* <ul className={!user ? 'prelogIn' : 'afterLog'}>
-        <li
-          id="my-profile-cont"
-          className={
-            !openProfile ? 'my-profile-cont close' : 'my-profile-cont open'
-          }
-          onMouseEnter={() => setOpenProfile(true)}
-          onMouseLeave={() => setOpenProfile(false)}
-          onClick={handleProfileClick}
-        >
-          {user ? (
-            <>
-              {window.innerWidth > 1150 ? (
-                <div className="img icon" onClick={() => navigate('/profile')}>
-                  <span className="material-symbols-outlined">person</span>
-                  {isAgent ? <p className="agent-title">סוכן</p> : null}
-                </div>
-              ) : (
-                <div className="img icon" onClick={() => navigate('/profile')}>
-                  <span className="material-symbols-outlined">person</span>
-                  {isAgent ? <p className="agent-title">סוכן</p> : null}
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="img icon" onClick={() => setOpenAuthModal(true)}>
-              <span className="material-symbols-outlined">person</span>
-            </div>
-          )}
-          {user && <ProfileMenu setOpenProfile={setOpenProfile} />}
-        </li>
-
-        {isAgent ? (
-          <li className={'left'}>
-            <Link to={'/agentClients'}>
-              <span className="material-symbols-outlined">StoreFront</span>
-            </Link>
-          </li>
-        ) : null}
-        {user && (
-          <li>
-            <Link to={'/cart'}>
-              <button className="icon">
-                {cart.length > 0 && (
-                  <div className="cart-counter">{cart.length}</div>
-                )}
-                <span className="material-symbols-outlined">shopping_cart</span>
-              </button>
-            </Link>
-          </li>
-        )}
-
-        {leftSideBar && (
-          <div
-            onClick={() => setLeftSideBar(false)}
-            className="fake-notification"
-          ></div>
-        )}
-
-        {user && (
-          <li className={'left'}>
-            <button className="icon" onClick={() => setLeftSideBar(true)}>
-              <span className="material-symbols-outlined">campaign</span>
-            </button>
-          </li>
-        )}
-      </ul> */}
-      {/* <IdentifyCont/> */}
       <Box sx={{ display: 'flex', gap: '10px' }}>
-        <IconButton
-          sx={{ height: '50px', width: '50px', backgroundColor: '#f3f5f9' }}
-        >
-          <PersonIcon sx={{ height: '30px', width: '30px' }} />
-        </IconButton>
-        <IconButton
-          sx={{ height: '50px', width: '50px', backgroundColor: '#f3f5f9' }}
-        >
-          <StorefrontIcon sx={{ height: '30px', width: '30px' }} />
-        </IconButton>
-        <IconButton
-          sx={{ height: '50px', width: '50px', backgroundColor: '#f3f5f9' }}
-        >
-          <Badge badgeContent={4} color="secondary">
-            <ShoppingCartIcon sx={{ height: '30px', width: '30px' }} />
-          </Badge>
-        </IconButton>
-        <IconButton
-          sx={{ height: '50px', width: '50px', backgroundColor: '#f3f5f9' }}
-        >
-          <Badge badgeContent={4} color="secondary">
-            <CampaignIcon sx={{ height: '30px', width: '30px' }} />
-          </Badge>
-        </IconButton>
+        {Object.entries(clientURL).map(([key, value]) => {
+          if (value.SHOW_IN_HEADER) {
+            return (
+              <IconButton
+                key={key}
+                sx={{
+                  height: '50px',
+                  width: '50px',
+                  backgroundColor: '#f3f5f9',
+                }}
+                onClick={() => handleClick(value)}
+                onMouseEnter={(e) => handleOnMouseOver(value, e)}
+              >
+                {value.WITH_BADGE ? (
+                  <Tooltip title={value.LABEL}>
+                    <Badge badgeContent={4} color="secondary">
+                      {value.ICON}
+                    </Badge>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title={value.LABEL}>{value.ICON}</Tooltip>
+                )}
+              </IconButton>
+            )
+          }
+        })}
       </Box>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        {Object.entries(clientURL).map(([key, value]) => {
+          if (value.SHOW_IN_PROFILE_MENU) {
+            return (
+              <MenuItem onClick={() => handleClose(value)} key={key}>
+                <ListItemIcon>{value.ICON}</ListItemIcon>
+                <ListItemText>{value.LABEL}</ListItemText>
+              </MenuItem>
+            )
+          }
+        })}
+      </Menu>
+      <Drawer
+        anchor="right"
+        open={openDrawver}
+        onClose={() => setOpenDrawver(false)}
+      >
+        <Box sx={{ minWidth: '310px' }} className="centered">
+          <Box>
+            <Typography variant="h6">הודעות</Typography>
+            <NotificationContainer />
+          </Box>
+        </Box>
+      </Drawer>
     </>
   )
 }

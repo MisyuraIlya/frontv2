@@ -10,6 +10,7 @@ const CenterComponent = () => {
     productsFilter,
     findProductsByValue,
     searchValue,
+    totalFound,
     loading,
     setSearchValue,
     setSavedValue,
@@ -38,7 +39,12 @@ const CenterComponent = () => {
         handleFunction={onChangeHandle}
         placeholder="חפש מוצר..."
         ListComponent={
-          <ProductList onClick={onClickHandle} array={productsFilter} />
+          <ProductList
+            onClick={onClickHandle}
+            array={productsFilter}
+            loading={loading}
+            totalFound={totalFound}
+          />
         }
       />
     </Box>

@@ -1,13 +1,4 @@
-import {
-  Box,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Paper,
-  TextField,
-} from '@mui/material'
+import { Box, IconButton, TextField } from '@mui/material'
 import React, { FC, useEffect, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import { useDebounce } from 'use-debounce'
