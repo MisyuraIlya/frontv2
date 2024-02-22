@@ -44,11 +44,12 @@ const RouterApp = () => {
         <Routes>
           <Route>
             <Route path="/" element={<Home />} />
-            {/* <Route
+            <Route
               path="/client/:documentType/:lvl1/:lvl2/:lvl3"
               element={<Catalog />}
             />
-            <Route path="/CatalogView" element={<CatalogView />} />
+
+            {/* <Route path="/CatalogView" element={<CatalogView />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />
 

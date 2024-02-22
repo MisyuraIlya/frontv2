@@ -6,9 +6,16 @@ import LeftSide from '../components/LeftSide/LeftSide'
 import { useCatalog } from '../store/CatalogStore'
 import { getProductsLocalStorage } from '../helpers/catalog.helpler'
 import { useSearchStore } from '../store/SearchStore'
-import BreadCrumbs from '../../../shared/BreadCrumbs'
+// import BreadCrumbs from '../../../shared/BreadCrumbs'
 import { useCategories } from '../store/CategoriesStore'
-
+import {
+  Grid,
+  Breadcrumbs,
+  Link,
+  Typography,
+  Box,
+  Container,
+} from '@mui/material'
 const Catalog = () => {
   const { documentType, lvl1, lvl2, lvl3 } = useParams()
   const location = useLocation()
@@ -78,34 +85,31 @@ const Catalog = () => {
   }, [location.pathname, location.search])
 
   return (
-    <div className="page-container category-page">
-      <div className="category-page-subcont">
-        <div className="category-page-subcont2 flex-container">
-          {(loading || filterLoading) && <Loader />}
-          <BreadCrumbs
-            array={[
-              {
-                title: lvl1Bread[0]?.title || '',
-                link: `/client/catalog/${lvl1Bread[0]?.identify}/0/0` || '',
-              },
-              {
-                title: lvl2Bread[0]?.title || '',
-                link:
-                  `/client/catalog/${lvl1Bread[0]?.identify}/${lvl2Bread[0]?.extId}/0` ||
-                  '',
-              },
-              { title: lvl3Bread[0]?.title || '', link: '' },
-            ]}
-          />
-          <div className="slide-menu-cont col-lg-3">
-            <RightSide />
-          </div>
-          <div className="category-page-sub col-lg-9">
-            <LeftSide />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="lg">
+      {/* <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href={`/client/catalog/${lvl1Bread[0]?.identify}/0/0`}>
+          {lvl1Bread[0]?.title || ''}
+        </Link>
+        <Link
+          underline="hover"
+          color="inherit"
+          href={`/client/catalog/${lvl1Bread[0]?.identify}/${lvl2Bread[0]?.extId}/0`}
+        >
+          {lvl2Bread[0]?.title || ''}
+        </Link>
+        <Typography variant='h5'>
+          {lvl3Bread[0]?.title || ''}
+        </Typography>
+      </Breadcrumbs> */}
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <RightSide />
+        </Grid>
+        <Grid item xs={9}>
+          <LeftSide />
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 

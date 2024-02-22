@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-// import { NavLink, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Filters from './components/Filters'
-// import useCategories from '../../store/CategoriesStore';
-// import useSearchStore from '../../store/SearchStore';
 import { useCatalog } from '../../store/CatalogStore'
 import { useCategories } from '../../store/CategoriesStore'
 import { useSearchStore } from '../../store/SearchStore'
 import { useParams } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { checkIsBlockedForView } from '../../helpers/checkIsBlockedForView'
+import { List, ListItem, ListItemText, Typography } from '@mui/material'
+import { themeColors } from '../../../../styles/mui'
 const RightSide = () => {
   const { categories } = useCategories()
   const { categoriesFilter } = useSearchStore()
@@ -16,10 +15,8 @@ const RightSide = () => {
   const { lvl1, lvl2, lvl3, page, parent, type, documentType } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-
   const isSearchDocument = documentType === 'search'
   const isAllProds = location?.pathname.includes('/0/0/0')
-
   const handlePush = (
     lvl1: ICategory,
     lvl2: ICategory,
@@ -54,156 +51,105 @@ const RightSide = () => {
 
   return (
     <>
-      <div
-        className={
-          open
-            ? 'category-slidebar-super-main-cont open'
-            : 'category-slidebar-super-main-cont closed'
-        }
-      >
-        <div onClick={() => setOpen(!open)} className="close-cont">
-          {open ? (
-            <span className="material-symbols-outlined">close</span>
-          ) : (
-            <span className="material-symbols-outlined">filter_list</span>
-          )}
-        </div>
-        <div className="category-slidebar-main-cont">
-          <div className="category-slidebar-fixed-cont">
-            <div className="category-slidebar-cont">
-              <div className="slide-head-cont">
-                <h2>{'סינון מוצרים'}</h2>
-              </div>
-              <div className="category-slidebar-subcont">
-                <div className="category-list-cont">
-                  <div
-                    className="category-list-subcont"
-                    onClick={() => setOpen(!open)}
-                  >
-                    <div className="lvl-cont">
-                      <div
-                        onClick={() =>
-                          navigate(`/client/${documentType}/0/0/0`)
-                        }
-                      >
-                        <h3 className={`lvl1 ${isAllProds ? 'active' : ''}`}>
-                          הכל
-                        </h3>
-                      </div>
-                    </div>
-                    {(categoriesFilter?.length > 0
-                      ? categoriesFilter
-                      : categories
-                    ).map((categoryLvl1, index1) => {
-                      if (categoryLvl1.lvlNumber === 1) {
-                        return (
-                          <div className="lvl-cont" key={index1}>
-                            <div
-                              onClick={() => {
-                                isSearchDocument
-                                  ? navigate(
-                                      `/client/${documentType}/${categoryLvl1.identify}/0/0${location.search}`
-                                    )
-                                  : navigate(
-                                      `/client/${documentType}/${categoryLvl1.identify}/0/0?page=1`
-                                    )
+      <List>
+        {categories?.map((lvl1Cat, key1) => {
+          if (lvl1Cat.lvlNumber === 1) {
+            return (
+              <>
+                <ListItem
+                  key={key1}
+                  onClick={() =>
+                    navigate(`/client/${documentType}/${lvl1Cat.identify}/0/0`)
+                  }
+                  sx={{ cursor: 'pointer' }}
+                >
+                  <ListItemText
+                    primary={lvl1Cat.title}
+                    sx={{
+                      '& span': {
+                        textDecoration:
+                          lvl1 === lvl1Cat.identify ? 'underline' : 'none',
+                        fontWeight: lvl1 === lvl1Cat.identify ? 600 : 500,
+                        color:
+                          lvl1 === lvl1Cat.identify
+                            ? themeColors.secondary
+                            : 'black',
+                      },
+                    }}
+                  />
+                </ListItem>
+                {lvl1 === lvl1Cat.identify && (
+                  <List sx={{ marginLeft: '30px' }}>
+                    {lvl1Cat?.categories?.map((lvl2Cat, key2) => {
+                      return (
+                        <>
+                          <ListItem
+                            key={key2}
+                            sx={{ cursor: 'pointer' }}
+                            onClick={() =>
+                              handlePush(lvl1Cat, lvl2Cat, lvl2Cat)
+                            }
+                          >
+                            <ListItemText
+                              primary={lvl2Cat.title}
+                              sx={{
+                                '& span': {
+                                  textDecoration:
+                                    lvl2 === lvl2Cat.extId
+                                      ? 'underline'
+                                      : 'none',
+                                  fontWeight:
+                                    lvl2 === lvl2Cat.extId ? 600 : 500,
+                                  color:
+                                    lvl2 === lvl2Cat.extId
+                                      ? themeColors.secondary
+                                      : 'black',
+                                },
                               }}
-                            >
-                              <h3
-                                className={
-                                  lvl1 == categoryLvl1.identify
-                                    ? 'lvl1 active'
-                                    : 'lvl1'
-                                }
-                              >
-                                {categoryLvl1.title}
-                              </h3>
-                            </div>
-                            {categoryLvl1?.categories?.map(
-                              (categoryLvl2, index2) => {
-                                return (
-                                  <div
-                                    key={index2}
-                                    className={
-                                      categoryLvl1.identify.toString() === lvl1
-                                        ? 'col active'
-                                        : 'col'
-                                    }
-                                  >
-                                    <div
-                                      onClick={() =>
-                                        handlePush(
-                                          categoryLvl1,
-                                          categoryLvl2,
-                                          categoryLvl2
-                                        )
-                                      }
-                                    >
-                                      <h3
-                                        className={
-                                          lvl2 == categoryLvl2.extId
-                                            ? 'active'
-                                            : ''
-                                        }
-                                      >
-                                        {categoryLvl2.title}
-                                      </h3>
-                                    </div>
-                                    <ul
-                                      className={
-                                        categoryLvl2.extId == lvl2
-                                          ? 'active'
-                                          : ''
-                                      }
-                                    >
-                                      {categoryLvl2?.categories?.map(
-                                        (categoryLvl3, index3) => {
-                                          return (
-                                            <li
-                                              key={index3}
-                                              className={
-                                                lvl3 == categoryLvl3.extId
-                                                  ? 'active-a'
-                                                  : ''
-                                              }
-                                            >
-                                              <span
-                                                className={
-                                                  lvl3 == categoryLvl3.extId
-                                                    ? 'active-a'
-                                                    : ''
-                                                }
-                                                onClick={() =>
-                                                  handlePush(
-                                                    categoryLvl1,
-                                                    categoryLvl2,
-                                                    categoryLvl3
-                                                  )
-                                                }
-                                              >
-                                                {categoryLvl3.title}
-                                              </span>
-                                            </li>
-                                          )
-                                        }
-                                      )}
-                                    </ul>
-                                  </div>
-                                )
-                              }
-                            )}
-                          </div>
-                        )
-                      }
+                            />
+                          </ListItem>
+                          {lvl2 === lvl2Cat.extId && (
+                            <List sx={{ marginLeft: '60px' }}>
+                              {lvl2Cat?.categories?.map((lvl3Cat, key3) => (
+                                <ListItem
+                                  key={key3}
+                                  sx={{ cursor: 'pointer' }}
+                                  onClick={() =>
+                                    handlePush(lvl1Cat, lvl2Cat, lvl3Cat)
+                                  }
+                                >
+                                  <ListItemText
+                                    primary={lvl3Cat.title}
+                                    sx={{
+                                      '& span': {
+                                        textDecoration:
+                                          lvl3 === lvl3Cat.extId
+                                            ? 'underline'
+                                            : 'none',
+                                        fontWeight:
+                                          lvl3 === lvl3Cat.extId ? 600 : 500,
+                                        color:
+                                          lvl3 === lvl3Cat.extId
+                                            ? themeColors.secondary
+                                            : 'black',
+                                      },
+                                    }}
+                                  />
+                                </ListItem>
+                              ))}
+                            </List>
+                          )}
+                        </>
+                      )
                     })}
-                  </div>
-                </div>
-              </div>
-              <Filters />
-            </div>
-          </div>
-        </div>
-      </div>
+                  </List>
+                )}
+              </>
+            )
+          }
+        })}
+      </List>
+      <Filters />
     </>
   )
 }
