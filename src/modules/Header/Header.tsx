@@ -26,6 +26,7 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
+      <CategoryNavBar />
     </AppBar>
   )
 }

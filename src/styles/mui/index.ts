@@ -164,7 +164,7 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          padding: '20px 0',
+          paddingTop: '15px',
           backgroundColor: '#fff',
           color: '#303545',
           iconColor: '#303545',

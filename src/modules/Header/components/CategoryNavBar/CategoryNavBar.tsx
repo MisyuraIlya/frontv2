@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useCategories } from '../../../Catalog/store/CategoriesStore'
 import { checkIsBlockedForView } from '../../../Catalog/helpers/checkIsBlockedForView'
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Typography,
+  Grid,
+  ListItemButton,
+} from '@mui/material'
+import { themeColors } from '../../../../styles/mui'
+
 const CategoryNavBar = () => {
   const { categories, getCategories } = useCategories()
-  const [active, setActeve] = useState('')
+  const [active, setActive] = useState<number>(0)
   const navigate = useNavigate()
 
   const handlePush = (
@@ -36,97 +48,97 @@ const CategoryNavBar = () => {
   }, [])
 
   return (
-    <nav
-      id="cat-nav"
-      className={
-        true ? 'active header-cats-main-desktop' : 'header-cats-main-desktop'
-      }
+    <List
+      sx={{
+        backgroundColor: themeColors.primary,
+        color: 'white',
+        marginTop: '10px',
+      }}
+      onMouseLeave={() => setActive(0)}
     >
-      <div className="container">
-        <ul className="main-menu-ecare">
-          {categories?.map((element, index) => {
-            if (element.lvlNumber === 1 && element.isPublished) {
-              return (
-                <li
+      <Container maxWidth="lg" sx={{ display: 'flex', position: 'relative' }}>
+        {categories?.map((element, index) => {
+          if (element.lvlNumber === 1 && element.isPublished) {
+            return (
+              <>
+                <ListItem
+                  sx={{
+                    height: '30px',
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                  }}
                   key={index}
-                  className={
-                    active === element.id.toString()
-                      ? 'active main-li'
-                      : 'main-li'
-                  }
+                  onMouseEnter={() => setActive(element.id)}
                 >
-                  <Link to={`/client/catalog/${element.identify}/0/0?page=1`}>
-                    <p>{element.title}</p>
-                  </Link>
-
-                  <div
-                    id={'sub_menu_' + element.id}
-                    className={
-                      active === element.id.toString()
-                        ? 'wide-sub-menu active'
-                        : 'wide-sub-menu'
+                  <ListItemText
+                    primary={element?.title}
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() =>
+                      navigate(`/client/catalog/${element.identify}/0/0?page=1`)
                     }
+                  />
+                </ListItem>
+                {active == element.id && (
+                  <Paper
+                    elevation={4}
+                    sx={{
+                      minHeight: '200px',
+                      maxHeight: '400px',
+                      overflow: 'auto',
+                      position: 'absolute',
+                      width: '100%',
+                      top: '38px',
+                    }}
+                    onMouseEnter={() => setActive(element.id)}
+                    onMouseLeave={() => setActive(0)}
                   >
-                    {element?.categories && element.categories.length > 0 && (
-                      <div className="sub-menu-wrapp scrollbar animated fadeIn">
-                        <div className="flex-container">
-                          <div className="col-lg-12 flex-container sub-menu-container">
-                            {element.categories?.map((elem, ind) => {
-                              return (
-                                <div
-                                  key={ind}
-                                  className="item"
-                                  onClick={() =>
-                                    handlePush(element, elem, elem)
-                                  }
-                                >
-                                  <a>
-                                    <h2>{elem.title}</h2>
-                                  </a>
-                                  <div className="children">
-                                    <ul>
-                                      {elem?.categories?.map((e, i) => {
-                                        return (
-                                          <li
-                                            key={i}
-                                            onClick={() =>
-                                              handlePush(element, elem, e)
-                                            }
-                                          >
-                                            <a>{e.title}</a>
-                                          </li>
-                                        )
-                                      })}
-                                    </ul>
-                                  </div>
-                                </div>
-                              )
-                            })}
-                          </div>
-
-                          <div className="col-lg-3">
-                            <div className="banner animated pulse">
-                              {/* <Link to={element.Link ? element.Link : '/'}> */}
-                              {/* <img src={`${process.env.REACT_APP_MEDIA}/banner/${element.Banner}`} alt="" /> */}
-                              {/* </Link> */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </li>
-              )
-            }
-          })}
-          <li>
-            <Link to={`/client/medi-special`}>
-              <p style={{ color: '#c52a43' }}>{'MEDI SPECIAL'}</p>
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+                    <Grid container spacing={2} sx={{ padding: '20px' }}>
+                      {element?.categories &&
+                        element.categories.length > 0 &&
+                        element.categories?.map((lvl2, key) => {
+                          return (
+                            <Grid item xs={3} key={key}>
+                              <Typography
+                                variant="body1"
+                                fontWeight={900}
+                                color={themeColors.primary}
+                                sx={{ cursor: 'pointer' }}
+                                onClick={() => handlePush(element, lvl2, lvl2)}
+                              >
+                                {lvl2.title}
+                              </Typography>
+                              <List sx={{ margin: '0', padding: '0' }}>
+                                {lvl2?.categories?.map((lvl3, key2) => (
+                                  <ListItem
+                                    key={key2}
+                                    sx={{ margin: '0', padding: '0' }}
+                                  >
+                                    <ListItemButton
+                                      sx={{ margin: '0', padding: '0' }}
+                                    >
+                                      <ListItemText
+                                        primary={lvl3?.title}
+                                        sx={{ cursor: 'pointer' }}
+                                        onClick={() =>
+                                          handlePush(element, lvl2, lvl3)
+                                        }
+                                      />
+                                    </ListItemButton>
+                                  </ListItem>
+                                ))}
+                              </List>
+                            </Grid>
+                          )
+                        })}
+                    </Grid>
+                  </Paper>
+                )}
+              </>
+            )
+          }
+        })}
+      </Container>
+    </List>
   )
 }
 
