@@ -1,12 +1,11 @@
 import React, { FC, useRef } from 'react'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { SwiperOptions } from 'swiper/types'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { Link } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import { TailSpin } from 'react-loader-spinner'
+import { Box, Typography } from '@mui/material'
 
 interface SliderSectionProps {
   title: string
@@ -53,25 +52,17 @@ const SliderSection: FC<SliderSectionProps> = ({
       },
     },
   }
-
   return (
-    <div className="products-sale product-list cat-list">
-      <div className="title-wrapper">
-        <h1 className="title">{title && <span>{title}</span>}</h1>
-        <div className="referal-cont">
-          {/* <Link to={res.link}>
-                        <p>{res.linkTitle}</p>
-                    </Link> */}
-        </div>
-      </div>
-      <div className="items images images-slider images-slider-cont">
+    <Box>
+      <Typography variant="h4">{title}</Typography>
+      <Box>
         <Swiper {...params}>
           {array?.map((element, index) => {
             return (
-              <SwiperSlide key={index} className="product-item">
-                <div className={'wrapper'}>
+              <SwiperSlide key={index}>
+                <Box>
                   <Link to={`/client/catalog/${element?.identify}/0/0?page=1`}>
-                    <div className="img-cont">
+                    <Box>
                       <img
                         className="img"
                         src={
@@ -82,50 +73,20 @@ const SliderSection: FC<SliderSectionProps> = ({
                             : process.env.REACT_APP_MEDIA + '/placeholder.jpg'
                         }
                       />
-                    </div>
-                    <div className="prod-data-cont">
-                      <h3 className="p-title">{element?.title}</h3>
-                    </div>
+                    </Box>
+                    <Box>
+                      <Typography variant="h6" fontSize={16}>
+                        {element?.title}
+                      </Typography>
+                    </Box>
                   </Link>
-                </div>
+                </Box>
               </SwiperSlide>
             )
           })}
         </Swiper>
-        {array?.length > toShow && (
-          <div className="swiper-navigation">
-            <button
-              className="swiper-nav prev"
-              //@ts-ignore
-              onClick={() => swiperRef.current?.slidePrev()}
-            >
-              <span className="material-symbols-outlined">
-                arrow_forward_ios
-              </span>
-            </button>
-            <button
-              className="swiper-nav next"
-              //@ts-ignore
-              onClick={() => swiperRef.current?.slideNext()}
-            >
-              <span className="material-symbols-outlined">arrow_back_ios</span>
-            </button>
-          </div>
-        )}
-      </div>
-      {loading && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '180px',
-          }}
-        >
-          <TailSpin height="40" width="40" color="black" visible={true} />
-        </div>
-      )}
-    </div>
+      </Box>
+    </Box>
   )
 }
 

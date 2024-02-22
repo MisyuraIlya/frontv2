@@ -12,7 +12,7 @@ const Header = () => {
   const { user, isAgent, isAdmin } = useAuth()
   const [mobileSearchOn, setMobileSearchOn] = useState(false)
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <Grid container spacing={2}>
           <Grid item xs={4} className="centered">

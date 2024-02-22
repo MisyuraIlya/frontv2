@@ -24,6 +24,7 @@ import Target from './modules/Agent/pages/Target'
 import Visits from './modules/Agent/pages/Visits'
 import AgentsPage from './modules/Admin/pages/AgentsPage'
 import { useAuth } from './modules/Auth/store/useAuthStore'
+import { Box } from '@mui/material'
 
 const RouterApp = () => {
   const { user } = useAuth()
@@ -39,47 +40,49 @@ const RouterApp = () => {
   return (
     <>
       <Header />
-      {/* <Routes>
-        <Route>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/client/:documentType/:lvl1/:lvl2/:lvl3"
-            element={<Catalog />}
-          />
-          <Route path="/CatalogView" element={<CatalogView />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+      <Box sx={{ marginTop: '140px' }}>
+        <Routes>
+          <Route>
+            <Route path="/" element={<Home />} />
+            {/* <Route
+              path="/client/:documentType/:lvl1/:lvl2/:lvl3"
+              element={<Catalog />}
+            />
+            <Route path="/CatalogView" element={<CatalogView />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
 
-          <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} />
-          <Route path="/documentPage" element={<DocumentsPage />} />
-          <Route path="/historyItemPage/:id" element={<HistoryItemPage />} />
-          <Route path="/historyPage" element={<HistoryPage />} />
-          <Route path="/kartessetPage" element={<KartessetPage />} />
+            <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} />
+            <Route path="/documentPage" element={<DocumentsPage />} />
+            <Route path="/historyItemPage/:id" element={<HistoryItemPage />} />
+            <Route path="/historyPage" element={<HistoryPage />} />
+            <Route path="/kartessetPage" element={<KartessetPage />} />
 
-          <Route
-            path="/admin/category-edit/:lvl1/:lvl2/:lvl3"
-            element={<CategoryEdit />}
-          />
-          <Route
-            path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
-            element={<ProductsEdit />}
-          />
-          <Route path="/admin/clients" element={<Clients />} />
-          <Route path="/admin/approveDoc" element={<Orders />} />
-          <Route
-            path="/admin/approveDocItems/:id"
-            element={<OrderItemPage />}
-          />
-          <Route path="/admin/notification" element={<NotificationPage />} />
-          <Route path="/admin/agents" element={<AgentsPage />} />
+            <Route
+              path="/admin/category-edit/:lvl1/:lvl2/:lvl3"
+              element={<CategoryEdit />}
+            />
+            <Route
+              path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
+              element={<ProductsEdit />}
+            />
+            <Route path="/admin/clients" element={<Clients />} />
+            <Route path="/admin/approveDoc" element={<Orders />} />
+            <Route
+              path="/admin/approveDocItems/:id"
+              element={<OrderItemPage />}
+            />
+            <Route path="/admin/notification" element={<NotificationPage />} />
+            <Route path="/admin/agents" element={<AgentsPage />} />
 
-          <Route path="/agentClients" element={<AgentClinets />} />
-          <Route path="/agentDashboard/:id" element={<AgentDashboard />} />
-          <Route path="/objectives/:id" element={<Objectives />} />
-          <Route path="/target/:id" element={<Target />} />
-          <Route path="/visits/:id" element={<Visits />} />
-        </Route>
-      </Routes> */}
+            <Route path="/agentClients" element={<AgentClinets />} />
+            <Route path="/agentDashboard/:id" element={<AgentDashboard />} />
+            <Route path="/objectives/:id" element={<Objectives />} />
+            <Route path="/target/:id" element={<Target />} />
+            <Route path="/visits/:id" element={<Visits />} /> */}
+          </Route>
+        </Routes>
+      </Box>
     </>
   )
 }

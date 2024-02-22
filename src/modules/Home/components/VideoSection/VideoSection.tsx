@@ -1,25 +1,80 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import GalaxtVideo from '../GalaxyVideo/GalaxtVideo'
+import { Typography, Button, Container, Paper, Box } from '@mui/material'
+
 const VideoSection = () => {
+  const styles = {
+    videoContainer: {
+      position: 'relative',
+      width: '100%',
+      height: '600px',
+      overflow: 'hidden',
+      background: '#fff', // Add background color
+    } as React.CSSProperties,
+
+    video: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      filter: 'brightness(50%)', // Add brightness filter
+    } as React.CSSProperties,
+    showcase: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      textAlign: 'center',
+      color: '#fff',
+    } as React.CSSProperties,
+    title: {
+      width: '90%',
+      marginBottom: '120px',
+    } as React.CSSProperties,
+  }
+
   return (
-    <section
-      id="page1-my"
-      className="section entry-section"
-      style={{ position: 'relative' }}
-    >
-      <GalaxtVideo />
-      <div className={true ? 'showcase animated fadeInDown' : 'showcase'}>
-        <h1 className="h1-2">
-          {'ברוכים הבאים למדי מרקט  המקור שלך לתרופות וציוד רפואי בישראל'}
-        </h1>
-        <Link to={'/client/catalog/0/0/0?page=1'}>
-          <div className="button-cls">
-            <p>{'לקטלוג המלא'}</p>
-          </div>
+    <Box style={styles.videoContainer}>
+      <Paper elevation={0}>
+        <video
+          style={styles.video}
+          preload="preload"
+          loop
+          muted
+          autoPlay
+          playsInline
+          webkit-playsInline
+          x-webkit-airplay="allow"
+          poster={`${process.env.REACT_APP_MEDIA}/poster.jpg`}
+        >
+          {window.innerWidth > 1200 ? (
+            <source
+              src={`${process.env.REACT_APP_MEDIA}/video.mp4`}
+              type="video/mp4"
+            />
+          ) : (
+            <source
+              src={`${process.env.REACT_APP_MEDIA}/video.webm`}
+              type="video/webm"
+            />
+          )}
+        </video>
+      </Paper>
+      <Box style={styles.showcase}>
+        <Box className="centered">
+          <Typography variant="h3" style={styles.title}>
+            ברוכים הבאים למדי מרקט המקור שלך לתרופות וציוד רפואי בישראל
+          </Typography>
+        </Box>
+        <Link to="/client/catalog/0/0/0?page=1">
+          <Button variant="contained" color="secondary">
+            לקטלוג המלא
+          </Button>
         </Link>
-      </div>
-    </section>
+      </Box>
+    </Box>
   )
 }
 
