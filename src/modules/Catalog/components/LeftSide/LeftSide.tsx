@@ -1,12 +1,11 @@
 import React from 'react'
 import ProductList from './components/ProductList/ProductList'
 import FiltersBlock from './components/FiltersBlock/FiltersBlock'
-// import Pagination from './components/Pagination/Pagination';
-import Pagination from '../../../../shared/Pagination'
 import { useParams } from 'react-router-dom'
 import { useCatalog } from '../../store/CatalogStore'
 import { useSearchStore } from '../../store/SearchStore'
-import { Box } from '@mui/material'
+import { Box, Pagination } from '@mui/material'
+import PaginationUtil from '../../../../utils/pagination/PaginationUtil'
 
 const LeftSide = () => {
   const { categoriesLvl1, hydraPagination } = useCatalog()
@@ -29,7 +28,7 @@ const LeftSide = () => {
 
       <FiltersBlock />
       <ProductList />
-      <Pagination hydraPagination={hydraPagination} />
+      <PaginationUtil hydraPagination={hydraPagination} />
     </Box>
   )
 }

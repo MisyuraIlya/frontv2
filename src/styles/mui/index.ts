@@ -195,6 +195,18 @@ const theme = createTheme({
       },
     },
 
+    //Pagination
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          direction: 'rtl',
+          '& svg': {
+            transform: 'rotate(180deg)',
+          },
+        },
+      },
+    },
+
     // MODAL
 
     // MuiBackdrop: {
