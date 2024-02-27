@@ -1,8 +1,16 @@
 import React from 'react'
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from '@mui/material'
 import { useCart } from '../../store/cart.store'
 import { useAuth } from '../../../Auth/store/useAuthStore'
-import { getUserFromStorage } from '../../../Auth/helpers/auth.helper'
 import { useModals } from '../../../Modals/provider/ModalProvider'
+import { themeColors } from '../../../../styles/mui'
+
 const MainSummary = () => {
   const { isUserBlocked } = useAuth()
   const {
@@ -25,99 +33,102 @@ const MainSummary = () => {
   } = useCart()
 
   const { openCartSettings, setOpenCartSettings } = useModals()
+
   return (
     <>
-      <ul className="first-price">
-        <li className="li-border">
-          <span className="title">{'כמות שורות'}</span>
-          <span className="price hidePrice">{cart.length}</span>
-        </li>
-
-        <li>
-          <span className="title">{'סה״כ לפני מע״מ'}</span>
-          <span className="price">{priceBeforeTax().toFixed(1)}</span>
-        </li>
+      <List>
+        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography variant="body1" color={themeColors.primary}>
+            כמות שורות
+          </Typography>
+          <Typography variant="body1" color={themeColors.primary}>
+            {cart.length}
+          </Typography>
+        </ListItem>
+        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+          >{`סה"כ לפני מע"מ`}</Typography>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+          >{`${priceBeforeTax().toFixed(1)}`}</Typography>
+        </ListItem>
         {calucalteDiscountTotal() !== 0 && (
-          <div>
-            <li className="">
-              <span className="title">
-                {'הנחה כללית: ' + getTotalDiscountPrecet() + '%'}
-              </span>
-              <span className="price">
-                {calucalteDiscountTotal().toFixed(1)}
-              </span>
-            </li>
-          </div>
+          <>
+            <Divider />
+            <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                color={themeColors.primary}
+              >{`הנחה כללית: ${getTotalDiscountPrecet()}%`}</Typography>
+              <Typography
+                variant="body1"
+                color={themeColors.primary}
+              >{`${calucalteDiscountTotal().toFixed(1)}`}</Typography>
+            </ListItem>
+          </>
         )}
-
         {calucalteDiscountTotal() !== 0 && (
-          <li>
-            <span className="title">{'סה״כ אחרי הנחה'}</span>
-            <span className="price">
-              {calculatePriceAfterDiscount().toFixed(1)}
-            </span>
-          </li>
+          <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Typography
+              variant="body1"
+              color={themeColors.primary}
+            >{`סה"כ אחרי הנחה`}</Typography>
+            <Typography
+              variant="body1"
+              color={themeColors.primary}
+            >{`${calculatePriceAfterDiscount().toFixed(1)}`}</Typography>
+          </ListItem>
         )}
+        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+          >{`דמי משלוח`}</Typography>
+          <Typography variant="body1" color={themeColors.primary}>
+            {process.env.DELIVERY_PRICE}
+          </Typography>
+        </ListItem>
+        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+          >{`מע"מ`}</Typography>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+          >{`${calculateTax().toFixed(1)}`}</Typography>
+        </ListItem>
+        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography variant="body1" color={themeColors.primary}>
+            {' '}
+            {'מחיר לתשלום'}
+          </Typography>
+          <Typography variant="h6" fontWeight={900} color={themeColors.primary}>
+            {calculateFinalPrice().toFixed(1)}
+          </Typography>
+        </ListItem>
+      </List>
 
-        <li>
-          <span className="title">דמי משלוח</span>
-          <span className="price">{process.env.DELIVERY_PRICE}</span>
-        </li>
-
-        <li>
-          <span className="title">{'מע״מ'}</span>
-          <span className="price">{calculateTax().toFixed(1)}</span>
-        </li>
-      </ul>
-
-      <h4>
-        <span className="title">{'מחיר לתשלום'}</span>
-        <span className="price">{calculateFinalPrice().toFixed(1)}</span>
-      </h4>
-
-      {/* <ul className="first-price">
-        <li>
-          <span className="title black">{'הגדרות לאספקה'}</span>
-          <span
-            onClick={() => setOpenCartSettings(!openCartSettings)}
-            className="icon material-symbols-outlined"
-          >
-            settings
-          </span>
-        </li>
-      </ul> */}
-
-      {selectedMode == 'quote' && (
-        <ul className="first-price">
-          <li>
-            <span className="title black">{'ללא אישור מנהל'}</span>
-            {/* <div 
-                        className={sendNoApproval ? "checkBox active" : "checkBox"}
-                        onClick={() => setSendNoApproval(!sendNoApproval)}
-                    ></div>							 */}
-          </li>
-        </ul>
+      {selectedMode === 'quote' && (
+        <List>
+          <ListItem>
+            <ListItemText primary={`ללא אישור מנהל`} />
+          </ListItem>
+        </List>
       )}
 
-      {/* {totalBasket > getUserFromStorage().MaxObligo &&
-        <div className="obligo-alert-cont">
-            {totalBasket > getUserFromStorage().MaxObligo &&
-                <p>{'חריגת אובליגו. צור קשר עם סוכן / משרד'}</p>
-            }
-        </div>
-        } */}
-
       {+process.env.MINIMUM_DELIVERY_PRICE! > priceBeforeTax() &&
-      selectedMode == 'order' ? (
-        <div className="minPrice-class">
-          <p>
-            {'עליך לצבור עוד ' +
-              Math.abs(
-                priceBeforeTax() - +process.env.MINIMUM_DELIVERY_PRICE!
-              ).toFixed(1) +
-              ' ש״ח עד למינימום הזמנה'}
-          </p>
-        </div>
+      selectedMode === 'order' ? (
+        <Typography color={themeColors.primary}>
+          {'עליך לצבור עוד ' +
+            Math.abs(
+              priceBeforeTax() - +process.env.MINIMUM_DELIVERY_PRICE!
+            ).toFixed(1) +
+            ' ש"ח עד למינימום הזמנה'}
+        </Typography>
       ) : null}
     </>
   )

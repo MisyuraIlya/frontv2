@@ -4,6 +4,7 @@ import { onAsk } from '../../../../shared/MySweetAlert'
 import { removeProductsFromStorage } from '../../helpers/localstorage'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
+import { Box, Button } from '@mui/material'
 
 const CartOptions = () => {
   const { cart, setCart, selectedMode, saveDarft } = useCart()
@@ -36,23 +37,35 @@ const CartOptions = () => {
   }
 
   return (
-    <div className="first-line-cont">
+    <Box sx={{ display: 'flex', justifyContent: 'end', gap: '20px' }}>
       {cart.length > 0 && (
-        <div className="draft-btn-cont reset">
-          <p onClick={() => askDelete()}>מחק סל</p>
-        </div>
+        <Button
+          onClick={() => askDelete()}
+          variant="contained"
+          sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+        >
+          מחק סל
+        </Button>
       )}
-      {cart.length > 0 && selectedMode == 'order' ? (
-        <div className="draft-btn-cont">
-          <p onClick={() => handleSaveAsDraft()}>שמור טיוטה</p>
-        </div>
-      ) : null}
-      {selectedMode == 'order' ? (
-        <div className="draft-btn-cont">
-          <p onClick={() => handleToDraft()}>טען טיוטה</p>
-        </div>
-      ) : null}
-    </div>
+      {cart.length > 0 && selectedMode == 'order' && (
+        <Button
+          variant="contained"
+          onClick={() => handleSaveAsDraft()}
+          sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+        >
+          שמור טיוטה
+        </Button>
+      )}
+      {selectedMode == 'order' && (
+        <Button
+          variant="contained"
+          onClick={() => handleToDraft()}
+          sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+        >
+          טען טיוטה
+        </Button>
+      )}
+    </Box>
   )
 }
 

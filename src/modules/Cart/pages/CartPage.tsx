@@ -2,23 +2,19 @@ import React from 'react'
 import CartOptions from '../components/CartOptions/CartOptions'
 import CartList from '../components/CartList/CartList'
 import Summary from '../components/Summary/Summary'
+import { Grid } from '@mui/material'
 
 const CartPage = () => {
   return (
-    <div className="page-container shop-cart docs">
-      {/* TODO ADD PRELOADER */}
-      <div className="container flex-container prods-main-cont">
-        <div className="col-lg-9 right-cont">
-          <div className="right-cont-subcont">
-            <CartOptions />
-            <CartList />
-          </div>
-        </div>
-        <div className="col-lg-3 summary">
-          <Summary />
-        </div>
-      </div>
-    </div>
+    <Grid container spacing={1} sx={{ marginTop: '100px' }}>
+      <Grid item xs={9}>
+        <CartOptions />
+        <CartList />
+      </Grid>
+      <Grid item xs={3} className="centered">
+        <Summary />
+      </Grid>
+    </Grid>
   )
 }
 

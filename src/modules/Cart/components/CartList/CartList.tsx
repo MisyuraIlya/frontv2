@@ -7,146 +7,174 @@ import {
   getDiscountPrecent,
   getPriceByOriginalPrice,
 } from '../../helpers/calculations'
+import {
+  Box,
+  Typography,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
+  Container,
+} from '@mui/material'
+import { themeColors } from '../../../../styles/mui'
 
 const CartList = () => {
   const { cart, CartTitle } = useCart()
   const { selectProduct } = useModals()
   return (
-    <div>
-      <div className="h1-cont">
-        <h1 className="title">{CartTitle()}</h1>
-      </div>
-      <div className="products doc-container">
-        <div id="lines-main-cont" className="lines-main-cont shop-cart-table">
-          <table className="lines-sub-cont">
-            <tbody>
-              <tr className="heading">
-                <th className="col-cont  sticky-col">
-                  <p></p>
-                </th>
-                <th className="col-cont">
-                  <p></p>
-                </th>
-                <th className="col-cont">
-                  <p>פריט</p>
-                </th>
-                <th className="col-cont">
-                  <p>כמות</p>
-                </th>
-                <th className="col-cont">
-                  <p>מחיר</p>
-                </th>
-                <th className="col-cont">
-                  <p>הנחה</p>
-                </th>
-                <th className="col-cont">
-                  <p>סה״כ להזמנה</p>
-                </th>
-                <th className="col-cont">
-                  <p></p>
-                </th>
-              </tr>
-              {cart.length > 0 ? (
-                cart?.map((element, index) => {
-                  let price = calculatePrice(
-                    element?.product,
-                    element?.quantity
-                  )
-                  let discount = getDiscountPrecent(element)
-                  let priceByOriginal = getPriceByOriginalPrice(element)
-                  return (
-                    <tr key={index} className={'item'}>
-                      <th
-                        className="col-cont  sticky-col"
-                        style={{ padding: '10px' }}
-                      >
-                        <AddToCart item={element?.product} />
-                      </th>
+    <>
+      <Container maxWidth="lg">
+        <Typography variant="h5">{CartTitle()}</Typography>
+      </Container>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>
+                <Typography
+                  variant="h6"
+                  fontSize={16}
+                  fontWeight={700}
+                  color={themeColors.primary}
+                >
+                  פריט
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography
+                  variant="h6"
+                  fontSize={16}
+                  fontWeight={700}
+                  color={themeColors.primary}
+                >
+                  כמות
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography
+                  variant="h6"
+                  fontSize={16}
+                  fontWeight={700}
+                  color={themeColors.primary}
+                >
+                  מחיר
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography
+                  variant="h6"
+                  fontSize={16}
+                  fontWeight={700}
+                  color={themeColors.primary}
+                >
+                  הנחה
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography
+                  variant="h6"
+                  fontSize={16}
+                  fontWeight={700}
+                  color={themeColors.primary}
+                >
+                  סה״כ להזמנה
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {cart?.map((element, index) => {
+              const price = calculatePrice(element?.product, element?.quantity)
+              const discount = getDiscountPrecent(element)
+              const priceByOriginal = getPriceByOriginalPrice(element)
 
-                      <th className="col-cont">
-                        {element?.product?.defaultImagePath ? (
-                          <img
-                            className="img"
-                            src={
-                              process.env.REACT_APP_MEDIA +
+              return (
+                <TableRow
+                  key={index}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell>
+                    <AddToCart item={element?.product} />
+                  </TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', gap: '10px', width: '350px' }}>
+                      <img
+                        width={80}
+                        src={
+                          element?.product?.defaultImagePath
+                            ? process.env.REACT_APP_MEDIA +
                               '/product/' +
                               element?.product?.defaultImagePath
-                            }
-                            onClick={() => selectProduct(element?.product)}
-                          />
-                        ) : (
-                          <img
-                            className="img"
-                            src={
-                              process.env.REACT_APP_MEDIA + '/placeholder.jpg'
-                            }
-                            onClick={() => selectProduct(element?.product)}
-                          />
-                        )}
-                      </th>
-
-                      <th
-                        className="col-cont"
+                            : process.env.REACT_APP_MEDIA + '/placeholder.jpg'
+                        }
                         onClick={() => selectProduct(element?.product)}
+                      />
+                      <Box
+                        sx={{
+                          textAlign: 'right',
+                          display: 'flex',
+                          justifyContent: 'right',
+                          alignItems: 'center',
+                        }}
                       >
-                        <p className="catalog">{'#' + element?.product?.sku}</p>
-                        <p>{element?.product?.title}</p>
-                      </th>
-
-                      <th className="col-cont">
-                        <p className="row-val percent">{element?.quantity}</p>
-                      </th>
-
-                      <th className="col-cont">
-                        <p className="row-val percent">
-                          {element?.product?.finalPrice}
-                        </p>
-                      </th>
-
-                      <th className="col-cont">
-                        <p className="row-val percent">{element?.discount}</p>
-                      </th>
-
-                      <th className="col-cont">
-                        {priceByOriginal != price.toFixed(1) ? (
-                          <>
-                            <p
-                              className="price price-p-cls"
-                              style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                              }}
-                            >
-                              {price.toFixed(1)}
-                            </p>
-                          </>
-                        ) : (
-                          <p
-                            className="price price-p-cls"
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
+                        <Box sx={{ width: '100%', textAlign: 'right' }}>
+                          <Typography
+                            variant="body1"
+                            sx={{ textAlign: 'left' }}
+                            color={themeColors.primary}
                           >
-                            {price.toFixed(1)}
-                          </p>
-                        )}
-                      </th>
-                    </tr>
-                  )
-                })
-              ) : (
-                <h1 className="empty">{'עגלת הקניות שלך ריקה'} </h1>
-              )}
-
-              {/* <FreeList/> */}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+                            {' '}
+                            #{element?.product?.sku}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            sx={{ textAlign: 'left' }}
+                            fontWeight={800}
+                            color={themeColors.primary}
+                          >
+                            {element?.product?.title}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body1" color={themeColors.primary}>
+                      {element?.quantity}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body1" color={themeColors.primary}>
+                      {element?.product?.finalPrice} ₪{' '}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="body1" color={themeColors.primary}>
+                      {element?.discount}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {priceByOriginal != price.toFixed(1) ? (
+                      <Typography variant="body1" color={themeColors.primary}>
+                        {price.toFixed(1)} ₪{' '}
+                      </Typography>
+                    ) : (
+                      <Typography variant="body1" color={themeColors.primary}>
+                        {price.toFixed(1)} ₪{' '}
+                      </Typography>
+                    )}
+                  </TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   )
 }
 

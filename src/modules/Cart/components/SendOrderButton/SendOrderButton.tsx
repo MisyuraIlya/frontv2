@@ -2,8 +2,7 @@ import React from 'react'
 import { useAuth } from '../../../Auth/store/useAuthStore'
 import { useCart } from '../../store/cart.store'
 import { useModals } from '../../../Modals/provider/ModalProvider'
-import Select from 'react-select'
-import AtarSelection from '../../../Auth/components/AtarSelection'
+import { Button, Container, Grid } from '@mui/material'
 
 const SendOrderButton = () => {
   const { isUserBlocked } = useAuth()
@@ -21,41 +20,44 @@ const SendOrderButton = () => {
   }
 
   return (
-    <div>
+    <Container>
       {!isUserBlocked &&
       ((cart.length > 0 &&
         +process.env.MINIMUM_DELIVERY_PRICE! <= priceBeforeTax()) ||
-        selectedMode != 'order') ? (
-        <div className="pay-btn-cont">
-          <div>
-            <AtarSelection />
-          </div>
-          <div className={!comment ? 'comments empty' : 'comments'}>
-            <textarea
-              placeholder={'הערות למסמך'}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-          </div>
-
-          <div className="btn-container flex-container">
-            <div className="btn-subcontainer col-lg-12">
-              <button onClick={() => handleSendOrder()} className="to-pay">
-                {'שלח'}
-              </button>
-            </div>
-          </div>
-
-          <div className="btn-container flex-container">
-            <div className="btn-subcontainer col-lg-12">
-              <button onClick={() => handlePay()} className="to-pay">
-                {'שלם'}
-              </button>
-            </div>
-          </div>
-        </div>
+        selectedMode !== 'order') ? (
+        <>
+          <textarea
+            placeholder={'הערות למסמך'}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <Button
+            onClick={handleSendOrder}
+            variant="contained"
+            sx={{
+              borderRadius: '20px',
+              width: '200px',
+              fontSize: '18px',
+              marginTop: '20px',
+            }}
+          >
+            {'שלח'}
+          </Button>
+          <Button
+            onClick={handlePay}
+            variant="contained"
+            sx={{
+              borderRadius: '20px',
+              width: '200px',
+              fontSize: '18px',
+              marginTop: '20px',
+            }}
+          >
+            {'שלם'}
+          </Button>
+        </>
       ) : null}
-    </div>
+    </Container>
   )
 }
 
