@@ -6,7 +6,7 @@ import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import ProductCard from '../../../ProductCard'
 
 const ProductList = () => {
-  const { products, loading } = useCatalog()
+  const { products, loading, listView } = useCatalog()
   const { documentType } = useParams()
   const { productsFilter } = useSearchStore()
   return (
@@ -35,7 +35,7 @@ const ProductList = () => {
             ? productsFilter
             : products
           )?.map((product, index) => (
-            <Grid item xs={3} key={index}>
+            <Grid item xs={listView ? 3 : 12} key={index}>
               <ProductCard product={product} />
             </Grid>
           ))}

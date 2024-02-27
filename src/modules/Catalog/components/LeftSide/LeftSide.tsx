@@ -17,15 +17,6 @@ const LeftSide = () => {
   const isSearchDocument = documentType === 'search'
   return (
     <Box>
-      {/* {currentCategory?.Id &&
-        <Helmet>
-            <title>{currentCategory.Title}</title>
-            <meta name="keywords" content={currentCategory.Title}/>
-            <link rel="canonical" href={entry + '/category/' + currentCategory.ParentId + '/' + currentCategory.Id}/>
-            <link rel="alternate" href={entry + '/category/' + currentCategory.ParentId + '/' + currentCategory.Id} hreflang="he-il"/>
-        </Helmet>
-        } */}
-
       <FiltersBlock />
       <ProductList />
       <PaginationUtil hydraPagination={hydraPagination} />

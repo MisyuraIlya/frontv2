@@ -45,7 +45,7 @@ const Catalog = () => {
   const lvl1Bread = categoriesLvl1?.filter((item) => item.identify == lvl1)
   const lvl2Bread = categoriesLvl2?.filter((item) => item.extId == lvl2!)
   const lvl3Bread = categoriesLvl3?.filter((item) => item.extId == lvl3!)
-
+  console.log('lvl1Bread', lvl1Bread, lvl2Bread, lvl3Bread)
   useEffect(() => {
     setCatalogParameters(lvl1 ?? '0', lvl2 ?? '0', lvl3 ?? '0', location.search)
     if (!isSearchDocument && !isRecommendedDocument && !isRegularDocument) {
@@ -86,6 +86,7 @@ const Catalog = () => {
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: '200px' }}>
+      {/* TODO */}
       {/* <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href={`/client/catalog/${lvl1Bread[0]?.identify}/0/0`}>
           {lvl1Bread[0]?.title || ''}
