@@ -1,7 +1,10 @@
 import React, { FC } from 'react'
+import { Input, Grid, IconButton } from '@mui/material'
 import { useCart } from '../../store/cart.store'
 import { useModals } from '../../../Modals/provider/ModalProvider'
-
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import { themeColors } from '../../../../styles/mui'
 interface AddToCartProps {
   item: IProduct
 }
@@ -47,51 +50,99 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
   }
 
   return (
-    <div className="add-to-cart">
-      <div className="wrapp flex-container">
-        {isInCart ? (
-          <>
-            <div className="col-lg-12 flex-container add-to-cont-after">
-              <div
-                className="col-lg-4 fx-btn MyCenetred"
+    <Grid className="centered" style={{ padding: '0px', margin: '0px' }}>
+      {isInCart ? (
+        <>
+          <Grid
+            item
+            xs={11}
+            container
+            sx={{ border: '1px solid black' }}
+            style={{ padding: '0px' }}
+          >
+            <Grid
+              item
+              xs={4}
+              className="centered"
+              sx={{ borderRight: '1px solid black' }}
+            >
+              <IconButton
                 onClick={() => increaseCartFunc()}
+                sx={{ borderRadius: '0px', width: '100%' }}
               >
-                <span className="material-symbols-outlined">add</span>
-              </div>
-              <div className="col-lg-4 input-cont">
-                <input
-                  type="number"
-                  value={Quantity}
-                  onChange={(e) =>
-                    onChangeQuantityFunc(parseInt(e.target.value))
-                  }
-                  onBlur={() => avoidNullInCart(item.sku)}
-                />
-              </div>
-              <div
-                className="col-lg-4 fx-btn MyCenetred"
+                <AddIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={4} className="centered">
+              <Input
+                type="number"
+                value={Quantity}
+                sx={{
+                  '& input': {
+                    textAlign: 'center',
+                    justifyContent: 'center', // for number input
+                  },
+                  '&::before': {
+                    borderBottom: '0px !important',
+                  },
+                  '&::after': {
+                    borderBottom: '0px',
+                  },
+                  '&:hover': {
+                    borderBottom: '0px',
+                  },
+                }}
+                onChange={(e) => onChangeQuantityFunc(parseInt(e.target.value))}
+                onBlur={() => avoidNullInCart(item.sku)}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              className="centered"
+              sx={{ borderLeft: '1px solid black' }}
+            >
+              <IconButton
                 onClick={
                   isInCart && Quantity > 1
                     ? () => decreaseCart(item.sku)
                     : () => deleteFromCart(item.sku)
                 }
+                sx={{ borderRadius: '0px', width: '100%' }}
               >
-                <span className="material-symbols-outlined">remove</span>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div
-            className="col-lg-12 flex-container add-to-cont-before"
-            onClick={isInCart ? undefined : () => addToCartFunc()}
+                <RemoveIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
+        </>
+      ) : (
+        <Grid
+          item
+          xs={11}
+          container
+          sx={{ border: '1px solid black' }}
+          style={{ padding: '0px' }}
+          onClick={isInCart ? undefined : () => addToCartFunc()}
+        >
+          <Grid
+            item
+            xs={12}
+            className="centered"
+            sx={{
+              cursor: 'pointer',
+              height: '40px',
+              color: themeColors.primary,
+              '&:hover': {
+                background: themeColors.primary,
+                color: 'white',
+              },
+            }}
           >
-            <div className="col-lg-12">
-              <p>{'הוספה לסל'}</p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+            {'הוספה לסל'}
+          </Grid>
+        </Grid>
+      )}
+    </Grid>
   )
 }
 

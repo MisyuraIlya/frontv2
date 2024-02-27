@@ -52,8 +52,8 @@ interface useCatalogState {
 
   attributes: IAttributeMain[]
   getAttributes: (searchValue: string) => void
-  sortProdSetting: string
-  setSortProdSetting: (value: string) => void
+  sortProdSetting: { value: string; label: string }
+  setSortProdSetting: (value: string, label: string) => void
 
   getRecommendedHomePage: () => void
   getRegularProductsHomePage: () => void
@@ -170,8 +170,9 @@ export const useCatalog = create<useCatalogState>((set, get) => ({
     // }
   },
 
-  sortProdSetting: 'שם',
-  setSortProdSetting: (value: string) => set({ sortProdSetting: value }),
+  sortProdSetting: { value: '1', label: 'שם' },
+  setSortProdSetting: (value: string, label: string) =>
+    set({ sortProdSetting: { value: value, label: label } }),
   recommendedPoductsHomePage: [],
   getRecommendedHomePage: async () => {
     set({ loadingRecommendedProds: true })

@@ -85,7 +85,7 @@ const Catalog = () => {
   }, [location.pathname, location.search])
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl" sx={{ marginTop: '200px' }}>
       {/* <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href={`/client/catalog/${lvl1Bread[0]?.identify}/0/0`}>
           {lvl1Bread[0]?.title || ''}

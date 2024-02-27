@@ -3,7 +3,26 @@ import { useCatalog } from '../../../../store/CatalogStore'
 import { useAuth } from '../../../../../Auth/store/useAuthStore'
 import { useDebounce } from 'use-debounce'
 import { useNavigate, useLocation } from 'react-router-dom'
+import {
+  Box,
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import { themeColors } from '../../../../../../styles/mui'
 
+import CloseIcon from '@mui/icons-material/Close'
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
+import WindowIcon from '@mui/icons-material/Window'
 const FiltersBlock = () => {
   const {
     prodsPerPage,
@@ -33,12 +52,12 @@ const FiltersBlock = () => {
     const updatedUrl = '?' + urlSearchParams.toString()
     setSearchParams(updatedUrl)
     navigate(location.pathname + updatedUrl)
-    if (val === 'sku') {
-      setSortProdSetting('מק״ט')
-    } else if (val === 'title') {
-      setSortProdSetting('שם')
-    } else if (val === 'id') {
-      setSortProdSetting('מומלץ')
+    if (val == '1') {
+      setSortProdSetting('1', 'שם')
+    } else if (val == '2') {
+      setSortProdSetting('2', 'מק״ט')
+    } else if (val == '3') {
+      setSortProdSetting('3', 'מומלץ')
     }
     setActiveSortPerPage(false)
   }
@@ -67,132 +86,164 @@ const FiltersBlock = () => {
   }
 
   useEffect(() => {
-    if (searchDebounce) {
-      handleSearchValue(searchDebounce)
-    }
+    handleSearchValue(searchDebounce)
   }, [searchDebounce])
 
+  const handleChange = (event: SelectChangeEvent) => {
+    handleChangeItemsPerPage(event.target.value)
+  }
+
+  const handleChangeOrdern = (event: SelectChangeEvent) => {
+    handleOrderBy(event.target.value)
+  }
+
+  const arrOrden = [
+    { value: '1', label: 'שם' },
+    { value: '2', label: 'מק״ט' },
+    { value: '3', label: 'מומלץ' },
+  ]
+
+  const arrProdsPerPage = ['2', '24', '48']
+
   return (
-    <div className="view-mode-cont">
-      <div className="view-mode-rightcont flex-container">
-        <div className="block quant-main">
-          <p> {'נמצאו: ' + totalItems + ' מוצרים'}</p>
-          {/* {isAgent && ((params.props.match.params.lvl2 && params.props.match.params.lvl2!='0') || params.props.match.params.type.includes('brand')) ?
-              <div className="file-main-cont">
-                <div className="file-cont" onClick={()=> params.downloadExcelPdf('xls', params.breadCrumbsNav)}>
-                  <img src={process.env.REACT_APP_MEDIA + 'icons/excel.svg'} />
-                </div>
-                <div className="file-cont" onClick={()=> params.downloadExcelPdf('pdf', params.breadCrumbsNav)}>
-                  <span className="material-symbols-outlined">picture_as_pdf</span>
-                </div>
-              </div>
-          :null} */}
-        </div>
-        <div className="search-block block">
-          <input
-            type="text"
-            onChange={(e) => setSearchParam(e.target.value)}
-            value={searchParam}
-            placeholder={'חיפוש מוצר...'}
-          />
-          {searchParam == '' ? (
-            <span className="material-symbols-outlined search-img">search</span>
-          ) : (
-            <span
-              className="material-symbols-outlined search-img"
-              onClick={() => {
-                handleSearchValue('')
-              }}
-            >
-              close
-            </span>
-          )}
-        </div>
-
-        <div className="block sort-main">
-          <div className="sort-sub">
-            <p className="p-title">{'מוצרים:'}</p>
-            <div className="drop-down-main">
-              <div
-                className="select-main"
-                onClick={() => setActiveProdsPerPage(!activeProdsPerPage)}
-              >
-                <p>{prodsPerPage}</p>
-                <img
-                  src={process.env.REACT_APP_MEDIA + '/icon/down-chevron.svg'}
-                  alt=""
-                />
-              </div>
-              {activeProdsPerPage ? (
-                <div className="drop-down-open-cont">
-                  <ul>
-                    <li onClick={() => handleChangeItemsPerPage('2')}>2</li>
-                    <li onClick={() => handleChangeItemsPerPage('24')}>24</li>
-                    <li onClick={() => handleChangeItemsPerPage('48')}>48</li>
-                  </ul>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-
-        <div className="block sort-main">
-          <div className="sort-sub">
-            <p className="p-title">{'מיון:'}</p>
-            <div className="drop-down-main">
-              <div
-                className="select-main"
-                onClick={() => setActiveSortPerPage(!activeSortPerPage)}
-              >
-                <p>{sortProdSetting}</p>
-                <img
-                  src={process.env.REACT_APP_MEDIA + '/icon/down-chevron.svg'}
-                  alt=""
-                />
-              </div>
-              {activeSortPerPage ? (
-                <div className="drop-down-open-cont">
-                  <ul>
-                    <li onClick={() => handleOrderBy('id')}>{'מומלץ'}</li>
-                    <li onClick={() => handleOrderBy('title')}>{'שם'}</li>
-                    <li onClick={() => handleOrderBy('sku')}>{'מק״ט'}</li>
-                  </ul>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-        <div className="block check-box-sub-cont check-row view-main">
-          <p>{'תצוגה:'}</p>
-          <div
-            className={
-              !listView ? 'view-img-cont actice' : 'view-img-cont  not-active'
-            }
-            onClick={() => setListView(false)}
-          >
-            <span
-              className="material-symbols-outlined googleIconHover"
-              style={{ fontSize: '30px' }}
-            >
-              grid_view
-            </span>
-          </div>
-          <div
-            className={
-              listView ? 'view-img-cont actice' : 'view-img-cont not-active'
-            }
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        borderBottom: '1px solid rgba(65, 67, 106, 0.2117647059)',
+        borderTop: '1px solid rgba(65, 67, 106, 0.2117647059)',
+      }}
+    >
+      <Grid
+        item
+        xs={2}
+        className="centered"
+        sx={{ paddingTop: '0px !important' }}
+      >
+        <Typography variant="body1" color={themeColors.primary}>
+          {'נמצאו: ' + totalItems + ' מוצרים'}
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={4}
+        className="centered"
+        sx={{ paddingTop: '0px !important' }}
+      >
+        <TextField
+          placeholder="חיפוש מוצר.."
+          value={searchParam}
+          onChange={(e) => setSearchParam(e.target.value)}
+          sx={{
+            border: '1px solid gray',
+            borderRadius: '4px',
+            padding: '0',
+            '& input': {
+              padding: '7px 10px',
+            },
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start" sx={{ cursor: 'pointer' }}>
+                {searchParam ? (
+                  <CloseIcon onClick={() => setSearchParam('')} />
+                ) : (
+                  <SearchIcon />
+                )}
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined"
+        />
+      </Grid>
+      <Grid
+        item
+        xs={2}
+        className="centered"
+        sx={{ paddingTop: '0px !important' }}
+      >
+        <Typography
+          variant="body1"
+          fontWeight={500}
+          color={themeColors.primary}
+        >
+          מוצרים:
+        </Typography>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <Select value={prodsPerPage} onChange={handleChange}>
+            {arrProdsPerPage?.map((item, key) => (
+              <MenuItem key={key} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid
+        item
+        xs={2}
+        className="centered"
+        sx={{ paddingTop: '0px !important' }}
+      >
+        <Typography
+          variant="body1"
+          fontWeight={500}
+          color={themeColors.primary}
+        >
+          מיון:
+        </Typography>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <Select value={sortProdSetting.value} onChange={handleChangeOrdern}>
+            {arrOrden?.map((item, index) => (
+              <MenuItem key={index} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid
+        item
+        xs={2}
+        className="centered"
+        sx={{ paddingTop: '0px !important', display: 'flex' }}
+      >
+        <Typography
+          variant="body1"
+          fontWeight={500}
+          color={themeColors.primary}
+          sx={{ paddingRight: '5px' }}
+        >
+          תצוגה:
+        </Typography>
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <IconButton
+            style={{
+              border: listView
+                ? '1px solid rgba(65, 67, 106, 0.2117647059)'
+                : '',
+              borderRadius: '0px',
+              padding: '7px',
+            }}
             onClick={() => setListView(true)}
           >
-            <span
-              className="material-symbols-outlined googleIconHover"
-              style={{ fontSize: '30px' }}
-            >
-              list
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+            <WindowIcon sx={{ fontSize: '25px' }} />
+          </IconButton>
+          <IconButton
+            style={{
+              border: !listView
+                ? '1px solid rgba(65, 67, 106, 0.2117647059)'
+                : '',
+              borderRadius: '0px',
+              padding: '7px',
+            }}
+            onClick={() => setListView(false)}
+          >
+            <FormatListBulletedIcon sx={{ fontSize: '25px' }} />
+          </IconButton>
+        </Box>
+      </Grid>
+    </Grid>
   )
 }
 

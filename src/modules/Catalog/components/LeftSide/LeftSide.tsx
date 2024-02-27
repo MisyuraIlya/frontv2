@@ -6,6 +6,7 @@ import Pagination from '../../../../shared/Pagination'
 import { useParams } from 'react-router-dom'
 import { useCatalog } from '../../store/CatalogStore'
 import { useSearchStore } from '../../store/SearchStore'
+import { Box } from '@mui/material'
 
 const LeftSide = () => {
   const { categoriesLvl1, hydraPagination } = useCatalog()
@@ -16,7 +17,7 @@ const LeftSide = () => {
   ))[0]
   const isSearchDocument = documentType === 'search'
   return (
-    <div className={'category-page-sub2'}>
+    <Box>
       {/* {currentCategory?.Id &&
         <Helmet>
             <title>{currentCategory.Title}</title>
@@ -27,14 +28,9 @@ const LeftSide = () => {
         } */}
 
       <FiltersBlock />
-      <div className="category-header-cont">
-        <div className="row-cont flex-container">
-          <div className="h1-cont col-lg-8">{/* <h1>{pageTitle}</h1> */}</div>
-        </div>
-      </div>
       <ProductList />
       <Pagination hydraPagination={hydraPagination} />
-    </div>
+    </Box>
   )
 }
 
