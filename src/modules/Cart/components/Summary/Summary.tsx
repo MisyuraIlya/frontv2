@@ -11,15 +11,7 @@ const Summary = () => {
   const { isUserBlocked } = useAuth()
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        height: '100%',
-        width: '300px',
-        position: 'fixed',
-        marginTop: '500px',
-      }}
-    >
+    <Container maxWidth="xl">
       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h4" fontWeight={400} fontSize={24}>
           {'פרטי מסמך'}
@@ -28,7 +20,7 @@ const Summary = () => {
         <MainSummary />
         <SendOrderButton />
       </Box>
-    </Paper>
+    </Container>
   )
 }
 

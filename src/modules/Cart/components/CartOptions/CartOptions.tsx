@@ -37,7 +37,14 @@ const CartOptions = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'end', gap: '20px' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'end',
+        gap: '20px',
+        margin: '0 20px',
+      }}
+    >
       {cart.length > 0 && (
         <Button
           onClick={() => askDelete()}

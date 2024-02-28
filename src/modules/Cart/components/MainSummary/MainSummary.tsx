@@ -50,10 +50,9 @@ const MainSummary = () => {
             variant="body1"
             color={themeColors.primary}
           >{`סה"כ לפני מע"מ`}</Typography>
-          <Typography
-            variant="body1"
-            color={themeColors.primary}
-          >{`${priceBeforeTax().toFixed(1)}`}</Typography>
+          <Typography variant="body1" color={themeColors.primary}>
+            {`${priceBeforeTax().toFixed(1)}`} ₪
+          </Typography>
         </ListItem>
         {calucalteDiscountTotal() !== 0 && (
           <>
@@ -63,10 +62,9 @@ const MainSummary = () => {
                 variant="body1"
                 color={themeColors.primary}
               >{`הנחה כללית: ${getTotalDiscountPrecet()}%`}</Typography>
-              <Typography
-                variant="body1"
-                color={themeColors.primary}
-              >{`${calucalteDiscountTotal().toFixed(1)}`}</Typography>
+              <Typography variant="body1" color={themeColors.primary}>
+                {`${calucalteDiscountTotal().toFixed(1)}`} ₪
+              </Typography>
             </ListItem>
           </>
         )}
@@ -76,10 +74,9 @@ const MainSummary = () => {
               variant="body1"
               color={themeColors.primary}
             >{`סה"כ אחרי הנחה`}</Typography>
-            <Typography
-              variant="body1"
-              color={themeColors.primary}
-            >{`${calculatePriceAfterDiscount().toFixed(1)}`}</Typography>
+            <Typography variant="body1" color={themeColors.primary}>
+              {`${calculatePriceAfterDiscount().toFixed(1)}`} ₪
+            </Typography>
           </ListItem>
         )}
         <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -88,7 +85,7 @@ const MainSummary = () => {
             color={themeColors.primary}
           >{`דמי משלוח`}</Typography>
           <Typography variant="body1" color={themeColors.primary}>
-            {process.env.DELIVERY_PRICE}
+            {process.env.DELIVERY_PRICE} ₪
           </Typography>
         </ListItem>
         <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -96,10 +93,9 @@ const MainSummary = () => {
             variant="body1"
             color={themeColors.primary}
           >{`מע"מ`}</Typography>
-          <Typography
-            variant="body1"
-            color={themeColors.primary}
-          >{`${calculateTax().toFixed(1)}`}</Typography>
+          <Typography variant="body1" color={themeColors.primary}>
+            {`${calculateTax().toFixed(1)}`} ₪
+          </Typography>
         </ListItem>
         <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="body1" color={themeColors.primary}>
@@ -107,7 +103,7 @@ const MainSummary = () => {
             {'מחיר לתשלום'}
           </Typography>
           <Typography variant="h6" fontWeight={900} color={themeColors.primary}>
-            {calculateFinalPrice().toFixed(1)}
+            {calculateFinalPrice().toFixed(1)} ₪
           </Typography>
         </ListItem>
       </List>

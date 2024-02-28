@@ -2,7 +2,7 @@ import React from 'react'
 import { useAuth } from '../../../Auth/store/useAuthStore'
 import { useCart } from '../../store/cart.store'
 import { useModals } from '../../../Modals/provider/ModalProvider'
-import { Button, Container, Grid } from '@mui/material'
+import { Box, Button, Container, Grid } from '@mui/material'
 
 const SendOrderButton = () => {
   const { isUserBlocked } = useAuth()
@@ -26,11 +26,21 @@ const SendOrderButton = () => {
         +process.env.MINIMUM_DELIVERY_PRICE! <= priceBeforeTax()) ||
         selectedMode !== 'order') ? (
         <>
-          <textarea
-            placeholder={'הערות למסמך'}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+          <Box sx={{ margin: '0px' }}>
+            <textarea
+              placeholder={'הערות למסמך'}
+              value={comment}
+              style={{
+                outline: 'none',
+                minHeight: '100px',
+                border: '1px solid rgba(51, 51, 51, .0784313725)',
+                resize: 'none',
+                width: '100%',
+                borderRadius: '5px',
+              }}
+              onChange={(e) => setComment(e.target.value)}
+            />
+          </Box>
           <Button
             onClick={handleSendOrder}
             variant="contained"
