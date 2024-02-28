@@ -51,9 +51,9 @@ const RouterApp = () => {
 
             <Route path="/CatalogView" element={<CatalogView />} />
             <Route path="/cart" element={<CartPage />} />
-            {/* <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
 
-            <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} />
+            {/* <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} />
             <Route path="/documentPage" element={<DocumentsPage />} />
             <Route path="/historyItemPage/:id" element={<HistoryItemPage />} />
             <Route path="/historyPage" element={<HistoryPage />} />

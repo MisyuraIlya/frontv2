@@ -6,12 +6,16 @@ import { useModals } from '../../Modals/provider/ModalProvider'
 import { useAgentProfileStore } from '../store/agentProfile.store'
 import moment from 'moment'
 import { onSuccessAlert } from '../../../shared/MySweetAlert'
+import { Card, Grid, Paper, Typography } from '@mui/material'
+import ListAltIcon from '@mui/icons-material/ListAlt'
+import RestorePageIcon from '@mui/icons-material/RestorePage'
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 
 interface Action {
   title: string
   mode: IDocumentType
   link: string
-  img: string
+  img: any
 }
 
 interface AgentActionsProps {
@@ -56,72 +60,48 @@ const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
       title: 'הזמנה',
       mode: 'order',
       link: '/CatalogView',
-      img: 'list_alt',
+      img: <ListAltIcon sx={{ fontSize: '40px' }} />,
     },
-    // {
-    //   title: 'החזרה',
-    //   mode: 'return',
-    //   link: '/CatalogView',
-    //   img: 'history',
-    // },
+    {
+      title: 'החזרה',
+      mode: 'return',
+      link: '/CatalogView',
+      img: <RestorePageIcon sx={{ fontSize: '40px' }} />,
+    },
     {
       title: 'ה.מחיר',
       mode: 'quote',
       link: '/CatalogView',
-      img: 'request_quote',
+      img: <RequestQuoteIcon sx={{ fontSize: '40px' }} />,
     },
   ]
   return (
     <>
-      <div className="agent-actions-main-cont">
-        <div className="agent-actions-sub-cont">
-          <div
-            className="Profile-slide-menu-cont"
-            style={{ paddingTop: '40px' }}
+      <Typography variant="h4" sx={{ marginTop: '50px', marginBottom: '20px' }}>
+        {'פעולות'}
+      </Typography>
+      <Grid container spacing={30}>
+        {actions?.map((item, key) => (
+          <Grid
+            item
+            xs={4}
+            onClick={() => {
+              setSelectedMode(item.mode)
+              navigate(item.link)
+              setAgentOptions(false)
+            }}
           >
-            <h1>{'פעולות'}</h1>
-            <div className="btns-cont flex-container">
-              {actions?.map((item, key) => (
-                <div className={`col-lg-${colsNumber}`} key={key}>
-                  <div
-                    className="Profile-slide-sub"
-                    onClick={() => {
-                      setSelectedMode(item.mode)
-                      navigate(item.link)
-                      setAgentOptions(false)
-                    }}
-                    style={{ margin: '5px' }}
-                  >
-                    <div className="Profile-slide-box">
-                      <span className="material-symbols-outlined search-img">
-                        {item.img}
-                      </span>
-                      <h2>{item.title}</h2>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              <div className={`col-lg-${colsNumber}`}>
-                <div
-                  className="Profile-slide-sub"
-                  style={{ margin: '5px' }}
-                  onClick={() => {
-                    handleCreateVisit()
-                    setAgentOptions(false)
-                  }}
-                >
-                  <div className="Profile-slide-box">
-                    <span className="material-symbols-outlined search-img">
-                      {'tour'}
-                    </span>
-                    <h2>{'קריאת שירות'}</h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            <Card
+              elevation={2}
+              sx={{ padding: '30px 50px', gap: '20px', cursor: 'pointer' }}
+              className="centered"
+            >
+              <Typography variant="h6">{item.title}</Typography>
+              {item.img}
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </>
   )
 }
