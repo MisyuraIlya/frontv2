@@ -62,11 +62,6 @@ const LeftComponent = () => {
       <Box sx={{ display: 'flex', gap: '10px' }}>
         {user ? (
           Object.entries(clientURL).map(([key, value]) => {
-            console.log(
-              'value.FOR_AGENT && isAgent',
-              value.LABEL,
-              value.FOR_AGENT
-            )
             if (value.SHOW_IN_HEADER) {
               if (value.FOR_AGENT && !isAgent) return
               return (

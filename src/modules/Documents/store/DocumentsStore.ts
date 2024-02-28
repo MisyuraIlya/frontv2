@@ -18,21 +18,21 @@ interface DocumentsStore {
   //===================================
 
   //========== CALENDAR ===============
-  showCalendar: boolean
-  setShowCalendar: (bool: boolean) => void
-  type: string
-  setType: (value: string) => void
-  dateFrom: Date
-  dateTo: Date
-  choosedDate: Date
-  setDateFrom: (date: Date) => void
-  setDateTo: (date: Date) => void
+  // showCalendar: boolean
+  // setShowCalendar: (bool: boolean) => void
+  // type: string
+  // setType: (value: string) => void
+  // dateFrom: Date
+  // dateTo: Date
+  // choosedDate: Date
+  // setDateFrom: (date: Date) => void
+  // setDateTo: (date: Date) => void
   //===================================
 
   //========== SEARCH FILTER ===============
   documentTypes: Array<{ value: string; label: string }>
   selectedDocument: string
-  setSelectedDocument: (value: string) => void
+  // setSelectedDocument: (value: string) => void
   documentType: string
   setDocumentType: (value: string) => void
   documentId: string
@@ -50,7 +50,7 @@ interface DocumentsStore {
   //========== DATA ===============
   items: Array<IDocument | IHistory | ICartessetLine>
   clearItems: () => void
-  getItems: () => Promise<void>
+  getItems: (dateFrom: Date, dateTo: Date) => Promise<void>
   //===============================
 
   //========== ITEM DATA ===============
@@ -82,15 +82,15 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   //===================================
 
   //========== CALENDAR ===============
-  showCalendar: false,
-  setShowCalendar: (bool: boolean) => set({ showCalendar: bool }),
-  type: '',
-  setType: (value: string) => set({ type: value, showCalendar: true }),
-  dateFrom: new Date(),
-  dateTo: new Date(),
-  choosedDate: new Date(),
-  setDateFrom: (date: Date) => set({ dateFrom: date }),
-  setDateTo: (date: Date) => set({ dateTo: date }),
+  // showCalendar: false,
+  // setShowCalendar: (bool: boolean) => set({ showCalendar: bool }),
+  // type: '',
+  // setType: (value: string) => set({ type: value, showCalendar: true }),
+  // dateFrom: new Date(),
+  // dateTo: new Date(),
+  // choosedDate: new Date(),
+  // setDateFrom: (date: Date) => set({ dateFrom: date }),
+  // setDateTo: (date: Date) => set({ dateTo: date }),
   //===================================
 
   //========== SEARCH FILTER ===============
@@ -105,10 +105,10 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   ],
 
   selectedDocument: 'orders',
-  setSelectedDocument: (value: string) => {
-    set({ selectedDocument: value })
-    get().getItems()
-  },
+  // setSelectedDocument: (value: string) => {
+  //   set({ selectedDocument: value })
+  //   get().getItems()
+  // },
   documentType: '',
   setDocumentType: (value: string) => set({ documentType: value }),
   documentItemType: 'orders',
@@ -242,7 +242,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   items: [],
 
   clearItems: () => set({ items: [] }),
-  getItems: async () => {
+  getItems: async (dateFrom: Date, dateTo: Date) => {
     set({ loading: true })
     try {
       let response = null
@@ -250,8 +250,8 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
         if (get().selectedDocument == 'quotes') {
           response = await DocumentsService.GetHistory(
             getClientExtId(),
-            moment(get().dateFrom).format('YYYY-MM-DD'),
-            moment(get().dateTo).format('YYYY-MM-DD')
+            moment(dateFrom).format('YYYY-MM-DD'),
+            moment(dateTo).format('YYYY-MM-DD')
           )
           // console.log('response',response)
           response['hydra:member'].map((element) => {
@@ -265,8 +265,8 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
           response = await DocumentsService.GetDocuments(
             getClientExtId(),
             get().selectedDocument,
-            moment(get().dateFrom).format('YYYY-MM-DD'),
-            moment(get().dateTo).format('YYYY-MM-DD'),
+            moment(dateFrom).format('YYYY-MM-DD'),
+            moment(dateTo).format('YYYY-MM-DD'),
             get().hydraPagination.page
           )
         }
@@ -277,8 +277,8 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
       } else if (get().documentType === 'history') {
         response = await DocumentsService.GetHistory(
           getClientExtId(),
-          moment(get().dateFrom).format('YYYY-MM-DD'),
-          moment(get().dateTo).format('YYYY-MM-DD')
+          moment(dateFrom).format('YYYY-MM-DD'),
+          moment(dateTo).format('YYYY-MM-DD')
         )
         set({ items: response['hydra:member'] })
         const hydraPagination = HydraHandler.paginationHandler(response)
@@ -286,8 +286,8 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
       } else if (get().documentType === 'kartesset') {
         response = await DocumentsService.GetKartesset(
           getClientExtId(),
-          moment(get().dateFrom).format('YYYY-MM-DD'),
-          moment(get().dateTo).format('YYYY-MM-DD')
+          moment(dateFrom).format('YYYY-MM-DD'),
+          moment(dateTo).format('YYYY-MM-DD')
         )
         set({ items: response?.lines['hydra:member'] })
       }

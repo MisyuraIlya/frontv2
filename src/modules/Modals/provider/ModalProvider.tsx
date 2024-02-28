@@ -32,8 +32,11 @@ import { useClientStore } from '../../Admin/store/ClientsStore'
 import RestoreCartModal from '../agentComponents/RestoreCartModal'
 import PdfViwer from '../components/PdfViwer/PdfViwer'
 import ImageModal from '../components/ImageModal/ImageModal'
+import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
 // Defines
 interface ModalContextType {
+  calendarHandler: (value: Date) => void
+  currentDate: Date
   openAuthModal: boolean
   setOpenAuthModal: (bool: boolean) => void
   stockNotify: boolean
@@ -100,6 +103,8 @@ interface ModalsProviderProps {
   children: ReactNode
 }
 const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
+  const [calendar, setCalendar] = useState(false)
+  const [currentDate, setCurrentDate] = useState(new Date())
   const [openAuthModal, setOpenAuthModal] = useState(false)
   const { setSelectedProd, loading, getProductOnlineData } =
     useSelectedProduct()
@@ -135,6 +140,11 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [objectCreate, setObjectCreate] = useState(false)
   const [agentOptions, setAgentOptions] = useState(false)
   const [restoreCartModal, setRestoreCartModal] = useState(false)
+
+  const calendarHandler = (value: Date) => {
+    setCurrentDate(value)
+    setCalendar(!calendar)
+  }
 
   const openStockNotify = () => {
     setStockNotify(true)
@@ -222,6 +232,8 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   }
 
   const value = {
+    calendarHandler,
+    currentDate,
     stockNotify,
     addToCartNotify,
     openStockNotify,
@@ -276,6 +288,12 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
 
   return (
     <ModalContext.Provider value={value}>
+      <CalendarUtil
+        show={calendar}
+        closeHandler={() => setCalendar(false)}
+        value={currentDate}
+        handleCalendar={calendarHandler}
+      />
       <div style={{ position: 'fixed', width: '100%', zIndex: 99 }}>
         <StockNotify />
         <AddToCartNotify />

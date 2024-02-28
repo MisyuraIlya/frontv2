@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Calendar from 'react-calendar'
 import Pagination from '../../../shared/Pagination'
 import { useDocuments } from '../store/DocumentsStore'
@@ -7,29 +7,22 @@ import DocsHead from '../components/DocsHead'
 import { useDocumentsProvider } from '../provider/DocumentsProvider'
 import DocumentList from '../components/DocumentList'
 import Loader from '../../../shared/Loader'
+import { Container } from '@mui/material'
+import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
+import { useModals } from '../../Modals/provider/ModalProvider'
 
 const DocumentsPage = () => {
-  const { loading, totalPages, hydraPagination, showCalendar, choosedDate } =
-    useDocuments()
-  const { handleCalendar } = useDocumentsProvider()
+  const [active, setActive] = useState(false)
+  const { loading, totalPages, hydraPagination } = useDocuments()
+  // const { handleCalendar } = useDocumentsProvider()
+
   return (
-    <div
-      className="page-container history admin-history docs"
-      style={{ marginTop: '160px' }}
-    >
-      <div className="docs-sub-cont">
-        {loading && <Loader />}
-        <Calendar
-          onChange={(date) => handleCalendar(date as Date)}
-          value={new Date()}
-          locale="he-IL"
-          className={showCalendar ? 'active' : null}
-        />
-        <DocsFilter />
-        <DocumentList />
-        <Pagination hydraPagination={hydraPagination} />
-      </div>
-    </div>
+    <Container maxWidth="xl">
+      {loading && <Loader />}
+      <DocsFilter />
+      <DocumentList />
+      <Pagination hydraPagination={hydraPagination} />
+    </Container>
   )
 }
 

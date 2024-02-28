@@ -53,34 +53,38 @@ const RouterApp = () => {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />
 
-            {/* <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} />
-            <Route path="/documentPage" element={<DocumentsPage />} />
-            <Route path="/historyItemPage/:id" element={<HistoryItemPage />} />
-            <Route path="/historyPage" element={<HistoryPage />} />
-            <Route path="/kartessetPage" element={<KartessetPage />} />
-
             <Route
+              path="/documentPage/:documentType/:dateFrom/:dateTo"
+              element={<DocumentsPage />}
+            />
+            {/* <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} /> */}
+
+            {/* <Route path="/historyItemPage/:id" element={<HistoryItemPage />} /> */}
+            {/* <Route path="/historyPage" element={<HistoryPage />} /> */}
+            {/* <Route path="/kartessetPage" element={<KartessetPage />} /> */}
+
+            {/* <Route
               path="/admin/category-edit/:lvl1/:lvl2/:lvl3"
               element={<CategoryEdit />}
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
               element={<ProductsEdit />}
-            />
-            <Route path="/admin/clients" element={<Clients />} />
-            <Route path="/admin/approveDoc" element={<Orders />} />
-            <Route
+            /> */}
+            {/* <Route path="/admin/clients" element={<Clients />} /> */}
+            {/* <Route path="/admin/approveDoc" element={<Orders />} /> */}
+            {/* <Route
               path="/admin/approveDocItems/:id"
               element={<OrderItemPage />}
-            />
-            <Route path="/admin/notification" element={<NotificationPage />} />
-            <Route path="/admin/agents" element={<AgentsPage />} />
+            /> */}
+            {/* <Route path="/admin/notification" element={<NotificationPage />} /> */}
+            {/* <Route path="/admin/agents" element={<AgentsPage />} /> */}
 
-            <Route path="/agentClients" element={<AgentClinets />} />
-            <Route path="/agentDashboard/:id" element={<AgentDashboard />} />
-            <Route path="/objectives/:id" element={<Objectives />} />
-            <Route path="/target/:id" element={<Target />} />
-            <Route path="/visits/:id" element={<Visits />} /> */}
+            {/* <Route path="/agentClients" element={<AgentClinets />} /> */}
+            {/* <Route path="/agentDashboard/:id" element={<AgentDashboard />} /> */}
+            {/* <Route path="/objectives/:id" element={<Objectives />} /> */}
+            {/* <Route path="/target/:id" element={<Target />} /> */}
+            {/* <Route path="/visits/:id" element={<Visits />} /> */}
           </Route>
         </Routes>
       </Box>

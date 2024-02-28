@@ -5,14 +5,16 @@ import React, {
   createContext,
   useContext,
   useEffect,
+  useState,
 } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 // Local
 import { useDocuments } from '../store/DocumentsStore'
 import moment from 'moment'
+import { useModals } from '../../Modals/provider/ModalProvider'
 
 interface DocumentsContextType {
-  handleCalendar: (date: Date) => void
+  handleCalendar: (date: 'from' | 'to') => void
 }
 const DocumentsContext = createContext<DocumentsContextType | null>(null)
 
@@ -30,64 +32,72 @@ interface DocumentsProviderProps {
 }
 
 const DocumentsProvider: FC<DocumentsProviderProps> = (props) => {
-  const {
-    setShowCalendar,
-    type,
-    setPage,
-    setDateFrom,
-    setDateTo,
-    getItems,
-    setDocumentType,
-  } = useDocuments()
+  const { setPage, getItems, setDocumentType } = useDocuments()
 
   const navigate = useNavigate()
   const location = useLocation()
+  const { calendarHandler, currentDate } = useModals()
   const isDocumentPage = location.pathname.includes('documentPage')
   const isKartessetPage = location.pathname.includes('kartessetPage')
   const isHistoryPage = location.pathname.includes('historyPage')
 
-  const handleCalendar = (date: Date) => {
+  const [type, setType] = useState<'from' | 'to' | null>(null)
+  const dateFrom = location.pathname.split('/')[3]
+  const dateTo = location.pathname.split('/')[4]
+
+  const handleCalendar = (type: 'from' | 'to') => {
     const urlSearchParams = new URLSearchParams(location.search)
     urlSearchParams.get('page')
-
-    if (type === 'from') {
-      setDateFrom(date)
-      urlSearchParams.set('from', moment(date).format('YYYY-MM-DD'))
-      urlSearchParams.get('to')
+    setType(type)
+    if (type === 'from' && dateFrom) {
+      calendarHandler(new Date(dateFrom))
+      // setDateFrom(date)
+      // urlSearchParams.set('from', moment(date).format('YYYY-MM-DD'))
+      // urlSearchParams.get('to')
     }
-    if (type === 'to') {
-      setDateTo(date)
-      urlSearchParams.set('to', moment(date).format('YYYY-MM-DD'))
-      urlSearchParams.get('from')
+    if (type === 'to' && dateTo) {
+      calendarHandler(new Date(dateTo))
+      // setDateTo(date)
+      // urlSearchParams.set('to', moment(date).format('YYYY-MM-DD'))
+      // urlSearchParams.get('from')
     }
-    const updatedUrl = '?' + urlSearchParams.toString()
-    navigate(updatedUrl)
-    setShowCalendar(false)
+    // const updatedUrl = '?' + urlSearchParams.toString()
+    // navigate(updatedUrl)
+    // setShowCalendar(false)
   }
 
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(location.search)
-    const page = urlSearchParams.get('page')
-    const from = urlSearchParams.get('from')
-    const to = urlSearchParams.get('to')
-    setPage(page)
-    if (from) {
-      setDateFrom(new Date(from))
+    if (type === 'from') {
+      const updatedPathname = `/documentPage/erp/${moment(currentDate).format('YYYY-MM-DD')}/${dateTo}`
+      navigate(updatedPathname)
     }
-    if (to) {
-      setDateTo(new Date(to))
+
+    if (type === 'to') {
+      const updatedPathname = `/documentPage/erp/${dateFrom}/${moment(currentDate).format('YYYY-MM-DD')}`
+      navigate(updatedPathname)
     }
-    if (isDocumentPage) {
-      setDocumentType('document')
-    }
-    if (isKartessetPage) {
-      setDocumentType('kartesset')
-    }
-    if (isHistoryPage) {
-      setDocumentType('history')
-    }
-    getItems()
-  }, [location.search, location.pathname])
+    // const urlSearchParams = new URLSearchParams(location.search)
+    // const page = urlSearchParams.get('page')
+    // const from = urlSearchParams.get('from')
+    // const to = urlSearchParams.get('to')
+    // setPage(page!)
+    // if (from) {
+    //   setDateFrom(new Date(from))
+    // }
+    // if (to) {
+    //   setDateTo(new Date(to))
+    // }
+    // if (isDocumentPage) {
+    //   setDocumentType('document')
+    // }
+    // if (isKartessetPage) {
+    //   setDocumentType('kartesset')
+    // }
+    // if (isHistoryPage) {
+    //   setDocumentType('history')
+    // }
+    // getItems()
+  }, [currentDate])
 
   const value = {
     handleCalendar,
