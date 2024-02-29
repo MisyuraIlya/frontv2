@@ -7,17 +7,50 @@ import moment from 'moment'
 interface DocumentsItemStore {
   loading: boolean
   setLoading: (value: boolean) => void
-  orderItems: Array<IDocumentItem>
-  setOrderItems: (arr: IDocumentItem[]) => void
+  setSwrHandler: (
+    orderItems: IDocumentItem[],
+    filesOrder: IDocumentItemsFile[],
+    totalTax: number,
+    totalPriceAfterTax: number,
+    totalAfterDiscount: number,
+    totalPrecent: number,
+    itemsLength: number
+  ) => void
+  orderItems: IDocumentItem[]
   filesOrder: IDocumentItemsFile[]
-  setFilesOrder: (arr: IDocumentItemsFile[]) => void
+  totalTax: number
+  totalPriceAfterTax: number
+  totalAfterDiscount: number
+  totalPrecent: number
+  itemsLength: number
 }
 
 export const useDocumentsItem = create<DocumentsItemStore>((set, get) => ({
   loading: false,
   setLoading: (loading) => set({ loading }),
+  setSwrHandler: (
+    orderItems,
+    filesOrder,
+    totalTax,
+    totalPriceAfterTax,
+    totalAfterDiscount,
+    totalPrecent,
+    itemsLength
+  ) =>
+    set({
+      orderItems,
+      filesOrder,
+      totalTax,
+      totalPriceAfterTax,
+      totalAfterDiscount,
+      totalPrecent,
+      itemsLength,
+    }),
   orderItems: [],
-  setOrderItems: (arr) => set({ orderItems: arr }),
   filesOrder: [],
-  setFilesOrder: (arr) => set({ filesOrder: arr }),
+  totalTax: 0,
+  totalPriceAfterTax: 0,
+  totalAfterDiscount: 0,
+  totalPrecent: 0,
+  itemsLength: 0,
 }))

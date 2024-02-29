@@ -20,7 +20,7 @@ const DocumentCardList = () => {
   const { selectProduct } = useModals()
 
   return (
-    <>
+    <Box sx={{ marginTop: '30px' }}>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -77,13 +77,10 @@ const DocumentCardList = () => {
             {orderItems?.map((element, index) => (
               <TableRow
                 key={index}
-                className={'item'}
-                id={'docRow_' + index}
                 onClick={() => selectProduct(element?.product)}
               >
                 <TableCell>
                   <img
-                    className="img"
                     width={100}
                     src={
                       element?.product?.defaultImagePath
@@ -119,11 +116,11 @@ const DocumentCardList = () => {
         </Table>
       </TableContainer>
       <Box className="centered">
-        {orderItems?.length === 0 && !loading ? (
-          <h1 className="no-products">לא נמצאו פריטים למסמך זה</h1>
-        ) : null}
+        {orderItems?.length === 0 && !loading && (
+          <Typography variant="h6">לא נמצאו פריטים למסמך זה</Typography>
+        )}
       </Box>
-    </>
+    </Box>
   )
 }
 

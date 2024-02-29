@@ -2,16 +2,18 @@ import React, { useEffect } from 'react'
 import { useDocuments } from '../store/DocumentsStore'
 import DocumentCardList from '../components/DocumentCardList'
 import DocsFilter from '../components/DocsFilter'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import DocsTotal from '../components/DocsTotal'
 import Loader from '../../../shared/Loader'
 import BreadCrumbs from '../../../shared/BreadCrumbs'
 import moment from 'moment'
 import DocsItemFilter from '../components/DocsItemFilter'
-import { Container } from '@mui/material'
+import { Breadcrumbs, Container, Link, Typography } from '@mui/material'
 import useSWR from 'swr'
 import { DocumentsService } from '../services/document.service'
 import { useDocumentsItem } from '../store/DocumentsItemStore'
+import { Navigate } from 'react-router-dom'
+import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 const DocumentsItemPage = () => {
   // const {
   //   loadingItemsPage,
@@ -20,10 +22,11 @@ const DocumentsItemPage = () => {
   //   setDocumentId,
   //   setDocumentItemType,
   // } = useDocuments()
-
-  const { setOrderItems, setFilesOrder, setLoading } = useDocumentsItem()
+  const { setSwrHandler, setLoading } = useDocumentsItem()
 
   const { documentItemType, id } = useParams()
+
+  const navigate = useNavigate()
 
   const fetchData = async () => {
     return await DocumentsService.GetDocumentsItemNew(
@@ -40,13 +43,21 @@ const DocumentsItemPage = () => {
   useEffect(() => {
     setLoading(isLoading)
     if (data) {
-      console.log('fetchedData', data)
-      setOrderItems(data.products['hydra:member'])
-      setFilesOrder(data.files['hydra:member'])
+      setSwrHandler(
+        data.products['hydra:member'],
+        data.files['hydra:member'],
+        data.totalTax,
+        data.totalPriceAfterTax,
+        data.totalAfterDiscount,
+        data.totalPrecent,
+        data.products['hydra:totalItems']
+      )
+      // setOrderItems(data.products['hydra:member'])
+      // setFilesOrder(data.files['hydra:member'])
     }
   }, [data])
-  // let from = moment().subtract(1, 'months').format('YYYY-MM-DD')
-  // let to = moment().format('YYYY-MM-DD')
+  let from = moment().subtract(1, 'months').format('YYYY-MM-DD')
+  let to = moment().format('YYYY-MM-DD')
 
   // useEffect(() => {
   //   setDocumentType('documentItem')
@@ -58,19 +69,18 @@ const DocumentsItemPage = () => {
   // }, [])
   return (
     <Container maxWidth="xl">
-      {/* {loadingItemsPage && <Loader />} */}
-      {/* <BreadCrumbs
+      <BreadCrumbsUtil
         array={[
           {
             title: 'מסמכים',
-            link: `/documentPage?page=1&from=${from}&to=${to}`,
+            link: `/documentPage/${documentItemType}/${from}/${to}/?page=1`,
           },
           { title: id || '', link: '' },
         ]}
-      /> */}
+      />
       <DocsItemFilter />
       <DocumentCardList />
-      {/* <DocsTotal /> */}
+      <DocsTotal />
     </Container>
   )
 }
