@@ -52,7 +52,11 @@ interface DocumentsStore {
   //========== DATA ===============
   items: Array<IDocument | IHistory | ICartessetLine>
   clearItems: () => void
-  getItems: (dateFrom: Date, dateTo: Date) => Promise<void>
+  getItems: (
+    documentType: string,
+    dateFrom: Date,
+    dateTo: Date
+  ) => Promise<void>
   //===============================
 
   //========== ITEM DATA ===============
@@ -112,7 +116,6 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   selectedDocument: 'orders',
   setSelectedDocument: (value: string) => {
     set({ selectedDocument: value })
-    // get().getItems()
   },
   documentType: '',
   setDocumentType: (value: string) => set({ documentType: value }),
@@ -247,11 +250,12 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   items: [],
 
   clearItems: () => set({ items: [] }),
-  getItems: async (dateFrom: Date, dateTo: Date) => {
+  getItems: async (documentType, dateFrom: Date, dateTo: Date) => {
+    console.log(documentType, dateFrom, dateTo)
     set({ loading: true })
     try {
       let response = null
-      if (get().documentType === 'document') {
+      if (documentType === 'document') {
         if (get().selectedDocument == 'quotes') {
           response = await DocumentsService.GetHistory(
             getClientExtId(),
@@ -279,7 +283,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
         set({ items: response['hydra:member'] })
         const hydraPagination = HydraHandler.paginationHandler(response)
         set({ hydraPagination: hydraPagination })
-      } else if (get().documentType === 'history') {
+      } else if (documentType === 'history') {
         response = await DocumentsService.GetHistory(
           getClientExtId(),
           moment(dateFrom).format('YYYY-MM-DD'),
@@ -288,7 +292,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
         set({ items: response['hydra:member'] })
         const hydraPagination = HydraHandler.paginationHandler(response)
         set({ hydraPagination: hydraPagination })
-      } else if (get().documentType === 'kartesset') {
+      } else if (documentType === 'kartesset') {
         response = await DocumentsService.GetKartesset(
           getClientExtId(),
           moment(dateFrom).format('YYYY-MM-DD'),

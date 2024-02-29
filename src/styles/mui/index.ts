@@ -207,6 +207,24 @@ const theme = createTheme({
       },
     },
 
+    // Table
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          cursor: 'pointer',
+          '&:hover': {
+            backgroundColor: '#e0e0e0', // Set your desired background color for hover effect
+          },
+          '&:nth-child(even)': {
+            backgroundColor: '#f5f5f5', // Set your desired background color for even rows
+            '&:hover': {
+              backgroundColor: '#e0e0e0', // Set your desired background color for hover effect
+            },
+          },
+        },
+      },
+    },
+
     // MODAL
 
     // MuiBackdrop: {

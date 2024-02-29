@@ -8,6 +8,7 @@ import { Container } from '@mui/material'
 import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
 import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment'
+import PaginationUtil from '../../../utils/pagination/PaginationUtil'
 
 const DocumentsPage = () => {
   const navigate = useNavigate()
@@ -46,7 +47,8 @@ const DocumentsPage = () => {
       {loading && <Loader />}
       <DocsFilter />
       <DocumentList />
-      <Pagination hydraPagination={hydraPagination} />
+      <PaginationUtil hydraPagination={hydraPagination} />
+      {/* <Pagination hydraPagination={hydraPagination} /> */}
     </Container>
   )
 }

@@ -1,12 +1,13 @@
 import { Box, Pagination, Typography } from '@mui/material'
 import React, { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 interface PaginationUtilProps {
   hydraPagination: hydraPagination
 }
 const PaginationUtil: FC<PaginationUtilProps> = ({ hydraPagination }) => {
   const navigate = useNavigate()
+  const {} = useParams()
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     page: number
