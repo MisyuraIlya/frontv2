@@ -96,4 +96,19 @@ export const DocumentsService = {
     )
     return response.data
   },
+
+  // NEW
+
+  async GetDocumentsNew(
+    userExId: string,
+    documentType: string,
+    fromDate: Date,
+    toDate: Date,
+    page: string | number
+  ): Promise<DocumentsResponse> {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/api/documents?userExId=${userExId}&from=${fromDate}&to=${toDate}&documentType=${documentType}&page=${page}`
+    )
+    return response.data
+  },
 }

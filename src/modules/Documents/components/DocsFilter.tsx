@@ -42,7 +42,10 @@ const DocsFilter = () => {
   } = useDocuments()
   const navigate = useNavigate()
   const location = useLocation()
-  const { documentType, dateFrom, dateTo, page } = useParams()
+  const { documentType, dateFrom, dateTo } = useParams()
+  const searchParams = new URLSearchParams(location.search)
+  const pageNumber = searchParams.get('page')
+
   const { isAdmin, isAgent, isSuperAgent } = useAuth()
   // const {location,push} = useHistory()
   const { id } = useParams()
@@ -135,7 +138,12 @@ const DocsFilter = () => {
             marginTop: '32px',
           }}
           onClick={() =>
-            getItems(documentType!, new Date(dateFrom!), new Date(dateTo!))
+            getItems(
+              documentType!,
+              new Date(dateFrom!),
+              new Date(dateTo!),
+              pageNumber!
+            )
           }
         >
           חפש

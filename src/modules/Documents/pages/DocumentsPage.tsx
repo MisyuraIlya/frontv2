@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Pagination from '../../../shared/Pagination'
 import { useDocuments } from '../store/DocumentsStore'
 import DocsFilter from '../components/DocsFilter'
@@ -9,9 +9,11 @@ import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
 import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment'
 import PaginationUtil from '../../../utils/pagination/PaginationUtil'
-
+import { useLocation } from 'react-router-dom'
 const DocumentsPage = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+
   const {
     loading,
     currentDate,
@@ -20,21 +22,30 @@ const DocumentsPage = () => {
     setShowCalendar,
     type,
     hydraPagination,
+    setPage,
+    getItems,
   } = useDocuments()
-  const { documentPage, dateFrom, dateTo } = useParams()
+  const { documentType, dateFrom, dateTo } = useParams()
+  const searchParams = new URLSearchParams(location.search)
+  const pageNumber = searchParams.get('page')
 
   const handleDate = (date: Date) => {
     setCurrentDate(date)
     if (type === 'from') {
-      const updatedPathname = `/documentPage/${documentPage}/${moment(date).format('YYYY-MM-DD')}/${dateTo}`
+      const updatedPathname = `/documentPage/${documentType}/${moment(date).format('YYYY-MM-DD')}/${dateTo}`
       navigate(updatedPathname)
     }
     if (type === 'to') {
-      const updatedPathname = `/documentPage/${documentPage}/${dateFrom}/${moment(date).format('YYYY-MM-DD')}`
+      const updatedPathname = `/documentPage/${documentType}/${dateFrom}/${moment(date).format('YYYY-MM-DD')}`
       navigate(updatedPathname)
     }
     setShowCalendar(false)
   }
+
+  useEffect(() => {
+    setPage(pageNumber ?? '1')
+    getItems(documentType!, new Date(dateFrom!), new Date(dateTo!), pageNumber!)
+  }, [pageNumber])
 
   return (
     <Container maxWidth="xl">
@@ -48,7 +59,6 @@ const DocumentsPage = () => {
       <DocsFilter />
       <DocumentList />
       <PaginationUtil hydraPagination={hydraPagination} />
-      {/* <Pagination hydraPagination={hydraPagination} /> */}
     </Container>
   )
 }

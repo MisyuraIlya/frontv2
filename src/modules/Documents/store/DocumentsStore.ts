@@ -55,7 +55,8 @@ interface DocumentsStore {
   getItems: (
     documentType: string,
     dateFrom: Date,
-    dateTo: Date
+    dateTo: Date,
+    page: string
   ) => Promise<void>
   //===============================
 
@@ -250,36 +251,23 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   items: [],
 
   clearItems: () => set({ items: [] }),
-  getItems: async (documentType, dateFrom: Date, dateTo: Date) => {
-    console.log(documentType, dateFrom, dateTo)
+  getItems: async (
+    documentType: string,
+    dateFrom: Date,
+    dateTo: Date,
+    page: string
+  ) => {
     set({ loading: true })
     try {
       let response = null
       if (documentType === 'document') {
-        if (get().selectedDocument == 'quotes') {
-          response = await DocumentsService.GetHistory(
-            getClientExtId(),
-            moment(dateFrom).format('YYYY-MM-DD'),
-            moment(dateTo).format('YYYY-MM-DD')
-          )
-          // console.log('response',response)
-          response['hydra:member'].map((element) => {
-            element.user_name = element.user.name
-            element.userExId = element.user.extId
-            element.type = 'טיוטה'
-            element.document_number = element.id
-            element.status = 'טיוטה'
-          })
-        } else {
-          response = await DocumentsService.GetDocuments(
-            getClientExtId(),
-            get().selectedDocument,
-            moment(dateFrom).format('YYYY-MM-DD'),
-            moment(dateTo).format('YYYY-MM-DD'),
-            get().hydraPagination.page
-          )
-        }
-
+        response = await DocumentsService.GetDocuments(
+          getClientExtId(),
+          get().selectedDocument,
+          moment(dateFrom).format('YYYY-MM-DD'),
+          moment(dateTo).format('YYYY-MM-DD'),
+          page
+        )
         set({ items: response['hydra:member'] })
         const hydraPagination = HydraHandler.paginationHandler(response)
         set({ hydraPagination: hydraPagination })
