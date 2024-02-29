@@ -1,23 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import Calendar from 'react-calendar'
+import React from 'react'
 import Pagination from '../../../shared/Pagination'
 import { useDocuments } from '../store/DocumentsStore'
 import DocsFilter from '../components/DocsFilter'
-import DocsHead from '../components/DocsHead'
-import { useDocumentsProvider } from '../provider/DocumentsProvider'
 import DocumentList from '../components/DocumentList'
 import Loader from '../../../shared/Loader'
 import { Container } from '@mui/material'
 import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
-import { useModals } from '../../Modals/provider/ModalProvider'
+import { useNavigate, useParams } from 'react-router-dom'
+import moment from 'moment'
 
 const DocumentsPage = () => {
-  const [active, setActive] = useState(false)
-  const { loading, totalPages, hydraPagination } = useDocuments()
-  // const { handleCalendar } = useDocumentsProvider()
+  const navigate = useNavigate()
+  const {
+    loading,
+    currentDate,
+    setCurrentDate,
+    showCalendar,
+    setShowCalendar,
+    type,
+    hydraPagination,
+  } = useDocuments()
+  const { documentPage, dateFrom, dateTo } = useParams()
+
+  const handleDate = (date: Date) => {
+    setCurrentDate(date)
+    if (type === 'from') {
+      const updatedPathname = `/documentPage/${documentPage}/${moment(date).format('YYYY-MM-DD')}/${dateTo}`
+      navigate(updatedPathname)
+    }
+    if (type === 'to') {
+      const updatedPathname = `/documentPage/${documentPage}/${dateFrom}/${moment(date).format('YYYY-MM-DD')}`
+      navigate(updatedPathname)
+    }
+    setShowCalendar(false)
+  }
 
   return (
     <Container maxWidth="xl">
+      <CalendarUtil
+        show={showCalendar}
+        closeHandler={() => setShowCalendar(false)}
+        value={currentDate}
+        handleCalendar={handleDate}
+      />
       {loading && <Loader />}
       <DocsFilter />
       <DocumentList />

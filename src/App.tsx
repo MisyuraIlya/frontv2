@@ -1,7 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import RouterApp from './RouterApp'
 import { ModalsProvider } from './modules/Modals/provider/ModalProvider'
-import { DocumentsProvider } from './modules/Documents/provider/DocumentsProvider'
 import { NotificationsProvider } from './modules/PushNotifications/provider/PushNotification'
 import { CacheProvider } from '@emotion/react'
 import { prefixer } from 'stylis'
@@ -22,9 +21,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <ModalsProvider>
             <NotificationsProvider>
-              <DocumentsProvider>
-                <RouterApp />
-              </DocumentsProvider>
+              <RouterApp />
             </NotificationsProvider>
           </ModalsProvider>
         </ThemeProvider>

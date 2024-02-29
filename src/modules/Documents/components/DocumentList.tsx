@@ -3,12 +3,12 @@ import { useDocuments } from '../store/DocumentsStore'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 const DocumentList = () => {
-  const { showCalendar, items, searchValue, loading, clerOrderItems } =
-    useDocuments()
+  const { items, searchValue, loading, clerOrderItems } = useDocuments()
   const navigate = useNavigate()
 
   return (
-    <div
+    <>
+      {/* <div
       className={
         showCalendar ? 'doc-container active card' : 'doc-container card'
       }
@@ -108,13 +108,13 @@ const DocumentList = () => {
                           )}
                         </th>
 
-                        {/* <th className="col-cont">
+                        <th className="col-cont">
                               {element?.DocumentID != '31' && element?.DocumentID != '3' ?
                                 <div className="file-cont" onClick={()=> downloadFile(element, 'pdf')}>
                                   <span className="material-symbols-outlined">picture_as_pdf</span>
                                 </div>
                               :null}
-                            </th> */}
+                            </th>
                       </tr>
                     )
                   }
@@ -124,7 +124,8 @@ const DocumentList = () => {
           </table>
         </div>
       ) : null}
-    </div>
+    </div> */}
+    </>
   )
 }
 

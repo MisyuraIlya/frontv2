@@ -18,10 +18,12 @@ interface DocumentsStore {
   //===================================
 
   //========== CALENDAR ===============
-  // showCalendar: boolean
-  // setShowCalendar: (bool: boolean) => void
-  // type: string
-  // setType: (value: string) => void
+  currentDate: Date
+  setCurrentDate: (currentDate: Date) => void
+  showCalendar: boolean
+  setShowCalendar: (bool: boolean) => void
+  type: 'from' | 'to'
+  handleCalendar: (value: 'from' | 'to', date: Date) => void
   // dateFrom: Date
   // dateTo: Date
   // choosedDate: Date
@@ -32,7 +34,7 @@ interface DocumentsStore {
   //========== SEARCH FILTER ===============
   documentTypes: Array<{ value: string; label: string }>
   selectedDocument: string
-  // setSelectedDocument: (value: string) => void
+  setSelectedDocument: (value: string) => void
   documentType: string
   setDocumentType: (value: string) => void
   documentId: string
@@ -82,15 +84,18 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   //===================================
 
   //========== CALENDAR ===============
-  // showCalendar: false,
-  // setShowCalendar: (bool: boolean) => set({ showCalendar: bool }),
-  // type: '',
-  // setType: (value: string) => set({ type: value, showCalendar: true }),
-  // dateFrom: new Date(),
-  // dateTo: new Date(),
-  // choosedDate: new Date(),
-  // setDateFrom: (date: Date) => set({ dateFrom: date }),
-  // setDateTo: (date: Date) => set({ dateTo: date }),
+  currentDate: new Date(),
+  setCurrentDate: (value) => set({ currentDate: value }),
+  showCalendar: false,
+  setShowCalendar: (bool: boolean) => set({ showCalendar: bool }),
+  type: 'from',
+  handleCalendar: (type: 'from' | 'to', date) => {
+    set({
+      currentDate: date,
+      type,
+      showCalendar: !get().showCalendar,
+    })
+  },
   //===================================
 
   //========== SEARCH FILTER ===============
@@ -105,10 +110,10 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   ],
 
   selectedDocument: 'orders',
-  // setSelectedDocument: (value: string) => {
-  //   set({ selectedDocument: value })
-  //   get().getItems()
-  // },
+  setSelectedDocument: (value: string) => {
+    set({ selectedDocument: value })
+    // get().getItems()
+  },
   documentType: '',
   setDocumentType: (value: string) => set({ documentType: value }),
   documentItemType: 'orders',
