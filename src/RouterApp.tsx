@@ -48,16 +48,17 @@ const RouterApp = () => {
               path="/client/:documentType/:lvl1/:lvl2/:lvl3"
               element={<Catalog />}
             />
-
             <Route path="/CatalogView" element={<CatalogView />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-
             <Route
               path="/documentPage/:documentType/:dateFrom/:dateTo"
               element={<DocumentsPage />}
             />
-            {/* <Route path="/documentItemPage/:documentItemType/:id" element={<DocumentsItemPage />} /> */}
+            <Route
+              path="/documentItemPage/:documentItemType/:id"
+              element={<DocumentsItemPage />}
+            />
 
             {/* <Route path="/historyItemPage/:id" element={<HistoryItemPage />} /> */}
             {/* <Route path="/historyPage" element={<HistoryPage />} /> */}

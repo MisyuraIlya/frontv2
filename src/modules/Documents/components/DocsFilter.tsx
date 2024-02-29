@@ -150,29 +150,6 @@ const DocsFilter = () => {
         </Button>
       </Box>
       <Box sx={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
-        <Box sx={{ display: 'flex', gap: '10px' }}>
-          <Button
-            sx={{ height: '40px' }}
-            variant="outlined"
-            startIcon={<PictureAsPdfIcon sx={{ fontSize: '30px' }} />}
-          >
-            PDF
-          </Button>
-          <Button
-            sx={{ height: '40px' }}
-            variant="outlined"
-            startIcon={<ArticleIcon sx={{ fontSize: '30px' }} />}
-          >
-            XL
-          </Button>
-          <Button
-            sx={{ height: '40px' }}
-            variant="outlined"
-            startIcon={<ShoppingCartCheckoutIcon sx={{ fontSize: '30px' }} />}
-          >
-            שחזר הזמנה
-          </Button>
-        </Box>
         <FormControl fullWidth sx={{ width: '200px' }}>
           <InputLabel id="demo-simple-select-label">מסמך</InputLabel>
           <Select

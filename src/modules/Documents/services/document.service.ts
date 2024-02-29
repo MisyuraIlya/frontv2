@@ -111,4 +111,14 @@ export const DocumentsService = {
     )
     return response.data
   },
+
+  async GetDocumentsItemNew(
+    documentItemType: DocumentItemTypes,
+    documentNumber: number | string
+  ): Promise<IDocumentItems> {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/api/documents/${documentNumber}?documentItemType=${documentItemType}&userExId=${getClientExtId()}`
+    )
+    return response.data
+  },
 }
