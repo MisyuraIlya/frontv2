@@ -32,7 +32,7 @@ const CenterComponent = () => {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', position: 'relative', zIndex: 10 }}>
       <SearchInput
         value={searchValue}
         setValue={handleSetValue}
@@ -44,6 +44,8 @@ const CenterComponent = () => {
             array={productsFilter}
             loading={loading}
             totalFound={totalFound}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
         }
       />

@@ -27,11 +27,9 @@ const RightSide = () => {
       if (!check) {
         isSearchDocument
           ? navigate(
-              `/client/${documentType}/${lvl1.identify}/${lvl2.extId}/0${location.search}`
+              `/client/${documentType}/${lvl1.id}/${lvl2.id}/0${location.search}`
             )
-          : navigate(
-              `/client/${documentType}/${lvl1.identify}/${lvl2.extId}/0?page=1`
-            )
+          : navigate(`/client/${documentType}/${lvl1.id}/${lvl2.id}/0?page=1`)
       }
     }
 
@@ -40,10 +38,10 @@ const RightSide = () => {
       if (!check) {
         isSearchDocument
           ? navigate(
-              `/client/${documentType}/${lvl1.identify}/${lvl2.extId}/${currentItem?.extId}/${location.search}`
+              `/client/${documentType}/${lvl1.id}/${lvl2.id}/${currentItem?.id}/${location.search}`
             )
           : navigate(
-              `/client/${documentType}/${lvl1.identify}/${lvl2.extId}/${currentItem?.extId}?page=1`
+              `/client/${documentType}/${lvl1.id}/${lvl2.id}/${currentItem?.id}?page=1`
             )
       }
     }
@@ -59,7 +57,7 @@ const RightSide = () => {
                 <ListItem
                   key={key1}
                   onClick={() =>
-                    navigate(`/client/${documentType}/${lvl1Cat.identify}/0/0`)
+                    navigate(`/client/${documentType}/${lvl1Cat.id}/0/0`)
                   }
                   sx={{ cursor: 'pointer' }}
                 >
@@ -68,17 +66,17 @@ const RightSide = () => {
                     sx={{
                       '& span': {
                         textDecoration:
-                          lvl1 === lvl1Cat.identify ? 'underline' : 'none',
-                        fontWeight: lvl1 === lvl1Cat.identify ? 600 : 500,
+                          lvl1 === lvl1Cat.id.toString() ? 'underline' : 'none',
+                        fontWeight: lvl1 === lvl1Cat.id.toString() ? 600 : 500,
                         color:
-                          lvl1 === lvl1Cat.identify
+                          lvl1 === lvl1Cat.id.toString()
                             ? themeColors.secondary
                             : 'black',
                       },
                     }}
                   />
                 </ListItem>
-                {lvl1 === lvl1Cat.identify && (
+                {lvl1 === lvl1Cat.id.toString() && (
                   <List sx={{ marginLeft: '30px' }}>
                     {lvl1Cat?.categories?.map((lvl2Cat, key2) => {
                       return (
@@ -95,20 +93,20 @@ const RightSide = () => {
                               sx={{
                                 '& span': {
                                   textDecoration:
-                                    lvl2 === lvl2Cat.extId
+                                    lvl2 === lvl2Cat.id.toString()
                                       ? 'underline'
                                       : 'none',
                                   fontWeight:
-                                    lvl2 === lvl2Cat.extId ? 600 : 500,
+                                    lvl2 === lvl2Cat.id.toString() ? 600 : 500,
                                   color:
-                                    lvl2 === lvl2Cat.extId
+                                    lvl2 === lvl2Cat.id.toString()
                                       ? themeColors.secondary
                                       : 'black',
                                 },
                               }}
                             />
                           </ListItem>
-                          {lvl2 === lvl2Cat.extId && (
+                          {lvl2 === lvl2Cat.id.toString() && (
                             <List sx={{ marginLeft: '60px' }}>
                               {lvl2Cat?.categories?.map((lvl3Cat, key3) => (
                                 <ListItem
@@ -123,13 +121,15 @@ const RightSide = () => {
                                     sx={{
                                       '& span': {
                                         textDecoration:
-                                          lvl3 === lvl3Cat.extId
+                                          lvl3 === lvl3Cat.id.toString()
                                             ? 'underline'
                                             : 'none',
                                         fontWeight:
-                                          lvl3 === lvl3Cat.extId ? 600 : 500,
+                                          lvl3 === lvl3Cat.id.toString()
+                                            ? 600
+                                            : 500,
                                         color:
-                                          lvl3 === lvl3Cat.extId
+                                          lvl3 === lvl3Cat.id.toString()
                                             ? themeColors.secondary
                                             : 'black',
                                       },

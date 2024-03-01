@@ -27,16 +27,14 @@ const CategoryNavBar = () => {
     if (currentItem.lvlNumber === 2) {
       const check = checkIsBlockedForView(currentItem)
       if (!check) {
-        navigate(`/client/catalog/${lvl1.identify}/${lvl2.extId}/0`)
+        navigate(`/client/catalog/${lvl1.id}/${lvl2.id}/0`)
       }
     }
 
     if (currentItem.lvlNumber === 3) {
       const check = checkIsBlockedForView(lvl2)
       if (!check) {
-        navigate(
-          `/client/catalog/${lvl1.identify}/${lvl2.extId}/${currentItem.extId}`
-        )
+        navigate(`/client/catalog/${lvl1.id}/${lvl2.id}/${currentItem.id}`)
       }
     }
   }
@@ -74,7 +72,7 @@ const CategoryNavBar = () => {
                     primary={element?.title}
                     sx={{ cursor: 'pointer' }}
                     onClick={() =>
-                      navigate(`/client/catalog/${element.identify}/0/0?page=1`)
+                      navigate(`/client/catalog/${element.id}/0/0?page=1`)
                     }
                   />
                 </ListItem>

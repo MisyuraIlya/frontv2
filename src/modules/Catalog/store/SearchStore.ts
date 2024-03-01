@@ -47,7 +47,8 @@ export const useSearchStore = create<useSearchStoreState>((set, get) => ({
         lvl1id,
         lvl2id,
         lvl3id,
-        searchParams
+        searchParams,
+        'search'
       )
       set({
         productsFilter: response['hydra:member'],
