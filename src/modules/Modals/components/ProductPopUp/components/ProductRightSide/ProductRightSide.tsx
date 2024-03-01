@@ -2,7 +2,9 @@ import React from 'react'
 import { useSelectedProduct } from '../../../../store/selecterdProduct.store'
 import AdditionalImages from '../AdditionalImages'
 import { useModals } from '../../../../provider/ModalProvider'
-
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
+import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined'
+import { Box, IconButton } from '@mui/material'
 const ProductRightSide = () => {
   const { selectedProd } = useSelectedProduct()
   const { handleImageModal } = useModals()
@@ -28,25 +30,36 @@ const ProductRightSide = () => {
   return (
     <>
       {selectedProd.defaultImagePath && (
-        <>
-          <span
-            className="material-symbols-outlined span1"
-            onClick={() => shareImage()}
-          >
-            share
-          </span>
-          <span
-            className="material-symbols-outlined span2"
-            onClick={() => openLink()}
-          >
-            link
-          </span>
-        </>
+        <Box sx={{ position: 'absolute' }}>
+          <Box>
+            <IconButton
+              onClick={() => shareImage()}
+              sx={{
+                backgroundColor: '#f3f5f9',
+                borderRadius: '9px',
+                '&:hover': { backgroundColor: '#d1d9e8' },
+              }}
+            >
+              <ShareOutlinedIcon sx={{ fontSize: '30px' }} />
+            </IconButton>
+          </Box>
+          <Box sx={{ marginTop: '10px' }}>
+            <IconButton
+              onClick={() => openLink()}
+              sx={{
+                backgroundColor: '#f3f5f9',
+                borderRadius: '9px',
+                '&:hover': { backgroundColor: '#d1d9e8' },
+              }}
+            >
+              <InsertLinkOutlinedIcon sx={{ fontSize: '30px' }} />
+            </IconButton>
+          </Box>
+        </Box>
       )}
 
       {selectedProd.defaultImagePath ? (
         <img
-          className="img  col-lg-12"
           src={`${process.env.REACT_APP_MEDIA}/product/${selectedProd.defaultImagePath}`}
           onClick={() =>
             handleImageModal(
@@ -55,14 +68,9 @@ const ProductRightSide = () => {
           }
         />
       ) : (
-        <img
-          className="img"
-          src={`${process.env.REACT_APP_MEDIA}/placeholder.jpg`}
-        />
+        <img src={`${process.env.REACT_APP_MEDIA}/placeholder.jpg`} />
       )}
-      <div className="additional-img-cont col-lg-11">
-        {selectedProd?.imagePath?.length > 1 && <AdditionalImages />}
-      </div>
+      <Box>{selectedProd?.imagePath?.length > 1 && <AdditionalImages />}</Box>
     </>
   )
 }

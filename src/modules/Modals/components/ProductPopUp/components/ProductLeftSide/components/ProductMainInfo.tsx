@@ -1,99 +1,54 @@
 import React from 'react'
 import { useSelectedProduct } from '../../../../../store/selecterdProduct.store'
+import { Typography, Link, Grid, IconButton } from '@mui/material'
+import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined'
 
 const ProductMainInfo = () => {
   const { selectedProd } = useSelectedProduct()
+
   return (
     <>
-      <h2>{selectedProd?.title}</h2>
-      {selectedProd.title ? (
-        <div className="details">
-          <p style={{ color: 'blacks' }}>{selectedProd.title}</p>
-        </div>
-      ) : null}
+      <Typography variant="h5">{selectedProd?.title}</Typography>
       {selectedProd?.sku && (
-        <div className="prod-info-cont flex-container">
-          <div className="col-lg-4">
-            <p className="c-title">{'מספר קטלוגי'}</p>
-          </div>
-          <div className="col-lg-8">
-            <p className="c-nomber">{selectedProd?.sku}</p>
-          </div>
-        </div>
+        <Grid container>
+          <Grid item xs={4}>
+            <Typography variant="h6">{'מספר קטלוגי'}</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Typography variant="body1">{selectedProd?.sku}</Typography>
+          </Grid>
+        </Grid>
       )}
       {selectedProd?.link && (
-        <div className="prod-info-cont flex-container">
-          <div className="col-lg-4">
-            <p className="c-title">{selectedProd?.linkTitle}</p>
-          </div>
-          <div className="col-lg-8">
-            <a
+        <Grid container>
+          <Grid item xs={4}>
+            <Typography variant="h6">{selectedProd?.linkTitle}</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Link
               href={selectedProd?.link}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="ExtendBtn material-symbols-outlined">
-                media_link
-              </span>
-            </a>
-          </div>
-        </div>
+              <IconButton>
+                <InsertLinkOutlinedIcon />
+              </IconButton>
+            </Link>
+          </Grid>
+        </Grid>
       )}
       {selectedProd?.packQuantity && (
-        <div className="prod-info-cont flex-container">
-          <div className="col-lg-4">
-            <p className="c-title pack_quan">{'יחידות במארז'}</p>
-          </div>
-          <div className="col-lg-8">
-            <p className="c-nomber rtl">{selectedProd?.packQuantity}</p>
-          </div>
-        </div>
+        <Grid container>
+          <Grid item xs={4}>
+            <Typography variant="h6">{'יחידות במארז'}</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Typography variant="body1">
+              {selectedProd?.packQuantity}
+            </Typography>
+          </Grid>
+        </Grid>
       )}
-
-      {/* {selectedProd?.Extra7 && ( // TODO FIX 
-            <div className="prod-info-cont flex-container">
-                <div className="col-lg-3">
-                    <p className="c-title pack_quan">
-                        {'יחידות במשטח'}
-                    </p>
-                </div>
-                <div className="col-lg-9">
-                    <p className="c-nomber rtl">
-                        {selectedProd?.Extra7}
-                    </p>
-                </div>
-            </div>
-        )} */}
-
-      {/* {selectedProd?.InnerPack && (
-            <div className="prod-info-cont flex-container">
-                <div className="col-lg-3">
-                    <p className="c-title pack_quan">
-                        {'Inner'}
-                    </p>
-                </div>
-                <div className="col-lg-9">
-                    <p className="c-nomber rtl">
-                        {selectedProd?.PackQuan}
-                    </p>
-                </div>
-            </div>
-        )} */}
-
-      {/* {selectedProd?.MasterCarton && (
-            <div className="prod-info-cont flex-container">
-                <div className="col-lg-3">
-                    <p className="c-title pack_quan">
-                        {'Master'}
-                    </p>
-                </div>
-                <div className="col-lg-9">
-                    <p className="c-nomber rtl">
-                        {selectedProd?.PackQuan}
-                    </p>
-                </div>
-            </div>
-        )} */}
     </>
   )
 }
