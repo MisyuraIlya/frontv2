@@ -25,9 +25,9 @@ const ProductMainInfoTwo = () => {
           {getUserFromStorage() && (
             <>
               {selectedProd.basePrice ? (
-                <Grid container>
+                <Grid container sx={{ margin: '20px 0px' }}>
                   <Grid item xs={4}>
-                    <Typography variant="h6">{"מחיר ליח' מקורי"}</Typography>
+                    <Typography variant="body1">{"מחיר ליח' מקורי"}</Typography>
                   </Grid>
                   <Grid item xs={8}>
                     <Typography variant="body1">
@@ -36,9 +36,9 @@ const ProductMainInfoTwo = () => {
                   </Grid>
                 </Grid>
               ) : null}
-              <Grid container>
+              <Grid container sx={{ margin: '20px 0px' }}>
                 <Grid item xs={4}>
-                  <Typography variant="h6">{'הנחה'}</Typography>
+                  <Typography variant="body1">{'הנחה'}</Typography>
                 </Grid>
                 <Grid item xs={8}>
                   {isAgent && selectedMode ? (
@@ -54,9 +54,9 @@ const ProductMainInfoTwo = () => {
                   )}
                 </Grid>
               </Grid>
-              <Grid container>
+              <Grid container sx={{ margin: '20px 0px' }}>
                 <Grid item xs={4}>
-                  <Typography variant="h6">{"מחיר ליח'"}</Typography>
+                  <Typography variant="body1">{"מחיר ליח'"}</Typography>
                 </Grid>
                 <Grid item xs={8}>
                   <Typography variant="body1">

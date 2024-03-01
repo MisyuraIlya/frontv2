@@ -10,9 +10,9 @@ const ProductMainInfo = () => {
     <>
       <Typography variant="h5">{selectedProd?.title}</Typography>
       {selectedProd?.sku && (
-        <Grid container>
+        <Grid container sx={{ margin: '20px 0px' }}>
           <Grid item xs={4}>
-            <Typography variant="h6">{'מספר קטלוגי'}</Typography>
+            <Typography variant="body1">{'מספר קטלוגי'}</Typography>
           </Grid>
           <Grid item xs={8}>
             <Typography variant="body1">{selectedProd?.sku}</Typography>
@@ -20,9 +20,9 @@ const ProductMainInfo = () => {
         </Grid>
       )}
       {selectedProd?.link && (
-        <Grid container>
+        <Grid container sx={{ margin: '20px 0px' }}>
           <Grid item xs={4}>
-            <Typography variant="h6">{selectedProd?.linkTitle}</Typography>
+            <Typography variant="body1">{selectedProd?.linkTitle}</Typography>
           </Grid>
           <Grid item xs={8}>
             <Link
@@ -38,9 +38,9 @@ const ProductMainInfo = () => {
         </Grid>
       )}
       {selectedProd?.packQuantity && (
-        <Grid container>
+        <Grid container sx={{ margin: '20px 0px' }}>
           <Grid item xs={4}>
-            <Typography variant="h6">{'יחידות במארז'}</Typography>
+            <Typography variant="body1">{'יחידות במארז'}</Typography>
           </Grid>
           <Grid item xs={8}>
             <Typography variant="body1">

@@ -18,11 +18,11 @@ const ProductHistoryPurche = () => {
     <>
       {getUserFromStorage() && (
         <>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
-              <Typography variant="h6">{'היסטוריית רכישה'}</Typography>
+          <Grid container sx={{ margin: '10px 0px' }}>
+            <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography variant="body1">{'היסטוריית רכישה'}</Typography>
             </Grid>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={8}>
               <IconButton onClick={handleOpen}>
                 <VisibilityIcon />
               </IconButton>

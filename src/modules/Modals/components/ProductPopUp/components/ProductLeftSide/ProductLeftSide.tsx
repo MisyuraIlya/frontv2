@@ -16,7 +16,11 @@ const ProductLeftSide = () => {
       <ProductHistoryPurche />
       <Divider />
       <ProductMainInfoTwo />
-      <PriceBlock product={selectedProd} />
+      <Box sx={{ display: 'flex', justifyContent: 'end', marginTop: '50px' }}>
+        <Box sx={{ width: '50%' }}>
+          <PriceBlock product={selectedProd} />
+        </Box>
+      </Box>
     </Box>
   )
 }
