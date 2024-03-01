@@ -12,9 +12,6 @@ import CartPage from './modules/Cart/pages/CartPage'
 import ProfilePage from './modules/Auth/pages/ProfilePage'
 import DocumentsItemPage from './modules/Documents/pages/DocumentsItemPage'
 import DocumentsPage from './modules/Documents/pages/DocumentsPage'
-import HistoryItemPage from './modules/Documents/pages/HistoryItemPage'
-import HistoryPage from './modules/Documents/pages/HistoryPage'
-import KartessetPage from './modules/Documents/pages/KartessetPage'
 import Header from './modules/Header/Header'
 import NotificationPage from './modules/PushNotifications/pages/NotificationPage'
 import AgentClinets from './modules/Agent/pages/AgentClinets'
@@ -60,14 +57,10 @@ const RouterApp = () => {
               element={<DocumentsItemPage />}
             />
 
-            {/* <Route path="/historyItemPage/:id" element={<HistoryItemPage />} /> */}
-            {/* <Route path="/historyPage" element={<HistoryPage />} /> */}
-            {/* <Route path="/kartessetPage" element={<KartessetPage />} /> */}
-
-            {/* <Route
+            <Route
               path="/admin/category-edit/:lvl1/:lvl2/:lvl3"
               element={<CategoryEdit />}
-            /> */}
+            />
             {/* <Route
               path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
               element={<ProductsEdit />}
