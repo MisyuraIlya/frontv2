@@ -9,11 +9,7 @@ interface DocumentsStore {
 
   //========== PAGINATION =============
   totalPages: number
-  //   page: number;
   setPage: (value: string) => void
-  //   lastPage: number;
-  //   nextPage: number;
-  //   previousPage: number;
   hydraPagination: hydraPagination
   //===================================
 
@@ -24,11 +20,6 @@ interface DocumentsStore {
   setShowCalendar: (bool: boolean) => void
   type: 'from' | 'to'
   handleCalendar: (value: 'from' | 'to', date: Date) => void
-  // dateFrom: Date
-  // dateTo: Date
-  // choosedDate: Date
-  // setDateFrom: (date: Date) => void
-  // setDateTo: (date: Date) => void
   //===================================
 
   //========== SEARCH FILTER ===============
@@ -39,8 +30,6 @@ interface DocumentsStore {
   setDocumentType: (value: string) => void
   documentId: string
   setDocumentId: (value: string) => void
-  documentItemType: DocumentItemTypes
-  setDocumentItemType: (value: DocumentItemTypes) => void
   selectedPriceMode: IPriceMode
   setSelectedPriceMode: (value: IPriceMode) => void
   searchValue: string
@@ -50,7 +39,7 @@ interface DocumentsStore {
   //========================================
 
   //========== DATA ===============
-  items: Array<IDocument | IHistory | ICartessetLine>
+  items: IDocument[]
   clearItems: () => void
   getItems: (
     documentType: string,
@@ -61,8 +50,8 @@ interface DocumentsStore {
   //===============================
 
   //========== ITEM DATA ===============
-  orderItems: Array<IDocumentItem | IHistoryDetailed>
-  filesOrder: IDocumentItemsFile[]
+  orderItems: IDocumentItem[]
+  filesOrder: IDocumentItem[]
   loadingItemsPage: boolean
   clerOrderItems: () => void
   totalTax: number
@@ -121,8 +110,6 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   documentType: '',
   setDocumentType: (value: string) => set({ documentType: value }),
   documentItemType: 'orders',
-  setDocumentItemType: (value: DocumentItemTypes) =>
-    set({ documentItemType: value }),
   documentId: '',
   setDocumentId: (value: string) => set({ documentId: value }),
   selectedPriceMode: 'updatedPrice',
@@ -308,49 +295,49 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   totalPrecent: 0,
   itemsLength: 0,
   getOrderItems: async (id: number | string) => {
-    set({
-      loadingItemsPage: true,
-      totalTax: 0,
-      totalPriceAfterTax: 0,
-      totalAfterDiscount: 0,
-      totalPrecent: 0,
-      itemsLength: 0,
-      orderItems: [],
-    })
-    try {
-      let response = null
-      if (get().documentType === 'documentItem') {
-        response = await DocumentsService.GetDocumentsItem(
-          id,
-          get().documentItemType
-        )
-        set({
-          orderItems: response.products['hydra:member'],
-          itemsLength: response.products['hydra:totalItems'],
-          filesOrder: response.files['hydra:member'],
-        })
-        set({
-          totalTax: response.totalTax,
-          totalPriceAfterTax: response.totalPriceAfterTax,
-          totalAfterDiscount: response.totalAfterDiscount,
-          totalPrecent: response.totalPrecent,
-        })
-      } else if (get().documentType === 'historyItem') {
-        response = await DocumentsService.GetHistoryItem(id)
-        set({ orderItems: response.historyDetaileds })
-        set({
-          totalTax: response?.total * 0.17,
-          itemsLength: response.historyDetaileds?.length,
-          totalPriceAfterTax: response?.total,
-          totalAfterDiscount: response?.total,
-          totalPrecent: response?.discount ? response?.discount : 0,
-        })
-      }
-    } catch (e) {
-      console.error('[ERROR] fetch documents', e)
-    } finally {
-      set({ loadingItemsPage: false })
-    }
+    // set({
+    //   loadingItemsPage: true,
+    //   totalTax: 0,
+    //   totalPriceAfterTax: 0,
+    //   totalAfterDiscount: 0,
+    //   totalPrecent: 0,
+    //   itemsLength: 0,
+    //   orderItems: [],
+    // })
+    // try {
+    //   let response = null
+    //   if (get().documentType === 'documentItem') {
+    //     response = await DocumentsService.GetDocumentsItem(
+    //       id,
+    //       get().documentItemType
+    //     )
+    //     set({
+    //       orderItems: response.products['hydra:member'],
+    //       itemsLength: response.products['hydra:totalItems'],
+    //       filesOrder: response.files['hydra:member'],
+    //     })
+    //     set({
+    //       totalTax: response.totalTax,
+    //       totalPriceAfterTax: response.totalPriceAfterTax,
+    //       totalAfterDiscount: response.totalAfterDiscount,
+    //       totalPrecent: response.totalPrecent,
+    //     })
+    //   } else if (get().documentType === 'historyItem') {
+    //     response = await DocumentsService.GetHistoryItem(id)
+    //     set({ orderItems: response.historyDetaileds })
+    //     set({
+    //       totalTax: response?.total * 0.17,
+    //       itemsLength: response.historyDetaileds?.length,
+    //       totalPriceAfterTax: response?.total,
+    //       totalAfterDiscount: response?.total,
+    //       totalPrecent: response?.discount ? response?.discount : 0,
+    //     })
+    //   }
+    // } catch (e) {
+    //   console.error('[ERROR] fetch documents', e)
+    // } finally {
+    //   set({ loadingItemsPage: false })
+    // }
   },
 
   //===============================

@@ -1,53 +1,23 @@
-interface IHistory {
-  id: ?(number | null)
-  orderExtId?: string
-  user: IUser
-  deliveryDate?: string
-  discount?: number
-  total: number
-  orderComment?: string
-  orderStatus: OrderStatus
-  createdAt: string
-  updatedAt: string
-  deliveryPrice?: number
-  historyDetaileds?: IHistoryDetailed[]
-  documentType: IDocumentType
-  agent?: IUser | null
-  isBuyByCredirCard?: boolean
-  isSendErp?: boolean
-  sendErpAt?: string
-
-  //TODO delete this combina for medib2b
-  user_name?: string
-  userExId?: string
-  type?: string
-  document_number?: int
-  status?: string
-}
-
-interface IHistoryDetailed {
-  id: number
-  history: IHistory
-  title: string
-  sku: string
-  product: IProduct
-  singlePrice: number
-  priceByOne: number
-  quantity: number
-  discount: number
-  total: number
-}
+type IDocumentTypes =
+  | 'history'
+  | 'draft'
+  | 'orders'
+  | 'priceOffer'
+  | 'deliveryOrder'
+  | 'aiInvoice'
+  | 'ciInvoice'
+  | 'return'
+  | 'kartesset'
 
 interface IDocument {
-  document_number: string
-  document_type: DocumentItemTypes
-  user_name: string
+  documentNumber: string
+  documentType: IDocumentTypes
+  userName: string
   userExId: string
-  type: string
-  date: string
-  date_payed: string
-  total: number
   status: string
+  createdAt: string
+  updatedAt: string
+  total: number
 }
 
 interface IDocumentItem {
@@ -59,7 +29,6 @@ interface IDocumentItem {
   priceByOne: number
   total: number
   discount: number
-  product: IProduct
 }
 
 // DocumentItemsDto interface definition
@@ -73,35 +42,6 @@ interface IDocumentItems {
   totalAfterDiscount: number
   totalPrecent: number
   documentType: string
-  files: {
-    'hydra:totalItems': number
-    'hydra:member': IDocumentItemsFile[]
-  }
-}
-
-interface IDocumentItemsFile {
-  name: string
-  base64: string
-}
-
-interface ICartessetLine {
-  Balance: number
-  Description: string
-  DueDate: string
-  ID: string
-  Referance: string
-  Show: boolean
-  TransID: string
-  TransType: string
-  ValueDate: string
-  suF: number
-}
-
-interface ICartesset {
-  lines: {
-    'hydra:totalItems': number
-    'hydra:member': ICartessetLine[]
-  }
 }
 
 interface IPdfDocumentItem {
@@ -132,11 +72,54 @@ interface IPdfDocument {
 }
 
 type OrderStatus = 'paid' | 'draft' | 'pending' | 'faild'
-type DocumentItemTypes =
-  | 'orders'
-  | 'priceOffer'
-  | 'deliveryOrder'
-  | 'aiInvoice'
-  | 'ciInvoice'
-  | 'returnOrders'
-  | 'all'
+
+// interface IHistory {
+//   id: ?(number | null)
+//   orderExtId?: string
+//   user: IUser
+//   deliveryDate?: string
+//   discount?: number
+//   total: number
+//   orderComment?: string
+//   orderStatus: OrderStatus
+//   createdAt: string
+//   updatedAt: string
+//   deliveryPrice?: number
+//   historyDetaileds?: IHistoryDetailed[]
+//   documentType: IDocumentType
+//   agent?: IUser | null
+//   isBuyByCredirCard?: boolean
+//   isSendErp?: boolean
+//   sendErpAt?: string
+// }
+
+// interface IHistoryDetailed {
+//   id: number
+//   history: IHistory
+//   product: IProduct
+//   singlePrice: number
+//   quantity: number
+//   discount: number
+//   total: number
+// }
+
+//CHECK IF NEED
+// interface ICartessetLine {
+//   Balance: number
+//   Description: string
+//   DueDate: string
+//   ID: string
+//   Referance: string
+//   Show: boolean
+//   TransID: string
+//   TransType: string
+//   ValueDate: string
+//   suF: number
+// }
+
+// interface ICartesset {
+//   lines: {
+//     'hydra:totalItems': number
+//     'hydra:member': ICartessetLine[]
+//   }
+// }
