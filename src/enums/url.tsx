@@ -8,7 +8,9 @@ import PersonIcon from '@mui/icons-material/Person'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import CampaignIcon from '@mui/icons-material/Campaign'
 import StorefrontIcon from '@mui/icons-material/Storefront'
-
+import moment from 'moment'
+const dateFrom = moment().subtract(1, 'day')
+const dateTo = moment()
 export const clientURL = {
   PROFILE: {
     LINK: '/profile',
@@ -51,7 +53,7 @@ export const clientURL = {
     NEED_AUTHORIZATION: true,
   },
   DOCUMENTS: {
-    LINK: '/documentPage',
+    LINK: `/documentPage/history/${dateFrom}/${dateTo}?page=1`,
     LABEL: 'מסמכי לקוח',
     ICON: <ArticleOutlinedIcon sx={{ height: '30px', width: '30px' }} />,
     FOR_AGENT: true,
