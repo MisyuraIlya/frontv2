@@ -6,7 +6,7 @@ type IDocumentTypes =
   | 'deliveryOrder'
   | 'aiInvoice'
   | 'ciInvoice'
-  | 'return'
+  | 'returnOrders'
   | 'kartesset'
 
 interface IDocument {

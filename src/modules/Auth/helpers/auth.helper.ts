@@ -83,6 +83,19 @@ export const getClientExtId = () => {
   }
 }
 
+export const getClientId = () => {
+  if (localStorage.client) {
+    const user = JSON.parse(localStorage.client)
+    return user.id
+  } else {
+    if (localStorage.user) {
+      const user = JSON.parse(localStorage.user)
+      return user.id
+    }
+    return null
+  }
+}
+
 export const getClientName = () => {
   if (localStorage.client) {
     const user = JSON.parse(localStorage.client)

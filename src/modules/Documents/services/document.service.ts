@@ -1,66 +1,36 @@
 import axios from 'axios'
 import { getClientExtId } from '../../Auth/helpers/auth.helper'
+import moment from 'moment'
 
 interface DocumentsResponse extends Hydra {
   'hydra:member': IDocument[]
 }
-interface HistoriesResponse extends Hydra {
-  'hydra:member': IHistory[]
-}
-interface HistoryDetailedResponse extends Hydra {
-  'hydra:member': IHistoryDetailed[]
-}
+
 interface RestoreCartResponse extends Hydra {
   'hydra:member': ICart[]
 }
 export const DocumentsService = {
   async GetDocuments(
-    userExId: string,
+    userId: string | null | undefined,
     documentType: string,
-    fromDate: string,
-    toDate: string,
+    fromDate: Date,
+    toDate: Date,
     page: string | number
   ): Promise<DocumentsResponse> {
+    const fromConverted = moment(fromDate).format('YYYY-MM-DD')
+    const toDateConverted = moment(toDate).format('YYYY-MM-DD')
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/documents?userExId=${userExId}&from=${fromDate}&to=${toDate}&documentType=${documentType}&page=${page}`
+      `${process.env.REACT_APP_API}/api/documents/${documentType}/${fromConverted}/${toDateConverted}?page=${page}&userId=${userId}`
     )
     return response.data
   },
 
   async GetDocumentsItem(
-    documentNumber: number | string,
-    documentItemType: DocumentItemTypes
+    documentItemType: IDocumentTypes,
+    documentNumber: number | string
   ): Promise<IDocumentItems> {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/api/documents/${documentNumber}?documentItemType=${documentItemType}&userExId=${getClientExtId()}`
-    )
-    return response.data
-  },
-
-  async GetKartesset(
-    userExId: string,
-    fromDate: string,
-    toDate: string
-  ): Promise<ICartesset> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/cartessets/${userExId}?from=${fromDate}&to=${toDate}`
-    )
-    return response.data
-  },
-
-  async GetHistory(
-    userExId: string,
-    fromDate: string,
-    toDate: string
-  ): Promise<HistoriesResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/histories?createdAt[before]=${toDate}&createdAt[after]=${fromDate}&user.extId=${userExId}`
-    )
-    return response.data
-  },
-  async GetHistoryItem(documentId: string | number): Promise<IHistory> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/histories/${documentId}`
     )
     return response.data
   },
@@ -93,31 +63,6 @@ export const DocumentsService = {
     const response = await axios.post(
       `${process.env.REACT_APP_API}/api/xl`,
       data
-    )
-    return response.data
-  },
-
-  // NEW
-
-  async GetDocumentsNew(
-    userExId: string,
-    documentType: string,
-    fromDate: Date,
-    toDate: Date,
-    page: string | number
-  ): Promise<DocumentsResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/documents?userExId=${userExId}&from=${fromDate}&to=${toDate}&documentType=${documentType}&page=${page}`
-    )
-    return response.data
-  },
-
-  async GetDocumentsItemNew(
-    documentItemType: DocumentItemTypes,
-    documentNumber: number | string
-  ): Promise<IDocumentItems> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/documents/${documentNumber}?documentItemType=${documentItemType}&userExId=${getClientExtId()}`
     )
     return response.data
   },

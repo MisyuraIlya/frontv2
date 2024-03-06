@@ -39,11 +39,11 @@ const DocumentsPage = () => {
   const handleDate = (date: Date) => {
     setCurrentDate(date)
     if (type === 'from') {
-      const updatedPathname = `/documentPage/${documentType}/${moment(date).format('YYYY-MM-DD')}/${dateTo}`
+      const updatedPathname = `/documentPage/${documentType}/${moment(date).format('YYYY-MM-DD')}/${dateTo}?page=1`
       navigate(updatedPathname)
     }
     if (type === 'to') {
-      const updatedPathname = `/documentPage/${documentType}/${dateFrom}/${moment(date).format('YYYY-MM-DD')}`
+      const updatedPathname = `/documentPage/${documentType}/${dateFrom}/${moment(date).format('YYYY-MM-DD')}?page=1`
       navigate(updatedPathname)
     }
     setShowCalendar(false)
@@ -52,7 +52,7 @@ const DocumentsPage = () => {
   useEffect(() => {
     setPage(pageNumber ?? '1')
     getItems(documentType!, new Date(dateFrom!), new Date(dateTo!), pageNumber!)
-  }, [pageNumber])
+  }, [pageNumber, documentType])
 
   let componentToRender: React.ReactNode
 
@@ -64,6 +64,7 @@ const DocumentsPage = () => {
     case 'deliveryOrder':
     case 'aiInvoice':
     case 'ciInvoice':
+    case 'returnOrders':
       componentToRender = <DocumentList />
       break
     case 'kartesset':

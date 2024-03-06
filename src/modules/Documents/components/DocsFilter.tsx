@@ -28,15 +28,11 @@ import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 const DocsFilter = () => {
   const {
-    // handleSearchClick,
     searchValue,
     setSearchValue,
-    downloadDocument,
-    handleRestoreCartFunction,
     getItems,
     documentTypes,
     selectedDocument,
-    filesOrder,
     handleCalendar,
     setSelectedDocument,
   } = useDocuments()
@@ -83,6 +79,11 @@ const DocsFilter = () => {
       // console.log('link',link.url)
       // window.open(link.url, '_blank');
     }
+  }
+
+  const handleSelect = (parameter: string) => {
+    setSelectedDocument(parameter)
+    navigate(`/documentPage/${parameter}/${dateFrom}/${dateTo}?page=1`)
   }
 
   return (
@@ -158,7 +159,7 @@ const DocsFilter = () => {
             value={selectedDocument}
             sx={{ height: '40px' }}
             label="מסמך"
-            onChange={(e) => setSelectedDocument(e.target.value)}
+            onChange={(e) => handleSelect(e.target.value)}
           >
             {documentTypes?.map((ele, ind) => {
               return (
