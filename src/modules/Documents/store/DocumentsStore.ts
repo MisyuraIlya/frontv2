@@ -24,15 +24,16 @@ interface DocumentsStore {
   //===================================
 
   //========== SEARCH FILTER ===============
-  documentTypes: Array<{ value: string; label: string }>
-  selectedDocument: string
-  setSelectedDocument: (value: string) => void
+  documentTypes: Array<{ value: IDocumentTypes; label: string }>
+  selectedDocument: IDocumentTypes
+  setSelectedDocument: (value: IDocumentTypes) => void
   searchValue: string
   setSearchValue: (value: string) => void
   //========================================
 
   //========== DATA ===============
   items: IDocument[]
+  totalItems: number
   getItems: (
     documentType: string,
     dateFrom: Date,
@@ -92,7 +93,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   ],
 
   selectedDocument: 'order',
-  setSelectedDocument: (value: string) => {
+  setSelectedDocument: (value: IDocumentTypes) => {
     set({ selectedDocument: value })
   },
   searchValue: '',
@@ -101,6 +102,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
 
   //========== DATA ===============
   items: [],
+  totalItems: 0,
   getItems: async (
     documentType: string,
     dateFrom: Date,
@@ -116,7 +118,10 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
         dateTo,
         page
       )
-      set({ items: response['hydra:member'] })
+      set({
+        items: response['hydra:member'],
+        totalItems: response['hydra:totalItems'],
+      })
       const hydraPagination = HydraHandler.paginationHandler(response)
       set({ hydraPagination: hydraPagination })
     } catch (e) {

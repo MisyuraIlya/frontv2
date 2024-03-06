@@ -17,8 +17,19 @@ import { themeColors } from '../../../styles/mui'
 import { DocumentTypeHebrew } from '../helpers/DocumentTypeHebrew'
 
 const DocumentList = () => {
-  const { items, showCalendar, searchValue, loading } = useDocuments()
+  const { items, showCalendar, searchValue, loading, selectedDocument } =
+    useDocuments()
   const navigate = useNavigate()
+
+  const handleNavigate = (element: IDocument) => {
+    if (selectedDocument === 'history' || selectedDocument === 'draft') {
+      navigate(`/documentItemPage/history/${element?.id}`)
+    } else {
+      navigate(
+        `/documentItemPage/${element?.documentType}/${element?.documentNumber}`
+      )
+    }
+  }
   return (
     <Box sx={{ marginTop: '50px' }}>
       {!showCalendar && items.length === 0 ? (
@@ -106,11 +117,7 @@ const DocumentList = () => {
                   <TableRow
                     key={index}
                     className={'item'}
-                    onClick={() => {
-                      navigate(
-                        `/documentItemPage/${element?.documentType}/${element?.documentNumber}`
-                      )
-                    }}
+                    onClick={() => handleNavigate(element)}
                   >
                     <TableCell>
                       <Typography variant="body2">

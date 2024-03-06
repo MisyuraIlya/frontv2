@@ -26,6 +26,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
+import { themeColors } from '../../../styles/mui'
 const DocsFilter = () => {
   const {
     searchValue,
@@ -35,6 +36,7 @@ const DocsFilter = () => {
     selectedDocument,
     handleCalendar,
     setSelectedDocument,
+    totalItems,
   } = useDocuments()
   const navigate = useNavigate()
   const location = useLocation()
@@ -50,38 +52,38 @@ const DocsFilter = () => {
   const [loadingRestoreCart, setLoadingRestoreCart] = useState(false)
   // const { handleCalendar } = useDocumentsProvider()
 
-  const handleResoreCart = async () => {
-    try {
-      setLoadingRestoreCart(true)
+  // const handleResoreCart = async () => {
+  //   try {
+  //     setLoadingRestoreCart(true)
 
-      // if (!isAdmin || !isAgent || !isSuperAgent) {
-      //   setRestoreCartModal(true)
-      // } else {
-      // if (id) {
-      const res = await handleRestoreCartFunction()
-      if (res) {
-        setCart(res)
-        navigate('/cart')
-      }
-      // }
-      // }
-      onSuccessAlert('שחזור בוצע בהצלחה', 'עודכן מחיר עדכני')
-    } catch (e) {
-      onErrorAlert('תקלה בשחזור נתונים', 'נסה שנית מאוחר יותר')
-    } finally {
-      setLoadingRestoreCart(false)
-    }
-  }
+  //     // if (!isAdmin || !isAgent || !isSuperAgent) {
+  //     //   setRestoreCartModal(true)
+  //     // } else {
+  //     // if (id) {
+  //     const res = await handleRestoreCartFunction()
+  //     if (res) {
+  //       setCart(res)
+  //       navigate('/cart')
+  //     }
+  //     // }
+  //     // }
+  //     onSuccessAlert('שחזור בוצע בהצלחה', 'עודכן מחיר עדכני')
+  //   } catch (e) {
+  //     onErrorAlert('תקלה בשחזור נתונים', 'נסה שנית מאוחר יותר')
+  //   } finally {
+  //     setLoadingRestoreCart(false)
+  //   }
+  // }
 
-  const handleDocument = async (file: string) => {
-    if (id) {
-      const link = await downloadDocument(file, id)
-      // console.log('link',link.url)
-      // window.open(link.url, '_blank');
-    }
-  }
+  // const handleDocument = async (file: string) => {
+  //   if (id) {
+  //     const link = await downloadDocument(file, id)
+  //     // console.log('link',link.url)
+  //     // window.open(link.url, '_blank');
+  //   }
+  // }
 
-  const handleSelect = (parameter: string) => {
+  const handleSelect = (parameter: IDocumentTypes) => {
     setSelectedDocument(parameter)
     navigate(`/documentPage/${parameter}/${dateFrom}/${dateTo}?page=1`)
   }
@@ -151,6 +153,11 @@ const DocsFilter = () => {
         </Button>
       </Box>
       <Box sx={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
+        <Box className="centered">
+          <Typography color={themeColors.primary}>
+            סה"כ מסמכים: {totalItems}
+          </Typography>
+        </Box>
         <FormControl fullWidth sx={{ width: '200px' }}>
           <InputLabel id="demo-simple-select-label">מסמך</InputLabel>
           <Select
@@ -159,7 +166,7 @@ const DocsFilter = () => {
             value={selectedDocument}
             sx={{ height: '40px' }}
             label="מסמך"
-            onChange={(e) => handleSelect(e.target.value)}
+            onChange={(e) => handleSelect(e.target.value as IDocumentTypes)}
           >
             {documentTypes?.map((ele, ind) => {
               return (

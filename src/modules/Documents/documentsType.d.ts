@@ -10,6 +10,7 @@ type IDocumentTypes =
   | 'kartesset'
 
 interface IDocument {
+  id: number
   documentNumber: string
   documentType: IDocumentTypes
   userName: string
