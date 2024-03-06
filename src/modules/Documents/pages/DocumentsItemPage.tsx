@@ -26,11 +26,14 @@ const DocumentsItemPage = () => {
 
   const { documentItemType, id } = useParams()
 
+  let from = moment().subtract(1, 'months').format('YYYY-MM-DD')
+  let to = moment().format('YYYY-MM-DD')
+
   const navigate = useNavigate()
 
   const fetchData = async () => {
-    return await DocumentsService.GetDocumentsItemNew(
-      documentItemType as DocumentItemTypes,
+    return await DocumentsService.GetDocumentsItem(
+      documentItemType as IDocumentTypes,
       id!
     )
   }
@@ -52,21 +55,9 @@ const DocumentsItemPage = () => {
         data.totalPrecent,
         data.products['hydra:totalItems']
       )
-      // setOrderItems(data.products['hydra:member'])
-      // setFilesOrder(data.files['hydra:member'])
     }
   }, [data])
-  let from = moment().subtract(1, 'months').format('YYYY-MM-DD')
-  let to = moment().format('YYYY-MM-DD')
 
-  // useEffect(() => {
-  //   setDocumentType('documentItem')
-  //   setDocumentItemType(documentItemType as DocumentItemTypes)
-  //   if (id) {
-  //     getOrderItems(id)
-  //     setDocumentId(id)
-  //   }
-  // }, [])
   return (
     <Container maxWidth="xl">
       <BreadCrumbsUtil

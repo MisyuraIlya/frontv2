@@ -17,8 +17,7 @@ import { themeColors } from '../../../styles/mui'
 import { DocumentTypeHebrew } from '../helpers/DocumentTypeHebrew'
 
 const DocumentList = () => {
-  const { items, showCalendar, searchValue, loading, clerOrderItems } =
-    useDocuments()
+  const { items, showCalendar, searchValue, loading } = useDocuments()
   const navigate = useNavigate()
   return (
     <Box sx={{ marginTop: '50px' }}>
@@ -111,7 +110,6 @@ const DocumentList = () => {
                       navigate(
                         `/documentItemPage/${element?.documentType}/${element?.documentNumber}`
                       )
-                      clerOrderItems()
                     }}
                   >
                     <TableCell>

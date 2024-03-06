@@ -30,7 +30,7 @@ export const DocumentsService = {
     documentNumber: number | string
   ): Promise<IDocumentItems> {
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/documents/${documentNumber}?documentItemType=${documentItemType}&userExId=${getClientExtId()}`
+      `${process.env.REACT_APP_API}/api/documentItems/${documentItemType}/${documentNumber}/?userExId=${getClientExtId()}`
     )
     return response.data
   },

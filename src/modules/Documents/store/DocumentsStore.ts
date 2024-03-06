@@ -81,17 +81,17 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
 
   //========== SEARCH FILTER ===============
   documentTypes: [
-    { value: 'orders', label: 'הזמנות' },
+    { value: 'order', label: 'הזמנות' },
     { value: 'priceOffer', label: 'הצעות מחיר' },
     { value: 'deliveryOrder', label: 'תעודות משלוח' },
     { value: 'aiInvoice', label: 'חשבוניות מס' },
     { value: 'ciInvoice', label: 'חשבוניות מס מרכזות' },
-    { value: 'returnOrders', label: 'החזרות' },
+    { value: 'returnOrder', label: 'החזרות' },
     { value: 'draft', label: 'טיוטות' },
     { value: 'history', label: 'מסמכי WEB' },
   ],
 
-  selectedDocument: 'orders',
+  selectedDocument: 'order',
   setSelectedDocument: (value: string) => {
     set({ selectedDocument: value })
   },

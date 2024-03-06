@@ -59,12 +59,12 @@ const DocumentsPage = () => {
   switch (documentType) {
     case 'history':
     case 'draft':
-    case 'orders':
+    case 'order':
     case 'priceOffer':
     case 'deliveryOrder':
     case 'aiInvoice':
     case 'ciInvoice':
-    case 'returnOrders':
+    case 'returnOrder':
       componentToRender = <DocumentList />
       break
     case 'kartesset':

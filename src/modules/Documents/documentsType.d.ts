@@ -1,12 +1,12 @@
 type IDocumentTypes =
   | 'history'
   | 'draft'
-  | 'orders'
+  | 'order'
   | 'priceOffer'
   | 'deliveryOrder'
   | 'aiInvoice'
   | 'ciInvoice'
-  | 'returnOrders'
+  | 'returnOrder'
   | 'kartesset'
 
 interface IDocument {
