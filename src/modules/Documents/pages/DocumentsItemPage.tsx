@@ -1,27 +1,16 @@
 import React, { useEffect } from 'react'
-import { useDocuments } from '../store/DocumentsStore'
 import DocumentCardList from '../components/DocumentCardList'
-import DocsFilter from '../components/DocsFilter'
 import { useNavigate, useParams } from 'react-router-dom'
 import DocsTotal from '../components/DocsTotal'
-import Loader from '../../../shared/Loader'
-import BreadCrumbs from '../../../shared/BreadCrumbs'
 import moment from 'moment'
 import DocsItemFilter from '../components/DocsItemFilter'
-import { Breadcrumbs, Container, Link, Typography } from '@mui/material'
+import { Container } from '@mui/material'
 import useSWR from 'swr'
 import { DocumentsService } from '../services/document.service'
 import { useDocumentsItem } from '../store/DocumentsItemStore'
-import { Navigate } from 'react-router-dom'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
+import Loader from '../../../shared/Loader'
 const DocumentsItemPage = () => {
-  // const {
-  //   loadingItemsPage,
-  //   getOrderItems,
-  //   setDocumentType,
-  //   setDocumentId,
-  //   setDocumentItemType,
-  // } = useDocuments()
   const { setSwrHandler, setLoading } = useDocumentsItem()
 
   const { documentItemType, id } = useParams()
@@ -39,7 +28,7 @@ const DocumentsItemPage = () => {
   }
 
   const { data, isLoading } = useSWR(
-    `api/documents/${documentItemType}?documentItemType=${documentItemType}`,
+    `api/documents/${documentItemType}/${id}`,
     fetchData
   )
 
@@ -60,11 +49,12 @@ const DocumentsItemPage = () => {
 
   return (
     <Container maxWidth="xl">
+      {isLoading && <Loader />}
       <BreadCrumbsUtil
         array={[
           {
             title: 'מסמכים',
-            link: `/documentPage/${documentItemType}/${from}/${to}/?page=1`,
+            link: `/documentPage/${documentItemType}/${from}/${to}?page=1`,
           },
           { title: id || '', link: '' },
         ]}

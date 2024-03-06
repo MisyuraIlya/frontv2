@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
-import Pagination from '../../../shared/Pagination'
 import { useDocuments } from '../store/DocumentsStore'
 import DocsFilter from '../components/DocsFilter'
 import DocumentList from '../components/DocumentList'
-import Loader from '../../../shared/Loader'
 import { Box, Container } from '@mui/material'
 import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -11,6 +9,8 @@ import moment from 'moment'
 import PaginationUtil from '../../../utils/pagination/PaginationUtil'
 import { useLocation } from 'react-router-dom'
 import KartessetLst from '../components/KartessetLst'
+import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
+import Loader from '../../../shared/Loader'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -31,6 +31,7 @@ const DocumentsPage = () => {
     hydraPagination,
     setPage,
     getItems,
+    setSelectedDocument,
   } = useDocuments()
   const { documentType, dateFrom, dateTo } = useParams<RouteParams>()
   const searchParams = new URLSearchParams(location.search)
@@ -52,6 +53,7 @@ const DocumentsPage = () => {
   useEffect(() => {
     setPage(pageNumber ?? '1')
     getItems(documentType!, new Date(dateFrom!), new Date(dateTo!), pageNumber!)
+    setSelectedDocument(documentType!)
   }, [pageNumber, documentType])
 
   let componentToRender: React.ReactNode
@@ -76,13 +78,14 @@ const DocumentsPage = () => {
 
   return (
     <Container maxWidth="xl">
+      {loading && <Loader />}
       <CalendarUtil
         show={showCalendar}
         closeHandler={() => setShowCalendar(false)}
         value={currentDate}
         handleCalendar={handleDate}
       />
-      {loading && <Loader />}
+      <BreadCrumbsUtil array={[]} />
       <DocsFilter />
       {componentToRender}
       <PaginationUtil hydraPagination={hydraPagination} />
