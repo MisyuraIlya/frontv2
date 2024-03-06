@@ -5,50 +5,51 @@ import BreadCrumbs from '../../../shared/BreadCrumbs'
 import { useCategories } from '../../Catalog/store/CategoriesStore'
 import Loader from '../../../shared/Loader'
 import { useParams } from 'react-router-dom'
+import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
+import { Container } from '@mui/material'
+import useSWR from 'swr'
+import { AdminCatalogService } from '../services/catalog.service'
+import { useAdminCategories } from '../store/CategoriesStore'
 const CategoryEdit = () => {
-  const { documentType, lvl1, lvl2, lvl3 } = useParams()
-  const {
-    loading,
-    getDynamicCategories,
-    setLvls,
-    categoriesLvl1,
-    categoriesLvl2,
-    categoriesLvl3,
-  } = useCategories()
-  const lvl1Bread = categoriesLvl1?.filter((item) => item.identify == lvl1!)
-  const lvl2Bread = categoriesLvl2?.filter((item) => item.extId == lvl2!)
-  const lvl3Bread = categoriesLvl3?.filter((item) => item.extId == lvl3!)
+  const { lvl1, lvl2 } = useParams()
+  const { setCategories } = useAdminCategories()
+
+  const fetchData = async () => {
+    return await AdminCatalogService.getAdminCategoory(lvl1 ?? '0', lvl2 ?? '0')
+  }
+
+  const { data, isLoading } = useSWR(
+    `api/adminCategories/${lvl1}/${lvl2}`,
+    fetchData
+  )
 
   useEffect(() => {
-    setLvls(lvl1!, lvl2!, lvl3!)
-    getDynamicCategories()
-  }, [lvl1, lvl2, lvl3])
+    if (data) {
+      setCategories(data['hydra:member'])
+    }
+  }, [data])
 
   return (
-    <div className="category-edit">
-      <div className="container">
-        <BreadCrumbs
-          array={[
-            {
-              title: lvl1Bread[0]?.title || '',
-              link: `/admin/category-edit/${lvl1Bread[0]?.id}/0/0` || '',
-            },
-            {
-              title: lvl2Bread[0]?.title || '',
-              link:
-                `/admin/category-edit/${lvl1Bread[0]?.id}/${lvl2Bread[0]?.id}/0` ||
-                '',
-            },
-            { title: lvl3Bread[0]?.title || '', link: '' },
-          ]}
-        />
-      </div>
-      {loading && <Loader />}
-      <div className="container items-container">
-        <CategoryEditFilters />
-        <CategoriesEditList />
-      </div>
-    </div>
+    <Container maxWidth="lg">
+      {/* <BreadCrumbsUtil
+        array={[
+          {
+            title: lvl1Bread[0]?.title || '',
+            link: `/admin/category-edit/${lvl1Bread[0]?.id}/0/0` || '',
+          },
+          {
+            title: lvl2Bread[0]?.title || '',
+            link:
+              `/admin/category-edit/${lvl1Bread[0]?.id}/${lvl2Bread[0]?.id}/0` ||
+              '',
+          },
+          { title: lvl3Bread[0]?.title || '', link: '' },
+        ]}
+      /> */}
+      {isLoading && <Loader />}
+      {/* <CategoryEditFilters /> */}
+      <CategoriesEditList />
+    </Container>
   )
 }
 

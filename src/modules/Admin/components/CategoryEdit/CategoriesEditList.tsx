@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useCategories } from '../../../Catalog/store/CategoriesStore'
 import {
   DragDropContext,
   Droppable,
@@ -9,8 +8,11 @@ import {
 import { useParams } from 'react-router-dom'
 import { AdminCatalogService } from '../../services/catalog.service'
 import CategoryEditItem from './CategoryEditItem'
+import { Box, Grid, Typography } from '@mui/material'
+import { useAdminCategories } from '../../store/CategoriesStore'
+
 const CategoriesEditList = () => {
-  const { currecntCategories, setCurrentCategories } = useCategories()
+  const { categories } = useAdminCategories()
   const { lvl1, lvl2, lvl3 } = useParams()
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
     background: isDraggingOver ? '#e5e5e5' : '#ddd',
@@ -31,7 +33,7 @@ const CategoriesEditList = () => {
     }
 
     const reorderedCategories = reorder(
-      currecntCategories,
+      categories,
       result.source.index,
       result.destination.index
     )
@@ -41,7 +43,7 @@ const CategoriesEditList = () => {
       orden: index,
     }))
 
-    setCurrentCategories(updatedCategories)
+    // setCurrentCategories(updatedCategories)
     await AdminCatalogService.dragAndDropCategories(updatedCategories)
   }
 
@@ -53,52 +55,48 @@ const CategoriesEditList = () => {
   }
 
   return (
-    <div className="items">
-      <div className="heading">
-        <div className="flex-container">
-          <div className="col-lg-1">
-            <p>כניסה</p>
-          </div>
-          <div className="col-lg-1">
-            <p>סדר</p>
-          </div>
-          <div className="col-lg-2">
-            <p>תמונה</p>
-          </div>
-          <div className="col-lg-1 product">
-            <p style={{ textAlign: 'right' }}>מזהה</p>
-          </div>
-          <div className={'col-lg-3 product'}>
-            <p style={{ textAlign: 'right' }}>כותרת</p>
-          </div>
-          {lvl1 === '0' && lvl2 === '0' && lvl3 === '0' && (
-            <div className="col-lg-1">
-              <p>סטאטוס</p>
-            </div>
-          )}
-        </div>
-      </div>
+    <Box>
+      <Grid container spacing={1}>
+        <Grid item xs={1}>
+          <Typography variant="body1">{'כניסה'}</Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1">{'סדר'}</Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1">{'תמונה'}</Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1">{'מזהה'}</Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="body1">{'כותרת'}</Typography>
+        </Grid>
+        {lvl1 === '0' && lvl2 === '0' && lvl3 === '0' && (
+          <Grid item xs={1}>
+            <Typography variant="body1">{'סטאטוס'}</Typography>
+          </Grid>
+        )}
+      </Grid>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
-            <div
-              className="items"
+            <Box
               {...provided.innerRef}
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {currecntCategories?.map((element, index) => {
+              {categories?.map((element, index) => {
                 return (
-                  <div key={index} id={'item_' + element.id} className="item">
+                  <Box key={index}>
                     <Draggable
                       key={element.id}
                       draggableId={element.id + ''}
                       index={index}
                     >
                       {(provided, snapshot) => (
-                        <div
-                          className="item"
+                        <Box
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -108,17 +106,17 @@ const CategoriesEditList = () => {
                           )}
                         >
                           <CategoryEditItem element={element} />
-                        </div>
+                        </Box>
                       )}
                     </Draggable>
-                  </div>
+                  </Box>
                 )
               })}
-            </div>
+            </Box>
           )}
         </Droppable>
       </DragDropContext>
-    </div>
+    </Box>
   )
 }
 

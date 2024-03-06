@@ -8,7 +8,9 @@ import { base64ToFile } from '../../../../helpers/base64ToFile'
 import { useProductsEditStore } from '../../store/ProductsEditStore'
 import { MediaObjectService } from '../../services/mediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
-
+import { Grid, IconButton, TextField, Typography } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 interface CategoryEditItemProps {
   element: ICategory
 }
@@ -65,23 +67,19 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
   }, [valueDebounced])
 
   return (
-    <div className="flex-container">
-      <div className="col-lg-1 enter MyCenetred">
-        <div onClick={() => navigate(handleLink())}>
-          <span className="material-symbols-outlined googleIconHover">
-            move_item
-          </span>
-        </div>
-      </div>
-      <div className="col-lg-1 sort MyCenetred">
-        <span className="material-symbols-outlined">drag_indicator</span>
-      </div>
-      <div className="col-lg-2 for-img">
-        <div
-          className={
-            element?.MediaObject?.filePath ? 'img-load active' : 'img-load'
-          }
-        >
+    <>
+      <Grid container spacing={1}>
+        <Grid item xs={1}>
+          <IconButton onClick={() => navigate(handleLink())}>
+            <LoginIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={1}>
+          <IconButton>
+            <DragIndicatorIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={2}>
           <MyCropper
             aspectRatio={16 / 16}
             uploadImg={uploadImg}
@@ -91,23 +89,27 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
                 : null
             }
           />
-        </div>
-      </div>
-      <div className={'col-lg-1 title'}>
-        <p>{element.id}</p>
-      </div>
-      <div
-        className={'col-lg-3 title'}
-        onClick={() => setActiveEdit(true)}
-        onBlur={() => setActiveEdit(false)}
-      >
-        <input
-          type="text"
-          placeholder="שם הקטגוריה"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1">{element.id}</Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Grid
+            container
+            item
+            lg={3}
+            onClick={() => setActiveEdit(true)}
+            onBlur={() => setActiveEdit(false)}
+          >
+            <TextField
+              type="text"
+              placeholder="שם הקטגוריה"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
 
       {lvl1 === '0' && lvl2 === '0' && lvl3 === '0' && (
         <div className="col-lg-1 status">
@@ -152,7 +154,7 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
           )}
         </div>
       )}
-    </div>
+    </>
   )
 }
 

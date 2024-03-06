@@ -54,7 +54,7 @@ export const clientURL = {
     NEED_AUTHORIZATION: true,
   },
   DOCUMENTS: {
-    LINK: `/documentPage/orders/${dateFrom}/${dateTo}?page=1`,
+    LINK: `/documentPage/order/${dateFrom}/${dateTo}?page=1`,
     LABEL: 'מסמכי לקוח',
     ICON: <ArticleOutlinedIcon sx={{ height: '30px', width: '30px' }} />,
     FOR_AGENT: true,
