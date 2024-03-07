@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useNotificationStore } from '../../store/notificationStore'
 import { useForm } from 'react-hook-form'
 import MyCropper from '../../../../shared/MyCropper'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
 import { MediaObjectService } from '../../../Admin/services/mediaObject.service'
+import {
+  TextField,
+  TextareaAutosize,
+  Button,
+  Typography,
+  Paper,
+  Grid,
+  Box,
+} from '@mui/material'
+import { useNotificationStore } from '../../store/notificationStore'
+import { themeColors } from '../../../../styles/mui'
+import AddIcon from '@mui/icons-material/Add'
 
 interface LeftSideForm {
   title: string
@@ -39,12 +50,11 @@ const LeftSide = () => {
       'notifications'
     )
     if (choosedItem?.id) {
-      const res2 = await updateItem({
+      await updateItem({
         id: choosedItem?.id?.toString(),
         image: res['@id'],
       })
     }
-    // await MediaObjectService.ftpUploader(res2.image.filePath,'src/img/notifications','notifications')
     fetchItems()
   }
 
@@ -57,50 +67,101 @@ const LeftSide = () => {
   }, [choosedItem])
 
   return (
-    <form className="col-lg-4 left-side" onSubmit={handleSubmit(handleForm)}>
+    <>
       {choosedItem?.id ? (
-        <div className={'wrapper editing active'}>
-          <div className="inputs">
-            <input
-              type="text"
-              placeholder="כותרת ההודעה"
-              {...register('title')}
-            />
-            <textarea placeholder="מלל הודעה" {...register('description')} />
-            <input type="text" placeholder="קישור" {...register('link')} />
-            <div className="upload-img">
-              <img
-                className="main-img"
-                src={
-                  `${process.env.REACT_APP_MEDIA}/notifications/` +
-                  choosedItem?.image?.filePath
-                }
+        <Paper elevation={4} sx={{ minHeight: '500px', borderRadius: '10px' }}>
+          <form onSubmit={handleSubmit(handleForm)}>
+            <Box sx={{ padding: '10px' }}>
+              <TextField
+                fullWidth
+                sx={{ background: '#f3f5f9' }}
+                placeholder="כותרת ההודעה"
+                {...register('title')}
               />
-              <MyCropper
-                aspectRatio={16 / 16}
-                uploadImg={uploadImg}
-                itemImage={''}
+              <TextareaAutosize
+                minRows={6}
+                style={{
+                  background: '#f3f5f9',
+                  width: '94%',
+                  resize: 'none',
+                  border: 'none',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  margin: '10px 0px',
+                }}
+                placeholder="מלל הודעה"
+                {...register('description')}
               />
-            </div>
-          </div>
-          <div className="save">
-            <button type="submit" className="cancel-post">
-              <span>בטל</span>
-            </button>
-            <button type="submit" className="save-post">
-              <span>שמור</span>
-            </button>
-          </div>
-        </div>
+              <TextField
+                fullWidth
+                sx={{ background: '#f3f5f9' }}
+                placeholder="קישור"
+                {...register('link')}
+              />
+              <Box className="centered" sx={{ marginTop: '50px' }}>
+                {/* <img
+                    className="main-img"
+                    src={
+                      choosedItem?.image?.filePath
+                      ? `${process.env.REACT_APP_MEDIA}/notifications/${choosedItem?.image?.filePath}`
+                      : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
+                    }
+                  /> */}
+                <MyCropper
+                  aspectRatio={16 / 16}
+                  uploadImg={uploadImg}
+                  itemImage={
+                    choosedItem?.image?.filePath
+                      ? `${process.env.REACT_APP_MEDIA}/notifications/${choosedItem?.image?.filePath}`
+                      : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
+                  }
+                />
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: '20px',
+                  justifyContent: 'center',
+                  marginTop: '50px',
+                }}
+              >
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  color="secondary"
+                  sx={{ width: '100px' }}
+                >
+                  בטל
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  sx={{ width: '100px' }}
+                >
+                  שמור
+                </Button>
+              </Box>
+            </Box>
+          </form>
+        </Paper>
       ) : (
-        <div className="wrapper add">
-          <button type="button" onClick={() => createItem(null)}>
-            <span className="img material-symbols-outlined">add</span>
-            <span>חדש</span>
-          </button>
-        </div>
+        <Paper
+          elevation={4}
+          className="centered"
+          sx={{ minHeight: '500px', borderRadius: '10px' }}
+        >
+          <Button
+            type="button"
+            variant="outlined"
+            onClick={() => createItem(null)}
+            startIcon={<AddIcon />}
+          >
+            <Typography variant="h6">חדש</Typography>
+          </Button>
+        </Paper>
       )}
-    </form>
+    </>
   )
 }
 

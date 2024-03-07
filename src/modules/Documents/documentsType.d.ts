@@ -18,7 +18,7 @@ interface IDocument {
   documentType: IDocumentTypes
   userName: string
   userExId: string
-  agentExtId: string
+  agentExId: string
   agentName: string
   status: string
   createdAt: string

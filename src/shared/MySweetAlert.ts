@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import { themeColors } from '../styles/mui'
 
 export const onSuccessAlert = (title: string, message: string) => {
   Swal.fire({
@@ -33,9 +34,10 @@ export const onInfoAlert = (title: string, message: string) => {
 export const onAsk = async (title: string, message: string) => {
   return Swal.fire({
     title: title,
+    text: message,
     showCancelButton: true,
-    confirmButtonColor: '#3B7A82',
-    cancelButtonColor: '#959595',
+    confirmButtonColor: themeColors.primary,
+    cancelButtonColor: themeColors.error,
     confirmButtonText: 'אישור',
     cancelButtonText: 'ביטול',
   }).then(function (res) {

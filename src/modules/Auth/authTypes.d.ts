@@ -86,3 +86,7 @@ interface createUserDoc {
   title: string
   base64Pdf: string
 }
+
+interface UsersResponse extends Hydra {
+  'hydra:member': IUser[]
+}

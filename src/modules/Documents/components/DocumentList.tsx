@@ -15,10 +15,12 @@ import {
 } from '@mui/material' // Import Material-UI components
 import { themeColors } from '../../../styles/mui'
 import { DocumentTypeHebrew } from '../helpers/DocumentTypeHebrew'
+import { useAuth } from '../../Auth/store/useAuthStore'
 
 const DocumentList = () => {
   const { items, showCalendar, searchValue, loading, selectedDocument } =
     useDocuments()
+  const { user } = useAuth()
   const navigate = useNavigate()
 
   const handleNavigate = (element: IDocument) => {
@@ -64,6 +66,20 @@ const DocumentList = () => {
                     לקוח
                   </Typography>
                 </TableCell>
+                {(user?.role === 'ROLE_AGENT' ||
+                  user?.role === 'ROLE_SUPER_AGENT' ||
+                  user?.role === 'ROLE_ADMIN') &&
+                  selectedDocument == 'order' && (
+                    <TableCell className="col-cont sticky-col">
+                      <Typography
+                        variant="body2"
+                        color={themeColors.primary}
+                        fontWeight={800}
+                      >
+                        סוכן
+                      </Typography>
+                    </TableCell>
+                  )}
                 <TableCell className="col-cont">
                   <Typography
                     variant="body2"
@@ -112,65 +128,79 @@ const DocumentList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((element, index) => {
-                return (
-                  <TableRow
-                    key={index}
-                    className={'item'}
-                    onClick={() => handleNavigate(element)}
-                  >
-                    <TableCell>
-                      <Typography variant="body2">
-                        {'#' + element?.documentNumber}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">
-                        {'#' + element?.userExId}
-                      </Typography>
-                      <Typography variant="body2">
-                        {element?.userName}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">
-                        {DocumentTypeHebrew(element?.documentType)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">
-                        {moment(element?.createdAt).format('DD-MM-YYYY')}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">
-                        {moment(element?.updatedAt).format('DD-MM-YYYY')}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant="body2">
-                        {element?.total.toFixed(1)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      {element?.status ? (
+              {!loading &&
+                items.map((element, index) => {
+                  return (
+                    <TableRow
+                      key={index}
+                      className={'item'}
+                      onClick={() => handleNavigate(element)}
+                    >
+                      <TableCell>
                         <Typography variant="body2">
-                          {element?.status ? element?.status : 'אושר'}
+                          {'#' + element?.documentNumber}
                         </Typography>
-                      ) : (
-                        <Typography variant="body2">ממתין</Typography>
-                      )}
-                    </TableCell>
-                    {/* <TableCell >
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {'#' + element?.userExId}
+                        </Typography>
+                        <Typography variant="body2">
+                          {element?.userName}
+                        </Typography>
+                      </TableCell>
+                      {(user?.role === 'ROLE_AGENT' ||
+                        user?.role === 'ROLE_SUPER_AGENT' ||
+                        user?.role === 'ROLE_ADMIN') &&
+                        selectedDocument == 'order' && (
+                          <TableCell className="col-cont sticky-col">
+                            <Typography variant="body2">
+                              {'#' + element?.agentExId}
+                            </Typography>
+                            <Typography variant="body2">
+                              {element?.agentName}
+                            </Typography>
+                          </TableCell>
+                        )}
+                      <TableCell>
+                        <Typography variant="body2">
+                          {DocumentTypeHebrew(selectedDocument)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {moment(element?.createdAt).format('DD-MM-YYYY')}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {moment(element?.updatedAt).format('DD-MM-YYYY')}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {element?.total.toFixed(1)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        {element?.status ? (
+                          <Typography variant="body2">
+                            {element?.status ? element?.status : 'אושר'}
+                          </Typography>
+                        ) : (
+                          <Typography variant="body2">ממתין</Typography>
+                        )}
+                      </TableCell>
+                      {/* <TableCell >
                           {element?.DocumentID !== '31' && element?.DocumentID !== '3' ? (
                             <Button variant="contained" onClick={() => downloadFile(element, 'pdf')}>
                               <span >picture_as_pdf</span>
                             </Button>
                           ) : null}
                         </TableCell> */}
-                  </TableRow>
-                )
-              })}
+                    </TableRow>
+                  )
+                })}
             </TableBody>
           </Table>
         </TableContainer>

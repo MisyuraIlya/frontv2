@@ -1,7 +1,7 @@
 export const DocumentTypeHebrew = (type: IDocumentTypes) => {
   if (type === 'draft') {
     return 'טיוטה'
-  } else if (type === 'orders') {
+  } else if (type === 'order') {
     return 'הזמנה'
   } else if (type === 'priceOffer') {
     return 'הצעת מחיר'
@@ -11,7 +11,7 @@ export const DocumentTypeHebrew = (type: IDocumentTypes) => {
     return 'חשבנוית מס'
   } else if (type === 'ciInvoice') {
     return 'חשבונית מס מרכזת'
-  } else if (type === 'return') {
+  } else if (type === 'returnOrder') {
     return 'תעודת החזר'
   }
 }

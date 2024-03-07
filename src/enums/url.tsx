@@ -115,7 +115,7 @@ export const AdminURL = {
   },
   ORDERS: {
     LINK: `/documentPage/history/${dateFrom}/${dateTo}`,
-    LABEL: 'הזמנות',
+    LABEL: 'מסמכים',
     ICON: <ShoppingCartCheckoutIcon sx={{ fontSize: '40px' }} />,
   },
   NOTIFICATIONS: {

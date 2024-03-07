@@ -35,6 +35,7 @@ interface DocumentsStore {
   items: IDocument[]
   totalItems: number
   getItems: (
+    user: IUser,
     documentType: string,
     dateFrom: Date,
     dateTo: Date,
@@ -104,6 +105,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
   items: [],
   totalItems: 0,
   getItems: async (
+    user: IUser,
     documentType: string,
     dateFrom: Date,
     dateTo: Date,
@@ -112,7 +114,7 @@ export const useDocuments = create<DocumentsStore>((set, get) => ({
     set({ loading: true })
     try {
       const response = await DocumentsService.GetDocuments(
-        getClientId(),
+        user,
         documentType,
         dateFrom,
         dateTo,

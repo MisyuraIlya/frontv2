@@ -18,15 +18,7 @@ const NotificationItem: FC<NotificationItemProps> = ({ element, index }) => {
   } = useNotificationStore()
   const [active, setActive] = useState(false)
   return (
-    <div
-      key={index}
-      className={
-        element?.id == itemToSend?.id || element?.id == choosedItem?.id
-          ? 'item active'
-          : 'item'
-      }
-      onClick={() => setChoosedItem(element)}
-    >
+    <div key={index} onClick={() => setChoosedItem(element)}>
       <div className="flex-container">
         <div className="col-lg-1 img">
           <div className="wr">

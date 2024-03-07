@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom'
 import KartessetLst from '../components/KartessetLst'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 import Loader from '../../../shared/Loader'
+import { useAuth } from '../../Auth/store/useAuthStore'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -36,7 +37,7 @@ const DocumentsPage = () => {
   const { documentType, dateFrom, dateTo } = useParams<RouteParams>()
   const searchParams = new URLSearchParams(location.search)
   const pageNumber = searchParams.get('page')
-
+  const { user } = useAuth()
   const handleDate = (date: Date) => {
     setCurrentDate(date)
     if (type === 'from') {
@@ -52,7 +53,13 @@ const DocumentsPage = () => {
 
   useEffect(() => {
     setPage(pageNumber ?? '1')
-    getItems(documentType!, new Date(dateFrom!), new Date(dateTo!), pageNumber!)
+    getItems(
+      user!,
+      documentType!,
+      new Date(dateFrom!),
+      new Date(dateTo!),
+      pageNumber!
+    )
     setSelectedDocument(documentType!)
   }, [pageNumber, documentType])
 

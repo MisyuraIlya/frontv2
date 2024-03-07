@@ -3,8 +3,6 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import CategoryEdit from './modules/Admin/pages/CategoryEdit'
 import ProductsEdit from './modules/Admin/pages/ProductsEdit'
 import Clients from './modules/Admin/pages/Clients'
-import Orders from './modules/Admin/pages/Orders'
-import OrderItemPage from './modules/Admin/pages/OrderItemPage'
 import Home from './modules/Home/pages/Home'
 import Catalog from './modules/Catalog/pages/Catalog'
 import CatalogView from './modules/Catalog/pages/CatalogView'
@@ -65,13 +63,9 @@ const RouterApp = () => {
               path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
               element={<ProductsEdit />}
             />
-            {/* <Route path="/admin/clients" element={<Clients />} /> */}
-            {/* <Route path="/admin/approveDoc" element={<Orders />} /> */}
-            {/* <Route
-              path="/admin/approveDocItems/:id"
-              element={<OrderItemPage />}
-            /> */}
-            {/* <Route path="/admin/notification" element={<NotificationPage />} /> */}
+            <Route path="/admin/clients" element={<Clients />} />
+
+            <Route path="/admin/notification" element={<NotificationPage />} />
             {/* <Route path="/admin/agents" element={<AgentsPage />} /> */}
 
             {/* <Route path="/agentClients" element={<AgentClinets />} /> */}

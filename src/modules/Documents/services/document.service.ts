@@ -11,7 +11,7 @@ interface RestoreCartResponse extends Hydra {
 }
 export const DocumentsService = {
   async GetDocuments(
-    userId: string | null | undefined,
+    user: IUser,
     documentType: string,
     fromDate: Date,
     toDate: Date,
@@ -19,9 +19,17 @@ export const DocumentsService = {
   ): Promise<DocumentsResponse> {
     const fromConverted = moment(fromDate).format('YYYY-MM-DD')
     const toDateConverted = moment(toDate).format('YYYY-MM-DD')
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/documents/${documentType}/${fromConverted}/${toDateConverted}?page=${page}&userId=${userId}`
-    )
+
+    let url = `${process.env.REACT_APP_API}/api/documents/${documentType}/${fromConverted}/${toDateConverted}?page=${page}`
+
+    if (
+      user.role === 'ROLE_USER' ||
+      user.role === 'ROLE_AGENT' ||
+      user.role === 'ROLE_SUPER_AGENT'
+    ) {
+      url += `&userId=${user.id}`
+    }
+    const response = await axios.get(url)
     return response.data
   },
 

@@ -1,36 +1,25 @@
+import { Grid, Typography } from '@mui/material'
 import React from 'react'
 
 const Head = () => {
   return (
-    <div className="heading">
-      <div className="flex-container">
-        <div className="col-lg-2">
-          <div className="wrapp">
-            <p>מס'</p>
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <div className="wrapp">
-            <p>לקוח</p>
-          </div>
-        </div>
-        <div className="col-lg-2">
-          <div className="wrapp">
-            <p>סטאטוס</p>
-          </div>
-        </div>
-        <div className="col-lg-1 MyCenetred">
-          <div className="wrapp">
-            <p>מידע</p>
-          </div>
-        </div>
-        <div className="col-lg-1 MyCenetred">
-          <div className="wrapp">
-            <p>פעולות</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={2}>
+        <Typography variant="body1">מס'</Typography>
+      </Grid>
+      <Grid item xs={4}>
+        <Typography variant="body1">לקוח</Typography>
+      </Grid>
+      <Grid item xs={2}>
+        <Typography variant="body1">סטאטוס</Typography>
+      </Grid>
+      <Grid item xs={1}>
+        <Typography variant="body1">מידע</Typography>
+      </Grid>
+      <Grid item xs={1}>
+        <Typography variant="body1">פעולות</Typography>
+      </Grid>
+    </Grid>
   )
 }
 

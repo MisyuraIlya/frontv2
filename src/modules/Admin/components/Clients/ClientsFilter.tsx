@@ -1,50 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useClientStore } from '../../store/ClientsStore'
 import { useNavigate } from 'react-router-dom'
-import { useDebounce } from 'use-debounce'
-import SearchInput from '../../../../shared/SearchInput'
+import SearchInput from '../../../../utils/SearchInput/SearchInput'
+import { Box, Typography } from '@mui/material'
 
 const ClientsFilter = () => {
-  const { totalClients, search, setSearch, getClients } = useClientStore()
-  const [valueDebounced] = useDebounce(search, 1000)
-  const [activeSearch, setActiveSearch] = useState(false)
+  const { totalClients, search, setSearch } = useClientStore()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (activeSearch) {
-      getClients()
-    }
-    if (!search) {
-      getClients()
-    }
-  }, [valueDebounced])
-  return (
-    <div className="filter flex-container">
-      <div className="col-lg-2">
-        <p>{'נמצאו ' + totalClients + ' לקוחות'}</p>
-      </div>
-      <div style={{ display: 'flex' }} className="col-lg-10">
-        <div className="col-lg-4">
-          <SearchInput
-            search={search}
-            setSearch={setSearch}
-            onActive={setActiveSearch}
-          />
-        </div>
+  const handleDebouce = (value: string) => {
+    const urlSearchParams = new URLSearchParams(location.search)
+    urlSearchParams.set('search', value)
+    const url = urlSearchParams.toString()
+    navigate(`/admin/clients?${url}`)
+  }
 
-        <div className="col-lg-7">
-          <ul
-            className="filter-ul"
-            style={{
-              backgroundImage:
-                'url(' + process.env.REACT_APP_MEDIA + '/icons/filter.svg)',
-            }}
-          >
-            {/* HERE FILTER BY SOMETHING */}
-          </ul>
-        </div>
-      </div>
-    </div>
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        margin: '20px 0',
+      }}
+    >
+      <Box>
+        <SearchInput
+          placeholder="חיפוש לקוח"
+          handleFunction={handleDebouce}
+          value={search}
+          setValue={setSearch}
+        />
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Typography variant="body1">
+          {'נמצאו: ' + totalClients + ' לקוחות'}
+        </Typography>
+      </Box>
+    </Box>
   )
 }
 

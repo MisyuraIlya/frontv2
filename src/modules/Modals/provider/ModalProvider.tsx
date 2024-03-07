@@ -16,8 +16,6 @@ import PayPopUp from '../components/PayPopUp/PayPopUp'
 import ClientRightSideBar from '../adminComponents/ClientRightSideBar/ClientRightSideBar'
 import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
-import ClientsInfo from '../adminComponents/ClientsInfo/ClientsInfo'
-import ClientOptions from '../adminComponents/ClientOptions/ClientOptions'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
 import EditTarget from '../agentComponents/EditTarget'
 import { useAgentProfileStore } from '../../Agent/store/agentProfile.store'
@@ -54,10 +52,6 @@ interface ModalContextType {
   setOpenSideBar: (bool: boolean) => void
   gallery: boolean
   setGallery: (bool: boolean) => void
-  clientsInfo: boolean
-  setClientsInfo: (bool: boolean) => void
-  clientOptions: boolean
-  setClientOptions: (bool: boolean) => void
   clientRightSideBar: boolean
   setClientRightSideBar: (bool: boolean) => void
   leftSideBar: boolean
@@ -118,8 +112,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   //ADMINS
   const { setSelectedAgent } = useClientStore()
   const [gallery, setGallery] = useState(false)
-  const [clientsInfo, setClientsInfo] = useState(false)
-  const [clientOptions, setClientOptions] = useState(false)
   const [agentsModal, setAgentsModal] = useState(false)
 
   //AGENTS
@@ -239,10 +231,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setOpenAuthModal,
     gallery,
     setGallery,
-    clientsInfo,
-    setClientsInfo,
-    clientOptions,
-    setClientOptions,
     clientRightSideBar,
     setClientRightSideBar,
     leftSideBar,
@@ -303,8 +291,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
       <LeftSideBar active={leftSideBar} setActive={setLeftSideBar} />
       {/* ADMINS */}
       <Gallery active={gallery} setActive={setGallery} />
-      <ClientsInfo active={clientsInfo} setActive={setClientsInfo} />
-      <ClientOptions active={clientOptions} setActive={setClientOptions} />
       <AgentsModal active={agentsModal} setActive={closeAgentsModalItem} />
 
       {/* implement AGENT MODALS */}

@@ -1,9 +1,5 @@
 import axios from 'axios'
 
-interface UsersResponse extends Hydra {
-  'hydra:member': IUser[]
-}
-
 interface updateAuthResponse {
   data: null
   message: string
@@ -13,20 +9,16 @@ interface updateAuthResponse {
 export const AdminClinetsService = {
   async getClients(
     page: string | number,
-    all = false,
-    search: string
+    search?: string
   ): Promise<UsersResponse> {
-    if (all) {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/users?itemsPerPage=10000&role=ROLE_USER&extId=${search}`
-      )
-      return response.data
-    } else {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/users?page=${page}&extId=${search}`
-      )
-      return response.data
+    let url = `${process.env.REACT_APP_API}/api/users?page=${page}`
+
+    if (search) {
+      url += `&extId=${search}`
     }
+
+    const response = await axios.get(url)
+    return response.data
   },
   async getAgents(): Promise<UsersResponse> {
     const response = await axios.get(
@@ -50,7 +42,7 @@ export const AdminClinetsService = {
     return response.data
   },
 
-  async updateClient(user: IUser): Promise<IUser> {
+  async updateClient(user: IUser): Promise<updateAuthResponse> {
     delete user.roles
     const response = await axios.post(
       `${process.env.REACT_APP_API}/auth/updateUser`,
