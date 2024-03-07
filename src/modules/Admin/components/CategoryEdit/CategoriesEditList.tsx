@@ -12,8 +12,8 @@ import { Box, Grid, Typography } from '@mui/material'
 import { useAdminCategories } from '../../store/CategoriesStore'
 
 const CategoriesEditList = () => {
-  const { categories } = useAdminCategories()
-  const { lvl1, lvl2, lvl3 } = useParams()
+  const { categories, setCategories } = useAdminCategories()
+
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
     background: isDraggingOver ? '#e5e5e5' : '#ddd',
   })
@@ -43,7 +43,7 @@ const CategoriesEditList = () => {
       orden: index,
     }))
 
-    // setCurrentCategories(updatedCategories)
+    setCategories(updatedCategories)
     await AdminCatalogService.dragAndDropCategories(updatedCategories)
   }
 
@@ -56,40 +56,41 @@ const CategoriesEditList = () => {
 
   return (
     <Box>
-      <Grid container spacing={1}>
-        <Grid item xs={1}>
-          <Typography variant="body1">{'כניסה'}</Typography>
-        </Grid>
-        <Grid item xs={1}>
-          <Typography variant="body1">{'סדר'}</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="body1">{'תמונה'}</Typography>
-        </Grid>
-        <Grid item xs={1}>
-          <Typography variant="body1">{'מזהה'}</Typography>
-        </Grid>
-        <Grid item xs={3}>
-          <Typography variant="body1">{'כותרת'}</Typography>
-        </Grid>
-        {lvl1 === '0' && lvl2 === '0' && lvl3 === '0' && (
+      <Box sx={{ borderBottom: '5px solid #e2e3e6', width: '100%' }}>
+        <Grid container spacing={1} sx={{ margin: '0 20px' }}>
           <Grid item xs={1}>
-            <Typography variant="body1">{'סטאטוס'}</Typography>
+            <Typography variant="h6">{'כניסה'}</Typography>
           </Grid>
-        )}
-      </Grid>
+          <Grid item xs={1}>
+            <Typography variant="h6">{'סדר'}</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography variant="h6">{'תמונה'}</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography variant="h6">{'מזהה'}</Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h6">{'כותרת'}</Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h6">{'סטאטוס'}</Typography>
+          </Grid>
+        </Grid>
+      </Box>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <Box
+              sx={{ margin: '0 25px' }}
               {...provided.innerRef}
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {categories?.map((element, index) => {
                 return (
-                  <Box key={index}>
+                  <Box key={index} sx={{ margin: '10px 0px' }}>
                     <Draggable
                       key={element.id}
                       draggableId={element.id + ''}

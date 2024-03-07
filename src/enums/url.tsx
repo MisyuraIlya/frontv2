@@ -9,6 +9,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import CampaignIcon from '@mui/icons-material/Campaign'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 import moment from 'moment'
+import ShopIcon from '@mui/icons-material/Shop'
+import GroupIcon from '@mui/icons-material/Group'
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
 const dateFrom = moment().subtract(1, 'day').format('YYYY-MM-DD')
 const dateTo = moment().format('YYYY-MM-DD')
 
@@ -95,5 +99,28 @@ export const agentURL = {
     LINK: '/offline',
     LABEL: '/מסמכי אופליין',
     ICON: <WifiOffOutlinedIcon />,
+  },
+}
+
+export const AdminURL = {
+  CATALOG_EDIT: {
+    LINK: '/admin/category-edit/0/0',
+    LABEL: 'ניהול קטלוג',
+    ICON: <ShopIcon sx={{ fontSize: '40px' }} />,
+  },
+  CLIENTS: {
+    LINK: '/admin/clients',
+    LABEL: 'לקוחות',
+    ICON: <GroupIcon sx={{ fontSize: '40px' }} />,
+  },
+  ORDERS: {
+    LINK: `/documentPage/history/${dateFrom}/${dateTo}`,
+    LABEL: 'הזמנות',
+    ICON: <ShoppingCartCheckoutIcon sx={{ fontSize: '40px' }} />,
+  },
+  NOTIFICATIONS: {
+    LINK: `/admin/notification`,
+    LABEL: 'הודעות',
+    ICON: <NotificationAddIcon sx={{ fontSize: '40px' }} />,
   },
 }

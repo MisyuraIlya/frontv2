@@ -18,7 +18,6 @@ import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
 import ClientsInfo from '../adminComponents/ClientsInfo/ClientsInfo'
 import ClientOptions from '../adminComponents/ClientOptions/ClientOptions'
-import AdminRightSideBar from '../adminComponents/AdminRightSideBar/AdminRightSideBar'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
 import EditTarget from '../agentComponents/EditTarget'
 import { useAgentProfileStore } from '../../Agent/store/agentProfile.store'
@@ -53,8 +52,6 @@ interface ModalContextType {
   setOpenMobileSideBar: (bool: boolean) => void
   openSideBar: boolean
   setOpenSideBar: (bool: boolean) => void
-  adminRightSideBar: boolean
-  setAdminRightSideBar: (bool: boolean) => void
   gallery: boolean
   setGallery: (bool: boolean) => void
   clientsInfo: boolean
@@ -112,7 +109,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [openPopUpPay, setOpenPopUpPay] = useState(false)
   const [openMobileSideBar, setOpenMobileSideBar] = useState(false)
   const [openSideBar, setOpenSideBar] = useState(false)
-  const [adminRightSideBar, setAdminRightSideBar] = useState(false)
   const [clientRightSideBar, setClientRightSideBar] = useState(false)
   const [leftSideBar, setLeftSideBar] = useState(false)
   const [pdfLinkOrBase64, setPdfLinkOrBase64] = useState('')
@@ -241,8 +237,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setOpenSideBar,
     openAuthModal,
     setOpenAuthModal,
-    adminRightSideBar,
-    setAdminRightSideBar,
     gallery,
     setGallery,
     clientsInfo,
@@ -301,11 +295,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
         <PayPopUp active={openPopUpPay} setActive={setOpenPopUpPay} />
       )}
 
-      {/* SIDEBARDS */}
-      <AdminRightSideBar
-        active={adminRightSideBar}
-        setActive={setAdminRightSideBar}
-      />
       <ClientRightSideBar
         active={clientRightSideBar}
         setActive={setClientRightSideBar}

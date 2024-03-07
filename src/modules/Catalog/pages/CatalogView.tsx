@@ -19,7 +19,7 @@ const CatalogView = () => {
         {categoriesLvl1?.map((element: ICategory, index) => {
           if (element?.parent?.id == lvl1) {
             return (
-              <Grid item xs={3}>
+              <Grid item xs={3} key={index}>
                 <Card elevation={0} sx={{ cursor: 'pointer' }}>
                   <CardMedia
                     component="img"

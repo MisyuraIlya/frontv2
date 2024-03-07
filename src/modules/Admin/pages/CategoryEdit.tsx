@@ -31,23 +31,20 @@ const CategoryEdit = () => {
 
   return (
     <Container maxWidth="lg">
-      {/* <BreadCrumbsUtil
+      <BreadCrumbsUtil
         array={[
           {
-            title: lvl1Bread[0]?.title || '',
-            link: `/admin/category-edit/${lvl1Bread[0]?.id}/0/0` || '',
+            title: lvl1?.toString()!,
+            link: `/admin/category-edit/${lvl1}/0` || '',
           },
           {
-            title: lvl2Bread[0]?.title || '',
-            link:
-              `/admin/category-edit/${lvl1Bread[0]?.id}/${lvl2Bread[0]?.id}/0` ||
-              '',
+            title: lvl2?.toString()!,
+            link: `/admin/category-edit/${lvl1}/${lvl2}` || '',
           },
-          { title: lvl3Bread[0]?.title || '', link: '' },
         ]}
-      /> */}
+      />
       {isLoading && <Loader />}
-      {/* <CategoryEditFilters /> */}
+      <CategoryEditFilters />
       <CategoriesEditList />
     </Container>
   )

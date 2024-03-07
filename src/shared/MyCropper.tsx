@@ -1,20 +1,35 @@
-import React, { useState, useRef, useEffect, FC, ChangeEvent } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState, useRef, FC, ChangeEvent } from 'react'
 import Cropper, { ReactCropperElement } from 'react-cropper'
-import SweetAlert from 'sweetalert2'
 import 'cropperjs/dist/cropper.css'
+import { Box, Button, Grid, IconButton } from '@mui/material'
+import ControlPointIcon from '@mui/icons-material/ControlPoint'
+import { themeColors } from '../styles/mui'
+import styled from 'styled-components'
+import ModalWrapper from '../utils/ModalWrapper/ModalWrapper'
 
 interface MyCropperProps {
   aspectRatio: number
   uploadImg: (base64: string, fileName: string) => void
   itemImage: string | null
 }
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+})
 
 const MyCropper: FC<MyCropperProps> = ({
   aspectRatio,
   uploadImg,
   itemImage,
 }) => {
+  const [openModal, setOpenModal] = useState(false)
   const [choosedFile, setChoosedFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [cropData, setCropData] = useState('')
@@ -31,9 +46,9 @@ const MyCropper: FC<MyCropperProps> = ({
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('e', e)
     const files = e.target.files
     if (files && files.length > 0) {
+      setOpenModal(true)
       const selectedFile = files[0]
       setFileName(files[0].name)
       setChoosedFile(selectedFile)
@@ -43,101 +58,85 @@ const MyCropper: FC<MyCropperProps> = ({
   }
 
   const cancle = () => {
+    setOpenModal(false)
     setChoosedFile(null)
   }
   return (
-    <div
-      className={
-        choosedFile ? 'load-image-wrapper absolute' : 'load-image-wrapper'
-      }
-    >
-      <div
-        className="addImg"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+    <>
+      <Box sx={{ position: 'relative' }} className="centered">
+        <img src={itemImage!} />
+        <IconButton
+          component="label"
+          role={undefined}
+          tabIndex={-1}
+          sx={{ position: 'absolute', zIndex: 10 }}
+        >
+          <ControlPointIcon
+            sx={{
+              fontSize: '40px',
+              color: themeColors.primary,
+              opacity: '0.5',
+            }}
+          />
+          <VisuallyHiddenInput type="file" onChange={handleFileChange} />
+        </IconButton>
+      </Box>
+      <ModalWrapper
+        active={openModal}
+        setActive={setOpenModal}
+        width={40}
+        height={45}
       >
-        <ul>
-          <div>
-            <li>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <Box sx={{ height: '80%' }}>
               <img
-                src={
-                  'https://foodappeal-b2b.com/src/img/icons/add-circular.svg'
-                }
+                src={cropData ? cropData! : previewUrl!}
+                style={{ width: '100%', height: '100%' }}
               />
-            </li>
-            <li className="upload">
-              <input
-                id="upload-file"
-                type="file"
-                className="upload"
-                onChange={handleFileChange}
-              />
-              <span>הוספת תמונה</span>
-            </li>
-          </div>
-        </ul>
-
-        <div style={{ position: 'absolute', top: '0', zIndex: '-1' }}>
-          {itemImage && (
-            <img src={`${process.env.REACT_APP_MEDIA}/${itemImage}`} />
-          )}
-        </div>
-      </div>
-
-      {choosedFile
-        ? ReactDOM.createPortal(
-            <div className="cropp-tool-wrapper">
-              <div className="cropp-tool">
-                <div className="flex-container">
-                  <div id="cropp_view" className="col-lg-6 for-cropp">
-                    {previewUrl && (
-                      <Cropper
-                        src={previewUrl}
-                        aspectRatio={aspectRatio}
-                        guides={false}
-                        checkCrossOrigin={false}
-                        ref={cropperRef}
-                      />
-                    )}
-                  </div>
-                  {previewUrl && (
-                    <div className="col-lg-6">
-                      <div className="image-preview">
-                        <img src={cropData ? cropData : previewUrl} />
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <ul className="actions">
-                  <li>
-                    <button
-                      onClick={() => handleSave()}
-                      className="button-green"
-                    >
-                      שמור
-                    </button>
-                    <button
-                      onClick={() => getCropData()}
-                      className="button-green"
-                    >
-                      גזור
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => cancle()} className="button-red">
-                      ביטול
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>,
-            document.getElementById('modal-root')!
-          )
-        : null}
-    </div>
+            </Box>
+            <Box
+              sx={{ display: 'flex', gap: '10px', height: '20%' }}
+              className="centered"
+            >
+              <Button
+                variant="outlined"
+                color="error"
+                sx={{ width: '100px' }}
+                onClick={() => cancle()}
+              >
+                בטל
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ width: '100px' }}
+                onClick={() => getCropData()}
+              >
+                גזור
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ width: '100px' }}
+                onClick={() => handleSave()}
+              >
+                שמור
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Cropper
+              src={previewUrl!}
+              aspectRatio={aspectRatio}
+              guides={false}
+              checkCrossOrigin={false}
+              ref={cropperRef}
+            />
+          </Grid>
+        </Grid>
+      </ModalWrapper>
+    </>
   )
 }
 

@@ -22,8 +22,9 @@ import {
 import { clientURL } from '../../../../enums/url'
 import NotificationContainer from '../../../PushNotifications/components/NotificationContainer/NotificationContainer'
 import { themeColors } from '../../../../styles/mui'
+import { onAsk } from '../../../../shared/MySweetAlert'
 const LeftComponent = () => {
-  const { user, isAgent, setAction } = useAuth()
+  const { user, isAgent, setAction, logOut } = useAuth()
   const { cart, selectedMode } = useCart()
   const [openProfile, setOpenProfile] = useState<boolean>(false)
   const { setOpenAuthModal, leftSideBar, setLeftSideBar } = useModals()
@@ -54,6 +55,13 @@ const LeftComponent = () => {
 
     if (value.LABEL === clientURL.NOTIFICATIONS.LABEL) {
       setOpenDrawver(true)
+    }
+  }
+
+  const beforeLogOut = async () => {
+    const ask = await onAsk('האם אתה בטוח?', 'כל המוצרים בסל ימחקו')
+    if (ask) {
+      logOut()
     }
   }
 
@@ -158,7 +166,12 @@ const LeftComponent = () => {
             {selectedMode == 'quote' && 'ה.מחיר'}
             {selectedMode == 'return' && 'החזרה'}
           </Typography>
-          <Button variant="outlined" fullWidth={true} sx={{ margin: '15px 0' }}>
+          <Button
+            variant="outlined"
+            fullWidth={true}
+            sx={{ margin: '15px 0' }}
+            onClick={() => beforeLogOut()}
+          >
             התנתק
           </Button>
         </Paper>

@@ -9,8 +9,8 @@ interface SearchInputProps {
   placeholder: string
   value: string
   setValue: (value: string) => void
-  handleFunction: (value: string) => void
-  ListComponent: any
+  handleFunction?: (value: string) => void
+  ListComponent?: any
 }
 
 const SearchInput: FC<SearchInputProps> = ({
@@ -45,7 +45,7 @@ const SearchInput: FC<SearchInputProps> = ({
   }
 
   useEffect(() => {
-    handleFunction(valueDebounced)
+    handleFunction && handleFunction(valueDebounced)
   }, [valueDebounced])
 
   return (
