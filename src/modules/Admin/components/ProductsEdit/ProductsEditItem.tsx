@@ -8,6 +8,10 @@ import { AdminProductService } from '../../services/products.service'
 import { useModals } from '../../../Modals/provider/ModalProvider'
 import { MediaObjectService } from '../../services/mediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
+import { Box, Checkbox, Grid, IconButton, Typography } from '@mui/material'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
+import CollectionsIcon from '@mui/icons-material/Collections'
+import { themeColors } from '../../../../styles/mui'
 
 interface ProductsEditItemProps {
   element: IProduct
@@ -15,10 +19,10 @@ interface ProductsEditItemProps {
 }
 
 const ProductsEditItem: FC<ProductsEditItemProps> = ({ element, index }) => {
-  const { products, getProducts, setProducts, setSelectedProduct } =
-    useProductsEditStore()
+  const { products, setProducts, setSelectedProduct } = useProductsEditStore()
+  const [checked, setCheked] = useState(element.isPublished)
   const { gallery, setGallery } = useModals()
-  const { lvl1, lvl2, lvl3 } = useParams()
+
   const getItemStyle = (
     isDragging: boolean,
     draggableStyle: any
@@ -39,25 +43,28 @@ const ProductsEditItem: FC<ProductsEditItemProps> = ({ element, index }) => {
       'src/img/products',
       'product'
     )
-    await getProducts(lvl1 ?? 0, lvl2 ?? 0, lvl3 ?? 0)
   }
 
-  const unpublishHandle = async (productId: string, isPublished: boolean) => {
+  const unpublishHandle = async () => {
+    setCheked(!checked)
     const newProd = products.map((item) => {
-      if (item.id.toString() === productId) {
-        item.isPublished = isPublished
+      if (item.id.toString() === element.id.toString()) {
+        item.isPublished = !checked
       }
       return item
     })
     setProducts(newProd)
-    await AdminProductService.updateProduct({ id: productId, isPublished })
+    await AdminProductService.updateProduct({
+      id: element.id.toString(),
+      isPublished: !checked,
+    })
   }
 
   return (
-    <div key={index} id={'item_' + element?.id} className="item">
+    <Box key={index}>
       <Draggable key={element.id} draggableId={element.id + ''} index={index}>
         {(provided, snapshot) => (
-          <div
+          <Box
             className="item"
             ref={provided.innerRef}
             {...provided.draggableProps}
@@ -67,102 +74,53 @@ const ProductsEditItem: FC<ProductsEditItemProps> = ({ element, index }) => {
               provided.draggableProps.style
             )}
           >
-            <div className="flex-container">
-              <div className="col-lg-1 sort MyCenetred">
-                <span className="material-symbols-outlined">
-                  drag_indicator
-                </span>
-              </div>
-              <div className="col-lg-1 for-img">
-                <div
-                  className={
-                    element?.defaultImagePath ? 'img-load active' : 'img-load'
+            <Grid container spacing={1}>
+              <Grid item xs={1}>
+                <IconButton>
+                  <DragIndicatorIcon sx={{ fontSize: '35px' }} />
+                </IconButton>
+              </Grid>
+              <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+                <MyCropper
+                  aspectRatio={16 / 16}
+                  uploadImg={uploadImg}
+                  itemImage={
+                    element?.defaultImagePath
+                      ? `${process.env.REACT_APP_MEDIA}/product/${element?.defaultImagePath}`
+                      : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
                   }
+                />
+              </Grid>
+              <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+                <IconButton
+                  onClick={() => {
+                    setGallery(true)
+                    setSelectedProduct(element)
+                  }}
                 >
-                  <MyCropper
-                    aspectRatio={16 / 16}
-                    uploadImg={uploadImg}
-                    itemImage={
-                      element?.defaultImagePath
-                        ? `product/${element?.defaultImagePath}`
-                        : null
-                    }
+                  <CollectionsIcon
+                    sx={{ fontSize: '35px', color: themeColors.primary }}
                   />
-                </div>
-              </div>
-              <div
-                className="col-lg-1 MyCenetred"
-                style={{ cursor: 'pointer' }}
-                onClick={() => {
-                  setGallery(true)
-                  setSelectedProduct(element)
-                }}
-              >
-                <span className="material-symbols-outlined">imagesmode</span>
-              </div>
-              <div className="col-lg-3 title">
-                <p>{element?.title}</p>
-              </div>
-              <div className="col-lg-2 title">
-                <p>{element?.sku}</p>
-              </div>
-              <div className="col-lg-3">
-                <div className="flex-container">
-                  <div className="col-lg-3 status sale"></div>
-                  <div className="col-lg-3 status sale"></div>
-                  <div className="col-lg-3 status sale"></div>
-                  <div className="col-lg-3 status">
-                    {!element?.isPublished ? (
-                      <div
-                        onClick={(e) =>
-                          unpublishHandle(element.id.toString(), true)
-                        }
-                        className="input active"
-                      >
-                        <span
-                          className="material-symbols-outlined"
-                          style={{
-                            color: 'white',
-                            height: '100%',
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}
-                        >
-                          done
-                        </span>
-                      </div>
-                    ) : (
-                      <div
-                        onClick={(e) =>
-                          unpublishHandle(element.id.toString(), false)
-                        }
-                        className="input"
-                      >
-                        <span
-                          className="material-symbols-outlined"
-                          style={{
-                            color: 'white',
-                            height: '100%',
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}
-                        >
-                          close
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                </IconButton>
+              </Grid>
+              <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body1">{element?.title}</Typography>
+              </Grid>
+              <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body1">{element?.sku}</Typography>
+              </Grid>
+              <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Checkbox
+                  checked={checked}
+                  onChange={() => unpublishHandle()}
+                  sx={{ color: themeColors.primary, cursor: 'pointer' }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
         )}
       </Draggable>
-    </div>
+    </Box>
   )
 }
 

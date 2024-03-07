@@ -2,20 +2,11 @@ import { create } from 'zustand'
 import { AdminProductService } from '../services/products.service'
 
 interface useProductsEditStoreState {
-  loading: boolean
   products: IProduct[]
+  productsRezerved: IProduct[]
+  search: string
+  setSearch: (search: string) => void
   setProducts: (arr: IProduct[]) => void
-  lvls: { lvl1: number | string; lvl2: number | string; lvl3: number | string }
-  setLvls: (
-    lvl1: number | string,
-    lvl2: number | string,
-    lvl3: number | string
-  ) => void
-  getProducts: (
-    lvl1: number | string,
-    lvl2: number | string,
-    lvl3: number | string
-  ) => Promise<void>
   selectedProduct: IProduct | null
   setSelectedProduct: (product: IProduct | null) => void
   deleteImageFunc: (imageId: number | string) => Promise<void>
@@ -24,24 +15,22 @@ interface useProductsEditStoreState {
 
 export const useProductsEditStore = create<useProductsEditStoreState>(
   (set, get) => ({
-    loading: false,
     products: [],
-    setProducts: (arr) => set({ products: arr }),
-    getProducts: async (
-      lvl1: string | number,
-      lvl2: string | number,
-      lvl3: string | number
-    ) => {
-      const response = await AdminProductService.GetProducts(lvl1, lvl2, lvl3)
-      set({ products: response['hydra:member'] })
+    setProducts: (arr) => set({ products: arr, productsRezerved: arr }),
+    productsRezerved: [],
+    search: '',
+    setSearch: (search: string) => {
+      if (search) {
+        const filter = get().products.filter(
+          (item) => item.title.includes(search) || item.sku.includes(search)
+        )
+        set({ products: filter })
+      } else {
+        set({ products: get().productsRezerved })
+      }
+      set({ search })
     },
-    lvls: {
-      lvl1: 0,
-      lvl2: 0,
-      lvl3: 0,
-    },
-    setLvls: (lvl1, lvl2, lvl3) =>
-      set({ lvls: { lvl1: lvl1, lvl2: lvl2, lvl3: lvl3 } }),
+
     selectedProduct: null,
     setSelectedProduct: (product) => set({ selectedProduct: product }),
     deleteImageFunc: async (imageId: number | string) => {

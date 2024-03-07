@@ -61,10 +61,10 @@ const RouterApp = () => {
               path="/admin/category-edit/:lvl1/:lvl2"
               element={<CategoryEdit />}
             />
-            {/* <Route
+            <Route
               path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
               element={<ProductsEdit />}
-            /> */}
+            />
             {/* <Route path="/admin/clients" element={<Clients />} /> */}
             {/* <Route path="/admin/approveDoc" element={<Orders />} /> */}
             {/* <Route

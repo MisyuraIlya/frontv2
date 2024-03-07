@@ -9,8 +9,9 @@ import ProductsEditItem from './ProductsEditItem'
 import { useParams } from 'react-router-dom'
 import { useProductsEditStore } from '../../store/ProductsEditStore'
 import { AdminProductService } from '../../services/products.service'
+import { Box, Grid, Typography } from '@mui/material'
 const ProductsEditList = () => {
-  const { products, setProducts, getProducts, setLvls } = useProductsEditStore()
+  const { products, setProducts } = useProductsEditStore()
   const { lvl1, lvl2, lvl3 } = useParams()
 
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
@@ -33,11 +34,6 @@ const ProductsEditList = () => {
     })
   }
 
-  useEffect(() => {
-    getProducts(lvl1 ?? 0, lvl2 ?? 0, lvl3 ?? 0)
-    setLvls(lvl1 ?? 0, lvl2 ?? 0, lvl3 ?? 0)
-  }, [])
-
   const reorder = (list: IProduct[], startIndex: number, endIndex: number) => {
     const result = Array.from(list)
     const [removed] = result.splice(startIndex, 1)
@@ -46,11 +42,34 @@ const ProductsEditList = () => {
   }
 
   return (
-    <>
+    <Box>
+      <Box sx={{ borderBottom: '5px solid #e2e3e6', width: '100%' }}>
+        <Grid container spacing={1} sx={{ margin: '0 20px' }}>
+          <Grid item xs={1}>
+            <Typography variant="h6">{'סדר'}</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography variant="h6">{'תמונה'}</Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Typography variant="h6">{'גלריה'}</Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h6">{'כותרת'}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="h6">{'מק״ט'}</Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Typography variant="h6">{'סטאטוס'}</Typography>
+          </Grid>
+        </Grid>
+      </Box>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
-            <div
+            <Box
+              sx={{ margin: '0 20px' }}
               className="items"
               {...provided.droppableProps}
               ref={provided.innerRef}
@@ -59,23 +78,16 @@ const ProductsEditList = () => {
               {products.map((element, index) => {
                 return <ProductsEditItem element={element} index={index} />
               })}
-            </div>
+            </Box>
           )}
         </Droppable>
       </DragDropContext>
       {products?.length == 0 && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-            height: '50px',
-          }}
-        >
-          <p>אין פריטים עבור קטגוריה זה</p>
-        </div>
+        <Box className="centered">
+          <Typography variant="body2">אין פריטים עבור קטגוריה זה</Typography>
+        </Box>
       )}
-    </>
+    </Box>
   )
 }
 
