@@ -1,14 +1,13 @@
 import React from 'react'
-import { useNotificationStore } from '../../store/notificationStore'
-import moment from 'moment'
 import NotificationItem from './notificationItem'
 import { Box } from '@mui/material'
+import useDataNotification from '../../hooks/useDataNotification'
 
 const RightSide = () => {
-  const { items } = useNotificationStore()
+  const { data } = useDataNotification()
   return (
     <Box>
-      {items.map((element, index) => {
+      {data?.['hydra:member']?.map((element, index) => {
         return <NotificationItem element={element} index={index} />
       })}
     </Box>

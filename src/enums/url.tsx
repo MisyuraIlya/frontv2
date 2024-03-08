@@ -109,7 +109,7 @@ export const AdminURL = {
     ICON: <ShopIcon sx={{ fontSize: '40px' }} />,
   },
   CLIENTS: {
-    LINK: '/admin/clients',
+    LINK: '/admin/clients?page=1',
     LABEL: 'לקוחות',
     ICON: <GroupIcon sx={{ fontSize: '40px' }} />,
   },

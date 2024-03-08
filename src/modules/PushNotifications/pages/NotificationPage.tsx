@@ -5,12 +5,12 @@ import { useNotificationStore } from '../store/notificationStore'
 import { useClientStore } from '../../Admin/store/ClientsStore'
 import { Container, Grid } from '@mui/material'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
+import { NotificationsServices } from '../services/notifications.service'
+import useSWR from 'swr'
+import useDataNotification from '../hooks/useDataNotification'
 
 const NotificationPage = () => {
-  const { createItem, fetchItems } = useNotificationStore()
-  useEffect(() => {
-    fetchItems()
-  }, [])
+  const { data } = useDataNotification()
   return (
     <Container maxWidth="lg">
       <BreadCrumbsUtil array={[]} />

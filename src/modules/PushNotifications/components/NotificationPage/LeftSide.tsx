@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import MyCropper from '../../../../shared/MyCropper'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
@@ -9,12 +9,11 @@ import {
   Button,
   Typography,
   Paper,
-  Grid,
   Box,
 } from '@mui/material'
 import { useNotificationStore } from '../../store/notificationStore'
-import { themeColors } from '../../../../styles/mui'
 import AddIcon from '@mui/icons-material/Add'
+import useDataNotification from '../../hooks/useDataNotification'
 
 interface LeftSideForm {
   title: string
@@ -23,9 +22,8 @@ interface LeftSideForm {
 }
 
 const LeftSide = () => {
-  const { choosedItem, createItem, updateItem, fetchItems, setChoosedItem } =
-    useNotificationStore()
-
+  const { choosedItem, setChoosedItem } = useNotificationStore()
+  const { updateMutation, createMutation } = useDataNotification()
   const {
     register,
     handleSubmit,
@@ -38,7 +36,7 @@ const LeftSide = () => {
       choosedItem.title = data.title
       choosedItem.description = data.description
       choosedItem.link = data.link
-      updateItem(choosedItem)
+      updateMutation(choosedItem)
       setChoosedItem(null)
     }
   }
@@ -49,13 +47,11 @@ const LeftSide = () => {
       convertFile,
       'notifications'
     )
-    if (choosedItem?.id) {
-      await updateItem({
-        id: choosedItem?.id?.toString(),
-        image: res['@id'],
-      })
+    if (choosedItem) {
+      //@ts-ignore
+      choosedItem.image = res['@id']
+      await updateMutation(choosedItem)
     }
-    fetchItems()
   }
 
   useEffect(() => {
@@ -99,14 +95,6 @@ const LeftSide = () => {
                 {...register('link')}
               />
               <Box className="centered" sx={{ marginTop: '50px' }}>
-                {/* <img
-                    className="main-img"
-                    src={
-                      choosedItem?.image?.filePath
-                      ? `${process.env.REACT_APP_MEDIA}/notifications/${choosedItem?.image?.filePath}`
-                      : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
-                    }
-                  /> */}
                 <MyCropper
                   aspectRatio={16 / 16}
                   uploadImg={uploadImg}
@@ -154,7 +142,7 @@ const LeftSide = () => {
           <Button
             type="button"
             variant="outlined"
-            onClick={() => createItem(null)}
+            onClick={() => createMutation(null)}
             startIcon={<AddIcon />}
           >
             <Typography variant="h6">חדש</Typography>
