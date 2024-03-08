@@ -1,51 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CatalogSearch from '../../../Catalog/components/CatalogSearch/CatalogSearch'
 import { Box } from '@mui/material'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import ProductList from '../../../../utils/SearchInput/ProductList'
-import { useSearchStore } from '../../../Catalog/store/SearchStore'
+import useSWR from 'swr'
+import { CatalogServices } from '../../../Catalog/services/catalog.service'
+import { useDebounce } from 'use-debounce'
 
 const CenterComponent = () => {
-  const {
-    productsFilter,
-    findProductsByValue,
-    searchValue,
-    totalFound,
-    loading,
-    setSearchValue,
-    setSavedValue,
-  } = useSearchStore()
+  const [search, setSearch] = useState<string>('')
+  const [valueDebounced] = useDebounce(search, 400)
+
+  const fetchData = async (): Promise<GetCatalogResponse> => {
+    if (valueDebounced) {
+      return await CatalogServices.GetCatalog(
+        '0',
+        '0',
+        '0',
+        `?search=${valueDebounced}`,
+        'search'
+      )
+    } else {
+      return {
+        'hydra:member': [],
+        'hydra:totalItems': 0,
+        'hydra:view': {
+          '@id': '',
+          'hydra:first': '',
+          'hydra:last': '',
+          'hydra:next': '',
+          'hydra:previous': '',
+        },
+      }
+    }
+  }
 
   const onClickHandle = (product: IProduct) => {
     console.log('product', product)
   }
 
-  const handleSetValue = (value: string) => {
-    setSearchValue(value)
-    setSavedValue(value)
-  }
+  const { data, isLoading, mutate } = useSWR<GetCatalogResponse>(
+    `/api/catalog/search/0/0/0?search=${search}`,
+    () => fetchData(),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  )
 
-  const onChangeHandle = (valueDebounced: string) => {
-    setSearchValue(valueDebounced)
-    setSavedValue(valueDebounced)
-    findProductsByValue('0', '0', '0', `?search=${valueDebounced}`)
+  const handleDebounced = (valueDebounced: string) => {
+    mutate()
   }
 
   return (
     <Box sx={{ width: '100%', position: 'relative', zIndex: 10 }}>
       <SearchInput
-        value={searchValue}
-        setValue={handleSetValue}
-        handleFunction={onChangeHandle}
+        value={search}
+        setValue={setSearch}
+        handleFunction={handleDebounced}
         placeholder="חפש מוצר..."
         ListComponent={
           <ProductList
             onClick={onClickHandle}
-            array={productsFilter}
-            loading={loading}
-            totalFound={totalFound}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
+            array={data?.['hydra:member'] ?? []}
+            loading={isLoading}
+            totalFound={data?.['hydra:totalItems'] ?? 0}
+            searchValue={search}
+            setSearchValue={setSearch}
           />
         }
       />

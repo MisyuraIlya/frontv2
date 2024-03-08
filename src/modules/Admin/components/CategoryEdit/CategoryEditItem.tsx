@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useCategories } from '../../../Catalog/store/CategoriesStore'
 import { AdminCatalogService } from '../../services/catalog.service'
 import { useDebounce } from 'use-debounce'
 import { base64ToFile } from '../../../../helpers/base64ToFile'

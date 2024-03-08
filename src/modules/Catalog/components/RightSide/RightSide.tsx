@@ -1,63 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import Filters from './components/Filters'
-import { useCatalog } from '../../store/CatalogStore'
-import { useCategories } from '../../store/CategoriesStore'
-import { useSearchStore } from '../../store/SearchStore'
 import { useParams } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { checkIsBlockedForView } from '../../helpers/checkIsBlockedForView'
 import { List, ListItem, ListItemText, Typography } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
+import useDataCategories from '../../hook/useDataCategories'
 const RightSide = () => {
-  const { categories } = useCategories()
-  const { categoriesFilter } = useSearchStore()
+  const { data } = useDataCategories()
   const [open, setOpen] = useState(false)
   const { lvl1, lvl2, lvl3, page, parent, type, documentType } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
   const isSearchDocument = documentType === 'search'
   const isAllProds = location?.pathname.includes('/0/0/0')
+
   const handlePush = (
     lvl1: ICategory,
     lvl2: ICategory,
     currentItem: ICategory
   ) => {
     if (currentItem.lvlNumber === 2) {
-      const check = checkIsBlockedForView(currentItem)
-      if (!check) {
-        isSearchDocument
-          ? navigate(
-              `/client/${documentType}/${lvl1.id}/${lvl2.id}/0${location.search}`
-            )
-          : navigate(`/client/${documentType}/${lvl1.id}/${lvl2.id}/0?page=1`)
-      }
+      navigate(
+        `/client/${documentType}/${lvl1.id}/${lvl2.id}/0${location.search}?page=1`
+      )
     }
-
     if (currentItem.lvlNumber === 3) {
-      const check = checkIsBlockedForView(lvl2)
-      if (!check) {
-        isSearchDocument
-          ? navigate(
-              `/client/${documentType}/${lvl1.id}/${lvl2.id}/${currentItem?.id}/${location.search}`
-            )
-          : navigate(
-              `/client/${documentType}/${lvl1.id}/${lvl2.id}/${currentItem?.id}?page=1`
-            )
-      }
+      navigate(
+        `/client/${documentType}/${lvl1.id}/${lvl2.id}/${currentItem?.id}/${location.search}?page=1`
+      )
     }
   }
 
   return (
     <>
       <List>
-        {categories?.map((lvl1Cat, key1) => {
+        {data?.['hydra:member']?.map((lvl1Cat, key1) => {
           if (lvl1Cat.lvlNumber === 1) {
             return (
               <>
                 <ListItem
                   key={key1}
                   onClick={() =>
-                    navigate(`/client/${documentType}/${lvl1Cat.id}/0/0`)
+                    navigate(`/client/${documentType}/${lvl1Cat.id}/0/0?page=1`)
                   }
                   sx={{ cursor: 'pointer' }}
                 >

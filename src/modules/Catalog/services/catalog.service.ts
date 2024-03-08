@@ -1,14 +1,6 @@
 import axios from 'axios'
 import { getClientExtId } from '../../Auth/helpers/auth.helper'
 
-interface GetCatalogResponse extends Hydra {
-  'hydra:member': IProduct[] // Define a more specific type if possible
-}
-
-interface GetCategoriesResponse extends Hydra {
-  'hydra:member': ICategory[]
-}
-
 interface GetCategoriesAttribute extends Hydra {
   'hydra:member': IAttributeMain[]
 }
@@ -37,17 +29,16 @@ export const CatalogServices = {
     return response.data
   },
 
-  async GetCategories(userExId: string): Promise<GetCategoriesResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/categoriesApp`
-    )
-    return response.data
-  },
+  async GetCategories(
+    userExId?: string | null
+  ): Promise<GetCategoriesResponse> {
+    let apiUrl = `${process.env.REACT_APP_API}/api/categoriesApp`
 
-  async GetCategoriesAll(): Promise<GetCategoriesResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/categoriesApp`
-    )
+    if (userExId) {
+      apiUrl += `?userExId=${userExId}`
+    }
+
+    const response = await axios.get(apiUrl)
     return response.data
   },
 

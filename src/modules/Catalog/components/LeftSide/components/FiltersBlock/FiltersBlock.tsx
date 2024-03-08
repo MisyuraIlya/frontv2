@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCatalog } from '../../../../store/CatalogStore'
-import { useAuth } from '../../../../../Auth/store/useAuthStore'
 import { useDebounce } from 'use-debounce'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
@@ -9,9 +8,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  InputLabel,
   MenuItem,
-  OutlinedInput,
   Select,
   SelectChangeEvent,
   TextField,
@@ -19,57 +16,33 @@ import {
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { themeColors } from '../../../../../../styles/mui'
-
 import CloseIcon from '@mui/icons-material/Close'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import WindowIcon from '@mui/icons-material/Window'
+import useDataCatalog from '../../../../hook/useDataCatalog'
+
+const arrOrden = [
+  { value: '1', label: 'שם' },
+  { value: '2', label: 'מק״ט' },
+  { value: '3', label: 'מומלץ' },
+]
+
 const FiltersBlock = () => {
+  const [search, setSearch] = useState<string>('')
   const {
-    prodsPerPage,
-    setProdsPerPage,
-    activeProdsPerPage,
-    setActiveProdsPerPage,
-    activeSortPerPage,
-    setActiveSortPerPage,
-    sortProdSetting,
-    setSortProdSetting,
     listView,
     setListView,
-    searchParam,
-    setSearchParam,
-    getCatalog,
-    totalItems,
-    setSearchParams,
+    prodsPerPage,
+    setProdsPerPage,
+    sortProdSetting,
+    setSortProdSetting,
   } = useCatalog()
-
+  const { data } = useDataCatalog()
   const location = useLocation()
   const navigate = useNavigate()
-  const [searchDebounce] = useDebounce(searchParam, 1000)
-
-  const handleOrderBy = (val: string) => {
-    const urlSearchParams = new URLSearchParams(location.search)
-    urlSearchParams.set('orderBy', val)
-    const updatedUrl = '?' + urlSearchParams.toString()
-    setSearchParams(updatedUrl)
-    navigate(location.pathname + updatedUrl)
-    if (val == '1') {
-      setSortProdSetting('1', 'שם')
-    } else if (val == '2') {
-      setSortProdSetting('2', 'מק״ט')
-    } else if (val == '3') {
-      setSortProdSetting('3', 'מומלץ')
-    }
-    setActiveSortPerPage(false)
-  }
-
-  const handleChangeItemsPerPage = (number: string) => {
-    const urlSearchParams = new URLSearchParams(location.search)
-    urlSearchParams.set('itemsPerPage', number)
-    urlSearchParams.set('page', '1')
-    const updatedUrl = '?' + urlSearchParams.toString()
-    setProdsPerPage(updatedUrl, number)
-    navigate(location.pathname + updatedUrl)
-  }
+  const [searchDebounce] = useDebounce(search, 1000)
+  const arrProdsPerPage = ['2', '24', '48']
+  const totalItems = data ? data?.['hydra:totalItems'] : '0'
 
   const handleSearchValue = (value: string) => {
     const urlSearchParams = new URLSearchParams(location.search)
@@ -78,32 +51,37 @@ const FiltersBlock = () => {
       urlSearchParams.set('search', value)
     } else {
       urlSearchParams.delete('search')
-      setSearchParam('')
     }
     const updatedUrl = '?' + urlSearchParams.toString()
-    setSearchParams(updatedUrl)
     navigate(location.pathname + updatedUrl)
+  }
+
+  const handleChangeItemsPerPage = (event: SelectChangeEvent) => {
+    const urlSearchParams = new URLSearchParams(location.search)
+    urlSearchParams.set('itemsPerPage', event.target.value)
+    urlSearchParams.set('page', '1')
+    const updatedUrl = '?' + urlSearchParams.toString()
+    setProdsPerPage(event.target.value)
+    navigate(location.pathname + updatedUrl)
+  }
+
+  const handleOrderBy = (event: SelectChangeEvent) => {
+    const urlSearchParams = new URLSearchParams(location.search)
+    urlSearchParams.set('orderBy', event.target.value)
+    const updatedUrl = '?' + urlSearchParams.toString()
+    navigate(location.pathname + updatedUrl)
+    if (event.target.value == '1') {
+      setSortProdSetting('1', 'שם')
+    } else if (event.target.value == '2') {
+      setSortProdSetting('2', 'מק״ט')
+    } else if (event.target.value == '3') {
+      setSortProdSetting('3', 'מומלץ')
+    }
   }
 
   useEffect(() => {
     handleSearchValue(searchDebounce)
   }, [searchDebounce])
-
-  const handleChange = (event: SelectChangeEvent) => {
-    handleChangeItemsPerPage(event.target.value)
-  }
-
-  const handleChangeOrdern = (event: SelectChangeEvent) => {
-    handleOrderBy(event.target.value)
-  }
-
-  const arrOrden = [
-    { value: '1', label: 'שם' },
-    { value: '2', label: 'מק״ט' },
-    { value: '3', label: 'מומלץ' },
-  ]
-
-  const arrProdsPerPage = ['2', '24', '48']
 
   return (
     <Grid
@@ -132,8 +110,8 @@ const FiltersBlock = () => {
       >
         <TextField
           placeholder="חיפוש מוצר.."
-          value={searchParam}
-          onChange={(e) => setSearchParam(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           sx={{
             border: '1px solid gray',
             borderRadius: '4px',
@@ -145,8 +123,8 @@ const FiltersBlock = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="start" sx={{ cursor: 'pointer' }}>
-                {searchParam ? (
-                  <CloseIcon onClick={() => setSearchParam('')} />
+                {search ? (
+                  <CloseIcon onClick={() => setSearch('')} />
                 ) : (
                   <SearchIcon />
                 )}
@@ -170,7 +148,7 @@ const FiltersBlock = () => {
           מוצרים:
         </Typography>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <Select value={prodsPerPage} onChange={handleChange}>
+          <Select value={prodsPerPage} onChange={handleChangeItemsPerPage}>
             {arrProdsPerPage?.map((item, key) => (
               <MenuItem key={key} value={item}>
                 {item}
@@ -193,7 +171,7 @@ const FiltersBlock = () => {
           מיון:
         </Typography>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <Select value={sortProdSetting.value} onChange={handleChangeOrdern}>
+          <Select value={sortProdSetting.value} onChange={handleOrderBy}>
             {arrOrden?.map((item, index) => (
               <MenuItem key={index} value={item.value}>
                 {item.label}
@@ -219,18 +197,6 @@ const FiltersBlock = () => {
         <Box sx={{ display: 'flex', gap: '20px' }}>
           <IconButton
             style={{
-              border: listView
-                ? '1px solid rgba(65, 67, 106, 0.2117647059)'
-                : '',
-              borderRadius: '0px',
-              padding: '7px',
-            }}
-            onClick={() => setListView(true)}
-          >
-            <WindowIcon sx={{ fontSize: '25px' }} />
-          </IconButton>
-          <IconButton
-            style={{
               border: !listView
                 ? '1px solid rgba(65, 67, 106, 0.2117647059)'
                 : '',
@@ -238,6 +204,18 @@ const FiltersBlock = () => {
               padding: '7px',
             }}
             onClick={() => setListView(false)}
+          >
+            <WindowIcon sx={{ fontSize: '25px' }} />
+          </IconButton>
+          <IconButton
+            style={{
+              border: listView
+                ? '1px solid rgba(65, 67, 106, 0.2117647059)'
+                : '',
+              borderRadius: '0px',
+              padding: '7px',
+            }}
+            onClick={() => setListView(true)}
           >
             <FormatListBulletedIcon sx={{ fontSize: '25px' }} />
           </IconButton>

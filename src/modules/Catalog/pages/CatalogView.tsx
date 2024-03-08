@@ -1,5 +1,4 @@
 import React from 'react'
-import { useCategories } from '../store/CategoriesStore'
 import { useParams } from 'react-router-dom'
 import {
   Card,
@@ -9,14 +8,15 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
+import useDataCategories from '../hook/useDataCategories'
 
 const CatalogView = () => {
-  const { categoriesLvl1 } = useCategories()
+  const { data } = useDataCategories()
   const { lvl1 } = useParams()
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2} sx={{ marginTop: '200px' }}>
-        {categoriesLvl1?.map((element: ICategory, index) => {
+        {data?.['hydra:member']?.map((element: ICategory, index) => {
           if (element?.parent?.id == lvl1) {
             return (
               <Grid item xs={3} key={index}>

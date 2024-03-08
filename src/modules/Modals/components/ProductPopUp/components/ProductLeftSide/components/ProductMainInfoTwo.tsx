@@ -6,14 +6,11 @@ import { useCart } from '../../../../../../Cart/store/cart.store'
 import { useAuth } from '../../../../../../Auth/store/useAuthStore'
 import { calPriceWithTax } from '../../../../../../Cart/helpers/calculations'
 import Loader from '../../../../../../../shared/Loader'
-import { useSearchStore } from '../../../../../../Catalog/store/SearchStore'
 
 const ProductMainInfoTwo = () => {
   const { selectedProd, isFetchOnline, loading } = useSelectedProduct()
   const { Maam, selectedMode } = useCart()
   const { isAgent } = useAuth()
-  const { searchValue } = useSearchStore()
-
   return (
     <>
       {isFetchOnline || loading ? (

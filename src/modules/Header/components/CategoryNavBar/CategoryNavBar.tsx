@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCategories } from '../../../Catalog/store/CategoriesStore'
-import { checkIsBlockedForView } from '../../../Catalog/helpers/checkIsBlockedForView'
 import {
   Container,
   List,
@@ -13,9 +11,10 @@ import {
   ListItemButton,
 } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
+import useDataCategories from '../../../Catalog/hook/useDataCategories'
 
 const CategoryNavBar = () => {
-  const { categories, getCategories } = useCategories()
+  const { data } = useDataCategories()
   const [active, setActive] = useState<number>(0)
   const navigate = useNavigate()
 
@@ -25,37 +24,25 @@ const CategoryNavBar = () => {
     currentItem: ICategory
   ) => {
     if (currentItem.lvlNumber === 2) {
-      const check = checkIsBlockedForView(currentItem)
-      if (!check) {
-        navigate(`/client/catalog/${lvl1.id}/${lvl2.id}/0`)
-      }
+      navigate(`/client/catalog/${lvl1.id}/${lvl2.id}/0?page=1`)
     }
-
     if (currentItem.lvlNumber === 3) {
-      const check = checkIsBlockedForView(lvl2)
-      if (!check) {
-        navigate(`/client/catalog/${lvl1.id}/${lvl2.id}/${currentItem.id}`)
-      }
+      navigate(`/client/catalog/${lvl1.id}/${lvl2.id}/${currentItem.id}?page=1`)
     }
   }
-
-  useEffect(() => {
-    if (categories.length === 0) {
-      getCategories()
-    }
-  }, [])
 
   return (
     <List
       sx={{
         backgroundColor: themeColors.primary,
+        minHeight: '30px',
         color: 'white',
         marginTop: '10px',
       }}
       onMouseLeave={() => setActive(0)}
     >
       <Container maxWidth="lg" sx={{ display: 'flex', position: 'relative' }}>
-        {categories?.map((element, index) => {
+        {data?.['hydra:member']?.map((element, index) => {
           if (element.lvlNumber === 1 && element.isPublished) {
             return (
               <>

@@ -1,25 +1,17 @@
 import React from 'react'
 import ProductList from './components/ProductList/ProductList'
 import FiltersBlock from './components/FiltersBlock/FiltersBlock'
-import { useParams } from 'react-router-dom'
-import { useCatalog } from '../../store/CatalogStore'
-import { useSearchStore } from '../../store/SearchStore'
-import { Box, Pagination } from '@mui/material'
+import { Box } from '@mui/material'
 import PaginationUtil from '../../../../utils/pagination/PaginationUtil'
+import useDataCatalog from '../../hook/useDataCatalog'
 
 const LeftSide = () => {
-  const { categoriesLvl1, hydraPagination } = useCatalog()
-  const { hydraPagination: searchHydraPagination } = useSearchStore()
-  const { documentType, lvl1 } = useParams()
-  const currentCategory = (categoriesLvl1?.filter(
-    (item) => item.id.toString() == lvl1
-  ))[0]
-  const isSearchDocument = documentType === 'search'
+  const { hydraPagination } = useDataCatalog()
   return (
     <Box>
       <FiltersBlock />
       <ProductList />
-      <PaginationUtil hydraPagination={hydraPagination} />
+      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}
     </Box>
   )
 }

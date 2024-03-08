@@ -1,20 +1,18 @@
 import React from 'react'
 import { useCatalog } from '../../../../store/CatalogStore'
-import { useSearchStore } from '../../../../store/SearchStore'
-import { useParams } from 'react-router-dom'
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import ProductCard from '../../../ProductCard'
+import useDataCatalog from '../../../../hook/useDataCatalog'
 
 const ProductList = () => {
-  const { products, loading, listView } = useCatalog()
-  const { documentType } = useParams()
-  const { productsFilter } = useSearchStore()
+  const { listView } = useCatalog()
+  const { data, isLoading } = useDataCatalog()
   return (
     <Grid container spacing={2} sx={{ marginTop: '20px' }}>
-      {loading ? (
+      {isLoading ? (
         <>
           {Array.from({ length: 24 }).map((_, index) => (
-            <Grid item xs={3}>
+            <Grid item xs={3} key={index}>
               <Skeleton
                 variant="rounded"
                 height={120}
@@ -31,20 +29,14 @@ const ProductList = () => {
         </>
       ) : (
         <>
-          {(productsFilter?.length > 0 && documentType === 'search'
-            ? productsFilter
-            : products
-          )?.map((product, index) => (
-            <Grid item xs={listView ? 3 : 12} key={index}>
+          {data?.['hydra:member']?.map((product, index) => (
+            <Grid item xs={listView ? 12 : 3} key={index}>
               <ProductCard product={product} />
             </Grid>
           ))}
         </>
       )}
-      {(productsFilter?.length > 0 && documentType === 'search'
-        ? productsFilter
-        : products
-      )?.length == 0 && (
+      {data?.['hydra:member']?.length == 0 && (
         <Box className="centered">
           <Typography variant="body1">לא נמאו מוצרים</Typography>
         </Box>
