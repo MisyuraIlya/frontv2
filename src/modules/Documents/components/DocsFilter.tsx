@@ -6,7 +6,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useModals } from '../../Modals/provider/ModalProvider'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import Loader from '../../../shared/Loader'
-import { onErrorAlert, onSuccessAlert } from '../../../shared/MySweetAlert'
+
+import { documentTypes } from '../../../enums/documentsTypes'
 import {
   Box,
   Button,
@@ -29,7 +30,7 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import { themeColors } from '../../../styles/mui'
 import useDataDocuments from '../hook/useDataDocuments'
 const DocsFilter = () => {
-  const { documentTypes, handleCalendar } = useDocuments()
+  const { handleCalendar } = useDocuments()
   const navigate = useNavigate()
   const location = useLocation()
   const { documentType, dateFrom, dateTo } = useParams()

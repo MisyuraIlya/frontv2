@@ -1,20 +1,20 @@
 import React from 'react'
 import Head from './Head'
-import { useClientStore } from '../../store/ClientsStore'
 import ClientItem from './ClientItem'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Box, Divider } from '@mui/material'
+import useDataClients from '../../hooks/useDataClients'
 
 const ClientsList = () => {
-  const { clients, loading } = useClientStore()
+  const { data, isLoading } = useDataClients()
   return (
     <Box>
       <Head />
-      {loading && (
+      {isLoading && (
         <Skeleton style={{ height: '30px', margin: '5px 0px' }} count={24} />
       )}
-      {clients?.map((element, index) => {
+      {data?.['hydra:member']?.map((element, index) => {
         return (
           <>
             <ClientItem element={element} index={index} />

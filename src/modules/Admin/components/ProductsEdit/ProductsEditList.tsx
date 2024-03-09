@@ -1,18 +1,12 @@
-import React, { useEffect } from 'react'
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from 'react-beautiful-dnd'
+import React, { useEffect, useState } from 'react'
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import ProductsEditItem from './ProductsEditItem'
-import { useParams } from 'react-router-dom'
-import { useProductsEditStore } from '../../store/ProductsEditStore'
 import { AdminProductService } from '../../services/products.service'
 import { Box, Grid, Typography } from '@mui/material'
+import useDataProductsEdit from '../../hooks/useDataProductsEdit'
 const ProductsEditList = () => {
-  const { products, setProducts } = useProductsEditStore()
-  const { lvl1, lvl2, lvl3 } = useParams()
+  const [products, setProducts] = useState<IProduct[]>([])
+  const { data } = useDataProductsEdit()
 
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
     background: isDraggingOver ? '#e5e5e5' : '#ddd',
@@ -40,6 +34,10 @@ const ProductsEditList = () => {
     result.splice(endIndex, 0, removed)
     return result
   }
+
+  useEffect(() => {
+    setProducts(data?.['hydra:member'] ?? [])
+  }, [data?.['hydra:member']])
 
   return (
     <Box>
@@ -69,7 +67,7 @@ const ProductsEditList = () => {
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <Box
-              sx={{ margin: '0 20px' }}
+              sx={{ margin: '10px 20px' }}
               className="items"
               {...provided.droppableProps}
               ref={provided.innerRef}

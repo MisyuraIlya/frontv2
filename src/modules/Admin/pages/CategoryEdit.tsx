@@ -1,44 +1,32 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import CategoriesEditList from '../components/CategoryEdit/CategoriesEditList'
 import CategoryEditFilters from '../components/CategoryEdit/CategoryEditFilters'
-import BreadCrumbs from '../../../shared/BreadCrumbs'
-import { useCategories } from '../../Catalog/store/CategoriesStore'
 import Loader from '../../../shared/Loader'
 import { useParams } from 'react-router-dom'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 import { Container } from '@mui/material'
-import useSWR from 'swr'
-import { AdminCatalogService } from '../services/catalog.service'
-import { useAdminCategories } from '../store/CategoriesStore'
+import useDataCategoryEdit from '../hooks/useDataCategoryEdit'
+import { findCategoryTitleById } from '../../../helpers/handleBreadCrumbs'
+import useDataCategories from '../../Catalog/hook/useDataCategories'
+
 const CategoryEdit = () => {
+  const { isLoading } = useDataCategoryEdit()
   const { lvl1, lvl2 } = useParams()
-  const { setCategories } = useAdminCategories()
-
-  const fetchData = async () => {
-    return await AdminCatalogService.getAdminCategoory(lvl1 ?? '0', lvl2 ?? '0')
-  }
-
-  const { data, isLoading } = useSWR(
-    `api/adminCategories/${lvl1}/${lvl2}`,
-    fetchData
-  )
-
-  useEffect(() => {
-    if (data) {
-      setCategories(data['hydra:member'])
-    }
-  }, [data])
+  const { data } = useDataCategories()
+  const categoriesArray = data?.['hydra:member'] || []
+  const res1 = findCategoryTitleById(+lvl1!, categoriesArray)
+  const res2 = findCategoryTitleById(+lvl2!, categoriesArray)
 
   return (
     <Container maxWidth="lg">
       <BreadCrumbsUtil
         array={[
           {
-            title: lvl1?.toString()!,
+            title: res1 ?? '',
             link: `/admin/category-edit/${lvl1}/0` || '',
           },
           {
-            title: lvl2?.toString()!,
+            title: res2 ?? '',
             link: `/admin/category-edit/${lvl1}/${lvl2}` || '',
           },
         ]}

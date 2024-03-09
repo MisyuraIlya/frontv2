@@ -1,3 +1,5 @@
+import { documentTypes } from '../enums/documentsTypes'
+
 export const findCategoryTitleById = (
   categoryId: number | undefined,
   categories: ICategory[]
@@ -27,4 +29,16 @@ export const findCategoryTitleById = (
   }
 
   return undefined
+}
+
+export const findDocumentTypeTitle = (
+  value: IDocumentTypes | undefined
+): string => {
+  let result = ''
+  documentTypes?.map((item) => {
+    if (value === item.value) {
+      result = item.label
+    }
+  })
+  return result
 }

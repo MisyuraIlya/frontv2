@@ -21,7 +21,6 @@ interface CategoryEditItemProps {
 
 const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
   const [activeEdit, setActiveEdit] = useState<boolean>(false)
-  const { getDynamicCategories } = useCategories()
   const [checked, setCheked] = useState(element.isPublished)
   const [title, setTitle] = useState(element.title)
   const [valueDebounced] = useDebounce(title, 1000)
@@ -40,7 +39,6 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
       'src/img3/category',
       'category'
     )
-    await getDynamicCategories()
   }
 
   const unpublishHandle = async () => {

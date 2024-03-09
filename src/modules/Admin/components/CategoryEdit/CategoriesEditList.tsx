@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   DragDropContext,
   Droppable,
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd'
-import { useParams } from 'react-router-dom'
 import { AdminCatalogService } from '../../services/catalog.service'
 import CategoryEditItem from './CategoryEditItem'
 import { Box, Grid, Typography } from '@mui/material'
-import { useAdminCategories } from '../../store/CategoriesStore'
+import useDataCategoryEdit from '../../hooks/useDataCategoryEdit'
 
 const CategoriesEditList = () => {
-  const { categories, setCategories } = useAdminCategories()
+  const { data } = useDataCategoryEdit()
+  const [categories, setCategories] = useState<ICategory[]>([])
 
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
     background: isDraggingOver ? '#e5e5e5' : '#ddd',
@@ -53,6 +53,10 @@ const CategoriesEditList = () => {
     result.splice(endIndex, 0, removed)
     return result
   }
+
+  useEffect(() => {
+    setCategories(data?.['hydra:member'] ?? [])
+  }, [data?.['hydra:member']])
 
   return (
     <Box>

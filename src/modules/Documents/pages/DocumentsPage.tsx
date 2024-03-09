@@ -11,6 +11,7 @@ import KartessetLst from '../components/KartessetLst'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 import Loader from '../../../shared/Loader'
 import useDataDocuments from '../hook/useDataDocuments'
+import { findDocumentTypeTitle } from '../../../helpers/handleBreadCrumbs'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -68,7 +69,14 @@ const DocumentsPage = () => {
         value={currentDate}
         handleCalendar={handleDate}
       />
-      <BreadCrumbsUtil array={[]} />
+      <BreadCrumbsUtil
+        array={[
+          {
+            title: findDocumentTypeTitle(documentType),
+            link: '',
+          },
+        ]}
+      />
       <DocsFilter />
       {componentToRender}
       {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}

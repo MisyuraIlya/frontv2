@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
 // import MyCropper from '../../../../components/tools/MyCropper';
-import { useParams } from 'react-router-dom'
 import { useProductsEditStore } from '../../store/ProductsEditStore'
 import { AdminProductService } from '../../services/products.service'
 import { useModals } from '../../../Modals/provider/ModalProvider'
