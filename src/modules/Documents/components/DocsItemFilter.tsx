@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useCart } from '../../Cart/store/cart.store'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useModals } from '../../Modals/provider/ModalProvider'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import {
@@ -16,18 +16,16 @@ import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
-import { useDocumentsItem } from '../store/DocumentsItemStore'
+import useDataDocumentsItem from '../hook/useDataDocumentsItem'
 
 const DocsItemFilter = () => {
-  const navigate = useNavigate()
+  const [search, setSearch] = useState<string>('')
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const { isAdmin, isAgent, isSuperAgent } = useAuth()
-  const { id } = useParams()
   const { cart, setCart } = useCart()
-  const { files, search, setSearch } = useDocumentsItem()
   const { setRestoreCartModal, handlePdfViwer } = useModals()
-
+  const { data } = useDataDocumentsItem()
   const handleResoreCart = async () => {
     // try {
     //   setLoadingRestoreCart(true)
@@ -68,7 +66,7 @@ const DocsItemFilter = () => {
       }}
     >
       <Box sx={{ display: 'flex', gap: '10px' }}>
-        {files?.map((file, index) => (
+        {data?.files['hydra:member']?.map((file, index) => (
           <Button
             key={index}
             onClick={() => handlePdfViwer(file.base64)}

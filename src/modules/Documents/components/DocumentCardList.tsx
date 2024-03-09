@@ -12,13 +12,12 @@ import {
 } from '@mui/material'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import { useModals } from '../../Modals/provider/ModalProvider'
-import { useDocumentsItem } from '../store/DocumentsItemStore'
 import { themeColors } from '../../../styles/mui'
+import useDataDocumentsItem from '../hook/useDataDocumentsItem'
 
 const DocumentCardList = () => {
-  const { orderItems, loading } = useDocumentsItem()
   const { selectProduct } = useModals()
-
+  const { data, isLoading } = useDataDocumentsItem()
   return (
     <Box sx={{ marginTop: '30px' }}>
       <TableContainer component={Paper}>
@@ -74,7 +73,7 @@ const DocumentCardList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orderItems?.map((element, index) => (
+            {data?.products['hydra:member']?.map((element, index) => (
               <TableRow
                 key={index}
                 onClick={() => selectProduct(element?.product)}
@@ -116,7 +115,7 @@ const DocumentCardList = () => {
         </Table>
       </TableContainer>
       <Box className="centered">
-        {orderItems?.length === 0 && !loading && (
+        {data?.products['hydra:member']?.length === 0 && !isLoading && (
           <Typography variant="h6">לא נמצאו פריטים למסמך זה</Typography>
         )}
       </Box>

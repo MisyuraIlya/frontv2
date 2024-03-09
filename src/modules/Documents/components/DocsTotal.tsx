@@ -1,24 +1,15 @@
 import React from 'react'
-import { useDocumentsItem } from '../store/DocumentsItemStore'
-import {
-  Container,
-  Typography,
-  List,
-  ListItem,
-  Paper,
-  Box,
-} from '@mui/material'
+import { Typography, List, ListItem, Paper, Box } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
+import useDataDocumentsItem from '../hook/useDataDocumentsItem'
 
 const DocsTotal = () => {
-  const {
-    totalTax,
-    totalPriceAfterTax,
-    totalAfterDiscount,
-    totalPrecent,
-    itemsLength,
-  } = useDocumentsItem()
-
+  const { data } = useDataDocumentsItem()
+  const totalTax = data?.totalTax ?? 0
+  const totalPriceAfterTax = data?.totalPriceAfterTax ?? 0
+  const totalAfterDiscount = data?.totalAfterDiscount ?? 0
+  const totalPrecent = data?.totalPrecent ?? 0
+  const itemsLength = data?.products['hydra:totalItems'] ?? 0
   return (
     <Box
       sx={{
