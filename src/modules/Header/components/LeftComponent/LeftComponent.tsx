@@ -85,7 +85,10 @@ const LeftComponent = () => {
                 >
                   {value.WITH_BADGE ? (
                     <Tooltip title={value.LABEL}>
-                      <Badge badgeContent={4} color="secondary">
+                      <Badge
+                        badgeContent={value.LABEL === 'עגלה' ? cart.length : 0}
+                        color="secondary"
+                      >
                         {value.ICON}
                       </Badge>
                     </Tooltip>

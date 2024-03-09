@@ -1,10 +1,13 @@
-import React, { FC } from 'react'
-import { Input, Grid, IconButton } from '@mui/material'
+import React, { FC, useState } from 'react'
+import { Input, Grid, IconButton, Box, Typography } from '@mui/material'
 import { useCart } from '../../store/cart.store'
-import { useModals } from '../../../Modals/provider/ModalProvider'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import { themeColors } from '../../../../styles/mui'
+import Snackbar from '@mui/material/Snackbar'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
+
 interface AddToCartProps {
   item: IProduct
 }
@@ -17,19 +20,20 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
     decreaseCart,
     deleteFromCart,
     changeQuantity,
-    avoidNullInCart,
   } = useCart()
-  const { openStockNotify, openAddToCartTotify } = useModals()
   const find = cart?.filter((itemCart) => itemCart?.sku === item?.sku)
   const Quantity = find[0]?.quantity
   const isInCart = find[0]?.sku ? true : false
 
+  const [notifyAddToCart, setNotifyAddTocart] = useState<boolean>(false)
+  const [notifyStock, setNotifyStock] = useState<boolean>(false)
+
   const addToCartFunc = () => {
     if (item?.stock >= item.packQuantity) {
       addToCart(item)
-      openAddToCartTotify(true)
+      setNotifyAddTocart(true)
     } else {
-      openStockNotify(true)
+      setNotifyStock(true)
     }
   }
 
@@ -37,7 +41,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
     if (item?.stock > Quantity) {
       increaseCart(item.sku)
     } else {
-      openStockNotify(true)
+      setNotifyStock(true)
     }
   }
 
@@ -45,12 +49,62 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
     if (item?.stock >= value * item.packQuantity) {
       changeQuantity(item.sku, value)
     } else {
-      openStockNotify(true)
+      setNotifyStock(true)
     }
   }
 
   return (
     <Grid className="centered" style={{ padding: '0px', margin: '0px' }}>
+      <Snackbar
+        sx={{ marginTop: '150px' }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={notifyAddToCart}
+        onClose={() => setNotifyAddTocart(false)}
+        autoHideDuration={2000}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: themeColors.primary,
+            borderRadius: '10px',
+            padding: '10px 20px',
+          }}
+        >
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '18px' }}>
+            {'מוצר התווסף לסל הקניות'}
+          </Typography>
+          <AddShoppingCartIcon sx={{ color: 'white' }} />
+        </Box>
+      </Snackbar>
+
+      <Snackbar
+        sx={{ marginTop: '150px' }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={notifyStock}
+        onClose={() => setNotifyStock(false)}
+        autoHideDuration={2000}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: themeColors.primary,
+            borderRadius: '10px',
+            padding: '10px 20px',
+          }}
+        >
+          <Typography variant="body2" sx={{ color: 'white', fontSize: '18px' }}>
+            {'כמות מלאי אינה מספקת'}
+          </Typography>
+          <RemoveShoppingCartIcon sx={{ color: 'white' }} />
+        </Box>
+      </Snackbar>
+
       {isInCart ? (
         <>
           <Grid
@@ -80,7 +134,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
                 sx={{
                   '& input': {
                     textAlign: 'center',
-                    justifyContent: 'center', // for number input
+                    justifyContent: 'center',
                   },
                   '&::before': {
                     borderBottom: '0px !important',
@@ -93,7 +147,6 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
                   },
                 }}
                 onChange={(e) => onChangeQuantityFunc(parseInt(e.target.value))}
-                onBlur={() => avoidNullInCart(item.sku)}
               />
             </Grid>
             <Grid

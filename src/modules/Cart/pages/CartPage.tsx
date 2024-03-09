@@ -15,6 +15,9 @@ const CartPage = () => {
         item
         xs={3}
         sx={{
+          position: 'fixed',
+          right: '0px',
+          width: '100%',
           height: '85vh',
           boxShadow: '2px 3px 9px 2px #e0e0e0;',
         }}

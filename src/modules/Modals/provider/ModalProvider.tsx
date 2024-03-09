@@ -7,8 +7,6 @@ import React, {
   ReactNode,
 } from 'react'
 import AuthPopUp from '../components/AuthPopUp/AuthPopUp'
-import AddToCartNotify from '../components/AddToCartNotify/AddToCartNotify'
-import StockNotify from '../components/StockNotify/StockNotify'
 import OrderSettings from '../components/OrderSettings/OrderSettings'
 import ProductPopUp from '../components/ProductPopUp/ProductPopUp'
 import TablePopUp from '../components/TablePopUp/TablePopUp'
@@ -29,15 +27,10 @@ import { useClientStore } from '../../Admin/store/ClientsStore'
 import RestoreCartModal from '../agentComponents/RestoreCartModal'
 import PdfViwer from '../components/PdfViwer/PdfViwer'
 import ImageModal from '../components/ImageModal/ImageModal'
-import CalendarUtil from '../../../utils/Calendar/CalendarUtil'
 // Defines
 interface ModalContextType {
   openAuthModal: boolean
   setOpenAuthModal: (bool: boolean) => void
-  stockNotify: boolean
-  addToCartNotify: boolean
-  openStockNotify: (bool: boolean) => void
-  openAddToCartTotify: (bool: boolean) => void
   openCartSettings: boolean
   setOpenCartSettings: (bool: boolean) => void
   selectedProduct: boolean
@@ -95,8 +88,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false)
   const { setSelectedProd, loading, getProductOnlineData } =
     useSelectedProduct()
-  const [stockNotify, setStockNotify] = useState(false)
-  const [addToCartNotify, setAddToCartNotify] = useState(false)
   const [openCartSettings, setOpenCartSettings] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(false)
   const [activeTablePopUp, setActiveTablePopUp] = useState(false)
@@ -124,20 +115,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [objectCreate, setObjectCreate] = useState(false)
   const [agentOptions, setAgentOptions] = useState(false)
   const [restoreCartModal, setRestoreCartModal] = useState(false)
-
-  const openStockNotify = () => {
-    setStockNotify(true)
-    setTimeout(() => {
-      setStockNotify(false)
-    }, 3000)
-  }
-
-  const openAddToCartTotify = () => {
-    setAddToCartNotify(true)
-    setTimeout(() => {
-      setAddToCartNotify(false)
-    }, 3000)
-  }
 
   const selectProduct = (product: IProduct) => {
     setSelectedProd(product)
@@ -211,10 +188,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   }
 
   const value = {
-    stockNotify,
-    addToCartNotify,
-    openStockNotify,
-    openAddToCartTotify,
     openCartSettings,
     setOpenCartSettings,
     selectedProduct,
@@ -259,11 +232,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
 
   return (
     <ModalContext.Provider value={value}>
-      <div style={{ position: 'fixed', width: '100%', zIndex: 99 }}>
-        <StockNotify />
-        <AddToCartNotify />
-      </div>
-
       <OrderSettings
         active={openCartSettings}
         setActive={setOpenCartSettings}

@@ -1,10 +1,11 @@
 import React from 'react'
 import { useCart } from '../../store/cart.store'
 import { onAsk } from '../../../../shared/MySweetAlert'
-import { removeProductsFromStorage } from '../../helpers/localstorage'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { Box, Button } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import SaveAsIcon from '@mui/icons-material/SaveAs'
 
 const CartOptions = () => {
   const { cart, setCart, selectedMode, saveDarft } = useCart()
@@ -16,7 +17,6 @@ const CartOptions = () => {
     const ask = await onAsk('האם אתה בטוח?', 'כל המוצרים בעגלה יימחקו')
     if (ask) {
       setCart([])
-      removeProductsFromStorage()
     }
   }
 
@@ -48,8 +48,10 @@ const CartOptions = () => {
       {cart.length > 0 && (
         <Button
           onClick={() => askDelete()}
-          variant="contained"
-          sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+          variant="outlined"
+          color="error"
+          startIcon={<DeleteIcon />}
+          sx={{ fontSize: '17px', minWidth: '130px', height: '39px' }}
         >
           מחק סל
         </Button>
@@ -59,6 +61,7 @@ const CartOptions = () => {
           variant="contained"
           onClick={() => handleSaveAsDraft()}
           sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+          startIcon={<SaveAsIcon />}
         >
           שמור טיוטה
         </Button>
@@ -68,6 +71,7 @@ const CartOptions = () => {
           variant="contained"
           onClick={() => handleToDraft()}
           sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+          startIcon={<SaveAsIcon />}
         >
           טען טיוטה
         </Button>

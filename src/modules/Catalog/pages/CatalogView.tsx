@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import useDataCategories from '../hook/useDataCategories'
 const CatalogView = () => {
   const { data } = useDataCategories()
   const { lvl1 } = useParams()
+  const navigate = useNavigate()
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2} sx={{ marginTop: '200px' }}>
@@ -20,7 +21,13 @@ const CatalogView = () => {
           if (element?.parent?.id == lvl1) {
             return (
               <Grid item xs={3} key={index}>
-                <Card elevation={0} sx={{ cursor: 'pointer' }}>
+                <Card
+                  elevation={0}
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    navigate(`/client/catalog/${element.id}/0/0?page=1`)
+                  }
+                >
                   <CardMedia
                     component="img"
                     sx={{

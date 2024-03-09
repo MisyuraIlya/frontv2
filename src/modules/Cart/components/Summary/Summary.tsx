@@ -1,9 +1,6 @@
 import React from 'react'
 import { useAuth } from '../../../Auth/store/useAuthStore'
-import { useCart } from '../../store/cart.store'
-// import { getCurrentUserId } from '../../../Auth/helpers/getCurrentUserId';
 import MainSummary from '../MainSummary/MainSummary'
-import CustomSummary from '../CustomSummary/CustomSummary'
 import SendOrderButton from '../SendOrderButton/SendOrderButton'
 import { Box, Container, Paper, Typography } from '@mui/material'
 
@@ -16,9 +13,8 @@ const Summary = () => {
         <Typography variant="h4" fontWeight={400} fontSize={24}>
           {'פרטי מסמך'}
         </Typography>
-        {/* <CustomSummary /> */}
         <MainSummary />
-        <SendOrderButton />
+        {/* <SendOrderButton /> */}
       </Box>
     </Container>
   )

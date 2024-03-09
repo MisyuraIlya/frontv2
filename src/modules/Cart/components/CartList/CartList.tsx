@@ -3,11 +3,6 @@ import { useCart } from '../../store/cart.store'
 import AddToCart from '../AddToCart/AddToCart'
 import { useModals } from '../../../Modals/provider/ModalProvider'
 import {
-  calculatePrice,
-  getDiscountPrecent,
-  getPriceByOriginalPrice,
-} from '../../helpers/calculations'
-import {
   Box,
   Typography,
   TableContainer,
@@ -18,12 +13,26 @@ import {
   TableBody,
   Paper,
   Container,
+  IconButton,
 } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
+import { calculatePrice } from '../../helpers/calculations'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { onAsk } from '../../../../shared/MySweetAlert'
 
 const CartList = () => {
-  const { cart, CartTitle } = useCart()
+  const { cart, CartTitle, deleteFromCart } = useCart()
   const { selectProduct } = useModals()
+
+  const handeDelete = async (item: ICart) => {
+    const ask = await onAsk(
+      'למחוק מהסל',
+      `למחוק מהסל את הפריט ${item.product.title}`
+    )
+    if (ask) {
+      deleteFromCart(item.sku)
+    }
+  }
   return (
     <>
       <Container maxWidth="lg">
@@ -88,22 +97,23 @@ const CartList = () => {
           </TableHead>
           <TableBody>
             {cart?.map((element, index) => {
-              const price = calculatePrice(element?.product, element?.quantity)
-              const discount = getDiscountPrecent(element)
-              const priceByOriginal = getPriceByOriginalPrice(element)
-
               return (
                 <TableRow
                   key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell>
-                    <AddToCart item={element?.product} />
+                    <Box className="centered">
+                      <IconButton onClick={() => handeDelete(element)}>
+                        <DeleteIcon sx={{ color: themeColors.primary }} />
+                      </IconButton>
+                      <AddToCart item={element?.product} />
+                    </Box>
                   </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: '10px', width: '350px' }}>
                       <img
-                        width={80}
+                        width={120}
                         src={
                           element?.product?.defaultImagePath
                             ? process.env.REACT_APP_MEDIA +
@@ -158,15 +168,13 @@ const CartList = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    {priceByOriginal != price.toFixed(1) ? (
-                      <Typography variant="body1" color={themeColors.primary}>
-                        {price.toFixed(1)} ₪{' '}
-                      </Typography>
-                    ) : (
-                      <Typography variant="body1" color={themeColors.primary}>
-                        {price.toFixed(1)} ₪{' '}
-                      </Typography>
-                    )}
+                    <Typography variant="body1" color={themeColors.primary}>
+                      {calculatePrice(
+                        element.product,
+                        element.quantity
+                      ).toFixed(1)}{' '}
+                      ₪{' '}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               )

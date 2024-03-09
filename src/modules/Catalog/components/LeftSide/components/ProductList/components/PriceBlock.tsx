@@ -13,7 +13,6 @@ const PriceBlock: FC<PriceBlockProps> = ({ product }) => {
   const { getCartItem, selectedMode } = useCart()
 
   const inCart = getCartItem(product)
-
   return (
     <Box>
       {user &&

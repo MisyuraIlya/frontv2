@@ -103,7 +103,7 @@ export const getClientName = () => {
   } else {
     if (localStorage.user) {
       const user = JSON.parse(localStorage.user)
-      return user.extId
+      return user.name
     }
     return null
   }
