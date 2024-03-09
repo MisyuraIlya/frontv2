@@ -5,6 +5,7 @@ import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOu
 import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined'
 import WifiOffOutlinedIcon from '@mui/icons-material/WifiOffOutlined'
 import PersonIcon from '@mui/icons-material/Person'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import CampaignIcon from '@mui/icons-material/Campaign'
 import StorefrontIcon from '@mui/icons-material/Storefront'
@@ -13,6 +14,7 @@ import ShopIcon from '@mui/icons-material/Shop'
 import GroupIcon from '@mui/icons-material/Group'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
+import { themeColors } from '../styles/mui'
 const dateFrom = moment().subtract(1, 'day').format('YYYY-MM-DD')
 const dateTo = moment().format('YYYY-MM-DD')
 
@@ -20,7 +22,14 @@ export const clientURL = {
   PROFILE: {
     LINK: '/profile',
     LABEL: 'פרופיל',
-    ICON: <PersonIcon sx={{ height: '30px', width: '30px' }} />,
+    ICON: (
+      <span
+        className="material-symbols-outlined"
+        style={{ color: themeColors.primary }}
+      >
+        person
+      </span>
+    ),
     FOR_AGENT: false,
     SHOW_IN_PROFILE_MENU: true,
     SHOW_IN_HEADER: true,
@@ -30,7 +39,14 @@ export const clientURL = {
   CART: {
     LINK: '/cart',
     LABEL: 'עגלה',
-    ICON: <ShoppingCartIcon sx={{ height: '30px', width: '30px' }} />,
+    ICON: (
+      <span
+        className="material-symbols-outlined"
+        style={{ color: themeColors.primary }}
+      >
+        shopping_cart
+      </span>
+    ),
     FOR_AGENT: false,
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
@@ -40,7 +56,14 @@ export const clientURL = {
   USER_LIST: {
     LINK: '/agnetClients',
     LABEL: 'הלקוחות שלי',
-    ICON: <StorefrontIcon sx={{ height: '30px', width: '30px' }} />,
+    ICON: (
+      <span
+        className="material-symbols-outlined"
+        style={{ color: themeColors.primary }}
+      >
+        StoreFront
+      </span>
+    ),
     FOR_AGENT: true,
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
@@ -50,7 +73,14 @@ export const clientURL = {
   NOTIFICATIONS: {
     LINK: '',
     LABEL: 'הודעות',
-    ICON: <CampaignIcon sx={{ height: '30px', width: '30px' }} />,
+    ICON: (
+      <span
+        className="material-symbols-outlined"
+        style={{ color: themeColors.primary }}
+      >
+        campaign
+      </span>
+    ),
     FOR_AGENT: false,
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
@@ -60,7 +90,14 @@ export const clientURL = {
   DOCUMENTS: {
     LINK: `/documentPage/order/${dateFrom}/${dateTo}?page=1`,
     LABEL: 'מסמכי לקוח',
-    ICON: <ArticleOutlinedIcon sx={{ height: '30px', width: '30px' }} />,
+    ICON: (
+      <span
+        className="material-symbols-outlined"
+        style={{ color: themeColors.primary }}
+      >
+        description{' '}
+      </span>
+    ),
     FOR_AGENT: true,
     SHOW_IN_PROFILE_MENU: true,
     SHOW_IN_HEADER: false,

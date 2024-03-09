@@ -589,22 +589,6 @@ body::-webkit-scrollbar-thumb {
       top: 0px;
       right: 8px;
       z-index: 98;
-      .material-symbols-outlined {
-        padding: 6px;
-        font-size: 30px;
-        color: $new2;
-        vertical-align: middle;
-        align-items: center;
-        &:hover {
-          font-variation-settings:
-            'FILL' 1,
-            'wght' 300,
-            'GRAD' 0,
-            'opsz' 48;
-          background: #88745136;
-          border-radius: 100%;
-        }
-      }
       &.activeIcon {
         .material-symbols-outlined {
           font-variation-settings:
@@ -4023,4 +4007,31 @@ span.edit {
 
 .muirtl-1f5ma7k-MuiInputBase-root-MuiOutlinedInput-root {
   padding-left: 0px !important;
+}
+
+//
+
+.muirtl-k32r9d-MuiButtonBase-root-MuiMenuItem-root:hover {
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 300,
+      'GRAD' 0,
+      'opsz' 48;
+    border-radius: 100%;
+  }
+}
+.material-symbols-outlined {
+  font-size: 30px;
+  padding: 3px;
+  vertical-align: middle;
+  align-items: center;
+  &:hover {
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 300,
+      'GRAD' 0,
+      'opsz' 48;
+    border-radius: 100%;
+  }
 }
