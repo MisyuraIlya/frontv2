@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDocuments } from '../store/DocumentsStore'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment'
 import {
   Table,
@@ -16,15 +16,17 @@ import {
 import { themeColors } from '../../../styles/mui'
 import { DocumentTypeHebrew } from '../helpers/DocumentTypeHebrew'
 import { useAuth } from '../../Auth/store/useAuthStore'
+import useDataDocuments from '../hook/useDataDocuments'
 
 const DocumentList = () => {
-  const { items, showCalendar, searchValue, loading, selectedDocument } =
-    useDocuments()
+  const { showCalendar } = useDocuments()
+  const { documentType } = useParams()
+  const { data, isLoading } = useDataDocuments()
   const { user } = useAuth()
   const navigate = useNavigate()
 
   const handleNavigate = (element: IDocument) => {
-    if (selectedDocument === 'history' || selectedDocument === 'draft') {
+    if (documentType === 'history' || documentType === 'draft') {
       navigate(`/documentItemPage/history/${element?.id}`)
     } else {
       navigate(
@@ -34,16 +36,13 @@ const DocumentList = () => {
   }
   return (
     <Box sx={{ marginTop: '50px' }}>
-      {!showCalendar && items.length === 0 ? (
+      {!showCalendar && data?.['hydra:member'].length === 0 ? (
         <Typography variant="h5">בחר טווח תאריכים ובצע חיפוש</Typography>
       ) : null}
-      {items.length === 0 && !loading ? (
+      {data?.['hydra:member'].length === 0 && !isLoading ? (
         <Typography variant="h5">לא נמצאו מסמכים בטווח תאריכים</Typography>
       ) : null}
-      {searchValue && searchValue.length === 0 ? (
-        <Typography variant="h5">לא נמצאו מסמכים בתאריכים אלו</Typography>
-      ) : null}
-      {items.length > 0 ? (
+      {(data?.['hydra:member'] ?? []).length > 0 ? (
         <TableContainer component={Paper}>
           <Table className="lines-sub-cont">
             <TableHead>
@@ -69,7 +68,7 @@ const DocumentList = () => {
                 {(user?.role === 'ROLE_AGENT' ||
                   user?.role === 'ROLE_SUPER_AGENT' ||
                   user?.role === 'ROLE_ADMIN') &&
-                  selectedDocument == 'order' && (
+                  documentType == 'order' && (
                     <TableCell className="col-cont sticky-col">
                       <Typography
                         variant="body2"
@@ -128,8 +127,8 @@ const DocumentList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {!loading &&
-                items.map((element, index) => {
+              {!isLoading &&
+                data?.['hydra:member']?.map((element, index) => {
                   return (
                     <TableRow
                       key={index}
@@ -152,7 +151,7 @@ const DocumentList = () => {
                       {(user?.role === 'ROLE_AGENT' ||
                         user?.role === 'ROLE_SUPER_AGENT' ||
                         user?.role === 'ROLE_ADMIN') &&
-                        selectedDocument == 'order' && (
+                        documentType == 'order' && (
                           <TableCell className="col-cont sticky-col">
                             <Typography variant="body2">
                               {'#' + element?.agentExId}
@@ -164,7 +163,8 @@ const DocumentList = () => {
                         )}
                       <TableCell>
                         <Typography variant="body2">
-                          {DocumentTypeHebrew(selectedDocument)}
+                          {documentType &&
+                            DocumentTypeHebrew(documentType as IDocumentTypes)}
                         </Typography>
                       </TableCell>
                       <TableCell>

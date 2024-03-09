@@ -2,10 +2,6 @@ import axios from 'axios'
 import { getClientExtId } from '../../Auth/helpers/auth.helper'
 import moment from 'moment'
 
-interface DocumentsResponse extends Hydra {
-  'hydra:member': IDocument[]
-}
-
 interface RestoreCartResponse extends Hydra {
   'hydra:member': ICart[]
 }
@@ -60,18 +56,18 @@ export const DocumentsService = {
     }
   },
 
-  async createPdf(data: IPdfDocument) {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API}/api/pdf`,
-      data
-    )
-    return response.data
-  },
-  async createXl(data: IPdfDocument) {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API}/api/xl`,
-      data
-    )
-    return response.data
-  },
+  // async createPdf(data: IPdfDocument) {
+  //   const response = await axios.post(
+  //     `${process.env.REACT_APP_API}/api/pdf`,
+  //     data
+  //   )
+  //   return response.data
+  // },
+  // async createXl(data: IPdfDocument) {
+  //   const response = await axios.post(
+  //     `${process.env.REACT_APP_API}/api/xl`,
+  //     data
+  //   )
+  //   return response.data
+  // },
 }

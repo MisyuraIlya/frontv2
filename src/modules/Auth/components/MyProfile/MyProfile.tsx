@@ -46,7 +46,11 @@ const MyProfile = () => {
             </Typography>
           </Grid>
           <Grid item xs={2} className="centered">
-            <Button variant="contained" sx={{ fontSize: '19px' }}>
+            <Button
+              variant="contained"
+              sx={{ fontSize: '19px' }}
+              onClick={() => logOut()}
+            >
               התנתק
             </Button>
           </Grid>

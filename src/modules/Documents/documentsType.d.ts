@@ -64,3 +64,7 @@ interface IDocumentItemsFile {
 }
 
 // ============= Documents Items =============
+
+interface DocumentsResponse extends Hydra {
+  'hydra:member': IDocument[]
+}

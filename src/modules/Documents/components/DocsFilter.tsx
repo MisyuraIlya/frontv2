@@ -27,17 +27,9 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import { themeColors } from '../../../styles/mui'
+import useDataDocuments from '../hook/useDataDocuments'
 const DocsFilter = () => {
-  const {
-    searchValue,
-    setSearchValue,
-    getItems,
-    documentTypes,
-    selectedDocument,
-    handleCalendar,
-    setSelectedDocument,
-    totalItems,
-  } = useDocuments()
+  const { documentTypes, handleCalendar } = useDocuments()
   const navigate = useNavigate()
   const location = useLocation()
   const { documentType, dateFrom, dateTo } = useParams()
@@ -84,10 +76,11 @@ const DocsFilter = () => {
   // }
 
   const handleSelect = (parameter: IDocumentTypes) => {
-    setSelectedDocument(parameter)
     navigate(`/documentPage/${parameter}/${dateFrom}/${dateTo}?page=1`)
   }
 
+  const { data, mutate } = useDataDocuments()
+  const total = data?.['hydra:totalItems'] ?? 0
   return (
     <Paper
       elevation={4}
@@ -140,14 +133,7 @@ const DocsFilter = () => {
             fontSize: '18px',
             marginTop: '32px',
           }}
-          onClick={() =>
-            getItems(
-              documentType!,
-              new Date(dateFrom!),
-              new Date(dateTo!),
-              pageNumber!
-            )
-          }
+          onClick={() => mutate()}
         >
           חפש
         </Button>
@@ -155,7 +141,7 @@ const DocsFilter = () => {
       <Box sx={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
         <Box className="centered">
           <Typography color={themeColors.primary}>
-            סה"כ מסמכים: {totalItems}
+            סה"כ מסמכים: {total}
           </Typography>
         </Box>
         <FormControl fullWidth sx={{ width: '200px' }}>
@@ -163,7 +149,7 @@ const DocsFilter = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedDocument}
+            value={documentType}
             sx={{ height: '40px' }}
             label="מסמך"
             onChange={(e) => handleSelect(e.target.value as IDocumentTypes)}
