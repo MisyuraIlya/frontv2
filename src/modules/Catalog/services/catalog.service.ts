@@ -5,10 +5,6 @@ interface GetCategoriesAttribute extends Hydra {
   'hydra:member': IAttributeMain[]
 }
 
-interface GetPurchaseHistoryItem extends Hydra {
-  'hydra:member': PurchaseHistoryItem[]
-}
-
 interface GetProductPopUpData {
   status: string
   data: ProductPopUp

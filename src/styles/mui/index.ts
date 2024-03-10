@@ -457,13 +457,19 @@ const theme = createTheme({
     //     },
     // },
 
-    // MuiCard: {
-    //     styleOverrides: {
-    //         root: {
-    //             borderRadius: themeSettings.borderRadius,
-    //         },
-    //     },
-    // },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: themeSettings.borderRadius,
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Set your default box shadow
+          transition: 'box-shadow 0.3s ease',
+
+          '&:hover': {
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Set your hover box shadow
+          },
+        },
+      },
+    },
   },
 })
 

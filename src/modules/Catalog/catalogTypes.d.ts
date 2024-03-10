@@ -102,3 +102,7 @@ interface GetCatalogResponse extends Hydra {
 interface GetCategoriesResponse extends Hydra {
   'hydra:member': ICategory[]
 }
+
+interface GetPurchaseHistoryItem extends Hydra {
+  'hydra:member': PurchaseHistoryItem[]
+}

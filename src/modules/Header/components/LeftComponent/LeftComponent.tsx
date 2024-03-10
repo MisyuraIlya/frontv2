@@ -44,10 +44,18 @@ const LeftComponent = () => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     if (value.LABEL === clientURL.PROFILE.LABEL) {
-      setAnchorEl(event.currentTarget)
+      setOpenProfile(true)
     }
   }
 
+  const handleOnLeftMouse = (
+    value: IURL,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (value.LABEL === clientURL.PROFILE.LABEL) {
+      setOpenProfile(false)
+    }
+  }
   const handleClick = (value: IURL) => {
     if (value.LINK) {
       navigate(value.LINK)
@@ -65,9 +73,18 @@ const LeftComponent = () => {
     }
   }
 
+  const handleProfileClick = (e: any) => {
+    e.stopPropagation()
+    // setOpenProfile(!openProfile);
+    setAction('login')
+  }
+
   return (
     <>
-      <Box sx={{ display: 'flex', gap: '10px' }}>
+      <Box
+        sx={{ display: 'flex', gap: '10px', position: 'relative' }}
+        onMouseLeave={() => setOpenProfile(false)}
+      >
         {user ? (
           Object.entries(clientURL).map(([key, value]) => {
             if (value.SHOW_IN_HEADER) {
@@ -116,81 +133,86 @@ const LeftComponent = () => {
             </Tooltip>
           </IconButton>
         )}
+
+        {openProfile && (
+          <Paper
+            elevation={4}
+            sx={{
+              position: 'absolute',
+              left: '-180px',
+              top: '50px',
+              zIndex: 10,
+            }}
+          >
+            <Paper
+              elevation={4}
+              sx={{ margin: '5px 10px', padding: '10px', width: '180px' }}
+            >
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'white',
+                  background: themeColors.primary,
+                  padding: '4px',
+                }}
+              >
+                לקוח
+              </Typography>
+              <Typography
+                variant="body1"
+                color={'black'}
+                sx={{ margin: '5px 0' }}
+              >
+                {user?.name}
+              </Typography>
+              <Typography
+                variant="body1"
+                color={'black'}
+                sx={{ margin: '5px 0' }}
+              >
+                {user?.extId}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'white',
+                  background: themeColors.secondary,
+                  padding: '4px',
+                }}
+              >
+                {selectedMode == 'order' && 'הזמנה'}
+                {selectedMode == 'quote' && 'ה.מחיר'}
+                {selectedMode == 'return' && 'החזרה'}
+              </Typography>
+              <Button
+                variant="outlined"
+                fullWidth={true}
+                sx={{ margin: '15px 0' }}
+                onClick={() => beforeLogOut()}
+              >
+                התנתק
+              </Button>
+            </Paper>
+            <Box sx={{ margin: '25px 10px' }}>
+              {Object.entries(clientURL).map(([key, value]) => {
+                if (value.SHOW_IN_PROFILE_MENU) {
+                  return (
+                    <MenuItem
+                      onClick={() => handleClose(value)}
+                      key={key}
+                      className="hoveredProfile"
+                      sx={{ marginTop: '10px' }}
+                    >
+                      <ListItemIcon>{value.ICON}</ListItemIcon>
+                      <ListItemText>{value.LABEL}</ListItemText>
+                    </MenuItem>
+                  )
+                }
+              })}
+            </Box>
+          </Paper>
+        )}
       </Box>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-        sx={{
-          marginTop: '50px',
-        }}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <Paper
-          elevation={4}
-          sx={{ margin: '5px 10px', padding: '10px', width: '180px' }}
-        >
-          <Typography
-            variant="body1"
-            sx={{
-              color: 'white',
-              background: themeColors.primary,
-              padding: '4px',
-            }}
-          >
-            לקוח
-          </Typography>
-          <Typography variant="body1" color={'black'} sx={{ margin: '5px 0' }}>
-            {user?.name}
-          </Typography>
-          <Typography variant="body1" color={'black'} sx={{ margin: '5px 0' }}>
-            {user?.extId}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              color: 'white',
-              background: themeColors.secondary,
-              padding: '4px',
-            }}
-          >
-            {selectedMode == 'order' && 'הזמנה'}
-            {selectedMode == 'quote' && 'ה.מחיר'}
-            {selectedMode == 'return' && 'החזרה'}
-          </Typography>
-          <Button
-            variant="outlined"
-            fullWidth={true}
-            sx={{ margin: '15px 0' }}
-            onClick={() => beforeLogOut()}
-          >
-            התנתק
-          </Button>
-        </Paper>
-        <Box sx={{ marginTop: '25px' }}>
-          {Object.entries(clientURL).map(([key, value]) => {
-            if (value.SHOW_IN_PROFILE_MENU) {
-              return (
-                <MenuItem onClick={() => handleClose(value)} key={key}>
-                  <ListItemIcon>{value.ICON}</ListItemIcon>
-                  <ListItemText>{value.LABEL}</ListItemText>
-                </MenuItem>
-              )
-            }
-          })}
-        </Box>
-      </Menu>
       <Drawer
         anchor="right"
         open={openDrawver}

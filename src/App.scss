@@ -4009,18 +4009,22 @@ span.edit {
   padding-left: 0px !important;
 }
 
-//
-
-.muirtl-k32r9d-MuiButtonBase-root-MuiMenuItem-root:hover {
-  .material-symbols-outlined {
-    font-variation-settings:
-      'FILL' 1,
-      'wght' 300,
-      'GRAD' 0,
-      'opsz' 48;
-    border-radius: 100%;
+// PROFILE
+.hoveredProfile {
+  &:hover {
+    background-color: #d1d9e8 !important;
+    border-radius: 8px;
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 1,
+        'wght' 300,
+        'GRAD' 0,
+        'opsz' 48;
+      border-radius: 100%;
+    }
   }
 }
+
 .material-symbols-outlined {
   font-size: 30px;
   padding: 3px;

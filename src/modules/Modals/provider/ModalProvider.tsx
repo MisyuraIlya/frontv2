@@ -86,8 +86,7 @@ interface ModalsProviderProps {
 }
 const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false)
-  const { setSelectedProd, loading, getProductOnlineData } =
-    useSelectedProduct()
+  const { setSelectedProd } = useSelectedProduct()
   const [openCartSettings, setOpenCartSettings] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(false)
   const [activeTablePopUp, setActiveTablePopUp] = useState(false)
@@ -119,7 +118,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const selectProduct = (product: IProduct) => {
     setSelectedProd(product)
     setSelectedProduct(true)
-    getProductOnlineData()
   }
 
   const onCloseSelectedProduct = (bool: boolean) => {
@@ -244,9 +242,7 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
         <AuthPopUp active={openAuthModal} setActive={setOpenAuthModal} />
       )}
       {/* <MobileSideBar active={openMobileSideBar} setActive={setOpenMobileSideBar}/> */}
-      {/* {!loading && */}
       <TablePopUp active={activeTablePopUp} setActive={setActiveTablePopUp} />
-      {/* } */}
       {openPopUpPay && (
         <PayPopUp active={openPopUpPay} setActive={setOpenPopUpPay} />
       )}

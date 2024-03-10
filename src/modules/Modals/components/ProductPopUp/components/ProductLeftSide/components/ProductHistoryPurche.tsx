@@ -1,22 +1,21 @@
 import React from 'react'
-import { useSelectedProduct } from '../../../../../store/selecterdProduct.store'
-import { getUserFromStorage } from '../../../../../../Auth/helpers/auth.helper'
 import { useModals } from '../../../../../provider/ModalProvider'
-import { Button, Typography, Box, Grid, IconButton } from '@mui/material'
+import { Typography, Grid, IconButton } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import { themeColors } from '../../../../../../../styles/mui'
+import { useAuth } from '../../../../../../Auth/store/useAuthStore'
 
 const ProductHistoryPurche = () => {
-  const { getPurchesHistory } = useSelectedProduct()
   const { setActiveTablePopUp } = useModals()
+  const { user } = useAuth()
 
   const handleOpen = () => {
     setActiveTablePopUp(true)
-    getPurchesHistory()
   }
 
   return (
     <>
-      {getUserFromStorage() && (
+      {user && (
         <>
           <Grid container sx={{ margin: '10px 0px' }}>
             <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
@@ -24,7 +23,7 @@ const ProductHistoryPurche = () => {
             </Grid>
             <Grid item xs={8}>
               <IconButton onClick={handleOpen}>
-                <VisibilityIcon />
+                <VisibilityIcon sx={{ color: themeColors.primary }} />
               </IconButton>
             </Grid>
           </Grid>

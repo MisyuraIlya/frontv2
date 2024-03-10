@@ -20,15 +20,15 @@ type BasicInfoProps = {
 const BasicInfo: FC<BasicInfoProps> = ({ product }) => {
   const { user } = useAuth()
   const { selectProduct } = useModals()
-  const { loading } = useCatalog()
 
   return (
-    <Card elevation={0}>
+    <Box>
       <CardMedia
         onClick={() => selectProduct(product)}
         component="img"
         height={120}
         sx={{
+          cursor: 'pointer',
           objectFit: 'contain',
           transition: 'transform 0.3s ease-in-out',
           '&:hover': {
@@ -69,7 +69,7 @@ const BasicInfo: FC<BasicInfoProps> = ({ product }) => {
           </Typography>
         </Box>
       </CardContent>
-    </Card>
+    </Box>
   )
 }
 
