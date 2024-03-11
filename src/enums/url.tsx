@@ -15,9 +15,10 @@ import GroupIcon from '@mui/icons-material/Group'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
 import { themeColors } from '../styles/mui'
+import { getAgentId } from '../modules/Auth/helpers/auth.helper'
 const dateFrom = moment().subtract(1, 'day').format('YYYY-MM-DD')
 const dateTo = moment().format('YYYY-MM-DD')
-
+const agent = getAgentId()
 export const clientURL = {
   PROFILE: {
     LINK: '/profile',
@@ -54,7 +55,7 @@ export const clientURL = {
     NEED_AUTHORIZATION: true,
   },
   USER_LIST: {
-    LINK: '/agnetClients',
+    LINK: `/agentClients/${agent}?page=1`,
     LABEL: 'הלקוחות שלי',
     ICON: (
       <span

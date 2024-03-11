@@ -8,6 +8,8 @@ interface IUser {
   isBlocked: boolean
   name: string
   phone: string
+  city: string
+  address: string
   createdAt: string
   updatedAt: string
   discount: number
@@ -23,7 +25,6 @@ interface IUser {
   maxObligo: float
   hp: string
   taxCode: string
-  atarim: IAtarim[]
 }
 
 interface IAtarim {

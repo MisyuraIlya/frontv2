@@ -12,11 +12,6 @@ import {
   updateAccessToken,
 } from '../helpers/auth.helper'
 import { onErrorAlert, onSuccessAlert } from '../../../shared/MySweetAlert'
-import {
-  getClientStorage,
-  removeClientStorage,
-  setClientStorage,
-} from '../../Agent/helpers/localstorage'
 
 interface AuthState {
   loading: boolean
@@ -84,13 +79,11 @@ export const useAuth = create<AuthState>((set, get) => ({
     set({ atarSelected: value })
     setChoosedAtar(value)
   },
-  client: getClientStorage(),
+  client: null,
   setSelectClient: (client: IUser | null) => {
     set({ client: client })
     if (client) {
-      setClientStorage(client)
     } else {
-      removeClientStorage()
     }
   },
   // states for auth modals
@@ -110,18 +103,7 @@ export const useAuth = create<AuthState>((set, get) => ({
       set({ loading: true })
       const response = await AuthService.login(username, password)
       if (response.status === 'success') {
-        const uniqueArray = response?.user?.atarim?.filter(
-          (item, index, self) => {
-            return index === self.findIndex((t) => t.extId === item.extId)
-          }
-        )
-        response.user.atarim = uniqueArray
         saveToStorage(response)
-        if (response.user?.atarim?.length > 0) {
-          set({ atarSelected: response.user?.atarim?.[0] })
-          setChoosedAtar(response.user?.atarim?.[0])
-        }
-
         // const find = response.user?.atarim?.find((item) => item.extId == extId)
         // get().setAtarSelected(response.user.atarim[0])
         onSuccessAlert('ברוכים הבאים', '')
