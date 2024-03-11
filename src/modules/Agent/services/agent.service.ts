@@ -6,12 +6,18 @@ interface agentServiceResponse extends Hydra {
 
 export const agentService = {
   async getClients(
-    page: string | number,
-    search: string
+    agentId: string,
+    page: string | number = '1',
+    search?: string
   ): Promise<agentServiceResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/users?page=${page}&extId=${search}`
-    )
+    console.log('page', page)
+    let apiUrl = `${process.env.REACT_APP_API}/api/agentClients/${agentId}?page=${page}`
+
+    if (search) {
+      apiUrl += `&search=${search}`
+    }
+
+    const response = await axios.get(apiUrl)
     return response.data
   },
 }

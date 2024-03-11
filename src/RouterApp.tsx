@@ -69,7 +69,7 @@ const RouterApp = () => {
             <Route path="/admin/notification" element={<NotificationPage />} />
 
             {/* AGENT */}
-            {/* <Route path="/agentClients" element={<AgentClinets />} /> */}
+            <Route path="/agentClients/:agentId" element={<AgentClinets />} />
             {/* <Route path="/agentDashboard/:id" element={<AgentDashboard />} /> */}
             {/* <Route path="/objectives/:id" element={<Objectives />} /> */}
             {/* <Route path="/target/:id" element={<Target />} /> */}
