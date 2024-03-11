@@ -1,3 +1,5 @@
+type ROLE_TYPES = 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_AGENT' | 'ROLE_SUPER_AGENT'
+
 interface IUser {
   id?: number
   extId: string
@@ -10,7 +12,7 @@ interface IUser {
   updatedAt: string
   discount: number
   roles?: Array<'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_AGENT' | 'ROLE_SUPER_AGENT'>
-  role: 'ROLE_ADMIN' | 'ROLE_USER' | 'ROLE_AGENT' | 'ROLE_SUPER_AGENT'
+  role: ROLE_TYPES
   isAllowOrder: boolean
   isAllowAllClients: boolean
   passwordUnencrypted: string | null

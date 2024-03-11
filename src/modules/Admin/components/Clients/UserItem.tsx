@@ -9,6 +9,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Switch,
   TextField,
   Typography,
 } from '@mui/material'
@@ -29,6 +30,7 @@ import {
 import { useForm, Controller } from 'react-hook-form'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 import { AdminClinetsService } from '../../services/clients.service'
+import { useParams } from 'react-router-dom'
 
 interface ClientItemProps {
   element: IUser
@@ -41,8 +43,15 @@ type RegistrationForm = {
   confirmPassword: string
 }
 
-const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
+type RouteParams = {
+  userRole: ROLE_TYPES
+}
+const UserItem: FC<ClientItemProps> = ({ element, index }) => {
+  const { userRole } = useParams<RouteParams>()
+  const isUser = userRole === 'ROLE_USER'
+  const isAgent = userRole === 'ROLE_AGENT'
   const [openInfo, setOpenInfo] = useState(false)
+  const [isMaster, setIsMaster] = useState(element.role === 'ROLE_SUPER_AGENT')
   const [openSettings, setOpenSettings] = useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -63,13 +72,13 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
     if (value) {
       const ask = await onAsk(
         'בטוח תרצה לחסום',
-        `לקוח "${element.name}" לא יוכל להכנס למערכת ולבצע הזמנות`
+        `המשתמש "${element.name}" לא יוכל להכנס למערכת ולבצע הזמנות`
       )
       if (ask) {
         element.isBlocked = value
         const response = await AdminClinetsService.updateClient(element)
         if (response.status == 'success') {
-          onSuccessAlert('לקוח נחסם בהצלחה', '')
+          onSuccessAlert('המשתמש נחסם בהצלחה', '')
         } else {
           onErrorAlert('לא עודכן', response.message)
         }
@@ -78,7 +87,7 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
       element.isBlocked = value
       const response = await AdminClinetsService.updateClient(element)
       if (response.status == 'success') {
-        onSuccessAlert('לקוח נפתח בהצלחה', '')
+        onSuccessAlert('המשתמש נפתח בהצלחה', '')
       } else {
         onErrorAlert('לא עודכן', response.message)
       }
@@ -88,8 +97,8 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
 
   const handleReset = async () => {
     const ask = await onAsk(
-      'בטוח תרצה לאפס את הלקוח?',
-      `לקוח "${element.name}" אצטרך לבצע הרשמה מחדש`
+      'בטוח תרצה לאפס את המשתמש?',
+      `המשתמש "${element.name}" אצטרך לבצע הרשמה מחדש`
     )
     if (ask) {
       element.isRegistered = false
@@ -120,13 +129,23 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
     setAnchorEl(null)
   }
 
+  const handleMaster = () => {
+    setIsMaster(!isMaster)
+    if (!isMaster) {
+      element.role = 'ROLE_SUPER_AGENT'
+    } else {
+      element.role = 'ROLE_AGENT'
+    }
+    AdminClinetsService.updateClient(element)
+  }
+
   return (
     <>
       <Grid container spacing={2} key={index}>
         <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body1">{element?.extId}</Typography>
         </Grid>
-        <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
+        <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body1">{element?.name}</Typography>
         </Grid>
         <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
@@ -142,6 +161,11 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
             <SettingsIcon sx={{ color: themeColors.primary }} />
           </IconButton>
         </Grid>
+        {isAgent && (
+          <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+            <Switch checked={isMaster} onChange={() => handleMaster()} />
+          </Grid>
+        )}
       </Grid>
 
       {/* INFO MODAL */}
@@ -152,7 +176,7 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
         width={20}
       >
         <Typography variant="h6" sx={{ margin: '10px 0' }}>
-          מידע לקוח
+          {isUser ? ' מידע לקוח' : ' מידע סוכן'}
         </Typography>
         <Divider />
         <Box
@@ -163,7 +187,7 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
           }}
         >
           <Typography variant="body1" fontWeight={800}>
-            שם להלקוח
+            {isUser ? 'שם הלקוח' : 'שם הסוכן'}
           </Typography>
           <Typography variant="body1">{element.name}</Typography>
         </Box>
@@ -187,7 +211,7 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
           }}
         >
           <Typography variant="body1" fontWeight={800}>
-            מס' לקוח
+            {isUser ? "מס' לקוח" : "מס' סוכן"}
           </Typography>
           <Typography variant="body1">{element.extId}</Typography>
         </Box>
@@ -245,21 +269,27 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
           <ListItemIcon>
             <PersonAddIcon fontSize="small" />
           </ListItemIcon>
-          <Typography variant="inherit">הקמת לקוח</Typography>
+          <Typography variant="inherit">
+            {isUser ? 'הקמת לקוח' : 'הקמת סוכן'}
+          </Typography>
         </MenuItem>
         {element?.isBlocked ? (
           <MenuItem onClick={() => handleBlock(false)}>
             <ListItemIcon>
               <PersonAddAltIcon fontSize="small" />
             </ListItemIcon>
-            <Typography variant="inherit">הפעלת לקוח</Typography>
+            <Typography variant="inherit">
+              {isUser ? 'הפעלת לקוח' : 'הפעלת סוכן'}
+            </Typography>
           </MenuItem>
         ) : (
           <MenuItem onClick={() => handleBlock(true)}>
             <ListItemIcon>
               <PersonOffIcon fontSize="small" />
             </ListItemIcon>
-            <Typography variant="inherit">חסימת לקוח</Typography>
+            <Typography variant="inherit">
+              {isUser ? 'חסימת לקוח' : 'חסימת סוכן'}
+            </Typography>
           </MenuItem>
         )}
 
@@ -267,7 +297,9 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
           <ListItemIcon>
             <PersonAddDisabledIcon fontSize="small" />
           </ListItemIcon>
-          <Typography variant="inherit">איפוס לקוח</Typography>
+          <Typography variant="inherit">
+            {isUser ? 'איפוס לקוח' : 'איפוס סוכן'}
+          </Typography>
         </MenuItem>
       </Menu>
 
@@ -285,10 +317,12 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
           <Divider />
           <Box>
             <Typography variant="body1" sx={{ margin: '10px 0' }}>
-              מספר לקוח: {element.extId}
+              {isUser ? 'מספר לקוח: ' : 'מספר סוכן: '}
+              {element.extId}
             </Typography>
             <Typography variant="body1" sx={{ margin: '10px 0' }}>
-              לקוח: {element.name}
+              {isUser ? ' לקוח: ' : 'סוכן: '}
+              {element.name}
             </Typography>
           </Box>
           <form onSubmit={handleSubmit(handleUpdate)}>
@@ -372,4 +406,4 @@ const ClientItem: FC<ClientItemProps> = ({ element, index }) => {
   )
 }
 
-export default ClientItem
+export default UserItem

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import CategoryEdit from './modules/Admin/pages/CategoryEdit'
 import ProductsEdit from './modules/Admin/pages/ProductsEdit'
-import Clients from './modules/Admin/pages/Clients'
+import Clients from './modules/Admin/pages/Users'
 import Home from './modules/Home/pages/Home'
 import Catalog from './modules/Catalog/pages/Catalog'
 import CatalogView from './modules/Catalog/pages/CatalogView'
@@ -17,9 +17,9 @@ import AgentDashboard from './modules/Agent/pages/AgentDashboard'
 import Objectives from './modules/Agent/pages/Objectives'
 import Target from './modules/Agent/pages/Target'
 import Visits from './modules/Agent/pages/Visits'
-import AgentsPage from './modules/Admin/pages/AgentsPage'
 import { useAuth } from './modules/Auth/store/useAuthStore'
 import { Box } from '@mui/material'
+import Users from './modules/Admin/pages/Users'
 
 const RouterApp = () => {
   const { user } = useAuth()
@@ -38,6 +38,7 @@ const RouterApp = () => {
       <Box sx={{ marginTop: '140px' }}>
         <Routes>
           <Route>
+            {/* CLIENT */}
             <Route path="/" element={<Home />} />
             <Route
               path="/client/:documentType/:lvl1/:lvl2/:lvl3"
@@ -55,6 +56,7 @@ const RouterApp = () => {
               element={<DocumentsItemPage />}
             />
 
+            {/* ADMIN */}
             <Route
               path="/admin/category-edit/:lvl1/:lvl2"
               element={<CategoryEdit />}
@@ -63,11 +65,10 @@ const RouterApp = () => {
               path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
               element={<ProductsEdit />}
             />
-            <Route path="/admin/clients" element={<Clients />} />
-
+            <Route path="/admin/:userRole" element={<Users />} />
             <Route path="/admin/notification" element={<NotificationPage />} />
-            {/* <Route path="/admin/agents" element={<AgentsPage />} /> */}
 
+            {/* AGENT */}
             {/* <Route path="/agentClients" element={<AgentClinets />} /> */}
             {/* <Route path="/agentDashboard/:id" element={<AgentDashboard />} /> */}
             {/* <Route path="/objectives/:id" element={<Objectives />} /> */}

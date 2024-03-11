@@ -1,21 +1,29 @@
 import useSWR from 'swr'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { AdminClinetsService } from '../services/clients.service'
 import { HydraHandler } from '../../../helpers/hydraHandler'
 
-const fetchData = async (page: string, search: string) => {
-  return await AdminClinetsService.getClients(page, search)
+const fetchData = async (
+  userRole: ROLE_TYPES,
+  page: string,
+  search: string
+) => {
+  return await AdminClinetsService.getClients(userRole, page, search)
 }
 
-const useDataClients = () => {
+type RouteParams = {
+  userRole: ROLE_TYPES
+}
+
+const useDataUsers = () => {
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
   const page = urlSearchParams.get('page')
   const search = urlSearchParams.get('search')
-
+  const { userRole } = useParams<RouteParams>()
   const { data, error, isLoading, isValidating, mutate } = useSWR(
-    `api/users?page=${page}`,
-    () => fetchData(page!, search!)
+    `api/${userRole}?page=${page}`,
+    () => fetchData(userRole!, page!, search!)
   )
 
   let hydraPagination
@@ -33,4 +41,4 @@ const useDataClients = () => {
   }
 }
 
-export default useDataClients
+export default useDataUsers

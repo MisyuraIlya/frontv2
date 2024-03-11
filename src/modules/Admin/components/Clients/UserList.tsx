@@ -1,29 +1,29 @@
 import React from 'react'
-import Head from './Head'
-import ClientItem from './ClientItem'
+import UserItem from './UserItem'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Box, Divider } from '@mui/material'
-import useDataClients from '../../hooks/useDataClients'
+import useDataUsers from '../../hooks/useDataUsers'
+import HeadUser from './HeadUser'
 
-const ClientsList = () => {
-  const { data, isLoading } = useDataClients()
+const UserList = () => {
+  const { data, isLoading } = useDataUsers()
   return (
     <Box>
-      <Head />
+      <HeadUser />
       {isLoading && (
         <Skeleton style={{ height: '30px', margin: '5px 0px' }} count={24} />
       )}
       {data?.['hydra:member']?.map((element, index) => {
         return (
-          <>
-            <ClientItem element={element} index={index} />
+          <Box key={index}>
+            <UserItem element={element} index={index} />
             <Divider sx={{ width: '100%' }} />
-          </>
+          </Box>
         )
       })}
     </Box>
   )
 }
 
-export default ClientsList
+export default UserList

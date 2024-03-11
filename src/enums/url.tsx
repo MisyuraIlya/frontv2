@@ -146,8 +146,13 @@ export const AdminURL = {
     ICON: <ShopIcon sx={{ fontSize: '40px' }} />,
   },
   CLIENTS: {
-    LINK: '/admin/clients?page=1',
+    LINK: '/admin/ROLE_USER?page=1',
     LABEL: 'לקוחות',
+    ICON: <GroupIcon sx={{ fontSize: '40px' }} />,
+  },
+  AGENTS: {
+    LINK: '/admin/ROLE_AGENT?page=1',
+    LABEL: 'סוכנים',
     ICON: <GroupIcon sx={{ fontSize: '40px' }} />,
   },
   ORDERS: {

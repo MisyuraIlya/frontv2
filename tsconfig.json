@@ -22,6 +22,6 @@
     },
     "include": [
       "src"
-    ]
+, "src/modules/Admin/components/Clients/.tsx"    ]
   }
   

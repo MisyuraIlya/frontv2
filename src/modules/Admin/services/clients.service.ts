@@ -8,10 +8,14 @@ interface updateAuthResponse {
 
 export const AdminClinetsService = {
   async getClients(
+    roleType: ROLE_TYPES,
     page: string | number,
     search?: string
   ): Promise<UsersResponse> {
-    let url = `${process.env.REACT_APP_API}/api/users?page=${page}`
+    let isAgent = false
+    if (roleType == 'ROLE_SUPER_AGENT' || roleType === 'ROLE_AGENT')
+      isAgent = true
+    let url = `${process.env.REACT_APP_API}/api/users?page=${page}&isAgent=${isAgent}`
 
     if (search) {
       url += `&extId=${search}`

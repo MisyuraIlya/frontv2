@@ -1,19 +1,26 @@
 import React from 'react'
 import { useClientStore } from '../../store/ClientsStore'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import { Box, Typography } from '@mui/material'
-import useDataClients from '../../hooks/useDataClients'
+import useDataClients from '../../hooks/useDataUsers'
 
-const ClientsFilter = () => {
+type RouteParams = {
+  userRole: ROLE_TYPES
+}
+
+const UserFilter = () => {
   const { search, setSearch } = useClientStore()
   const navigate = useNavigate()
   const { data } = useDataClients()
+  const { userRole } = useParams<RouteParams>()
   const handleDebouce = (value: string) => {
-    const urlSearchParams = new URLSearchParams(location.search)
-    urlSearchParams.set('search', value)
-    const url = urlSearchParams.toString()
-    navigate(`/admin/clients?${url}`)
+    if (value) {
+      const urlSearchParams = new URLSearchParams(location.search)
+      urlSearchParams.set('search', value)
+      const url = urlSearchParams.toString()
+      navigate(`/admin/${userRole}?${url}`)
+    }
   }
   const total = data?.['hydra:totalItems'] ?? 0
 
@@ -40,4 +47,4 @@ const ClientsFilter = () => {
   )
 }
 
-export default ClientsFilter
+export default UserFilter
