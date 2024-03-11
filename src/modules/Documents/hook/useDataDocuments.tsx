@@ -35,7 +35,6 @@ const useDataDocuments = () => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const pageNumber = searchParams.get('page')
-
   const { data, error, isValidating, mutate } = useSWR<DocumentsResponse>(
     `/api/documents/${documentType}/${fromConverted}/${toDateConverted}${location.search}`,
     () =>

@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react'
 import { TextField, CircularProgress, Typography, Grid } from '@mui/material'
 import { useSelectedProduct } from '../../../../../store/selecterdProduct.store'
-import { getUserFromStorage } from '../../../../../../Auth/helpers/auth.helper'
 import { useCart } from '../../../../../../Cart/store/cart.store'
 import { useAuth } from '../../../../../../Auth/store/useAuthStore'
-import { calPriceWithTax } from '../../../../../../Cart/helpers/calculations'
 import Loader from '../../../../../../../shared/Loader'
 
 const ProductMainInfoTwo = () => {
-  const { selectedProd, isFetchOnline, loading } = useSelectedProduct()
+  const { selectedProd } = useSelectedProduct()
   const { Maam, selectedMode } = useCart()
-  const { isAgent } = useAuth()
+  const { user } = useAuth()
   return (
     <>
-      {isFetchOnline || loading ? (
+      {/* {isFetchOnline || loading ? (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Loader />
         </div>
       ) : (
         <>
-          {getUserFromStorage() && (
+          {user && (
             <>
               {selectedProd.basePrice ? (
                 <Grid container sx={{ margin: '20px 0px' }}>
@@ -64,7 +62,7 @@ const ProductMainInfoTwo = () => {
             </>
           )}
         </>
-      )}
+      )} */}
     </>
   )
 }

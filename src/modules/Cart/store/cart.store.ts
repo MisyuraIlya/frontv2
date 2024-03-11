@@ -1,16 +1,14 @@
 import { create } from 'zustand'
-import {
-  getAgentId,
-  getClientExtId,
-  getClientName,
-  getUserFromStorage,
-} from '../../Auth/helpers/auth.helper'
 import CartServices from '../services/cart.services'
 import { onErrorAlert, onSuccessAlert } from '../../../shared/MySweetAlert'
 import moment from 'moment'
 import { AdminOrderService } from '../../Admin/services/orders.service'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
 import { calculatePrice } from '../helpers/calculations'
+import {
+  getAgentFromStorage,
+  getUserFromStorage,
+} from '../../Auth/helpers/auth.helper'
 
 interface useCartState {
   loading: boolean
@@ -156,8 +154,7 @@ export const useCart = create(
         } else if (get().selectedMode == 'return') {
           totalTitle += ' ' + 'החזרה'
         }
-        totalTitle += ' | ' + getClientName()
-        console.log('totalTitle', totalTitle)
+        totalTitle += ' | ' + getUserFromStorage().name
         return totalTitle
       },
       setComment: (value) => set({ comment: value }),
@@ -170,9 +167,9 @@ export const useCart = create(
           set({ loading: true })
           const response = await CartServices.CreateOrder(
             get().comment,
-            getClientExtId(),
+            getUserFromStorage().id,
             get().finalPrice(),
-            getAgentId(),
+            getAgentFromStorage().id,
             false,
             get().discount,
             get().selectedMode,

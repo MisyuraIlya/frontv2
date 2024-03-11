@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getClientExtId } from '../../Auth/helpers/auth.helper'
 
 interface GetCategoriesAttribute extends Hydra {
   'hydra:member': IAttributeMain[]
@@ -17,11 +16,14 @@ export const CatalogServices = {
     lvl2: string | number,
     lvl3: string | number,
     searchParams: string,
-    documentType: CatalogDocumentType
+    documentType: CatalogDocumentType,
+    user?: IUser
   ): Promise<GetCatalogResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/catalog/${documentType}/${lvl1}/${lvl2}/${lvl3}${searchParams}&userExtId=${getClientExtId()}`
-    )
+    let url = `${process.env.REACT_APP_API}/api/catalog/${documentType}/${lvl1}/${lvl2}/${lvl3}${searchParams}`
+    if (user) {
+      url += `&userId=${user.id}`
+    }
+    const response = await axios.get(url)
     return response.data
   },
 

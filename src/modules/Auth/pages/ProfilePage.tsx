@@ -1,20 +1,24 @@
 import React from 'react'
 import MyProfile from '../components/MyProfile/MyProfile'
 import AgentMyProfile from '../components/AgentMyProfile/AgentMyProfile'
-import { useAuth } from '../store/useAuthStore'
 import AgentActions from '../../Agent/components/AgentActions'
+import { Container } from '@mui/material'
+import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 const ProfilePage = () => {
-  const { isAgent } = useAuth()
   return (
-    <div className="page-container Profile-page">
-      <div className="Profile-page-subcont">
-        <MyProfile />
-        {/* {isAgent &&  */}
-        <AgentMyProfile />
-        {/* }  */}
-        <AgentActions colsNumber={3} />
-      </div>
-    </div>
+    <Container maxWidth="lg">
+      <BreadCrumbsUtil
+        array={[
+          {
+            title: 'פרופיל',
+            link: '',
+          },
+        ]}
+      />
+      <MyProfile />
+      <AgentMyProfile />
+      <AgentActions colsNumber={3} />
+    </Container>
   )
 }
 

@@ -1,9 +1,8 @@
 import useSWR from 'swr'
 import { CatalogServices } from '../services/catalog.service'
-import { getClientId } from '../../Auth/helpers/auth.helper'
 
 const fetchData = async (): Promise<GetCategoriesResponse> => {
-  return await CatalogServices.GetCategories(getClientId())
+  return await CatalogServices.GetCategories('3')
 }
 
 const useDataCategories = () => {

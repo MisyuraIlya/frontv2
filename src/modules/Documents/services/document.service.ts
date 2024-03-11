@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getClientExtId } from '../../Auth/helpers/auth.helper'
 import moment from 'moment'
 
 interface RestoreCartResponse extends Hydra {
@@ -21,7 +20,8 @@ export const DocumentsService = {
     if (
       user.role === 'ROLE_USER' ||
       user.role === 'ROLE_AGENT' ||
-      user.role === 'ROLE_SUPER_AGENT'
+      user.role === 'ROLE_SUPER_AGENT' ||
+      user.role === null
     ) {
       url += `&userId=${user.id}`
     }
@@ -31,11 +31,14 @@ export const DocumentsService = {
 
   async GetDocumentsItem(
     documentItemType: IDocumentTypes,
-    documentNumber: number | string
+    documentNumber: number | string,
+    user?: IUser
   ): Promise<IDocumentItems> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/documentItems/${documentItemType}/${documentNumber}/?userExId=${getClientExtId()}`
-    )
+    let apiUrl = `${process.env.REACT_APP_API}/api/documentItems/${documentItemType}/${documentNumber}`
+    if (user) {
+      apiUrl += `?userExId=${user.id}`
+    }
+    const response = await axios.get(apiUrl)
     return response.data
   },
 

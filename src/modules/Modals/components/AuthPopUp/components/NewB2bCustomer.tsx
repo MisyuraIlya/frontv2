@@ -2,7 +2,6 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { useModals } from '../../../provider/ModalProvider'
-import { useAgentStore } from '../../../../Agent/store/agent.store'
 import { onErrorAlert } from '../../../../../shared/MySweetAlert'
 import AuthInput from '../../../../Auth/components/AuthInput/AuthInput'
 
@@ -14,13 +13,11 @@ const NewB2bCustomer = () => {
   } = useForm<formNewB2bForm>()
   const { setOpenAuthModal } = useModals()
   const { registerClient, setAction } = useAuth()
-  const { getClients } = useAgentStore()
 
   const onSubmit = async (data: formNewB2bForm) => {
     if (data.password === data.confirmPassword) {
       await registerClient(data)
       setOpenAuthModal(false)
-      await getClients()
     } else {
       onErrorAlert('סיסמאות חיבות להיות תואמות', '')
     }

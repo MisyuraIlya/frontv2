@@ -24,7 +24,7 @@ import NotificationContainer from '../../../PushNotifications/components/Notific
 import { themeColors } from '../../../../styles/mui'
 import { onAsk } from '../../../../shared/MySweetAlert'
 const LeftComponent = () => {
-  const { user, isAgent, setAction, logOut } = useAuth()
+  const { user, isAgent, agent, setAction, logOut, setUser } = useAuth()
   const { cart, selectedMode } = useCart()
   const [openProfile, setOpenProfile] = useState<boolean>(false)
   const { setOpenAuthModal, leftSideBar, setLeftSideBar } = useModals()
@@ -77,6 +77,23 @@ const LeftComponent = () => {
     e.stopPropagation()
     // setOpenProfile(!openProfile);
     setAction('login')
+  }
+
+  const handleLogOutClinet = async () => {
+    if (cart.length > 0) {
+      const ask = await onAsk('קיימים פריטים בסל', 'בטוח תרצה לצאת מהלקוח?')
+      if (ask) {
+        if (agent) {
+          setUser(agent)
+          navigate('/')
+        }
+      }
+    } else {
+      if (agent) {
+        setUser(agent)
+        navigate('/')
+      }
+    }
   }
 
   return (
@@ -192,6 +209,15 @@ const LeftComponent = () => {
               >
                 התנתק
               </Button>
+              {agent && user?.role === 'ROLE_USER' && (
+                <Button
+                  variant="outlined"
+                  fullWidth={true}
+                  onClick={() => handleLogOutClinet()}
+                >
+                  התנתק מהלקוח
+                </Button>
+              )}
             </Paper>
             <Box sx={{ margin: '25px 10px' }}>
               {Object.entries(clientURL).map(([key, value]) => {

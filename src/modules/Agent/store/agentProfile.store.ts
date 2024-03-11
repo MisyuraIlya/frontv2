@@ -1,13 +1,9 @@
 import { create } from 'zustand'
 import { agentService } from '../services/agent.service'
 import { HydraHandler } from '../../../helpers/hydraHandler'
-import { removeClientStorage, setClientStorage } from '../helpers/localstorage'
 import { MONTH_HEBREW_1 } from '../helpers/arrayOfMonths'
 import { agentProfileService } from '../services/agentProfile.service'
-import {
-  getChoosedAgentId,
-  getUserFromStorage,
-} from '../../Auth/helpers/auth.helper'
+
 import moment from 'moment'
 import { agentSheduleCalendarService } from '../services/agentSheduleCalendar.service'
 import { AdminClinetsService } from '../../Admin/services/clients.service'
@@ -79,7 +75,7 @@ export const useAgentProfileStore = create<AgentProfileStoreState>(
       try {
         set({ loading: true })
         const response = await agentSheduleCalendarService.getAgentObjective(
-          getChoosedAgentId(),
+          '3',
           moment().format('YYYY-MM-DD'),
           moment().format('YYYY-MM-DD')
         )
@@ -122,7 +118,7 @@ export const useAgentProfileStore = create<AgentProfileStoreState>(
       let res: IAgentTaget[] = MONTH_HEBREW_1.map((item) => {
         return {
           id: null,
-          agent: getUserFromStorage(),
+          agent: '3',
           month: item.name,
           year: get().choosedYear,
           currentValue: 0,
@@ -133,7 +129,7 @@ export const useAgentProfileStore = create<AgentProfileStoreState>(
       try {
         set({ loading: true })
         const response = await agentProfileService.getAgentTargets(
-          getChoosedAgentId(),
+          '3',
           get().choosedYear
         )
         res.map((item) => {
@@ -204,7 +200,7 @@ export const useAgentProfileStore = create<AgentProfileStoreState>(
           get().hydraPagination.page,
           'visit',
           search,
-          getChoosedAgentId()
+          '3'
         )
         const hydraHandler = HydraHandler.paginationHandler(response)
         set({ visits: response['hydra:member'], hydraPagination: hydraHandler })

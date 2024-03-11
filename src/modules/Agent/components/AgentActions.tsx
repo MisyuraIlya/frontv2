@@ -6,7 +6,7 @@ import { useModals } from '../../Modals/provider/ModalProvider'
 import { useAgentProfileStore } from '../store/agentProfile.store'
 import moment from 'moment'
 import { onSuccessAlert } from '../../../shared/MySweetAlert'
-import { Card, Grid, Paper, Typography } from '@mui/material'
+import { Card, Grid, Typography } from '@mui/material'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import RestorePageIcon from '@mui/icons-material/RestorePage'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
@@ -22,17 +22,17 @@ interface AgentActionsProps {
   colsNumber: number
 }
 const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
-  const { isAgent, user, client } = useAuth()
+  const { user } = useAuth()
   const { setSelectedMode } = useCart()
   const navigate = useNavigate()
   const { setAgentOptions } = useModals()
   const { createVisit } = useAgentProfileStore()
 
   const handleCreateVisit = async () => {
-    if (user && client) {
+    if (user) {
       let obj: IAgentObjective = {
         agent: user,
-        client: client,
+        client: user,
         isCompleted: true,
         completedAt: moment().format('YYYY-MM-DD'),
         title: '',

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getUserFromStorage } from '../../Auth/helpers/auth.helper'
 
 const CartServices = {
   async CreateOrder(
@@ -25,7 +24,7 @@ const CartServices = {
       deliveryPrice,
       deliveryDate,
       products,
-      user: getUserFromStorage(),
+      user: '',
     }
     const response = await axios.post(
       `${process.env.REACT_APP_API}/api/send_orders`,

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Tabs, { Tab } from 'react-best-tabs'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { setChoosedAgentId } from '../../Auth/helpers/auth.helper'
 const TabsBanner = () => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -50,7 +49,7 @@ const TabsBanner = () => {
       }
     }
     if (id) {
-      setChoosedAgentId(id)
+      // setChoosedAgentId(id)
     }
   }, [location.pathname, id])
 

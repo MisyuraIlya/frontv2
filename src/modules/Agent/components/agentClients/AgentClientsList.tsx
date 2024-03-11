@@ -13,14 +13,14 @@ import {
 import useDataAgentClients from '../../hooks/useDataAgentClients'
 import { themeColors } from '../../../../styles/mui'
 import { UserStatus } from '../../../../enums/status'
-import { useAgentStore } from '../../store/agent.store'
 import { useCart } from '../../../Cart/store/cart.store'
 import { onAsk } from '../../../../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../Auth/store/useAuthStore'
 
 const AgentClientsList = () => {
   const { data, isLoading } = useDataAgentClients()
-  const { setSelectedClient } = useAgentStore()
+  const { setUser } = useAuth()
   const { cart, setCart } = useCart()
   const navigate = useNavigate()
 
@@ -29,11 +29,11 @@ const AgentClientsList = () => {
       const ask = await onAsk('קיימים פריטים בסל', 'כל הפריטים ימחקו')
       if (ask) {
         setCart([])
-        setSelectedClient(user)
+        setUser(user)
         navigate('/profile')
       }
     } else {
-      setSelectedClient(user)
+      setUser(user)
       navigate('/profile')
     }
   }

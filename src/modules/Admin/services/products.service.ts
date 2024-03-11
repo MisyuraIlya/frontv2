@@ -42,7 +42,7 @@ export const AdminProductService = {
     lvl3: number | string
   ): Promise<productResponse> {
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/catalog/catalog/${lvl1}/${lvl2}/${lvl3}?itemsPerPage=10000`
+      `${process.env.REACT_APP_API}/api/catalog/catalog/${lvl1}/${lvl2}/${lvl3}`
     )
     return response.data
   },
