@@ -28,29 +28,6 @@ export const saveToStorage = (data: IAuthResponse): void => {
   saveTokensStorage(data)
 }
 
-export const getRole = () => {
-  let user = null
-  if (getAgentFromStorage()) {
-    user = getAgentFromStorage()
-  } else {
-    user = getUserFromStorage()
-  }
-  if (user) {
-    const role = user?.role
-    if (role == 'ROLE_ADMIN') {
-      return 'ADMIN'
-    } else if (role == 'ROLE_SUPER_AGENT') {
-      return 'SUPER_AGENT'
-    } else if (role == 'ROLE_AGENT') {
-      return 'AGENT'
-    } else if (role == 'ROLE_USER') {
-      return 'USER'
-    } else {
-      return null
-    }
-  }
-}
-
 export const getUserFromStorage = () => {
   const data = localStorage.getItem('user-storage')
   if (data) {

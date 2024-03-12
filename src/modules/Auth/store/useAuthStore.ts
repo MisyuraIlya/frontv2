@@ -67,10 +67,10 @@ export const useAuth = create(
   persist(
     (set, get) => ({
       loading: false,
-      isClient: getRole() === 'USER',
-      isAdmin: getRole() === 'ADMIN',
-      isAgent: getRole() === 'AGENT' || getRole() === 'SUPER_AGENT',
-      isSuperAgent: getRole() === 'SUPER_AGENT',
+      isClient: false,
+      isAdmin: false,
+      isAgent: false,
+      isSuperAgent: false,
       user: null,
       agent: null,
       setUser: (user) => set({ user }),
@@ -99,7 +99,12 @@ export const useAuth = create(
               response.user.role === 'ROLE_AGENT' ||
               response.user.role === 'ROLE_SUPER_AGENT'
             ) {
-              set({ agent: response.user })
+              set({ agent: response.user, isAgent: true })
+              if (response.user.role === 'ROLE_SUPER_AGENT') {
+                set({ isSuperAgent: true })
+              }
+            } else {
+              set({ isClient: true })
             }
             onSuccessAlert('ברוכים הבאים', '')
             setTimeout(() => {

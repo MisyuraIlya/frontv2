@@ -95,7 +95,7 @@ const LeftComponent = () => {
       }
     }
   }
-
+  console.log('isAgent', isAgent)
   return (
     <>
       <Box
