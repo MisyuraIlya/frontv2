@@ -22,7 +22,9 @@ interface useCartState {
   decreaseCart: (sku: string) => void
   deleteFromCart: (sku: string) => void
   changeQuantity: (sku: string, quantity: number) => void
-  changePackQuantity: (product: IProduct, packQuantity: number) => void
+  changePrice: (cartItem: ICart, value: number) => void
+  changeDiscount: (cartItem: ICart, value: number) => void
+  changeSum: (cartItem: ICart, value: number) => void
   // ========== HANDLE CART ==========
 
   // ========== CART PAGE ==========
@@ -126,15 +128,52 @@ export const useCart = create(
         }
         set({ cart })
       },
-      changePackQuantity: (product, packQuantity) => {
-        const cart = get().cart
-        const itemIndex = cart.findIndex((item) => item.sku === product.sku)
-        if (itemIndex !== -1) {
-          cart[itemIndex].choosedPackQuantity = packQuantity
-        } else {
-          console.error('Item not found in cart')
+
+      changePrice: (cartItem: ICart, value: number) => {
+        const updatedProduct = { ...cartItem.product, finalPrice: value }
+        const discountedPrice = value - (value * cartItem.discount) / 100
+        const updatedCartItem = {
+          ...cartItem,
+          price: discountedPrice,
+          product: updatedProduct,
         }
-        set({ cart })
+        updatedCartItem.total = updatedCartItem.quantity * discountedPrice
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item === cartItem ? updatedCartItem : item
+          ),
+        }))
+      },
+
+      changeDiscount: (cartItem: ICart, value: number) => {
+        const clampedDiscount = Math.max(0, Math.min(value, 100))
+        const updatedCartItem = { ...cartItem, discount: clampedDiscount }
+        const discountedPrice =
+          updatedCartItem.product.finalPrice -
+          (updatedCartItem.product.finalPrice * clampedDiscount) / 100
+        updatedCartItem.price = discountedPrice
+        updatedCartItem.total = updatedCartItem.quantity * discountedPrice
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item === cartItem ? updatedCartItem : item
+          ),
+        }))
+      },
+
+      changeSum: (cartItem: ICart, value: number) => {
+        const updatedCartItem = { ...cartItem, price: value }
+        const discount =
+          ((cartItem.product.finalPrice - value) /
+            cartItem.product.finalPrice) *
+          100
+        updatedCartItem.discount = discount
+        updatedCartItem.total = updatedCartItem.quantity * value
+
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item === cartItem ? updatedCartItem : item
+          ),
+        }))
       },
 
       // ========== HANDLE CART ==========

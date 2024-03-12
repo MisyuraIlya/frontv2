@@ -10,7 +10,7 @@ type PriceBlockProps = {
 
 const PriceBlock: FC<PriceBlockProps> = ({ product }) => {
   const { user, isAgent } = useAuth()
-  const { getCartItem, selectedMode } = useCart()
+  const { getCartItem, selectedMode, changeQuantity } = useCart()
 
   const inCart = getCartItem(product)
   return (
@@ -34,7 +34,10 @@ const PriceBlock: FC<PriceBlockProps> = ({ product }) => {
                 {isAgent ? (
                   <Box sx={{ margin: '2px 15px' }}>
                     <TextField
-                      value={inCart?.discount}
+                      value={inCart?.quantity ?? 0}
+                      onChange={(e) =>
+                        changeQuantity(product.sku, +e.target.value)
+                      }
                       sx={{
                         '& input': {
                           textAlign: 'center',
@@ -65,12 +68,7 @@ const PriceBlock: FC<PriceBlockProps> = ({ product }) => {
               <Box>
                 <Typography variant="body1">{'סה״כ להזמנה'}</Typography>
                 <Typography variant="body1" className="centered">
-                  {inCart
-                    ? (inCart?.choosedPackQuantity
-                        ? inCart.quantity * inCart.choosedPackQuantity
-                        : inCart.quantity) * inCart.price
-                    : 0}{' '}
-                  ₪
+                  ₪{inCart?.total}
                 </Typography>
               </Box>
             </Grid>

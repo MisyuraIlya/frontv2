@@ -7,7 +7,7 @@ type AgentHandler = {
 }
 
 const AgentHandler: FC<AgentHandler> = ({ product }) => {
-  const { getCartItem } = useCart()
+  const { getCartItem, changePrice, changeDiscount, changeSum } = useCart()
   const inCart = getCartItem(product)
   return (
     <Box sx={{ margin: '0 20px 0 35px' }}>
@@ -19,7 +19,8 @@ const AgentHandler: FC<AgentHandler> = ({ product }) => {
             </Typography>
             <Box sx={{ marginBottom: '10px' }}>
               <TextField
-                value={inCart?.price}
+                value={inCart?.product.finalPrice ?? product.finalPrice}
+                onChange={(e) => changePrice(inCart!, +e.target.value)}
                 sx={{
                   '& input': {
                     textAlign: 'center',
@@ -39,7 +40,8 @@ const AgentHandler: FC<AgentHandler> = ({ product }) => {
             </Typography>
             <Box sx={{ marginBottom: '10px' }}>
               <TextField
-                value={inCart?.discount}
+                value={inCart?.discount ?? product?.discount}
+                onChange={(e) => changeDiscount(inCart!, +e.target.value)}
                 sx={{
                   '& input': {
                     textAlign: 'center',
@@ -59,7 +61,8 @@ const AgentHandler: FC<AgentHandler> = ({ product }) => {
             </Typography>
             <Box sx={{ marginBottom: '10px' }}>
               <TextField
-                value={inCart?.product.finalPrice}
+                value={inCart?.price ?? product.finalPrice}
+                onChange={(e) => changeSum(inCart!, +e.target.value)}
                 sx={{
                   '& input': {
                     textAlign: 'center',
