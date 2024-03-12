@@ -43,7 +43,9 @@ const BasicInfo: FC<BasicInfoProps> = ({ product }) => {
         alt={product.title}
       />
       <CardContent>
-        <Typography variant="body1">{product?.title}</Typography>
+        <Typography variant="body2" fontWeight={700} sx={{ height: '50px' }}>
+          {product?.title}
+        </Typography>
         <Box sx={{ display: 'flex', gap: '5px' }}>
           <Typography variant="body1">מק״ט:</Typography>
           <Typography variant="body1">{product?.sku}</Typography>

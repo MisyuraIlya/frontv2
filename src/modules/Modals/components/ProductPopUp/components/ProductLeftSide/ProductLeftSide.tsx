@@ -7,6 +7,7 @@ import SubProducts from './components/SubProducts'
 import { useSelectedProduct } from '../../../../store/selecterdProduct.store'
 import PriceBlock from '../../../../../Catalog/components/LeftSide/components/ProductList/components/PriceBlock'
 import { Box, Divider } from '@mui/material'
+import PriceBlockPopUp from './components/PriceBlockPopUp'
 const ProductLeftSide = () => {
   const { selectedProd } = useSelectedProduct()
   return (
@@ -18,7 +19,7 @@ const ProductLeftSide = () => {
       <ProductMainInfoTwo />
       <Box sx={{ display: 'flex', justifyContent: 'end', marginTop: '50px' }}>
         <Box sx={{ width: '50%' }}>
-          <PriceBlock product={selectedProd} />
+          <PriceBlockPopUp product={selectedProd} />
         </Box>
       </Box>
     </Box>
