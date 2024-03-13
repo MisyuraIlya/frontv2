@@ -2,6 +2,7 @@ import React, { FC, ReactNode, MouseEvent, useEffect } from 'react'
 import AgentsList from '../components/AgentList'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import { useAgentProfileStore } from '../store/agentProfile.store'
+import { Container, Grid } from '@mui/material'
 
 interface ContainerProps {
   children: ReactNode
@@ -9,17 +10,26 @@ interface ContainerProps {
 
 const AgentContainer: FC<ContainerProps> = ({ children }) => {
   const { isSuperAgent, isAdmin } = useAuth()
-  const { fetchAgentsList, agentsList } = useAgentProfileStore()
-  useEffect(() => {
-    if (agentsList.length == 0) {
-      fetchAgentsList()
-    }
-  }, [])
+  // const { fetchAgentsList } = useAgentProfileStore()
+
+  // useEffect(() => {
+  //   if (agentsList.length == 0) {
+  //     fetchAgentsList()
+  //   }
+  // }, [])
   return (
-    <div className={'container agent-container flex-container break-display'}>
-      {(isSuperAgent || isAdmin) && <AgentsList />}
-      {children}
-    </div>
+    <Container maxWidth="lg">
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          {/* {(isSuperAgent || isAdmin) &&  */}
+          <AgentsList />
+          {/* // } */}
+        </Grid>
+        <Grid item xs={8}>
+          {children}
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 

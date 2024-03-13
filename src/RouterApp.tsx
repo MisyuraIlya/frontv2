@@ -14,7 +14,6 @@ import Header from './modules/Header/Header'
 import NotificationPage from './modules/PushNotifications/pages/NotificationPage'
 import AgentClinets from './modules/Agent/pages/AgentClinets'
 import AgentDashboard from './modules/Agent/pages/AgentDashboard'
-import Objectives from './modules/Agent/pages/Objectives'
 import Target from './modules/Agent/pages/Target'
 import Visits from './modules/Agent/pages/Visits'
 import { useAuth } from './modules/Auth/store/useAuthStore'
@@ -70,7 +69,10 @@ const RouterApp = () => {
 
             {/* AGENT */}
             <Route path="/agentClients/:agentId" element={<AgentClinets />} />
-            <Route path="/agentDashboard/:id" element={<AgentDashboard />} />
+            <Route
+              path="/agentDashboard/:tab/:id"
+              element={<AgentDashboard />}
+            />
             {/* <Route path="/objectives/:id" element={<Objectives />} /> */}
             {/* <Route path="/target/:id" element={<Target />} /> */}
             {/* <Route path="/visits/:id" element={<Visits />} /> */}

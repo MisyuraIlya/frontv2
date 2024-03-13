@@ -7,7 +7,7 @@ interface updateAuthResponse {
 }
 
 export const AdminClinetsService = {
-  async getClients(
+  async getUsers(
     roleType: ROLE_TYPES,
     page: string | number,
     search?: string

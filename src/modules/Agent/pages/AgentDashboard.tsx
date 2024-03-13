@@ -1,40 +1,52 @@
-import React, { ReactNode, FC, useEffect } from 'react'
-import AgentLayout from '../layout/AgentLayout'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import React from 'react'
 import AgentsList from '../components/AgentList'
-import AgentPerformanceInfo from '../components/AgentPerformanceInfo'
-import VisitsDashboard from '../components/VisitsDashboard'
-import NearestObjectives from '../components/NearestObjectives'
-import TargetsDashboard from '../components/TargetsDashboard'
-import { useMobile } from '../../Mobile/store/mobile.store'
-import AgentContainer from '../layout/AgentContainer'
-import { useAgentProfileStore } from '../store/agentProfile.store'
-import { useParams } from 'react-router-dom'
+import { Box, Container, Grid } from '@mui/material'
+import { Tab, Tabs } from '../../../utils/tabs'
+import AgentMissions from '../Tabs/AgentMissions'
+import AgentVisits from '../Tabs/AgentVisits'
+import AgentTargets from '../Tabs/AgentTargets'
+import AgentDashBoard from '../Tabs/AgentDashBoard'
+import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 
 const AgentDashboard = () => {
-  const { isMobile } = useMobile()
-  const { fetchTaskToday } = useAgentProfileStore()
-  const { id } = useParams()
-  useEffect(() => {
-    fetchTaskToday()
-  }, [id])
+  const components = [
+    {
+      title: 'דאשבורד',
+      component: <AgentDashBoard />,
+    },
+    {
+      title: 'משימות',
+      component: <AgentMissions />,
+    },
+    {
+      title: 'תבניות ביקורים',
+      component: <AgentVisits />,
+    },
+    {
+      title: 'יעדים',
+      component: <AgentTargets />,
+    },
+  ]
   return (
-    <div
-      className={
-        !isMobile
-          ? 'page-container myMarginTop'
-          : 'page-container myMarginTop openAgentListMob'
-      }
-    >
-      <AgentContainer>
-        <AgentLayout>
-          <AgentPerformanceInfo />
-          <VisitsDashboard />
-          <NearestObjectives />
-          <TargetsDashboard />
-        </AgentLayout>
-      </AgentContainer>
-    </div>
+    <Container maxWidth="xl">
+      <BreadCrumbsUtil array={[]} />
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          {/* {(isSuperAgent || isAdmin) &&  */}
+          <AgentsList />
+          {/* // } */}
+        </Grid>
+        <Grid item xs={9}>
+          <Tabs baseRoute="/agentDashboard" params={['tab', 'id']}>
+            {components.map((tab, index) => (
+              <Tab key={index} label={tab.title}>
+                <Box>{tab.component}</Box>
+              </Tab>
+            ))}
+          </Tabs>
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 
