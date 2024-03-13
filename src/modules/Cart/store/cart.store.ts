@@ -4,7 +4,6 @@ import { onErrorAlert, onSuccessAlert } from '../../../shared/MySweetAlert'
 import moment from 'moment'
 import { AdminOrderService } from '../../Admin/services/orders.service'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
-import { calculatePrice } from '../helpers/calculations'
 import {
   getAgentFromStorage,
   getUserFromStorage,
@@ -280,8 +279,7 @@ export const useCart = create(
 
       totalBeforeTax: () => {
         const priceBefore = get().cart.reduce((accumulator, item) => {
-          const itemPrice = calculatePrice(item.product, item.quantity)
-          return accumulator + itemPrice
+          return accumulator + item.total
         }, 0)
         return priceBefore
       },

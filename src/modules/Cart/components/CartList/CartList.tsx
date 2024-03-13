@@ -14,15 +14,25 @@ import {
   Paper,
   Container,
   IconButton,
+  TextField,
 } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
 import { calculatePrice } from '../../helpers/calculations'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { onAsk } from '../../../../shared/MySweetAlert'
+import { useAuth } from '../../../Auth/store/useAuthStore'
 
 const CartList = () => {
-  const { cart, CartTitle, deleteFromCart } = useCart()
+  const {
+    cart,
+    CartTitle,
+    deleteFromCart,
+    changePrice,
+    changeDiscount,
+    changeSum,
+  } = useCart()
   const { selectProduct } = useModals()
+  const { isAgent } = useAuth()
 
   const handeDelete = async (item: ICart) => {
     const ask = await onAsk(
@@ -81,6 +91,16 @@ const CartList = () => {
                   color={themeColors.primary}
                 >
                   הנחה
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <Typography
+                  variant="h6"
+                  fontSize={16}
+                  fontWeight={700}
+                  color={themeColors.primary}
+                >
+                  סה״כ יחידה
                 </Typography>
               </TableCell>
               <TableCell>
@@ -152,28 +172,79 @@ const CartList = () => {
                       </Box>
                     </Box>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>
                     <Typography variant="body1" color={themeColors.primary}>
                       {element?.quantity}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="body1" color={themeColors.primary}>
-                      {element?.product?.finalPrice} ₪{' '}
-                    </Typography>
+                    {isAgent ? (
+                      <TextField
+                        value={element?.product.finalPrice}
+                        onChange={(e) => changePrice(element, +e.target.value)}
+                        sx={{
+                          width: '50%',
+                          '& input': {
+                            textAlign: 'center',
+                            padding: '5px 10px',
+                            borderRadius: '5px',
+                            backgroundColor: '#f3f5f9',
+                          },
+                        }}
+                      />
+                    ) : (
+                      <Typography variant="body1" color={themeColors.primary}>
+                        {element?.product?.finalPrice} ₪{' '}
+                      </Typography>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {isAgent ? (
+                      <TextField
+                        value={element?.discount}
+                        onChange={(e) =>
+                          changeDiscount(element, +e.target.value)
+                        }
+                        sx={{
+                          width: '50%',
+                          '& input': {
+                            textAlign: 'center',
+                            padding: '5px 10px',
+                            borderRadius: '5px',
+                            backgroundColor: '#f3f5f9',
+                          },
+                        }}
+                      />
+                    ) : (
+                      <Typography variant="body1" color={themeColors.primary}>
+                        {element?.discount} %
+                      </Typography>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {isAgent ? (
+                      <TextField
+                        value={element?.price}
+                        onChange={(e) => changeSum(element, +e.target.value)}
+                        sx={{
+                          width: '50%',
+                          '& input': {
+                            textAlign: 'center',
+                            padding: '5px 10px',
+                            borderRadius: '5px',
+                            backgroundColor: '#f3f5f9',
+                          },
+                        }}
+                      />
+                    ) : (
+                      <Typography variant="body1" color={themeColors.primary}>
+                        ₪{element?.price}
+                      </Typography>
+                    )}
                   </TableCell>
                   <TableCell>
                     <Typography variant="body1" color={themeColors.primary}>
-                      {element?.discount} %
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body1" color={themeColors.primary}>
-                      {calculatePrice(
-                        element.product,
-                        element.quantity
-                      ).toFixed(1)}{' '}
-                      ₪{' '}
+                      ₪{element?.total}
                     </Typography>
                   </TableCell>
                 </TableRow>
