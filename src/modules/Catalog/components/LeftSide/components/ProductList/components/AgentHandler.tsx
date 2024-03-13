@@ -7,8 +7,34 @@ type AgentHandler = {
 }
 
 const AgentHandler: FC<AgentHandler> = ({ product }) => {
-  const { getCartItem, changePrice, changeDiscount, changeSum } = useCart()
+  const { getCartItem, changePrice, changeDiscount, changeSum, addToCart } =
+    useCart()
   const inCart = getCartItem(product)
+
+  const handleChangePrice = (value: number) => {
+    if (!inCart) {
+      addToCart(product)
+    }
+    const itemCart = getCartItem(product)
+    changePrice(itemCart!, value)
+  }
+
+  const handleChangeDiscount = (value: number) => {
+    if (!inCart) {
+      addToCart(product)
+    }
+    const itemCart = getCartItem(product)
+    changeDiscount(itemCart!, value)
+  }
+
+  const handleChangeSum = (value: number) => {
+    if (!inCart) {
+      addToCart(product)
+    }
+    const itemCart = getCartItem(product)
+    changeSum(itemCart!, value)
+  }
+
   return (
     <Box sx={{ margin: '0 20px 0 35px' }}>
       <Grid container spacing={2} sx={{ marginRight: '0px' }}>
@@ -20,7 +46,7 @@ const AgentHandler: FC<AgentHandler> = ({ product }) => {
             <Box sx={{ marginBottom: '10px' }}>
               <TextField
                 value={inCart?.product.finalPrice ?? product.finalPrice}
-                onChange={(e) => changePrice(inCart!, +e.target.value)}
+                onChange={(e) => handleChangePrice(+e.target.value)}
                 sx={{
                   '& input': {
                     textAlign: 'center',
@@ -41,7 +67,7 @@ const AgentHandler: FC<AgentHandler> = ({ product }) => {
             <Box sx={{ marginBottom: '10px' }}>
               <TextField
                 value={inCart?.discount ?? product?.discount}
-                onChange={(e) => changeDiscount(inCart!, +e.target.value)}
+                onChange={(e) => handleChangeDiscount(+e.target.value)}
                 sx={{
                   '& input': {
                     textAlign: 'center',
@@ -62,7 +88,7 @@ const AgentHandler: FC<AgentHandler> = ({ product }) => {
             <Box sx={{ marginBottom: '10px' }}>
               <TextField
                 value={inCart?.price ?? product.finalPrice}
-                onChange={(e) => changeSum(inCart!, +e.target.value)}
+                onChange={(e) => handleChangeSum(+e.target.value)}
                 sx={{
                   '& input': {
                     textAlign: 'center',

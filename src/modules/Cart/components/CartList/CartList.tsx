@@ -164,7 +164,7 @@ const CartList = () => {
                   </TableCell>
                   <TableCell>
                     <Typography variant="body1" color={themeColors.primary}>
-                      {element?.discount}
+                      {element?.discount} %
                     </Typography>
                   </TableCell>
                   <TableCell>

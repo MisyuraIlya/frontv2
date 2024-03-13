@@ -10,9 +10,40 @@ type PriceBlockProps = {
 
 const PriceBlockPopUp: FC<PriceBlockProps> = ({ product }) => {
   const { user, isAgent } = useAuth()
-  const { getCartItem, selectedMode } = useCart()
+  const {
+    getCartItem,
+    selectedMode,
+    changePrice,
+    changeDiscount,
+    changeSum,
+    addToCart,
+  } = useCart()
 
   const inCart = getCartItem(product)
+
+  const handleChangePrice = (value: number) => {
+    if (!inCart) {
+      addToCart(product)
+    }
+    const itemCart = getCartItem(product)
+    changePrice(itemCart!, value)
+  }
+
+  const handleChangeDiscount = (value: number) => {
+    if (!inCart) {
+      addToCart(product)
+    }
+    const itemCart = getCartItem(product)
+    changeDiscount(itemCart!, value)
+  }
+
+  const handleChangeSum = (value: number) => {
+    if (!inCart) {
+      addToCart(product)
+    }
+    const itemCart = getCartItem(product)
+    changeSum(itemCart!, value)
+  }
   return (
     <Box>
       {user &&
@@ -30,7 +61,8 @@ const PriceBlockPopUp: FC<PriceBlockProps> = ({ product }) => {
                 {isAgent ? (
                   <Box sx={{ marginBottom: '10px' }}>
                     <TextField
-                      value={inCart?.price}
+                      value={inCart?.product.finalPrice ?? product.finalPrice}
+                      onChange={(e) => handleChangePrice(+e.target.value)}
                       sx={{
                         '& input': {
                           textAlign: 'center',
@@ -56,7 +88,8 @@ const PriceBlockPopUp: FC<PriceBlockProps> = ({ product }) => {
                 {isAgent ? (
                   <Box sx={{ marginBottom: '10px' }}>
                     <TextField
-                      value={inCart?.discount}
+                      value={inCart?.discount ?? product?.discount}
+                      onChange={(e) => handleChangeDiscount(+e.target.value)}
                       sx={{
                         '& input': {
                           textAlign: 'center',
@@ -82,7 +115,8 @@ const PriceBlockPopUp: FC<PriceBlockProps> = ({ product }) => {
                 {isAgent ? (
                   <Box sx={{ marginBottom: '10px' }}>
                     <TextField
-                      value={inCart?.product.finalPrice}
+                      value={inCart?.price ?? product.finalPrice}
+                      onChange={(e) => handleChangeSum(+e.target.value)}
                       sx={{
                         '& input': {
                           textAlign: 'center',
@@ -118,26 +152,9 @@ const PriceBlockPopUp: FC<PriceBlockProps> = ({ product }) => {
               <Typography variant="body1" sx={{ textAlign: 'center' }}>
                 {"יח' להזמנה"}
               </Typography>
-              {isAgent ? (
-                <Box sx={{ marginBottom: '10px' }}>
-                  <TextField
-                    value={inCart?.quantity}
-                    sx={{
-                      '& input': {
-                        textAlign: 'center',
-                        width: '60%',
-                        padding: '5px 10px',
-                        borderRadius: '5px',
-                        backgroundColor: '#f3f5f9',
-                      },
-                    }}
-                  />
-                </Box>
-              ) : (
-                <Typography variant="body1" className="centered">
-                  {inCart?.quantity}
-                </Typography>
-              )}
+              <Typography variant="body1" className="centered">
+                {inCart?.quantity}
+              </Typography>
             </Box>
           </Grid>
           <Grid item xs={6} className="centered">

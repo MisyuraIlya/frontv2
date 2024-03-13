@@ -13,7 +13,7 @@ interface ProductCardProps {
 const ProductCard: FC<ProductCardProps> = ({ product, listView = false }) => {
   const { isAgent } = useAuth()
   return (
-    <Card sx={{ height: isAgent ? '510px' : '400px', position: 'relative' }}>
+    <Card sx={{ height: isAgent ? '500px' : '400px', position: 'relative' }}>
       {/* <Tags product={product} /> */}
       <Grid container spacing={2}>
         <Grid item xs={listView ? 6 : 12}>
