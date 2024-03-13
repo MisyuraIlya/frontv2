@@ -37,7 +37,7 @@ const Visits = () => {
   }, [valueDebounced, id])
   return (
     <div className="page-container myMarginTop agentVisitsPage">
-      <AgentContainer>
+      {/* <AgentContainer>
         <AgentLayout>
           <div className="myPadding">
             <MyCard>
@@ -59,13 +59,12 @@ const Visits = () => {
               <VisitsList />
             </MyCard>
           </div>
-
           <div className="myMarginTop">
             <Pagination hydraPagination={hydraPagination} />
           </div>
         </AgentLayout>
         <SideButton onClickBtn={() => setVisitModal(true)} imgLink="" />
-      </AgentContainer>
+      </AgentContainer> */}
     </div>
   )
 }

@@ -4,17 +4,78 @@ import { useAgentProfileStore } from '../store/agentProfile.store'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
+import { Card, Grid, Typography } from '@mui/material'
+import SupportAgentIcon from '@mui/icons-material/SupportAgent'
+import LegendToggleIcon from '@mui/icons-material/LegendToggle'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
+import GroupIcon from '@mui/icons-material/Group'
 
 const AgentPerformanceInfo = () => {
   const { user, isAdmin, isSuperAgent } = useAuth()
   const { agentPremormence } = useAgentProfileStore()
 
   return (
-    <div className="myMarginTop">
-      <MyCard>
-        <div className="InfoBanner AgentPerformanceInfo">
-          <div className="flex-container flexCont">
-            <div className="col-lg-8 info-box-right-maincont">
+    <Card>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <Grid container spacing={2}>
+            <Grid item xs={6} className="centered" sx={{ gap: '5px' }}>
+              <SupportAgentIcon />
+              <Typography>{user?.name}</Typography>
+            </Grid>
+            <Grid item xs={6} className="centered" sx={{ gap: '5px' }}>
+              <LegendToggleIcon />
+              <Typography>{'סה״כ שנתי'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.totalOrderSum)}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} className="centered" sx={{ gap: '5px' }}>
+              <AnalyticsIcon />
+              <Typography>{'סל ממוצע'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.monthlyAverage)}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} className="centered" sx={{ gap: '5px' }}>
+              <GroupIcon />
+              <Typography>{'לקוחות'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.clientsAssigned)}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={6} sx={{ gap: '5px' }}>
+              <Typography>{'סה״כ יומי'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.dailySalesQuantity)}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ gap: '5px' }}>
+              <Typography>{'כמות עסקאות יומי'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.dailySalesQuantity)}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ gap: '5px' }}>
+              <Typography>{'סה״כ חודשי'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.monthlySalesSum)}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ gap: '5px' }}>
+              <Typography>{'עמידה ביעד'}</Typography>
+              <Typography>
+                {numberWithCommas(agentPremormence?.targetPercentage)}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      {/* <div className="col-lg-8 info-box-right-maincont">
               <div className="flex-container col-lg-12 info-box-right-cont">
                 <div className="flex-container col-lg-2 agent-name">
                   <div className="agent-name-subcont">
@@ -91,11 +152,8 @@ const AgentPerformanceInfo = () => {
                   </Wrap>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </MyCard>
-    </div>
+            </div> */}
+    </Card>
   )
 }
 

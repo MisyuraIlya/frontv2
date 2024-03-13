@@ -1,5 +1,7 @@
 import { Box } from '@mui/material'
 import React from 'react'
+import MyScheduleCalendar from '../components/MyScheduleCalendar'
+import WeekFilter from '../components/WeekFilter'
 
 const AgentMissions = () => {
   // const { fetchAgentCalendar, weekFrom, weekTo } = useMyScheduleCalendar()
@@ -11,21 +13,15 @@ const AgentMissions = () => {
 
   return (
     <Box>
-      {/* <AgentContainer>
-        <AgentLayout>
-          <div>
-            <div className="myCenterAlign myWidth">
-              <WeekFilter />
-            </div>
-            <div className="myMarginTop">
-              <MyCard>
-                <MyScheduleCalendar />
-              </MyCard>
-            </div>
-          </div>
-        </AgentLayout>
-        <SideButton onClickBtn={() => setObjectCreate(true)} imgLink="" />
-      </AgentContainer> */}
+      <div>
+        <div className="myCenterAlign myWidth">
+          <WeekFilter />
+        </div>
+        <div className="myMarginTop">
+          <MyScheduleCalendar />
+        </div>
+      </div>
+      {/* <SideButton onClickBtn={() => setObjectCreate(true)} imgLink="" /> */}
     </Box>
   )
 }

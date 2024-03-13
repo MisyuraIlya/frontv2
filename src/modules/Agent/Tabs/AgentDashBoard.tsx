@@ -9,9 +9,9 @@ const AgentDashBoard = () => {
   return (
     <Box>
       <AgentPerformanceInfo />
-      <VisitsDashboard />
-      <NearestObjectives />
-      <TargetsDashboard />
+      {/* <VisitsDashboard /> */}
+      {/* <NearestObjectives /> */}
+      {/* <TargetsDashboard /> */}
     </Box>
   )
 }

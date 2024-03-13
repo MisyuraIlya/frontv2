@@ -27,6 +27,7 @@ const AgentDashboard = () => {
       component: <AgentTargets />,
     },
   ]
+
   return (
     <Container maxWidth="xl">
       <BreadCrumbsUtil array={[]} />
