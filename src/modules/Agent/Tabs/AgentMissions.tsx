@@ -13,14 +13,8 @@ const AgentMissions = () => {
 
   return (
     <Box>
-      <div>
-        <div className="myCenterAlign myWidth">
-          <WeekFilter />
-        </div>
-        <div className="myMarginTop">
-          <MyScheduleCalendar />
-        </div>
-      </div>
+      <WeekFilter />
+      <MyScheduleCalendar />
       {/* <SideButton onClickBtn={() => setObjectCreate(true)} imgLink="" /> */}
     </Box>
   )

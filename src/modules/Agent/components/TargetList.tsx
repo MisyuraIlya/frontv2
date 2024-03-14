@@ -6,95 +6,160 @@ import Wrap from '../../../shared/Wrap'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import { useModals } from '../../Modals/provider/ModalProvider'
-const TargetList = () => {
-  const { loading, targets } = useAgentProfileStore()
-  const { isSuperAgent, isAdmin } = useAuth()
-  const { setTargetModalItem } = useModals()
+import { Box, Card, Grid, IconButton, Typography } from '@mui/material'
+import useDataAgentTargets from '../hooks/useDataAgentTargets'
+import { themeColors } from '../../../styles/mui'
+import ModeEditIcon from '@mui/icons-material/ModeEdit'
 
+const TargetList = ({ year }: { year: string }) => {
+  // const { loading, targets } = useAgentProfileStore()
+  const { isSuperAgent, isAdmin } = useAuth()
+  // const { setTargetModalItem } = useModals()
+  const { data, isLoading } = useDataAgentTargets(year)
   const completedType = (item: IAgentTaget) => {
     let answer = ''
-    let bg = 'primaryWrap'
+    let bg = '#f7f9fc'
     if (!item.targetValue || !item.currentValue) {
-      bg = 'primaryWrap'
+      bg = '#f7f9fc'
       answer = 'ממתין'
     } else {
       if (item.currentValue > item.targetValue) {
-        bg = 'successWrap'
+        bg = '#41dc934d'
         answer = 'הגיע ליעד'
       } else {
-        bg = 'errorWrap'
+        bg = '#d2335c33'
         answer = 'לא הגיע'
       }
     }
-    return <Wrap bg={bg}>{answer}</Wrap>
+    return (
+      <Box
+        sx={{
+          backgroundColor: bg,
+          color: themeColors.primary,
+          padding: '5px 10px',
+          borderRadius: '5px',
+        }}
+      >
+        {answer}
+      </Box>
+    )
   }
 
   return (
-    <div className="TargetList">
-      <div className="head myDesktop">
-        <div className="flex-container">
-          <div className="col-lg-2 col-1">
-            <p>תאריך</p>
-          </div>
-          <div className="col-lg-2 col-2">
-            <p>מחזור</p>
-          </div>
-          <div className="col-lg-2 col-3">
-            <p>יעד</p>
-          </div>
-          <div className="col-lg-2 col-4">
-            <p>מחזור</p>
-          </div>
-          <div className="col-lg-2 myCenterAlign col-5">
-            <p>סטאטוס</p>
-          </div>
-          <div className="col-lg-1 myCenterAlign col-6">
-            <p>פעולות</p>
-          </div>
-        </div>
-      </div>
-      {loading ? (
-        <div className="myCenterAlign loaderHeigth">
+    <Card sx={{ marginTop: '50px' }}>
+      <Grid container spacing={2} sx={{ margin: '5px', padding: '10px 20px' }}>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            תאריך
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            מחזור
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            יעד
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            מחזור
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            סטאטוס
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1" fontWeight={700}>
+            פעולות
+          </Typography>
+        </Grid>
+      </Grid>
+      {isLoading ? (
+        <Box className="centered">
           <Loader />
-        </div>
+        </Box>
       ) : (
         <div>
-          {targets.map((item, index) => {
+          {data?.['hydra:member']?.map((item, index) => {
             return (
-              <MyCard key={index}>
-                <div className="flex-container body">
-                  <div className="col-lg-2 colMobile4 mobileAlign col-1">
-                    <p>{item.month}</p>
-                  </div>
-                  <div className="col-lg-2 colMobile4 mobileAlign col-2">
-                    <p>חודשי</p>
-                  </div>
-                  <div className="col-lg-2 colMobile6 mobileAlign col-3">
-                    <p>{numberWithCommas(item.targetValue)}</p>
-                  </div>
-                  <div className="col-lg-2 colMobile6 mobileAlign col-4">
-                    <p>{numberWithCommas(item.currentValue)}</p>
-                  </div>
-                  <div className="col-lg-2 myCenterAlign colMobile6 mobileAlign col-5">
-                    {completedType(item)}
-                  </div>
-                  {(isSuperAgent || isAdmin) && (
-                    <div
-                      className="col-lg-1 myCenterAlign modalBtn colMobile6 mobileAlign col-6"
-                      onClick={() => setTargetModalItem(item)}
+              <Card
+                key={index}
+                sx={{
+                  margin: '20px',
+                  padding: '10px 20px',
+                  borderRadius: '5px',
+                  boxShadow: '0 2px 40px rgba(132,147,168,.15)',
+                }}
+              >
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <Typography variant="body1">{item.month}</Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <Typography variant="body1">חודשי</Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <Typography variant="body1">
+                      {numberWithCommas(item.targetValue)}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <Typography variant="body1">
+                      {numberWithCommas(item.currentValue)}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <Typography variant="body1">
+                      {completedType(item)}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={1}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <IconButton
+                      sx={{
+                        borderRadius: '5px',
+                        backgroundColor: '#f7f9fc',
+                        minWidth: '80px',
+                      }}
                     >
-                      <Wrap>
-                        <span className="material-symbols-outlined">draw</span>
-                      </Wrap>
-                    </div>
-                  )}
-                </div>
-              </MyCard>
+                      <ModeEditIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              </Card>
             )
           })}
         </div>
       )}
-    </div>
+    </Card>
   )
 }
 

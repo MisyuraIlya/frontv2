@@ -1,92 +1,132 @@
-import React, { useEffect, useState } from 'react'
-
-import MyCard from '../../../shared/MyCard'
-import Wrap from '../../../shared/Wrap'
-import { useAgentProfileStore } from '../store/agentProfile.store'
+import React from 'react'
+import { Card, Grid, Typography } from '@mui/material'
 import Loader from '../../../shared/Loader'
-import { useAuth } from '../../Auth/store/useAuthStore'
-import { useModals } from '../../Modals/provider/ModalProvider'
 import moment from 'moment'
+import useDataAgentObjectives from '../hooks/useDataAgentObjectives'
 const VisitsList = () => {
-  const { loading, visits } = useAgentProfileStore()
-  const { isSuperAgent, isAdmin } = useAuth()
-  const { setVisitModalItem } = useModals()
+  // const { loading, visits } = useAgentProfileStore()
+  // const { isSuperAgent, isAdmin } = useAuth()
+  // const { setVisitModalItem } = useModals()
 
+  const { isLoading, data } = useDataAgentObjectives('visit')
   return (
-    <div className="VisitsList">
-      <div className="head">
-        <div className="flex-container">
-          <div className="col-lg-5">
-            <p>לקוח</p>
-          </div>
-          <div className="col-lg-2">
-            <p>כתובת</p>
-          </div>
-          <div className="col-lg-2">
-            <p>טלפון</p>
-          </div>
-          <div className="col-lg-1">
-            <p>שעות</p>
-          </div>
-          <div className="col-lg-1 myCenterAlign">
-            <p>יום</p>
-          </div>
-          <div className="col-lg-1 myCenterAlign">
-            <p>פעולות</p>
-          </div>
-        </div>
-      </div>
+    <Card sx={{ marginTop: '50px' }}>
+      <Grid
+        container
+        spacing={2}
+        className="head"
+        sx={{ borderRadius: '5px', padding: '20px', margin: '10px' }}
+      >
+        <Grid item xs={5}>
+          <Typography variant="body1" fontWeight={700}>
+            לקוח
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            כתובת
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="body1" fontWeight={700}>
+            טלפון
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1" fontWeight={700}>
+            שעות
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1" fontWeight={700}>
+            יום
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="body1" fontWeight={700}>
+            פעולות
+          </Typography>
+        </Grid>
+      </Grid>
 
-      {loading ? (
+      {isLoading ? (
         <div className="loaderHeightMin myCenterAlign myWidth">
           <div className="myCenterAlign">
             <Loader />
           </div>
         </div>
       ) : (
-        visits.map((item, index) => {
+        data?.['hydra:member']?.map((item, index) => {
           return (
-            <MyCard key={index}>
-              <div className="flex-container">
+            <Card
+              key={index}
+              sx={{
+                padding: '20px',
+                margin: '10px',
+                borderRadius: '5px',
+                boxShadow: '0 2px 40px rgba(132,147,168,.15)',
+              }}
+            >
+              <Grid container spacing={2}>
                 {item?.client && (
-                  <div className="col-lg-5 colMobile6 mobileAlign">
-                    <p>
+                  <Grid
+                    item
+                    xs={5}
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <Typography>
                       {item?.client.extId} - {item?.client.name}
-                    </p>
-                  </div>
+                    </Typography>
+                  </Grid>
                 )}
-                <div className="col-lg-2 colMobile6 mobileAlign">
-                  {/* <p>{item.client}</p> */}
-                </div>
-                <div className="col-lg-2 colMobile6 mobileAlign">
-                  {/* <p>{item.clientContact}</p> */}
-                </div>
-                <div className="col-lg-1 colMobile3 mobileAlign">
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                >
+                  <Typography>{item.client?.address}</Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                >
+                  <Typography>{item.client?.phone}</Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={1}
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                >
                   {item.hourFrom && item.hourTo ? (
-                    <p>
+                    <Typography>
                       {moment(item.hourFrom).format('HH')} -{' '}
                       {moment(item.hourTo).format('HH')}
-                    </p>
+                    </Typography>
                   ) : (
-                    <p>אין תאריכים</p>
+                    <Typography>אין תאריכים</Typography>
                   )}
-                </div>
-                <div className="col-lg-1 colMobile3 myCenterAlign mobileAlign">
-                  <p>{item.choosedDay}</p>
-                </div>
-                {(isSuperAgent || isAdmin) && (
-                  <div className="col-lg-1 colMobile3 myCenterAlign mobileAlign modalBtn">
+                </Grid>
+                <Grid
+                  item
+                  xs={1}
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                >
+                  <Typography>{item.choosedDay}</Typography>
+                </Grid>
+                {/* {(isSuperAgent || isAdmin) && (
+                  <Grid item xs={1} className="myCenterAlign mobileAlign modalBtn">
                     <Wrap onClick={() => setVisitModalItem(item)}>
                       <span className="material-symbols-outlined">draw</span>
                     </Wrap>
-                  </div>
-                )}
-              </div>
-            </MyCard>
+                  </Grid>
+                )} */}
+              </Grid>
+            </Card>
           )
         })
       )}
-    </div>
+    </Card>
   )
 }
 

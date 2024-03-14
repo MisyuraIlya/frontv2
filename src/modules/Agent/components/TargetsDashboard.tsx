@@ -3,6 +3,7 @@ import MyCard from '../../../shared/MyCard'
 import ReactApexChart from 'react-apexcharts'
 import YearSelectorBanner from './YearSelectorBanner'
 import { useAgentProfileStore } from '../store/agentProfile.store'
+import { Card, Typography } from '@mui/material'
 
 const TargetsDashboard = () => {
   const { monthAgentSales } = useAgentProfileStore()
@@ -77,38 +78,35 @@ const TargetsDashboard = () => {
   }
 
   return (
-    <div className="myMarginTop myMarginBottom">
-      <MyCard>
-        <div className="container targets-cont">
-          <h4>עמידה ביעדים</h4>
-          <div className="myMarginTop">
+    <Card sx={{ marginTop: '50px' }}>
+      <Typography variant="h6">עמידה ביעדים</Typography>
+
+      {/* <div className="myMarginTop">
             <YearSelectorBanner isDashborad={true} />
-          </div>
-          {window.innerWidth > 1050 ? (
-            <>
-              <ReactApexChart
-                //  @ts-ignore
-                options={optionsDesktop}
-                series={seriesDesktop}
-                type="bar"
-                height={350}
-              />
-            </>
-          ) : (
-            <>
-              <ReactApexChart
-                // @ts-ignore
-                options={optionsMob}
-                series={seriesDesktop}
-                type="bar"
-                height={550}
-                styles
-              />
-            </>
-          )}
-        </div>
-      </MyCard>
-    </div>
+          </div> */}
+      {window.innerWidth > 1050 ? (
+        <>
+          <ReactApexChart
+            //  @ts-ignore
+            options={optionsDesktop}
+            series={seriesDesktop}
+            type="bar"
+            height={350}
+          />
+        </>
+      ) : (
+        <>
+          <ReactApexChart
+            // @ts-ignore
+            options={optionsMob}
+            series={seriesDesktop}
+            type="bar"
+            height={550}
+            styles
+          />
+        </>
+      )}
+    </Card>
   )
 }
 

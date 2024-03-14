@@ -3,6 +3,8 @@ import ReactApexChart from 'react-apexcharts'
 import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
 import { useAgentProfileStore } from '../store/agentProfile.store'
+import { Box, Card, Grid, Typography } from '@mui/material'
+import MyCheapButton from '../../../shared/MyCheapButton'
 
 const VisitsDashboard = () => {
   const { objectivesToday } = useAgentProfileStore()
@@ -47,56 +49,78 @@ const VisitsDashboard = () => {
     colors: ['#24426b'],
   }
   return (
-    <div className="myMarginTop">
-      <MyCard>
-        <div className="flex-container visit-dash-cont">
-          <div className="container flex-container col-lg-6">
-            <div className="textAlign col-lg-4">
-              <h3>ביקורים</h3>
-              <div className="text-wrap-cont">
-                <h4>בוצע</h4>
-                <Wrap>{objectivesToday?.visitsCompleted ?? 0}</Wrap>
-              </div>
-              <div className="text-wrap-cont">
-                <h4>לביצוע</h4>
-                <Wrap>{objectivesToday?.visitsTotal ?? 0}</Wrap>
-              </div>
-            </div>
-            <div className="apex-cont col-lg-7">
-              {/* @ts-ignore */}
-              <ReactApexChart
-                options={options2}
-                series={series2}
-                type="radialBar"
-                height={250}
-              />
-            </div>
-          </div>
-          <div className="container flex-container col-lg-6">
-            <div className="textAlign col-lg-4">
-              <h3>משימות</h3>
-              <div className="text-wrap-cont">
-                <h4>בוצע</h4>
-                <Wrap>{objectivesToday?.objectiveCompleted ?? 0}</Wrap>
-              </div>
-              <div className="text-wrap-cont">
-                <h4>לביצוע</h4>
-                <Wrap>{objectivesToday?.objectiveTotal ?? 0}</Wrap>
-              </div>
-            </div>
-            <div className="apex-cont col-lg-7">
-              {/* @ts-ignore */}
-              <ReactApexChart
-                options={options1}
-                series={series1}
-                type="radialBar"
-                height={250}
-              />
-            </div>
-          </div>
-        </div>
-      </MyCard>
-    </div>
+    <Card sx={{ padding: '0 50px', marginTop: '50px' }}>
+      <Grid container spacing={2}>
+        <Grid item xs={6} sx={{ display: 'flex', gap: '20px' }}>
+          <Box className="centered">
+            <Box>
+              <Typography variant="h6">ביקורים</Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Typography variant="h6">בוצע</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <MyCheapButton>
+                    {objectivesToday?.visitsCompleted ?? 0}
+                  </MyCheapButton>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} sx={{ marginTop: '5px' }}>
+                <Grid item xs={6}>
+                  <Typography variant="h6">לביצוע</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <MyCheapButton>
+                    {objectivesToday?.visitsTotal ?? 0}
+                  </MyCheapButton>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          <ReactApexChart
+            // @ts-ignore
+            options={options2}
+            series={series2}
+            type="radialBar"
+            height={250}
+          />
+        </Grid>
+        <Grid item xs={6} sx={{ display: 'flex', gap: '20px' }}>
+          <Box className="centered">
+            <Box>
+              <Typography variant="h6">משימות</Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Typography variant="h6">בוצע</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <MyCheapButton>
+                    {objectivesToday?.objectiveCompleted ?? 0}
+                  </MyCheapButton>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} sx={{ marginTop: '5px' }}>
+                <Grid item xs={6}>
+                  <Typography variant="h6">לביצוע</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <MyCheapButton>
+                    {objectivesToday?.objectiveTotal ?? 0}
+                  </MyCheapButton>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          <ReactApexChart
+            // @ts-ignore
+            options={options1}
+            series={series1}
+            type="radialBar"
+            height={250}
+          />
+        </Grid>
+      </Grid>
+    </Card>
   )
 }
 

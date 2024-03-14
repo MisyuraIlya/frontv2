@@ -12,14 +12,20 @@ export const agentProfileService = {
   async getAgentObjective(
     page: string | number,
     type: objectiveTypes,
-    search: string,
-    agentId: string | null
+    search?: string,
+    agentId?: string
   ): Promise<AgentObjectiveResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/agent_objectives?page=${page}&objectiveType=${type}&agent.id=${agentId}&client.extId=${search}`
-    )
+    let apiUrl = `${process.env.REACT_APP_API}/api/agent_objectives?page=${page}&objectiveType=${type}`
+    if (agentId) {
+      apiUrl += `&agent.id=${agentId}`
+    }
+    if (search) {
+      apiUrl += `&client.extId=${search}`
+    }
+    const response = await axios.get(apiUrl)
     return response.data
   },
+
   async createAgentObjective(
     object: IAgentObjective
   ): Promise<IAgentObjective> {
