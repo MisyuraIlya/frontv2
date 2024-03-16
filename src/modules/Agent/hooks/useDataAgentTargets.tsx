@@ -18,9 +18,31 @@ const useDataAgentTargets = (year: string) => {
     () => fetchData(id!, year)
   )
 
+  const createTarget = async (obj: IAgentTaget) => {
+    try {
+      await agentProfileService.createAgentTarget(obj)
+    } catch (e) {
+      console.log('[ERROR] error', e)
+    } finally {
+      mutate()
+    }
+  }
+
+  const updateTarget = async (obj: IAgentTaget) => {
+    try {
+      await agentProfileService.updateAgentTarget(obj)
+    } catch (e) {
+      console.log('[ERROR] error', e)
+    } finally {
+      mutate()
+    }
+  }
+
   return {
     data,
     isLoading: isLoading,
+    createTarget,
+    updateTarget,
     isError: error,
     isValidating,
     mutate,

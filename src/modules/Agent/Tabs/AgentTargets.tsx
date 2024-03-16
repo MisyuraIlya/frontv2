@@ -1,6 +1,6 @@
 import { Box, Card, MenuItem, Select } from '@mui/material'
 import React, { useState } from 'react'
-import TargetList from '../components/TargetList'
+import TargetList from '../components/agentTargets/TargetList'
 import useDataAgentTargets from '../hooks/useDataAgentTargets'
 import moment from 'moment'
 

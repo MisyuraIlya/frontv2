@@ -1,6 +1,6 @@
 import { Box, Card, Container } from '@mui/material'
 import React, { useState } from 'react'
-import VisitsList from '../components/VisitsList'
+import VisitsList from '../components/agentVisits/VisitsList'
 import SearchInput from '../../../utils/SearchInput/SearchInput'
 import useDataAgentObjectives from '../hooks/useDataAgentObjectives'
 import PaginationUtil from '../../../utils/pagination/PaginationUtil'

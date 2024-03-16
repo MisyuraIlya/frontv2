@@ -33,6 +33,26 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
     () => fetchData(page!, objective, search!, id!)
   )
 
+  const createVisit = async (obj: IAgentObjective) => {
+    try {
+      await agentProfileService.createAgentObjective(obj)
+    } catch (e) {
+      console.log('[ERROR] error', e)
+    } finally {
+      mutate()
+    }
+  }
+
+  const updateVisit = async (obj: IAgentObjective) => {
+    try {
+      await agentProfileService.updateAgentObjective(obj)
+    } catch (e) {
+      console.log('[ERROR] error', e)
+    } finally {
+      mutate()
+    }
+  }
+
   let hydraPagination
   if (data) {
     hydraPagination = HydraHandler.paginationHandler(data)
@@ -41,6 +61,8 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
   return {
     data,
     hydraPagination,
+    createVisit,
+    updateVisit,
     isLoading: isLoading,
     isError: error,
     isValidating,
