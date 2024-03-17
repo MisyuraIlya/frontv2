@@ -13,7 +13,6 @@ import {
   Typography,
 } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
-import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import {
   HEBREW_DAYS,
   ReactSelectOptionsOfFullHour,
@@ -56,22 +55,21 @@ const VisitPopUp = ({
       week3: item?.week3 || false,
       week4: item?.week4 || false,
       day: item?.choosedDay || '',
-      hourFrom: moment(item?.hourFrom).format('HH:mm') || '',
-      hourTo: moment(item?.hourTo).format('HH:mm') || '',
+      hourFrom: item?.hourFrom || '',
+      hourTo: item?.hourTo || '',
     },
   })
 
   const handleClick = (data: EditAndCreateVisitForm) => {
     if (item?.client?.name) {
-      const updated = item
-      updated.week1 = data.week1 ?? item.week1
-      updated.week2 = data.week2 ?? item.week2
-      updated.week3 = data.week3 ?? item.week3
-      updated.week4 = data.week4 ?? item.week4
-      updated.choosedDay = data?.day ?? item.choosedDay
-      updated.hourFrom = data?.hourFrom ?? item.hourFrom
-      updated.hourTo = data?.hourTo ?? item.hourTo
-      updateVisit(updated)
+      item.week1 = data.week1 ?? item.week1
+      item.week2 = data.week2 ?? item.week2
+      item.week3 = data.week3 ?? item.week3
+      item.week4 = data.week4 ?? item.week4
+      item.choosedDay = data?.day ?? item.choosedDay
+      item.hourFrom = data?.hourFrom ?? item.hourFrom
+      item.hourTo = data?.hourTo ?? item.hourTo
+      updateVisit(item)
     } else {
       if (selectedUser && agent) {
         let obj: IAgentObjective = {
@@ -94,11 +92,9 @@ const VisitPopUp = ({
           updatedAt: moment().format('YYYY-MM-DD'),
           subTusk: [],
         }
-        console.log('new', obj)
         createVisit(obj)
       }
     }
-    reset()
     setOpen(false)
   }
 
@@ -162,7 +158,6 @@ const VisitPopUp = ({
             <Controller
               name="day"
               control={control}
-              defaultValue=""
               rules={{
                 required: 'בחר יום בשבוע',
               }}
@@ -188,7 +183,6 @@ const VisitPopUp = ({
               <Controller
                 name="hourFrom"
                 control={control}
-                defaultValue=""
                 rules={{
                   required: 'בחר משעה',
                 }}
@@ -209,7 +203,6 @@ const VisitPopUp = ({
               <Controller
                 name="hourTo"
                 control={control}
-                defaultValue=""
                 rules={{
                   required: 'בחר עד שעה',
                 }}
@@ -237,6 +230,20 @@ const VisitPopUp = ({
             }}
           >
             צור ביקור
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            type="submit"
+            sx={{
+              fontSize: '18px',
+              position: 'absolute',
+              bottom: '30px',
+              left: '60px',
+              borderRadius: '8px',
+            }}
+          >
+            מחיקה
           </Button>
         </Box>
       </form>

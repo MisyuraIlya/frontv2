@@ -1,5 +1,5 @@
 import { Box, IconButton, TextField } from '@mui/material'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import { useDebounce } from 'use-debounce'
 import CloseIcon from '@mui/icons-material/Close'

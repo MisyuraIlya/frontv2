@@ -15,7 +15,6 @@ import ClientRightSideBar from '../adminComponents/ClientRightSideBar/ClientRigh
 import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
-import EditTarget from '../agentComponents/EditTarget'
 import { useAgentProfileStore } from '../../Agent/store/agentProfile.store'
 import ObjectiveList from '../agentComponents/ObjectiveList'
 import { useMyScheduleCalendar } from '../../Agent/store/ScheduleCalendar.store'
@@ -50,9 +49,6 @@ interface ModalContextType {
   setLeftSideBar: (bool: boolean) => void
   taskModal: boolean
   setTaskModal: (bool: boolean) => void
-  targetModal: boolean
-  setTargetModal: (bool: boolean) => void
-  setTargetModalItem: (item: IAgentTaget) => void
   setAgentsModalItem: (item: IUser) => void
   setAgentsModal: (bool: boolean) => void
   setObjectItemModal: (item: IAgentObjective) => void
@@ -103,7 +99,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const { setSelectedTarget, setSelectedVisit } = useAgentProfileStore()
   const { setSelectedObjectItem } = useMyScheduleCalendar()
   const [taskModal, setTaskModal] = useState(false)
-  const [targetModal, setTargetModal] = useState(false)
   const [objectModal, setObjectModal] = useState(false)
   const [objectCreate, setObjectCreate] = useState(false)
   const [agentOptions, setAgentOptions] = useState(false)
@@ -118,18 +113,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setSelectedProduct(bool)
     if (!bool) {
       // clearSubProducts()
-    }
-  }
-
-  const setTargetModalItem = (item: IAgentTaget) => {
-    setTargetModal(true)
-    setSelectedTarget(item)
-  }
-
-  const closeTargetModalItem = (bool: boolean) => {
-    setTargetModal(bool)
-    if (!bool) {
-      setSelectedTarget(null)
     }
   }
 
@@ -190,10 +173,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setLeftSideBar,
     taskModal,
     setTaskModal,
-    targetModal,
-    setTargetModal,
-    setTargetModalItem,
-
     setObjectItemModal,
     setObjectCreate,
     setAgentOptions,
@@ -237,7 +216,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
       <AgentsModal active={agentsModal} setActive={closeAgentsModalItem} />
 
       {/* implement AGENT MODALS */}
-      <EditTarget active={targetModal} setActive={closeTargetModalItem} />
       <ObjectiveList active={objectModal} setActive={closeObjectItemModal} />
       <ObjectiveCreateModal active={objectCreate} setActive={setObjectCreate} />
       <AgentOptions active={agentOptions} setActive={setAgentOptions} />

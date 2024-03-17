@@ -1,5 +1,4 @@
 import { Card, Grid, IconButton, Typography } from '@mui/material'
-import moment from 'moment-timezone'
 import React, { FC, useState } from 'react'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import VisitPopUp from './VisitPopUp'
@@ -11,7 +10,6 @@ interface VisitItem {
 
 const VisitItem: FC<VisitItem> = ({ item, index }) => {
   const [open, setOpen] = useState(false)
-  console.log('item.hourFrom', item.hourFrom)
 
   return (
     <>
@@ -41,8 +39,7 @@ const VisitItem: FC<VisitItem> = ({ item, index }) => {
           <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
             {item.hourFrom && item.hourTo ? (
               <Typography>
-                {moment(item.hourFrom).tz('Asia/Jerusalem').format('HH')} -{' '}
-                {moment(item.hourTo).tz('Asia/Jerusalem').format('HH')}
+                {item.hourFrom} - {item.hourTo}
               </Typography>
             ) : (
               <Typography>אין תאריכים</Typography>
