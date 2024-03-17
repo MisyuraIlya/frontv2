@@ -25,7 +25,6 @@ export const agentProfileService = {
     const response = await axios.get(apiUrl)
     return response.data
   },
-
   async createAgentObjective(
     object: IAgentObjective
   ): Promise<IAgentObjective> {
@@ -69,7 +68,6 @@ export const agentProfileService = {
     )
     return response.data
   },
-
   async getAgentTargets(
     agentId: number | string | null,
     year: string

@@ -26,7 +26,7 @@ export const AdminClinetsService = {
   },
   async getAgents(): Promise<UsersResponse> {
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/users?itemsPerPage=10000&role[]=ROLE_AGENT&role[]=ROLE_SUPER_AGENT`
+      `${process.env.REACT_APP_API}/api/users?itemsPerPage=100000&role[]=ROLE_AGENT&role[]=ROLE_SUPER_AGENT`
     )
     return response.data
   },

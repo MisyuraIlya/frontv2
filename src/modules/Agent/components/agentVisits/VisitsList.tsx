@@ -3,13 +3,9 @@ import { Card, Grid, IconButton, Typography } from '@mui/material'
 import Loader from '../../../../shared/Loader'
 import moment from 'moment'
 import useDataAgentObjectives from '../../hooks/useDataAgentObjectives'
-import VisitItem from './visitItem'
+import VisitItem from './VisitItem'
 
 const VisitsList = () => {
-  // const { loading, visits } = useAgentProfileStore()
-  // const { isSuperAgent, isAdmin } = useAuth()
-  // const { setVisitModalItem } = useModals()
-
   const { isLoading, data } = useDataAgentObjectives('visit')
   return (
     <Card sx={{ marginTop: '50px' }}>

@@ -34,6 +34,7 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
   )
 
   const createVisit = async (obj: IAgentObjective) => {
+    console.log('createVisit', obj)
     try {
       await agentProfileService.createAgentObjective(obj)
     } catch (e) {
