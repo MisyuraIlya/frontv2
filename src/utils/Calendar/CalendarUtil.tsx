@@ -34,7 +34,7 @@ const StyledCalendarUtil = styled(Box)`
   height: 300px;
   transition: top 0.5s ease;
   background-color: white;
-  z-index: 9999;
+  z-index: 999999;
   &.show {
     top: 30%;
   }

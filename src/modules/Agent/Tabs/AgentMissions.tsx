@@ -1,21 +1,32 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, Fab } from '@mui/material'
+import React, { useState } from 'react'
 import MyScheduleCalendar from '../components/agentMissions/MyScheduleCalendar'
 import WeekFilter from '../components/WeekFilter'
+import AddIcon from '@mui/icons-material/Add'
+import CreateMissionModal from '../components/agentMissions/CreateMissionModal'
 
 const AgentMissions = () => {
-  // const { fetchAgentCalendar, weekFrom, weekTo } = useMyScheduleCalendar()
-  // const { setObjectCreate } = useModals()
-  // const { id } = useParams()
-  // useEffect(() => {
-  //   fetchAgentCalendar()
-  // }, [weekFrom, weekTo, id])
-
+  const [open, setOpen] = useState(false)
   return (
     <Box>
       <WeekFilter />
       <MyScheduleCalendar />
-      {/* <SideButton onClickBtn={() => setObjectCreate(true)} imgLink="" /> */}
+      <Fab
+        onClick={() => setOpen(true)}
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: 'fixed',
+          right: '50px',
+          bottom: '50px',
+          borderRadius: '5px',
+          width: '80px',
+          height: '80px',
+        }}
+      >
+        <AddIcon style={{ fontSize: '50px' }} />
+      </Fab>
+      <CreateMissionModal open={open} setOpen={setOpen} />
     </Box>
   )
 }

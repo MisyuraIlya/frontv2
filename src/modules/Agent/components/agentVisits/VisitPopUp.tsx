@@ -19,7 +19,7 @@ import {
 } from '../../helpers/arrayOfMonths'
 import moment from 'moment'
 import SearchUserList from '../../../../utils/SearchInput/SearchUserList'
-import { onAsk } from '../../../../shared/MySweetAlert'
+import { onAsk, onSuccessAlert } from '../../../../shared/MySweetAlert'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 
 type EditAndCreateVisitForm = {
@@ -73,6 +73,7 @@ const VisitPopUp = ({
       item.hourFrom = data?.hourFrom ?? item.hourFrom
       item.hourTo = data?.hourTo ?? item.hourTo
       updateVisit(item)
+      onSuccessAlert('ביקור עודכן בהצלחה', '')
     } else {
       if (selectedUser && agent) {
         let obj: IAgentObjective = {
@@ -95,6 +96,7 @@ const VisitPopUp = ({
           updatedAt: moment().format('YYYY-MM-DD'),
           subTusk: [],
         }
+        onSuccessAlert('ביקור הוקם בהצלחה', '')
         createVisit(obj)
       }
     }
@@ -105,6 +107,8 @@ const VisitPopUp = ({
     const ask = await onAsk('בטוח תרצה למחוק?', '')
     if (ask && item?.id) {
       deleteVisit(item?.id)
+      setOpen(false)
+      onSuccessAlert('ביקור נמחק בהצלחה', '')
     }
   }
 

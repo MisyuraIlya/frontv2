@@ -48,7 +48,6 @@ interface ModalContextType {
   setLeftSideBar: (bool: boolean) => void
   setAgentsModalItem: (item: IUser) => void
   setAgentsModal: (bool: boolean) => void
-  setObjectCreate: (bool: boolean) => void
   setAgentOptions: (bool: boolean) => void
   setRestoreCartModal: (bool: boolean) => void
   setPdfViwer: (bool: boolean) => void
@@ -94,7 +93,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   //AGENTS
   const { setSelectedTarget, setSelectedVisit } = useAgentProfileStore()
   const { setSelectedObjectItem } = useMyScheduleCalendar()
-  const [objectCreate, setObjectCreate] = useState(false)
   const [agentOptions, setAgentOptions] = useState(false)
   const [restoreCartModal, setRestoreCartModal] = useState(false)
 
@@ -153,7 +151,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setClientRightSideBar,
     leftSideBar,
     setLeftSideBar,
-    setObjectCreate,
     setAgentOptions,
     setAgentsModal,
     setAgentsModalItem,
@@ -195,7 +192,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
       <AgentsModal active={agentsModal} setActive={closeAgentsModalItem} />
 
       {/* implement AGENT MODALS */}
-      <ObjectiveCreateModal active={objectCreate} setActive={setObjectCreate} />
       <AgentOptions active={agentOptions} setActive={setAgentOptions} />
       <PdfViwer active={pdfViwer} setActive={setPdfViwer} />
       <ImageModal active={imageModal} setActive={setImageModal} />

@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import MobileMyScheduleCalendar from './MobileMyScheduleCalendar'
 import {
   HourOfDay,
@@ -10,7 +10,7 @@ import { ConvertHebrewNameDayToWeekDateByWeekName } from '../../helpers/Schedule
 import { useMobile } from '../../../Mobile/store/mobile.store'
 import './MyScheduleCalendar.styles.scss'
 import useDataAgentMissions from '../../hooks/useDataAgentMissions'
-import MissionModal from './MissionModal'
+import MissionModal from './UpdateMissionModal'
 import MySheduleCalendarItem from './MySheduleCalendarItem'
 
 const MyScheduleCalendar = () => {
@@ -18,7 +18,6 @@ const MyScheduleCalendar = () => {
     useMyScheduleCalendar()
   const { isMobile } = useMobile()
   const { data } = useDataAgentMissions(weekFrom, weekTo)
-  console.log('data', data)
   return (
     <>
       {!isMobile ? (

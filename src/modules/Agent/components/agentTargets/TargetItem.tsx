@@ -18,6 +18,7 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 import { themeColors } from '../../../../styles/mui'
 import useDataAgentTargets from '../../hooks/useDataAgentTargets'
 import useDataAgentObjectives from '../../hooks/useDataAgentObjectives'
+import { onSuccessAlert } from '../../../../shared/MySweetAlert'
 
 interface TargetItemProps {
   item: IAgentTaget
@@ -67,6 +68,7 @@ const TargetItem: FC<TargetItemProps> = ({ item, index }) => {
       item.targetValue = number
       createTarget(item)
     }
+    onSuccessAlert('יעד עודכן בהצלחה', '')
     setOpen(false)
   }
 
