@@ -19,6 +19,8 @@ import {
 } from '../../helpers/arrayOfMonths'
 import moment from 'moment'
 import SearchUserList from '../../../../utils/SearchInput/SearchUserList'
+import { onAsk } from '../../../../shared/MySweetAlert'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 
 type EditAndCreateVisitForm = {
   week1: boolean
@@ -41,7 +43,8 @@ const VisitPopUp = ({
 }) => {
   const { agent } = useAuth()
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null)
-  const { createVisit, updateVisit } = useDataAgentObjectives('visit')
+  const { createVisit, updateVisit, deleteVisit } =
+    useDataAgentObjectives('visit')
   const {
     register,
     handleSubmit,
@@ -98,6 +101,13 @@ const VisitPopUp = ({
     setOpen(false)
   }
 
+  const handleDelete = async () => {
+    const ask = await onAsk('בטוח תרצה למחוק?', '')
+    if (ask && item?.id) {
+      deleteVisit(item?.id)
+    }
+  }
+
   const onClickHandle = (user: IUser) => {
     setSelectedUser(user)
   }
@@ -107,9 +117,28 @@ const VisitPopUp = ({
       <form className="centered" onSubmit={handleSubmit(handleClick)}>
         <Box>
           <Typography variant="h5" sx={{ padding: '20px 0' }}>
-            עדכון ביקור
+            {item?.id ? 'עדכון ביקור' : 'יצירת ביקור'}
           </Typography>
-          <SearchUserList onClick={onClickHandle} />
+          {item?.id ? (
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '20px',
+                alignItems: 'center',
+                margin: '10px 0',
+              }}
+            >
+              <PersonOutlineIcon />
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 600, fontSize: '18px' }}
+              >
+                #{item?.client?.extId} - {item?.client?.name}
+              </Typography>
+            </Box>
+          ) : (
+            <SearchUserList onClick={onClickHandle} />
+          )}
           <Typography variant="h5" textAlign={'center'}>
             שבוע
           </Typography>
@@ -231,20 +260,23 @@ const VisitPopUp = ({
           >
             צור ביקור
           </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            type="submit"
-            sx={{
-              fontSize: '18px',
-              position: 'absolute',
-              bottom: '30px',
-              left: '60px',
-              borderRadius: '8px',
-            }}
-          >
-            מחיקה
-          </Button>
+          {item?.id && (
+            <Button
+              onClick={() => handleDelete()}
+              variant="outlined"
+              color="error"
+              type="button"
+              sx={{
+                fontSize: '18px',
+                position: 'absolute',
+                bottom: '30px',
+                left: '60px',
+                borderRadius: '8px',
+              }}
+            >
+              מחיקה
+            </Button>
+          )}
         </Box>
       </form>
     </ModalWrapper>

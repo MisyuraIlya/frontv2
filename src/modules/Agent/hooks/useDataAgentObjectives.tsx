@@ -54,6 +54,16 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
     }
   }
 
+  const deleteVisit = async (id: number | string) => {
+    try {
+      await agentProfileService.deleteAgentObjective(id)
+    } catch (e) {
+      console.log('[ERROR] error', e)
+    } finally {
+      mutate()
+    }
+  }
+
   let hydraPagination
   if (data) {
     hydraPagination = HydraHandler.paginationHandler(data)
@@ -64,6 +74,7 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
     hydraPagination,
     createVisit,
     updateVisit,
+    deleteVisit,
     isLoading: isLoading,
     isError: error,
     isValidating,
