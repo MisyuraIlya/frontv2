@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import MyScheduleCalendar from '../components/MyScheduleCalendar'
+import MyScheduleCalendar from '../components/agentMissions/MyScheduleCalendar'
 import WeekFilter from '../components/WeekFilter'
 
 const AgentMissions = () => {

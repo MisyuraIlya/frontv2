@@ -251,7 +251,7 @@
 
 .taskList {
   h3 {
-    color: $new2;
+    color: #2c1e5d;
   }
 
   .type {
@@ -269,21 +269,21 @@
   .myCenterAlign {
     h4 {
       margin: 8px 0;
-      color: $almost-black;
+      color: #1c1c1c;
     }
 
     &.numCls {
       font-weight: 500;
       margin: 8px 0;
       font-size: 12px;
-      color: $almost-black;
+      color: #1c1c1c;
     }
   }
 }
 
 .modalTitle {
   h3 {
-    color: $new2;
+    color: #2c1e5d;
     margin: 0 10px 16px 0;
   }
 }

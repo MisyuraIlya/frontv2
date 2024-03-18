@@ -16,7 +16,6 @@ import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
 import { useAgentProfileStore } from '../../Agent/store/agentProfile.store'
-import ObjectiveList from '../agentComponents/ObjectiveList'
 import { useMyScheduleCalendar } from '../../Agent/store/ScheduleCalendar.store'
 import ObjectiveCreateModal from '../agentComponents/ObjectiveCreateModal'
 import AgentOptions from '../agentComponents/AgentOptions'
@@ -47,11 +46,8 @@ interface ModalContextType {
   setClientRightSideBar: (bool: boolean) => void
   leftSideBar: boolean
   setLeftSideBar: (bool: boolean) => void
-  taskModal: boolean
-  setTaskModal: (bool: boolean) => void
   setAgentsModalItem: (item: IUser) => void
   setAgentsModal: (bool: boolean) => void
-  setObjectItemModal: (item: IAgentObjective) => void
   setObjectCreate: (bool: boolean) => void
   setAgentOptions: (bool: boolean) => void
   setRestoreCartModal: (bool: boolean) => void
@@ -98,8 +94,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   //AGENTS
   const { setSelectedTarget, setSelectedVisit } = useAgentProfileStore()
   const { setSelectedObjectItem } = useMyScheduleCalendar()
-  const [taskModal, setTaskModal] = useState(false)
-  const [objectModal, setObjectModal] = useState(false)
   const [objectCreate, setObjectCreate] = useState(false)
   const [agentOptions, setAgentOptions] = useState(false)
   const [restoreCartModal, setRestoreCartModal] = useState(false)
@@ -113,18 +107,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setSelectedProduct(bool)
     if (!bool) {
       // clearSubProducts()
-    }
-  }
-
-  const setObjectItemModal = (item: IAgentObjective) => {
-    setObjectModal(true)
-    setSelectedObjectItem(item)
-  }
-
-  const closeObjectItemModal = (bool: boolean) => {
-    setObjectModal(bool)
-    if (!bool) {
-      setSelectedObjectItem(null)
     }
   }
 
@@ -171,9 +153,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setClientRightSideBar,
     leftSideBar,
     setLeftSideBar,
-    taskModal,
-    setTaskModal,
-    setObjectItemModal,
     setObjectCreate,
     setAgentOptions,
     setAgentsModal,
@@ -216,7 +195,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
       <AgentsModal active={agentsModal} setActive={closeAgentsModalItem} />
 
       {/* implement AGENT MODALS */}
-      <ObjectiveList active={objectModal} setActive={closeObjectItemModal} />
       <ObjectiveCreateModal active={objectCreate} setActive={setObjectCreate} />
       <AgentOptions active={agentOptions} setActive={setAgentOptions} />
       <PdfViwer active={pdfViwer} setActive={setPdfViwer} />

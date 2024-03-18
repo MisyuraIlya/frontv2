@@ -7,11 +7,9 @@ interface ScheduleCalendarState {
   loading: boolean
   weekFrom: string
   weekTo: string
-  ScheduleCalendarInfo: IAgentObjective[]
   daysOfWeek: DayOfWeek[]
   hoursOfDay: HourOfDay[]
   handleStatus: (id: number, status: boolean) => void
-  fetchAgentCalendar: () => void
   switchCalendarBackWeek: () => void
   switchCalendarForwardWeek: () => void
   selectedObjectItem: IAgentObjective | null
@@ -58,7 +56,6 @@ export const useMyScheduleCalendar = create<ScheduleCalendarState>(
           status
         )
         onSuccessAlert('נתונים עודכנו בהצלחה', '')
-        get().fetchAgentCalendar()
       } catch (e) {
         console.log('[ERROR] update is completed')
       } finally {
@@ -95,7 +92,6 @@ export const useMyScheduleCalendar = create<ScheduleCalendarState>(
           subTusk: [],
         }
         await agentProfileService.createAgentObjective(obj)
-        await get().fetchAgentCalendar()
       } catch (e) {
         console.log('[ERROR]', e)
       } finally {
@@ -142,23 +138,7 @@ export const useMyScheduleCalendar = create<ScheduleCalendarState>(
       '20:00',
       '21:00',
     ],
-    ScheduleCalendarInfo: [],
-    fetchAgentCalendar: async () => {
-      try {
-        set({ loading: true })
-        const response = await agentSheduleCalendarService.getAgentObjective(
-          // getChoosedAgentId(),
-          '3',
-          get().weekFrom,
-          get().weekTo
-        )
-        set({ ScheduleCalendarInfo: response.data })
-      } catch (e) {
-        console.log('[ERROR] ffetch agent calendar')
-      } finally {
-        set({ loading: false })
-      }
-    },
+
     selectedObjectItem: null,
     setSelectedObjectItem: (value: IAgentObjective | null) =>
       set({ selectedObjectItem: value }),
