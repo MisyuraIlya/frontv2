@@ -41,20 +41,21 @@ const MyScheduleCalendar = () => {
                 <Loader />
               </div>
             ) : (
-              hoursOfDay.map((hour) => (
-                <div key={hour} className="row">
+              hoursOfDay.map((hour, key1) => (
+                <div key={key1} className="row">
                   <div className="cell hour">
                     <p>{hour}</p>
                   </div>
-                  {daysOfWeek.map((day) => (
-                    <div key={`${day}-${hour}`} className="cell">
-                      {data?.data.map((event) => {
+                  {daysOfWeek.map((day, key2) => (
+                    <div key={`${key2}`} className="cell">
+                      {data?.data.map((event, key3) => {
                         if (event.choosedDay == day && event.hourFrom == hour) {
                           const eventDuration =
                             hoursOfDay.indexOf(event.hourTo as HourOfDay) -
                             hoursOfDay.indexOf(event.hourFrom as HourOfDay)
                           return (
                             <MySheduleCalendarItem
+                              key={key3}
                               event={event}
                               day={day}
                               hour={hour}

@@ -48,9 +48,11 @@ export const agentProfileService = {
     object: IAgentObjective
   ): Promise<IAgentObjective> {
     // @ts-ignore
-    object.agent = `/api/users/${object.agent.id ?? object.agent}`
-    // @ts-ignore
-    object.client = `/api/users/${object.client.id ?? object.client}`
+    object.agent = `/api/users/${object?.agent?.id ?? object.agent}`
+    if (object?.client) {
+      // @ts-ignore
+      object.client = `/api/users/${object?.client?.id ?? object.client}`
+    }
     const response = await axios.patch(
       `${process.env.REACT_APP_API}/api/agent_objectives/${object.id}`,
       object,

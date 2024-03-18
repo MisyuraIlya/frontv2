@@ -8,7 +8,7 @@ interface IAgentTaget {
   isCompleted: boolean | null
 }
 
-type objectiveTypes = 'visit' | 'task'
+type objectiveTypes = 'visit' | 'task' | 'mix'
 
 interface IAgentObjective {
   id?: number

@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { useMyScheduleCalendar } from '../store/ScheduleCalendar.store'
 import useDataAgentMissions from '../hooks/useDataAgentMissions'
+import { IconButton } from '@mui/material'
 const WeekFilter = () => {
   const {
     switchCalendarBackWeek,
@@ -13,12 +14,14 @@ const WeekFilter = () => {
   return (
     <div className="WeekFilter myCenterAlign ">
       <div className="img" onClick={() => switchCalendarBackWeek()}>
-        <span
-          className="material-symbols-outlined"
-          style={{ cursor: 'pointer' }}
-        >
-          arrow_forward
-        </span>
+        <IconButton>
+          <span
+            className="material-symbols-outlined"
+            style={{ cursor: 'pointer' }}
+          >
+            arrow_forward
+          </span>
+        </IconButton>
       </div>
       <div className="filterDates">
         <p>
@@ -28,12 +31,14 @@ const WeekFilter = () => {
         </p>
       </div>
       <div className="img" onClick={() => switchCalendarForwardWeek()}>
-        <span
-          className="material-symbols-outlined"
-          style={{ cursor: 'pointer' }}
-        >
-          arrow_back
-        </span>
+        <IconButton>
+          <span
+            className="material-symbols-outlined"
+            style={{ cursor: 'pointer' }}
+          >
+            arrow_back
+          </span>
+        </IconButton>
       </div>
     </div>
   )

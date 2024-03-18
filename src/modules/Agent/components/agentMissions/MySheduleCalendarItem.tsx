@@ -5,23 +5,37 @@ import MissionModal from './UpdateMissionModal'
 type DayOfWeek = 'ראשון' | 'שני' | 'שלישי' | 'רביעי' | 'חמישי' | 'שישי' | 'שבת'
 
 interface MySheduleCalendarItemProps {
+  key: number
   event: IAgentObjective
   day: DayOfWeek
   hour: HourOfDay
   eventDuration: number
 }
 const MySheduleCalendarItem: FC<MySheduleCalendarItemProps> = ({
+  key,
   event,
   day,
   hour,
   eventDuration,
 }) => {
   const [open, setOpen] = useState(false)
+
+  const handleType = () => {
+    if (event.objectiveType === 'mix') {
+      return 'event_3'
+    } else if (event.objectiveType === 'task') {
+      return 'event_2'
+    } else if (event.objectiveType === 'visit') {
+      return 'event_1'
+    } else {
+      return 'event_1'
+    }
+  }
   return (
     <>
       <div
-        key={`${day}-${hour}-${event.hourFrom} event`}
-        className={`event_1`}
+        key={`${key} event`}
+        className={handleType()}
         style={{ height: `${eventDuration * 100}px` }}
         onClick={() => setOpen(!open)}
       >
