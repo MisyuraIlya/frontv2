@@ -22,7 +22,7 @@ const VisitItem: FC<VisitItem> = ({ item, index }) => {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
             {item?.client && (
               <Typography>
                 {item?.client.extId} - {item?.client.name}
@@ -32,10 +32,26 @@ const VisitItem: FC<VisitItem> = ({ item, index }) => {
           <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography>{item.client?.address}</Typography>
           </Grid>
-          <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid
+            item
+            xs={2}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Typography>{item.client?.phone}</Typography>
           </Grid>
-          <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid
+            item
+            xs={2}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             {item.hourFrom && item.hourTo ? (
               <Typography>
                 {item.hourFrom} - {item.hourTo}
@@ -44,10 +60,18 @@ const VisitItem: FC<VisitItem> = ({ item, index }) => {
               <Typography>אין תאריכים</Typography>
             )}
           </Grid>
-          <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid
+            item
+            xs={1}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Typography>{item.choosedDay}</Typography>
           </Grid>
-          <Grid item xs={1} className="myCenterAlign mobileAlign modalBtn">
+          <Grid item xs={1}>
             <IconButton
               onClick={() => setOpen(!open)}
               sx={{

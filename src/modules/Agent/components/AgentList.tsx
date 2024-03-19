@@ -1,7 +1,6 @@
 import React from 'react'
-import { useAgentProfileStore } from '../store/agentProfile.store'
 import { useAuth } from '../../Auth/store/useAuthStore'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import useDataAgents from '../hooks/useDataAgents'
 import {
   Avatar,
@@ -15,17 +14,36 @@ import {
 
 const AgentsList = () => {
   // const { agentList } = useAgentProfileStore()
-  // const { id } = useParams()
+  const { setAgent, user } = useAuth()
+  const { id } = useParams()
+  console.log('user', user)
   // const { pathname } = useLocation()
   // const page = pathname.split('/')[1]
   const { data } = useDataAgents()
+  const navigate = useNavigate()
+
+  const handleChange = (agent: IUser) => {
+    setAgent(agent)
+    navigate(`/agentDashboard/0/${agent.id}`)
+  }
   return (
     <>
       <List sx={{ width: '100%' }}>
         {data?.['hydra:member']?.map((item, index) => (
-          <ListItem alignItems="flex-start">
+          <ListItem
+            onClick={() => handleChange(item)}
+            alignItems="flex-start"
+            key={index}
+            sx={{
+              margin: '10px 0',
+              cursor: 'pointer',
+              borderRadius: '5px',
+              background: id == item.id ? '#d1d9e8' : null,
+              border: user?.id == item.id ? '1px solid #d1d9e8' : null,
+            }}
+          >
             <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              <Avatar alt={item.name} />
             </ListItemAvatar>
             <ListItemText
               primary={item.name}

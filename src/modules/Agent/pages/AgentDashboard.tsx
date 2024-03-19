@@ -41,7 +41,7 @@ const AgentDashboard = () => {
           <Tabs baseRoute="/agentDashboard" params={['tab', 'id']}>
             {components.map((tab, index) => (
               <Tab key={index} label={tab.title}>
-                <Box>{tab.component}</Box>
+                <Box sx={{ margin: '20px 0' }}>{tab.component}</Box>
               </Tab>
             ))}
           </Tabs>

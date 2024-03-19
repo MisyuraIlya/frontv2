@@ -13,9 +13,9 @@ const VisitsList = () => {
         container
         spacing={2}
         className="head"
-        sx={{ borderRadius: '5px', padding: '20px', margin: '10px' }}
+        sx={{ borderRadius: '5px', padding: '30px', margin: '10px' }}
       >
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Typography variant="body1" fontWeight={700}>
             לקוח
           </Typography>
@@ -30,7 +30,7 @@ const VisitsList = () => {
             טלפון
           </Typography>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2}>
           <Typography variant="body1" fontWeight={700}>
             שעות
           </Typography>

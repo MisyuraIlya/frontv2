@@ -15,7 +15,7 @@ const AgentPerformanceInfo = () => {
   const { agent, isAdmin, isSuperAgent } = useAuth()
   const { data } = useDataAgentProfile()
   return (
-    <Card sx={{ padding: '10px', marginTop: '50px' }}>
+    <Card sx={{ padding: '10px' }}>
       <Grid container spacing={10}>
         <Grid item xs={7} className="centered">
           <Grid container spacing={2} className="centered">

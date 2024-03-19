@@ -5,7 +5,6 @@ import {
   removeFromStorage,
   saveToStorage,
   updateAccessToken,
-  getRole,
 } from '../helpers/auth.helper'
 import { onErrorAlert, onSuccessAlert } from '../../../shared/MySweetAlert'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
@@ -19,7 +18,7 @@ interface AuthState {
   user: IUser | null
   agent: IUser | null
   setUser: (user: IUser | null) => void
-
+  setAgent: (user: IUser | null) => void
   // ========== STATES FOR AUTH MODAL ==========
   action: ActionType
   setAction: (value: ActionType) => void
@@ -74,7 +73,7 @@ export const useAuth = create(
       user: null,
       agent: null,
       setUser: (user) => set({ user }),
-
+      setAgent: (agent) => set({ agent }),
       // ========== STATES FOR AUTH MODAL ==========
       action: 'login',
       setAction: (value: ActionType) => set({ action: value }),
