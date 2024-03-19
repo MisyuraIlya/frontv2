@@ -63,63 +63,63 @@ export const NotificationsServices = {
   },
 
   // OneSignalService
-  async registerClient(
-    clientName: string,
-    appId: string,
-    platform: string,
-    isSubscribed: boolean,
-    userExId: string,
-    isAllowed: boolean,
-    type: string
-  ): Promise<NotificationsServicesResponse> {
-    const valAjax = {
-      classPoint: classPoint,
-      funcName: 'registerClient',
-      clientName,
-      appId,
-      platform,
-      isSubscribed,
-      userExId,
-      isAllowed,
-      type,
-      url: URL,
-    }
+  // async registerClient(
+  //   clientName: string,
+  //   appId: string,
+  //   platform: string,
+  //   isSubscribed: boolean,
+  //   userExId: string,
+  //   isAllowed: boolean,
+  //   type: string
+  // ): Promise<NotificationsServicesResponse> {
+  //   const valAjax = {
+  //     classPoint: classPoint,
+  //     funcName: 'registerClient',
+  //     clientName,
+  //     appId,
+  //     platform,
+  //     isSubscribed,
+  //     userExId,
+  //     isAllowed,
+  //     type,
+  //     url: URL,
+  //   }
 
-    const data = await axios.post(URL, valAjax)
-    return data.data
-  },
+  //   const data = await axios.post(URL, valAjax)
+  //   return data.data
+  // },
 
-  async getOrdersPerClient(
-    clientName: string,
-    userExId: string
-  ): Promise<OneSignalServerNotificationResponse> {
-    const valAjax = {
-      classPoint: classPoint,
-      funcName: 'fetchNotificationPerClient',
-      clientName,
-      userExId,
-      url: URL,
-    }
-    const data = await axios.post(URL, valAjax)
-    return data.data
-  },
+  // async getOrdersPerClient(
+  //   clientName: string,
+  //   userExId: string
+  // ): Promise<OneSignalServerNotificationResponse> {
+  //   const valAjax = {
+  //     classPoint: classPoint,
+  //     funcName: 'fetchNotificationPerClient',
+  //     clientName,
+  //     userExId,
+  //     url: URL,
+  //   }
+  //   const data = await axios.post(URL, valAjax)
+  //   return data.data
+  // },
 
-  async handleIsRead(
-    clientName: string,
-    notificationId: string,
-    isRead: boolean
-  ) {
-    const valAjax = {
-      classPoint: classPoint,
-      funcName: 'handleIsRead',
-      clientName,
-      notificationId,
-      isRead,
-      url: URL,
-    }
-    const data = await axios.post(URL, valAjax)
-    return data.data
-  },
+  // async handleIsRead(
+  //   clientName: string,
+  //   notificationId: string,
+  //   isRead: boolean
+  // ) {
+  //   const valAjax = {
+  //     classPoint: classPoint,
+  //     funcName: 'handleIsRead',
+  //     clientName,
+  //     notificationId,
+  //     isRead,
+  //     url: URL,
+  //   }
+  //   const data = await axios.post(URL, valAjax)
+  //   return data.data
+  // },
 
-  async handleReadAll() {},
+  // async handleReadAll() {},
 }

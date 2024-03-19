@@ -133,7 +133,7 @@ const NotificationItem: FC<NotificationItemProps> = ({ element, index }) => {
               name="radio-buttons-group"
             >
               <FormControlLabel
-                value="all"
+                value="allUsers"
                 control={<Radio />}
                 label="כל המשתמשים"
               />

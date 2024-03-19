@@ -16,19 +16,9 @@ interface ISendNotification {
   values: Array<string>
 }
 
-interface IOneSignalServerNotification {
+interface INotificationUser {
   id: number
-  user_ex_id: string
-  title: string
-  description: string
-  link: string | null
-  date: string
-  send_to: string | null
-  img: string | null
-  video: string | null
-  public: boolean | null
-  unpublished: boolean | null
-  type: string | null
-  is_read: number
-  is_flag: number
+  user: IUser
+  notification: INotification
+  isRead: boolean
 }
