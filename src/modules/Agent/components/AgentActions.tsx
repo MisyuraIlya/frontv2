@@ -3,7 +3,6 @@ import { useAuth } from '../../Auth/store/useAuthStore'
 import { useCart } from '../../Cart/store/cart.store'
 import { useNavigate } from 'react-router-dom'
 import { useModals } from '../../Modals/provider/ModalProvider'
-import { useAgentProfileStore } from '../store/agentProfile.store'
 import moment from 'moment'
 import { onSuccessAlert } from '../../../shared/MySweetAlert'
 import { Card, Grid, Typography } from '@mui/material'
@@ -26,7 +25,6 @@ const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
   const { setSelectedMode } = useCart()
   const navigate = useNavigate()
   const { setAgentOptions } = useModals()
-  const { createVisit } = useAgentProfileStore()
 
   const handleCreateVisit = async () => {
     if (user) {
@@ -51,7 +49,7 @@ const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
         subTusk: [],
       }
       // console.log('obj',obj)
-      await createVisit(obj)
+      // await createVisit(obj)
       onSuccessAlert('ביקור התווסף', '')
     }
   }

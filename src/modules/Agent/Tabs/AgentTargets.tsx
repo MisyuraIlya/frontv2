@@ -10,7 +10,7 @@ interface OptionType {
 }
 
 const AgentTargets = () => {
-  const [year, setYear] = useState('2024')
+  const [year, setYear] = useState(moment().year().toString())
 
   const dates: OptionType[] = [
     {

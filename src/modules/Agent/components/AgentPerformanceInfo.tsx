@@ -1,6 +1,5 @@
 import React from 'react'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
-import { useAgentProfileStore } from '../store/agentProfile.store'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
@@ -13,11 +12,10 @@ import MyCheapButton from '../../../shared/MyCheapButton'
 
 const AgentPerformanceInfo = () => {
   const { user, isAdmin, isSuperAgent } = useAuth()
-  const { agentPremormence } = useAgentProfileStore()
 
   return (
     <Card sx={{ padding: '10px', marginTop: '50px' }}>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         <Grid item xs={3} className="centered">
           <Box className="centered" sx={{ gap: '10px' }}>
             <SupportAgentIcon />
@@ -135,7 +133,7 @@ const AgentPerformanceInfo = () => {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
     </Card>
   )
 }

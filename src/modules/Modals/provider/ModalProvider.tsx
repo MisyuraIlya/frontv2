@@ -15,11 +15,9 @@ import ClientRightSideBar from '../adminComponents/ClientRightSideBar/ClientRigh
 import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
-import { useAgentProfileStore } from '../../Agent/store/agentProfile.store'
 import { useMyScheduleCalendar } from '../../Agent/store/ScheduleCalendar.store'
 import ObjectiveCreateModal from '../agentComponents/ObjectiveCreateModal'
 import AgentOptions from '../agentComponents/AgentOptions'
-import AgentsModal from '../adminComponents/AgentsModal/AgentsModal'
 import { useClientStore } from '../../Admin/store/ClientsStore'
 import RestoreCartModal from '../agentComponents/RestoreCartModal'
 import PdfViwer from '../components/PdfViwer/PdfViwer'
@@ -91,7 +89,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [agentsModal, setAgentsModal] = useState(false)
 
   //AGENTS
-  const { setSelectedTarget, setSelectedVisit } = useAgentProfileStore()
   const { setSelectedObjectItem } = useMyScheduleCalendar()
   const [agentOptions, setAgentOptions] = useState(false)
   const [restoreCartModal, setRestoreCartModal] = useState(false)
@@ -189,7 +186,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
       <LeftSideBar active={leftSideBar} setActive={setLeftSideBar} />
       {/* ADMINS */}
       <Gallery active={gallery} setActive={setGallery} />
-      <AgentsModal active={agentsModal} setActive={closeAgentsModalItem} />
 
       {/* implement AGENT MODALS */}
       <AgentOptions active={agentOptions} setActive={setAgentOptions} />

@@ -111,10 +111,16 @@ interface ITodayObjectives {
   objectiveCompleted: number
 }
 
+interface IGoals {
+  name: string
+  value: number
+  strokeColor: string
+}
+
 interface IMonthAgenthSale {
   y: number
   x: string
-  goals: number
+  goals: IGoals[]
 }
 
 interface IScheduleCalendar {

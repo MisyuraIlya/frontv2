@@ -1,19 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import MyCard from '../../../shared/MyCard'
+import React, { useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
-import YearSelectorBanner from './YearSelectorBanner'
-import { useAgentProfileStore } from '../store/agentProfile.store'
-import { Card, Typography } from '@mui/material'
+import { Card, MenuItem, Select, Typography } from '@mui/material'
+import moment from 'moment'
+import useDataAgentTargets from '../hooks/useDataAgentTargets'
+import { MONTH_HEBREW_1 } from '../helpers/arrayOfMonths'
+import { themeColors } from '../../../styles/mui'
+
+interface OptionType {
+  value: string
+  label: string
+}
 
 const TargetsDashboard = () => {
-  const { monthAgentSales } = useAgentProfileStore()
-  const seriesDesktop = [
+  const [year, setYear] = useState(moment().year().toString())
+  const dates: OptionType[] = [
     {
-      name: 'Actual',
-      data: monthAgentSales,
+      value: (moment().year() - 1).toString(),
+      label: (moment().year() - 1).toString(),
+    },
+    { value: moment().year().toString(), label: moment().year().toString() },
+    {
+      value: (moment().year() + 1).toString(),
+      label: (moment().year() + 1).toString(),
     },
   ]
-
+  const { data } = useDataAgentTargets(year)
+  const sales: IMonthAgenthSale[] = MONTH_HEBREW_1.map((item) => {
+    const matchingData = data?.['hydra:member']?.find(
+      (res) => item.name === res.month
+    )
+    return {
+      y: matchingData ? matchingData.currentValue ?? 0 : 0,
+      x: matchingData ? matchingData.month : '',
+      goals: [
+        {
+          name: 'יעד מכירות',
+          value: matchingData ? matchingData.targetValue ?? 0 : 0,
+          strokeColor: themeColors.primary,
+        },
+      ],
+    }
+  })
+  const seriesDesktop = [
+    {
+      name: 'מכירות',
+      data: sales,
+    },
+  ]
   const optionsMob = {
     chart: {
       height: 350,
@@ -76,14 +109,21 @@ const TargetsDashboard = () => {
       colors: ['#FFAD0D', '#6F3FF5'],
     },
   }
-
   return (
-    <Card sx={{ marginTop: '50px' }}>
+    <Card sx={{ margin: '50px 0', padding: '0 50px' }}>
       <Typography variant="h6">עמידה ביעדים</Typography>
 
-      {/* <div className="myMarginTop">
-            <YearSelectorBanner isDashborad={true} />
-          </div> */}
+      <Select
+        value={year}
+        sx={{ height: '40px', minWidth: '150px' }}
+        onChange={(e) => setYear(e.target.value)}
+      >
+        {dates?.map((item, index) => (
+          <MenuItem value={item.value} key={index}>
+            {item.value}
+          </MenuItem>
+        ))}
+      </Select>
       {window.innerWidth > 1050 ? (
         <>
           <ReactApexChart
