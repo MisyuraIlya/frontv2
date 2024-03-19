@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Grid, IconButton, Typography } from '@mui/material'
+import { Box, Card, Grid, IconButton, Typography } from '@mui/material'
 import Loader from '../../../../shared/Loader'
 import moment from 'moment'
 import useDataAgentObjectives from '../../hooks/useDataAgentObjectives'
@@ -53,6 +53,14 @@ const VisitsList = () => {
         data?.['hydra:member']?.map((item, index) => (
           <VisitItem item={item} index={index} />
         ))
+      )}
+
+      {data?.['hydra:member'].length === 0 && (
+        <Box className="centered" sx={{ minHeight: '100px' }}>
+          <Typography variant="body1" fontWeight={700}>
+            לא נמצאו תוצאות
+          </Typography>
+        </Box>
       )}
     </Card>
   )

@@ -10,7 +10,6 @@ interface VisitItem {
 
 const VisitItem: FC<VisitItem> = ({ item, index }) => {
   const [open, setOpen] = useState(false)
-
   return (
     <>
       <Card
@@ -23,13 +22,13 @@ const VisitItem: FC<VisitItem> = ({ item, index }) => {
         }}
       >
         <Grid container spacing={2}>
-          {item?.client && (
-            <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
+            {item?.client && (
               <Typography>
                 {item?.client.extId} - {item?.client.name}
               </Typography>
-            </Grid>
-          )}
+            )}
+          </Grid>
           <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography>{item.client?.address}</Typography>
           </Grid>

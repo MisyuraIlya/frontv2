@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { IsInteger } from '../../../helpers/IsInteger'
 
 interface AgentObjectiveResponse extends Hydra {
   'hydra:member': IAgentObjective[]
@@ -27,7 +28,11 @@ export const agentProfileService = {
         apiUrl += `&agent.id=${agentId}`
       }
       if (search) {
-        apiUrl += `&client.extId=${search}`
+        if (IsInteger(search)) {
+          apiUrl += `&client.extId=${search}`
+        } else {
+          apiUrl += `&client.name=${search}`
+        }
       }
       if (dateFrom && dateTo) {
         apiUrl += `&date[before]=${dateFrom}&date[after]=${dateTo}`

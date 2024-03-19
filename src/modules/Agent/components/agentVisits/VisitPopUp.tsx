@@ -80,7 +80,7 @@ const VisitPopUp = ({
           agent: agent,
           client: selectedUser,
           isCompleted: false,
-          completedAt: moment().format('YYYY-MM-DD'),
+          completedAt: null,
           title: '',
           description: '',
           week1: data.week1,
