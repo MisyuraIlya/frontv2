@@ -15,15 +15,25 @@ const fetchData = async (agentId: string, dateFrom: string, dateTo: string) => {
   )
 }
 
+const fetchDataProfile = async (agentId: string) => {
+  return await agentProfileService.getAgentProfile(agentId)
+}
+
 type RouteParams = {
   id: string
 }
 
 const useDataAgentDashboard = (weekFrom: string, weekTo: string) => {
   const { id } = useParams<RouteParams>()
+
   const { data, error, isLoading, isValidating, mutate } = useSWR(
     `/api/calendar/${id}/${weekFrom}/${weekTo}`,
     () => fetchData(id!, weekFrom, weekTo)
+  )
+
+  const { data: profile, isLoading: profileLoading } = useSWR(
+    `/agentProfile/${id}`,
+    () => fetchDataProfile(id!)
   )
 
   const updateObjective = async (obj: IAgentObjective) => {
@@ -38,6 +48,8 @@ const useDataAgentDashboard = (weekFrom: string, weekTo: string) => {
 
   return {
     data,
+    profile,
+    profileLoading,
     isLoading: isLoading,
     isError: error,
     updateObjective,

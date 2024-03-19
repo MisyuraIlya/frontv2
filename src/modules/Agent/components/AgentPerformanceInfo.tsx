@@ -9,25 +9,26 @@ import LegendToggleIcon from '@mui/icons-material/LegendToggle'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import GroupIcon from '@mui/icons-material/Group'
 import MyCheapButton from '../../../shared/MyCheapButton'
+import useDataAgentProfile from '../hooks/useDataAgentProfile'
 
 const AgentPerformanceInfo = () => {
-  const { user, isAdmin, isSuperAgent } = useAuth()
-
+  const { agent, isAdmin, isSuperAgent } = useAuth()
+  const { data } = useDataAgentProfile()
   return (
     <Card sx={{ padding: '10px', marginTop: '50px' }}>
-      {/* <Grid container spacing={2}>
-        <Grid item xs={3} className="centered">
-          <Box className="centered" sx={{ gap: '10px' }}>
-            <SupportAgentIcon />
-            <Box sx={{ marginTop: '5px' }}>
-              <Typography>{user?.name}</Typography>
-              <Typography>{user?.phone}</Typography>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={5}>
-          <Grid container spacing={2}>
-            <Grid item xs={6} sx={{ gap: '5px' }}>
+      <Grid container spacing={10}>
+        <Grid item xs={7} className="centered">
+          <Grid container spacing={2} className="centered">
+            <Grid item xs={4} sx={{ gap: '5px' }}>
+              <Box className="centered" sx={{ gap: '10px' }}>
+                <SupportAgentIcon />
+                <Box sx={{ marginTop: '5px' }}>
+                  <Typography>{agent?.name}</Typography>
+                  <Typography>{agent?.phone}</Typography>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={4} sx={{ gap: '5px' }}>
               <Grid container spacing={0} className="centered">
                 <Grid item xs={2}>
                   <LegendToggleIcon />
@@ -37,12 +38,12 @@ const AgentPerformanceInfo = () => {
                 </Grid>
                 <Grid item xs={5}>
                   <MyCheapButton>
-                    {numberWithCommas(agentPremormence?.totalOrderSum)}
+                    {numberWithCommas(data?.totalPriceMonth)}
                   </MyCheapButton>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6} sx={{ gap: '5px' }}>
+            <Grid item xs={4} sx={{ gap: '5px' }}>
               <Grid container spacing={0} className="centered">
                 <Grid item xs={2}>
                   <LegendToggleIcon />
@@ -52,12 +53,12 @@ const AgentPerformanceInfo = () => {
                 </Grid>
                 <Grid item xs={5}>
                   <MyCheapButton>
-                    {numberWithCommas(agentPremormence?.totalOrderSum)}
+                    {numberWithCommas(data?.totalPriceYear)}
                   </MyCheapButton>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6} sx={{ gap: '5px' }}>
+            <Grid item xs={4} sx={{ gap: '5px' }}>
               <Grid container spacing={0} className="centered">
                 <Grid item xs={2}>
                   <AnalyticsIcon />
@@ -67,29 +68,14 @@ const AgentPerformanceInfo = () => {
                 </Grid>
                 <Grid item xs={5}>
                   <MyCheapButton>
-                    {numberWithCommas(agentPremormence?.monthlyAverage)}
-                  </MyCheapButton>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={6} sx={{ gap: '5px' }}>
-              <Grid container spacing={0} className="centered">
-                <Grid item xs={2}>
-                  <GroupIcon />
-                </Grid>
-                <Grid item xs={5}>
-                  <Typography variant="body2">{'לקוחות'}</Typography>
-                </Grid>
-                <Grid item xs={5}>
-                  <MyCheapButton>
-                    {numberWithCommas(agentPremormence?.clientsAssigned)}
+                    {numberWithCommas(data?.averageBasket)}
                   </MyCheapButton>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Grid container spacing={2}>
             <Grid item xs={6} sx={{ gap: '5px' }}>
               <Typography variant="body2" textAlign={'center'}>
@@ -97,7 +83,7 @@ const AgentPerformanceInfo = () => {
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
                 <MyCheapButton>
-                  {numberWithCommas(agentPremormence?.dailySalesQuantity)}
+                  {numberWithCommas(data?.totalPriceDay)}
                 </MyCheapButton>
               </Box>
             </Grid>
@@ -107,17 +93,17 @@ const AgentPerformanceInfo = () => {
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
                 <MyCheapButton>
-                  {numberWithCommas(agentPremormence?.dailySalesQuantity)}
+                  {numberWithCommas(data?.totalDayCount)}
                 </MyCheapButton>
               </Box>
             </Grid>
             <Grid item xs={6} sx={{ gap: '5px' }}>
               <Typography variant="body2" textAlign={'center'}>
-                {'סה״כ חודשי'}
+                {'סה"כ משימות'}
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
                 <MyCheapButton>
-                  {numberWithCommas(agentPremormence?.monthlySalesSum)}
+                  {numberWithCommas(data?.totalMissions)}
                 </MyCheapButton>
               </Box>
             </Grid>
@@ -127,13 +113,13 @@ const AgentPerformanceInfo = () => {
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
                 <MyCheapButton>
-                  {numberWithCommas(agentPremormence?.targetPercentage)}
+                  {numberWithCommas(data?.targetPrecent)}
                 </MyCheapButton>
               </Box>
             </Grid>
           </Grid>
         </Grid>
-      </Grid> */}
+      </Grid>
     </Card>
   )
 }

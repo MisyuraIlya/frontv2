@@ -14,7 +14,7 @@ const MyCheapButton: FC<MyCheapButtonProps> = ({ children, sx }) => {
         ...sx,
         borderRadius: '5px',
         minWidth: '50px',
-        backgroundColor: '#ecf4ff',
+        backgroundColor: '#f7f9fc',
         padding: '5px 15px',
         '&:hover': { backgroundColor: '#ecf1f8' },
       }}

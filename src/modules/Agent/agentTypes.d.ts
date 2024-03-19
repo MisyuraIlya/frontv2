@@ -32,6 +32,19 @@ interface IAgentObjective {
   subTusk: IAgentObjective[]
 }
 
+interface IAgentProfile {
+  totalPriceMonth: number
+  totalPriceYear: number
+  averageBasket: number
+  totalClients: number
+
+  totalPriceDay: number
+  totalDayCount: number
+
+  totalMissions: number
+  targetPrecent: number
+}
+
 //MERGE VISIT WITH OBJECTIVE the same
 // interface IAgnetVisit {
 //   id: number;

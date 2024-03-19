@@ -9,6 +9,7 @@ interface AgentTargetResponse extends Hydra {
 }
 
 export const agentProfileService = {
+  // OBJECTIVES
   async getAgentObjective(
     page: string | number,
     type?: objectiveTypes | null,
@@ -84,6 +85,8 @@ export const agentProfileService = {
     )
     return response.data
   },
+
+  // TARGETS
   async getAgentTargets(
     agentId: number | string | null,
     year: string
@@ -119,6 +122,16 @@ export const agentProfileService = {
   async deleteAgentTarget(id: number | string): Promise<void> {
     const response = await axios.delete(
       `${process.env.REACT_APP_API}/api/agent_objectives/${id}`
+    )
+    return response.data
+  },
+
+  // AgentProfile
+  async getAgentProfile(
+    agentId: number | string | null
+  ): Promise<IAgentProfile> {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/agentProfile/${agentId}`
     )
     return response.data
   },
