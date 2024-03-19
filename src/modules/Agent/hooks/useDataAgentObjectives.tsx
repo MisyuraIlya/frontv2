@@ -28,6 +28,7 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
   const page = urlSearchParams.get('page')
   const search = urlSearchParams.get('search')
   const { id } = useParams<RouteParams>()
+
   const { data, error, isLoading, isValidating, mutate } = useSWR(
     `api/agent_objectives/${id}?page=${page}&${search}`,
     () => fetchData(page!, objective, search!, id!)

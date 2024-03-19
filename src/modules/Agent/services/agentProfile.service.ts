@@ -11,19 +11,33 @@ interface AgentTargetResponse extends Hydra {
 export const agentProfileService = {
   async getAgentObjective(
     page: string | number,
-    type: objectiveTypes,
-    search?: string,
-    agentId?: string
+    type?: objectiveTypes | null,
+    search?: string | null,
+    agentId?: string | null,
+    dateFrom?: string | null,
+    dateTo?: string | null
   ): Promise<AgentObjectiveResponse> {
-    let apiUrl = `${process.env.REACT_APP_API}/api/agent_objectives?page=${page}&objectiveType=${type}`
-    if (agentId) {
-      apiUrl += `&agent.id=${agentId}`
+    try {
+      let apiUrl = `${process.env.REACT_APP_API}/api/agent_objectives?page=${page}`
+      if (type) {
+        apiUrl += `&objectiveType=${type}`
+      }
+      if (agentId) {
+        apiUrl += `&agent.id=${agentId}`
+      }
+      if (search) {
+        apiUrl += `&client.extId=${search}`
+      }
+      if (dateFrom && dateTo) {
+        apiUrl += `&date[before]=${dateFrom}&date[after]=${dateTo}`
+      }
+      const response = await axios.get(apiUrl)
+      return response.data
+    } catch (error) {
+      // Handle error here
+      console.error('Error fetching agent objectives:', error)
+      throw error // Optionally rethrow the error
     }
-    if (search) {
-      apiUrl += `&client.extId=${search}`
-    }
-    const response = await axios.get(apiUrl)
-    return response.data
   },
   async createAgentObjective(
     object: IAgentObjective
