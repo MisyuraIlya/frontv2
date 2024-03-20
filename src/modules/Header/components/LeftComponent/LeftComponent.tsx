@@ -21,9 +21,11 @@ import { clientURL } from '../../../../enums/url'
 import NotificationContainer from '../../../PushNotifications/components/NotificationContainer/NotificationContainer'
 import { themeColors } from '../../../../styles/mui'
 import { onAsk } from '../../../../shared/MySweetAlert'
+import useDataNotificationUser from '../../../PushNotifications/hooks/useDataNotificationUser'
 const LeftComponent = () => {
   const { user, isAgent, agent, setAction, logOut, setUser } = useAuth()
   const { cart, selectedMode } = useCart()
+  const { data: notificationData } = useDataNotificationUser()
   const [openProfile, setOpenProfile] = useState<boolean>(false)
   const { setOpenAuthModal } = useModals()
   const navigate = useNavigate()
@@ -93,7 +95,6 @@ const LeftComponent = () => {
       }
     }
   }
-  console.log('isAgent', isAgent)
   return (
     <>
       <Box
@@ -115,18 +116,29 @@ const LeftComponent = () => {
                   onClick={() => handleClick(value)}
                   onMouseEnter={(e) => handleOnMouseOver(value, e)}
                 >
-                  {value.WITH_BADGE ? (
+                  {value === clientURL.CART && (
+                    <Tooltip title={value.LABEL}>
+                      <Badge badgeContent={cart.length ?? 0} color="secondary">
+                        {value.ICON}
+                      </Badge>
+                    </Tooltip>
+                  )}
+                  {value === clientURL.NOTIFICATIONS && (
                     <Tooltip title={value.LABEL}>
                       <Badge
-                        badgeContent={value.LABEL === 'עגלה' ? cart.length : 0}
+                        badgeContent={
+                          notificationData?.['hydra:totalItems'] ?? 0
+                        }
                         color="secondary"
                       >
                         {value.ICON}
                       </Badge>
                     </Tooltip>
-                  ) : (
-                    <Tooltip title={value.LABEL}>{value.ICON}</Tooltip>
                   )}
+                  {value !== clientURL.CART &&
+                    value !== clientURL.NOTIFICATIONS && (
+                      <Tooltip title={value.LABEL}>{value.ICON}</Tooltip>
+                    )}
                 </IconButton>
               )
             }
@@ -242,8 +254,8 @@ const LeftComponent = () => {
         open={openDrawver}
         onClose={() => setOpenDrawver(false)}
       >
-        <Box sx={{ minWidth: '310px' }} className="centered">
-          <Box>
+        <Box sx={{ minWidth: '350px' }} className="centered">
+          <Box sx={{ width: '90%' }}>
             <Typography
               variant="h6"
               sx={{

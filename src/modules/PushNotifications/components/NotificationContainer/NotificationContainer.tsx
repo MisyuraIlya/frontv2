@@ -5,7 +5,6 @@ import { Box } from '@mui/material'
 import useDataNotificationUser from '../../hooks/useDataNotificationUser'
 
 const NotificationContainer = () => {
-  // const { oneSignalNotifications } = useOneSignalStore()
   const { data } = useDataNotificationUser()
 
   return (
