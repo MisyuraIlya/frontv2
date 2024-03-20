@@ -8,10 +8,9 @@ interface NotificationsServicesResponse {
   message: string
   data: boolean
 }
-interface OneSignalServerNotificationResponse {
-  status: 'sucsses' | 'error'
-  message: string
-  data: IOneSignalServerNotification[]
+
+interface GetNotificationResponse extends Hydra {
+  'hydra:member': INotification[]
 }
 
 export const NotificationsServices = {
