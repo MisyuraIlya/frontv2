@@ -12,7 +12,6 @@ import ProductPopUp from '../components/ProductPopUp/ProductPopUp'
 import TablePopUp from '../components/TablePopUp/TablePopUp'
 import PayPopUp from '../components/PayPopUp/PayPopUp'
 import ClientRightSideBar from '../adminComponents/ClientRightSideBar/ClientRightSideBar'
-import LeftSideBar from '../components/LeftSideBar/LeftSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
 import { useMyScheduleCalendar } from '../../Agent/store/ScheduleCalendar.store'
@@ -42,8 +41,6 @@ interface ModalContextType {
   setGallery: (bool: boolean) => void
   clientRightSideBar: boolean
   setClientRightSideBar: (bool: boolean) => void
-  leftSideBar: boolean
-  setLeftSideBar: (bool: boolean) => void
   setAgentsModalItem: (item: IUser) => void
   setAgentsModal: (bool: boolean) => void
   setAgentOptions: (bool: boolean) => void
@@ -78,7 +75,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [openMobileSideBar, setOpenMobileSideBar] = useState(false)
   const [openSideBar, setOpenSideBar] = useState(false)
   const [clientRightSideBar, setClientRightSideBar] = useState(false)
-  const [leftSideBar, setLeftSideBar] = useState(false)
   const [pdfLinkOrBase64, setPdfLinkOrBase64] = useState('')
   const [pdfViwer, setPdfViwer] = useState(false)
   const [srcImageModal, setImageSrcModal] = useState('')
@@ -146,8 +142,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setGallery,
     clientRightSideBar,
     setClientRightSideBar,
-    leftSideBar,
-    setLeftSideBar,
     setAgentOptions,
     setAgentsModal,
     setAgentsModalItem,
@@ -183,7 +177,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
         setActive={setClientRightSideBar}
       />
 
-      <LeftSideBar active={leftSideBar} setActive={setLeftSideBar} />
       {/* ADMINS */}
       <Gallery active={gallery} setActive={setGallery} />
 

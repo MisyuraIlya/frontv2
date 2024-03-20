@@ -1,18 +1,21 @@
 import React from 'react'
 import NotificationCard from '../NotificationCard/NotificationCard'
 import './NotificationContainer.styles.scss'
-import { useOneSignalStore } from '../../store/oneSignalStore'
+import { Box } from '@mui/material'
+import useDataNotificationUser from '../../hooks/useDataNotificationUser'
 
 const NotificationContainer = () => {
-  const { oneSignalNotifications } = useOneSignalStore()
+  // const { oneSignalNotifications } = useOneSignalStore()
+  const { data } = useDataNotificationUser()
+
   return (
-    <div className="NotificationContainer">
-      <div className="notificationWrapper">
-        {oneSignalNotifications?.map((element, index) => (
-          <NotificationCard element={element} index={index} />
-        ))}
-      </div>
-    </div>
+    <Box sx={{ width: '100%' }}>
+      {data?.['hydra:member']?.map((item, index) => (
+        <Box key={index}>
+          <NotificationCard element={item} />
+        </Box>
+      ))}
+    </Box>
   )
 }
 

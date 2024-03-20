@@ -15,7 +15,10 @@ const useDataNotificationUser = () => {
     fetchData(user?.id!)
   )
 
-  const updateNotificationUser = async (obj: INotificationUser) => {
+  const updateNotificationUser = async (obj: {
+    id: number
+    isRead: boolean
+  }) => {
     await clientNotifications.updateNotification(obj)
     mutate()
   }

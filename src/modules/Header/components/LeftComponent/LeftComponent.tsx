@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../../Auth/store/useAuthStore'
 import { useModals } from '../../../Modals/provider/ModalProvider'
-import ProfileMenu from './components/ProfileMenu'
 import { useCart } from '../../../Cart/store/cart.store'
 import { Link, useNavigate } from 'react-router-dom'
 import {
@@ -27,7 +26,7 @@ const LeftComponent = () => {
   const { user, isAgent, agent, setAction, logOut, setUser } = useAuth()
   const { cart, selectedMode } = useCart()
   const [openProfile, setOpenProfile] = useState<boolean>(false)
-  const { setOpenAuthModal, leftSideBar, setLeftSideBar } = useModals()
+  const { setOpenAuthModal } = useModals()
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -246,7 +245,16 @@ const LeftComponent = () => {
       >
         <Box sx={{ minWidth: '310px' }} className="centered">
           <Box>
-            <Typography variant="h6">הודעות</Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: 'center',
+                color: themeColors.primary,
+                marginTop: '20px',
+              }}
+            >
+              הודעות
+            </Typography>
             <NotificationContainer />
           </Box>
         </Box>

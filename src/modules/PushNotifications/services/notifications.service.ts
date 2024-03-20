@@ -3,10 +3,6 @@ import axios from 'axios'
 const URL = 'https://digitrade.host/helpers/onesignal/src/index.php'
 const classPoint = 'OneSignal'
 
-interface GetNotificationResponse extends Hydra {
-  'hydra:member': INotification[] // Define a more specific type if possible
-}
-
 interface NotificationsServicesResponse {
   status: 'sucsses' | 'error'
   message: string

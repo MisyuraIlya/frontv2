@@ -21,4 +21,5 @@ interface INotificationUser {
   user: IUser
   notification: INotification
   isRead: boolean
+  createdAt: string
 }
