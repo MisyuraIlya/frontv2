@@ -6,6 +6,8 @@ interface useMobileState {
   isAndroid: boolean
   isPwa: boolean
   isMobile: boolean
+  showMobileSearch: boolean
+  setSHowMobileSearch: (value: boolean) => void
 }
 
 export const useMobile = create<useMobileState>((set, get) => ({
@@ -15,4 +17,8 @@ export const useMobile = create<useMobileState>((set, get) => ({
   isIPhone: /iPhone/i.test(navigator.userAgent),
   isAndroid: /Android/i.test(navigator.userAgent),
   isPwa: window.matchMedia('(display-mode: standalone)').matches,
+
+  //header
+  showMobileSearch: false,
+  setSHowMobileSearch: (value: boolean) => set({ showMobileSearch: value }),
 }))

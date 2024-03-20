@@ -18,12 +18,13 @@ import { useAuth } from './modules/Auth/store/useAuthStore'
 import { Box } from '@mui/material'
 import Users from './modules/Admin/pages/Users'
 import BottomNavigationMobile from './components/BottomNavigationMobile'
+import { useMobile } from './modules/Mobile/store/mobile.store'
 
 const RouterApp = () => {
   const { user } = useAuth()
+  const { isMobile } = useMobile()
   const isAuthenticated = !!user
   const navigate = useNavigate()
-
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/')
