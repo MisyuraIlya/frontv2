@@ -19,23 +19,29 @@ const ProductCard: FC<ProductCardProps> = ({ product, listView = false }) => {
         <Grid item xs={listView ? 6 : 12}>
           <BasicInfo product={product} />
         </Grid>
-        <Box
-          sx={{
-            height: '10x',
-            marginBottom: '5px',
-            borderTop: '1px solid rgba(65,67,106,.43137254901960786);',
-            width: '100%',
-          }}
-        />
+        {isAgent && (
+          <Box
+            sx={{
+              height: '10x',
+              marginBottom: '5px',
+              borderTop: '1px solid rgba(65,67,106,.43137254901960786);',
+              width: '100%',
+            }}
+          />
+        )}
+
         {isAgent && <AgentHandler product={product} />}
-        <Box
-          sx={{
-            height: '10x',
-            marginTop: '5px',
-            borderBottom: '1px solid rgba(65,67,106,.43137254901960786);',
-            width: '100%',
-          }}
-        />
+        {isAgent && (
+          <Box
+            sx={{
+              height: '10x',
+              marginTop: '5px',
+              borderBottom: '1px solid rgba(65,67,106,.43137254901960786);',
+              width: '100%',
+            }}
+          />
+        )}
+
         <Grid item xs={listView ? 6 : 12}>
           <Box
             sx={

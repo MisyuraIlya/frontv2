@@ -11,6 +11,7 @@ import {
 } from '@mui/material'
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { themeColors } from '../../../styles/mui'
 
 interface ProductListProps {
   array: Array<IProduct>
@@ -41,8 +42,16 @@ const ProductList: FC<ProductListProps> = ({
       }}
     >
       <Box sx={{ height: '80%', overflow: 'auto' }}>
+        {!loading && array.length === 0 && (
+          <Box className="centered" sx={{ height: '80%' }}>
+            <Typography variant="h6" color={themeColors.primary}>
+              לא נמצאו מוצרים
+            </Typography>
+          </Box>
+        )}
+
         {loading ? (
-          <Box sx={{ display: 'flex', height: '300px' }} className="centered">
+          <Box className="centered">
             <CircularProgress />
           </Box>
         ) : (
@@ -100,6 +109,7 @@ const ProductList: FC<ProductListProps> = ({
           </List>
         )}
       </Box>
+
       <Box sx={{ height: '10%', marginTop: '15px' }} className="centered">
         <Button
           variant="outlined"

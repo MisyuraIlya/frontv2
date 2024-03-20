@@ -226,6 +226,13 @@ export const useAuth = create(
       },
 
       logOut: () => {
+        set({
+          isAdmin: false,
+          isAgent: false,
+          isClient: false,
+          isSuperAgent: false,
+        })
+        localStorage.clear()
         removeFromStorage()
         set({ user: null, agent: null })
         window.location.href = '/'

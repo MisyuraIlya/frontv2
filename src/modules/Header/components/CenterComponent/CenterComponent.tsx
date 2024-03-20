@@ -6,11 +6,12 @@ import ProductList from '../../../../utils/SearchInput/components/ProductList'
 import useSWR from 'swr'
 import { CatalogServices } from '../../../Catalog/services/catalog.service'
 import { useDebounce } from 'use-debounce'
+import { useModals } from '../../../Modals/provider/ModalProvider'
 
 const CenterComponent = () => {
   const [search, setSearch] = useState<string>('')
   const [valueDebounced] = useDebounce(search, 400)
-
+  const { selectProduct } = useModals()
   const fetchData = async (): Promise<GetCatalogResponse> => {
     if (valueDebounced) {
       return await CatalogServices.GetCatalog(
@@ -36,7 +37,7 @@ const CenterComponent = () => {
   }
 
   const onClickHandle = (product: IProduct) => {
-    console.log('product', product)
+    selectProduct(product)
   }
 
   const { data, isLoading, mutate } = useSWR<GetCatalogResponse>(
