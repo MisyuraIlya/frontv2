@@ -17,6 +17,7 @@ import AgentDashboard from './modules/Agent/pages/AgentDashboard'
 import { useAuth } from './modules/Auth/store/useAuthStore'
 import { Box } from '@mui/material'
 import Users from './modules/Admin/pages/Users'
+import BottomNavigationMobile from './components/BottomNavigationMobile'
 
 const RouterApp = () => {
   const { user } = useAuth()
@@ -74,6 +75,7 @@ const RouterApp = () => {
           </Route>
         </Routes>
       </Box>
+      <BottomNavigationMobile />
     </>
   )
 }
