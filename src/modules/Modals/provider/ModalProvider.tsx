@@ -14,8 +14,6 @@ import PayPopUp from '../components/PayPopUp/PayPopUp'
 import ClientRightSideBar from '../adminComponents/ClientRightSideBar/ClientRightSideBar'
 import Gallery from '../adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
-import { useMyScheduleCalendar } from '../../Agent/store/ScheduleCalendar.store'
-import ObjectiveCreateModal from '../agentComponents/ObjectiveCreateModal'
 import AgentOptions from '../agentComponents/AgentOptions'
 import { useClientStore } from '../../Admin/store/ClientsStore'
 import RestoreCartModal from '../agentComponents/RestoreCartModal'
@@ -41,8 +39,6 @@ interface ModalContextType {
   setGallery: (bool: boolean) => void
   clientRightSideBar: boolean
   setClientRightSideBar: (bool: boolean) => void
-  setAgentsModalItem: (item: IUser) => void
-  setAgentsModal: (bool: boolean) => void
   setAgentOptions: (bool: boolean) => void
   setRestoreCartModal: (bool: boolean) => void
   setPdfViwer: (bool: boolean) => void
@@ -82,10 +78,8 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   //ADMINS
   const { setSelectedAgent } = useClientStore()
   const [gallery, setGallery] = useState(false)
-  const [agentsModal, setAgentsModal] = useState(false)
 
   //AGENTS
-  const { setSelectedObjectItem } = useMyScheduleCalendar()
   const [agentOptions, setAgentOptions] = useState(false)
   const [restoreCartModal, setRestoreCartModal] = useState(false)
 
@@ -98,18 +92,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     setSelectedProduct(bool)
     if (!bool) {
       // clearSubProducts()
-    }
-  }
-
-  const setAgentsModalItem = (item: IUser) => {
-    setAgentsModal(true)
-    setSelectedAgent(item)
-  }
-
-  const closeAgentsModalItem = (bool: boolean) => {
-    setAgentsModal(bool)
-    if (!bool) {
-      setSelectedAgent(null)
     }
   }
 
@@ -143,8 +125,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
     clientRightSideBar,
     setClientRightSideBar,
     setAgentOptions,
-    setAgentsModal,
-    setAgentsModalItem,
     setRestoreCartModal,
     setPdfViwer,
     handlePdfViwer,

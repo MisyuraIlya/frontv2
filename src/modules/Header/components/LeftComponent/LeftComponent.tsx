@@ -11,7 +11,6 @@ import {
   IconButton,
   ListItemIcon,
   ListItemText,
-  Menu,
   MenuItem,
   Paper,
   Tooltip,
