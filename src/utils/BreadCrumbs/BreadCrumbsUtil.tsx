@@ -30,6 +30,7 @@ const BreadCrumbsUtil: FC<BreadCrumbsProps> = ({ array }) => {
           onClick={() => navigate('/')}
           sx={{ cursor: 'pointer' }}
           color={themeColors.primary}
+          fontSize={'14px'}
         >
           בית
         </Typography>
@@ -38,6 +39,7 @@ const BreadCrumbsUtil: FC<BreadCrumbsProps> = ({ array }) => {
             return (
               <Typography
                 key={index}
+                fontSize={'14px'}
                 sx={{ cursor: 'pointer' }}
                 onClick={() => navigate(element.link)}
                 color={themeColors.primary}
@@ -48,7 +50,11 @@ const BreadCrumbsUtil: FC<BreadCrumbsProps> = ({ array }) => {
           }
         })}
       </Breadcrumbs>
-      <Button endIcon={<ArrowBackIcon />} onClick={() => navigate(-1)}>
+      <Button
+        endIcon={<ArrowBackIcon />}
+        onClick={() => navigate(-1)}
+        sx={{ display: { xs: 'none' } }}
+      >
         חזור
       </Button>
     </Box>

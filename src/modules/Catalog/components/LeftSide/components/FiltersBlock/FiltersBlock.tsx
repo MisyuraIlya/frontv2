@@ -88,15 +88,20 @@ const FiltersBlock = () => {
       container
       spacing={2}
       sx={{
+        padding: '10px 0',
         borderBottom: '1px solid rgba(65, 67, 106, 0.2117647059)',
         borderTop: '1px solid rgba(65, 67, 106, 0.2117647059)',
       }}
     >
       <Grid
         item
-        xs={2}
-        className="centered"
-        sx={{ paddingTop: '0px !important' }}
+        xs={6}
+        sm={2}
+        sx={{
+          paddingTop: '10px !important',
+          display: 'flex',
+          alignItems: 'center',
+        }}
       >
         <Typography variant="body1" color={themeColors.primary}>
           {'נמצאו: ' + totalItems + ' מוצרים'}
@@ -104,9 +109,10 @@ const FiltersBlock = () => {
       </Grid>
       <Grid
         item
-        xs={4}
+        xs={6}
+        sm={4}
         className="centered"
-        sx={{ paddingTop: '0px !important' }}
+        sx={{ paddingTop: '10px !important' }}
       >
         <TextField
           placeholder="חיפוש מוצר.."
@@ -136,18 +142,23 @@ const FiltersBlock = () => {
       </Grid>
       <Grid
         item
-        xs={2}
-        className="centered"
-        sx={{ paddingTop: '0px !important' }}
+        xs={6}
+        sm={2}
+        sx={{
+          paddingTop: '10px !important',
+          display: 'flex',
+          alignItems: 'center',
+        }}
       >
         <Typography
           variant="body1"
           fontWeight={500}
           color={themeColors.primary}
+          sx={{ paddingRight: '8px' }}
         >
           מוצרים:
         </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <FormControl sx={{ m: 1, minWidth: 120, margin: '0px' }} size="small">
           <Select value={prodsPerPage} onChange={handleChangeItemsPerPage}>
             {arrProdsPerPage?.map((item, key) => (
               <MenuItem key={key} value={item}>
@@ -159,18 +170,24 @@ const FiltersBlock = () => {
       </Grid>
       <Grid
         item
-        xs={2}
-        className="centered"
-        sx={{ paddingTop: '0px !important' }}
+        xs={6}
+        sm={2}
+        sx={{
+          paddingTop: '10px !important',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'end',
+        }}
       >
         <Typography
           variant="body1"
           fontWeight={500}
           color={themeColors.primary}
+          sx={{ paddingRight: '8px' }}
         >
           מיון:
         </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <FormControl sx={{ m: 1, minWidth: 120, margin: '0px' }} size="small">
           <Select value={sortProdSetting.value} onChange={handleOrderBy}>
             {arrOrden?.map((item, index) => (
               <MenuItem key={index} value={item.value}>
@@ -182,9 +199,13 @@ const FiltersBlock = () => {
       </Grid>
       <Grid
         item
-        xs={2}
-        className="centered"
-        sx={{ paddingTop: '0px !important', display: 'flex' }}
+        xs={12}
+        sm={2}
+        sx={{
+          paddingTop: '10px !important',
+          display: 'flex',
+          alignItems: 'center',
+        }}
       >
         <Typography
           variant="body1"

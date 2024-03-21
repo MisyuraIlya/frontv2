@@ -30,7 +30,12 @@ const ProductList = () => {
       ) : (
         <>
           {data?.['hydra:member']?.map((product, index) => (
-            <Grid item xs={listView ? 12 : 3} key={index}>
+            <Grid
+              item
+              xs={listView ? 12 : 6}
+              key={index}
+              sm={listView ? 12 : 3}
+            >
               <ProductCard product={product} />
             </Grid>
           ))}

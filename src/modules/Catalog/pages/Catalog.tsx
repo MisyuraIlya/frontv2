@@ -1,11 +1,11 @@
 import React from 'react'
-import RightSide from '../components/RightSide/RightSide'
 import LeftSide from '../components/LeftSide/LeftSide'
-import { Grid, Container } from '@mui/material'
+import { Grid, Container, useMediaQuery } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import useDataCategories from '../hook/useDataCategories'
 import { findCategoryTitleById } from '../../../helpers/handleBreadCrumbs'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
+import RightSide from '../components/RightSide'
 const Catalog = () => {
   const { lvl1, lvl2, lvl3 } = useParams()
   const { data } = useDataCategories()
@@ -13,7 +13,7 @@ const Catalog = () => {
   const res1 = findCategoryTitleById(+lvl1!, categoriesArray)
   const res2 = findCategoryTitleById(+lvl2!, categoriesArray)
   const res3 = findCategoryTitleById(+lvl3!, categoriesArray)
-
+  const isMobile = useMediaQuery('(max-width:800px)')
   return (
     <Container maxWidth="xl" sx={{ marginTop: '200px' }}>
       <BreadCrumbsUtil
@@ -33,10 +33,14 @@ const Catalog = () => {
         ]}
       />
       <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <RightSide />
+        <Grid item xs={0} sm={3}>
+          {isMobile ? (
+            <RightSide.MobileRightSide />
+          ) : (
+            <RightSide.DesktopRightSide />
+          )}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={9}>
           <LeftSide />
         </Grid>
       </Grid>
