@@ -42,6 +42,7 @@ const Header = () => {
               </Grid>
             </Grid>
           </Toolbar>
+          <Mobile.CategoryNavBarMobile />
           <Mobile.SearchBar />
         </>
       ) : (

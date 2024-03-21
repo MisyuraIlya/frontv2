@@ -141,6 +141,12 @@ const theme = createTheme({
   direction: 'rtl',
   typography: {
     fontFamily: 'Ploni, Arial',
+    body1: {
+      fontSize: '14px',
+    },
+    body2: {
+      fontSize: '13px',
+    },
   },
   palette: {
     background: {
