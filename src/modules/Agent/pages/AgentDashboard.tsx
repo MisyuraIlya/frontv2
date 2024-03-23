@@ -32,12 +32,12 @@ const AgentDashboard = () => {
     <Container maxWidth="xl">
       <BreadCrumbsUtil array={[]} />
       <Grid container spacing={2}>
-        <Grid item xs={3}>
+        <Grid item sm={3} xs={12}>
           {/* {(isSuperAgent || isAdmin) &&  */}
           <AgentsList />
           {/* // } */}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item sm={9} xs={12}>
           <Tabs baseRoute="/agentDashboard" params={['tab', 'id']}>
             {components.map((tab, index) => (
               <Tab key={index} label={tab.title}>

@@ -7,7 +7,8 @@ import ForgotPasswordStepOne from './components/ForgotPasswordStepOne'
 import ForgotPasswordStepTwo from './components/ForgotPasswordStepTwo'
 import ValidationForm from './components/ValidationForm'
 import NewB2bCustomer from './components/NewB2bCustomer'
-import { Modal, Paper } from '@mui/material'
+import { Box, IconButton, Modal, Paper } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 type AuthPopUpProps = {
   active: boolean
@@ -36,6 +37,13 @@ const AuthPopUp: FC<AuthPopUpProps> = ({ active, setActive }) => {
           outline: 'none',
         }}
       >
+        <Box
+          sx={{ display: 'flex', justifyContent: 'end', marginBottom: '20px' }}
+        >
+          <IconButton onClick={() => setActive(false)}>
+            <CloseIcon sx={{ fontSize: '35px', cursor: 'pointer' }} />
+          </IconButton>
+        </Box>
         {action === 'login' && <LoginForm />}
         {action === 'register' && <RegistrationForm />}
         {action === 'forgotPassordStepOne' && <ForgotPasswordStepOne />}

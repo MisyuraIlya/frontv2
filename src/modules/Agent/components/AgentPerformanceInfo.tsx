@@ -17,9 +17,9 @@ const AgentPerformanceInfo = () => {
   return (
     <Card sx={{ padding: '10px' }}>
       <Grid container spacing={10}>
-        <Grid item xs={7} className="centered">
+        <Grid item sm={7} xs={12} className="centered">
           <Grid container spacing={2} className="centered">
-            <Grid item xs={4} sx={{ gap: '5px' }}>
+            <Grid item sm={4} xs={6} sx={{ gap: '5px' }}>
               <Box className="centered" sx={{ gap: '10px' }}>
                 <SupportAgentIcon />
                 <Box sx={{ marginTop: '5px' }}>
@@ -28,7 +28,7 @@ const AgentPerformanceInfo = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={4} sx={{ gap: '5px' }}>
+            <Grid item sm={4} xs={6} sx={{ gap: '5px' }}>
               <Grid container spacing={0} className="centered">
                 <Grid item xs={2}>
                   <LegendToggleIcon />
@@ -43,7 +43,7 @@ const AgentPerformanceInfo = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={4} sx={{ gap: '5px' }}>
+            <Grid item sm={4} xs={6} sx={{ gap: '5px' }}>
               <Grid container spacing={0} className="centered">
                 <Grid item xs={2}>
                   <LegendToggleIcon />
@@ -58,7 +58,7 @@ const AgentPerformanceInfo = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={4} sx={{ gap: '5px' }}>
+            <Grid item sm={4} xs={6} sx={{ gap: '5px' }}>
               <Grid container spacing={0} className="centered">
                 <Grid item xs={2}>
                   <AnalyticsIcon />
@@ -75,7 +75,7 @@ const AgentPerformanceInfo = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item sm={5} xs={12}>
           <Grid container spacing={2}>
             <Grid item xs={6} sx={{ gap: '5px' }}>
               <Typography variant="body2" textAlign={'center'}>

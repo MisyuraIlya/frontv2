@@ -17,6 +17,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import useDataDocumentsItem from '../hook/useDataDocumentsItem'
+import { ExcelGeneratorIDocuments } from '../helpers/ExcelGenerator'
 
 const DocsItemFilter = () => {
   const [search, setSearch] = useState<string>('')
@@ -48,19 +49,11 @@ const DocsItemFilter = () => {
     // }
   }
 
-  const handleDocument = async () => {
-    // if (id) {
-    //   const link = await downloadDocument(file, id)
-    //   // console.log('link',link.url)
-    //   // window.open(link.url, '_blank');
-    // }
-  }
-
   return (
     <Paper
       elevation={4}
       sx={{
-        display: 'flex',
+        display: { sm: 'flex', xs: 'block' },
         justifyContent: 'space-between',
         padding: '20px 20px',
       }}
@@ -77,17 +70,18 @@ const DocsItemFilter = () => {
             {file.name}
           </Button>
         ))}
-
+        {data && (
+          <Button
+            sx={{ height: '40px' }}
+            variant="outlined"
+            startIcon={<ArticleIcon sx={{ fontSize: '30px' }} />}
+            onClick={() => ExcelGeneratorIDocuments(data)}
+          >
+            XL
+          </Button>
+        )}
         <Button
-          sx={{ height: '40px' }}
-          variant="outlined"
-          startIcon={<ArticleIcon sx={{ fontSize: '30px' }} />}
-          onClick={() => handleDocument()}
-        >
-          XL
-        </Button>
-        <Button
-          sx={{ height: '40px' }}
+          sx={{ height: '40px', whiteSpace: 'nowrap' }}
           variant="outlined"
           startIcon={<ShoppingCartCheckoutIcon sx={{ fontSize: '30px' }} />}
           onClick={() => handleResoreCart()}
@@ -95,7 +89,13 @@ const DocsItemFilter = () => {
           שחזר הזמנה
         </Button>
       </Box>
-      <FormControl variant="outlined" sx={{ width: '200px' }}>
+      <FormControl
+        variant="outlined"
+        sx={{
+          width: { sm: '200px', xs: '100%' },
+          marginTop: { sm: '0px', xs: '20px' },
+        }}
+      >
         <OutlinedInput
           id="outlined-adornment-password"
           type={search}

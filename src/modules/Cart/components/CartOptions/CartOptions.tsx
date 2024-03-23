@@ -51,7 +51,12 @@ const CartOptions = () => {
           variant="outlined"
           color="error"
           startIcon={<DeleteIcon />}
-          sx={{ fontSize: '17px', minWidth: '130px', height: '39px' }}
+          sx={{
+            fontSize: '14px',
+            whiteSpace: 'nowrap',
+            minWidth: { sm: { minWidth: '130px' }, xs: { minWidth: '100px' } },
+            height: '39px',
+          }}
         >
           מחק סל
         </Button>
@@ -60,7 +65,12 @@ const CartOptions = () => {
         <Button
           variant="contained"
           onClick={() => handleSaveAsDraft()}
-          sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+          sx={{
+            fontSize: '14px',
+            whiteSpace: 'nowrap',
+            minWidth: { sm: { minWidth: '130px' }, xs: { minWidth: '100px' } },
+            height: '35px',
+          }}
           startIcon={<SaveAsIcon />}
         >
           שמור טיוטה
@@ -70,7 +80,12 @@ const CartOptions = () => {
         <Button
           variant="contained"
           onClick={() => handleToDraft()}
-          sx={{ fontSize: '17px', minWidth: '130px', height: '35px' }}
+          sx={{
+            fontSize: '14px',
+            whiteSpace: 'nowrap',
+            minWidth: { sm: { minWidth: '130px' }, xs: { minWidth: '100px' } },
+            height: '35px',
+          }}
           startIcon={<SaveAsIcon />}
         >
           טען טיוטה

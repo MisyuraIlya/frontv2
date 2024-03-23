@@ -18,7 +18,7 @@ const ProductLeftSide = () => {
       <Divider />
       <ProductMainInfoTwo />
       <Box sx={{ display: 'flex', justifyContent: 'end', marginTop: '50px' }}>
-        <Box sx={{ width: '50%' }}>
+        <Box sx={{ width: { sm: '50%', xs: '100%' } }}>
           <PriceBlockPopUp product={selectedProd} />
         </Box>
       </Box>

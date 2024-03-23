@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import ModalWrapper from '../../../../utils/ModalWrapper/ModalWrapper'
 import { Box, Card, Divider, IconButton, Typography } from '@mui/material'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'
 import moment from 'moment'
@@ -11,7 +10,7 @@ import { themeColors } from '../../../../styles/mui'
 import useDataAgentMissions from '../../hooks/useDataAgentMissions'
 import { useMyScheduleCalendar } from '../../store/ScheduleCalendar.store'
 import { onSuccessAlert } from '../../../../shared/MySweetAlert'
-
+import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
 const MissionModal = ({
   open,
   setOpen,

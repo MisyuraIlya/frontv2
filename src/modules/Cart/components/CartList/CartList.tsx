@@ -17,7 +17,6 @@ import {
   TextField,
 } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
-import { calculatePrice } from '../../helpers/calculations'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { onAsk } from '../../../../shared/MySweetAlert'
 import { useAuth } from '../../../Auth/store/useAuthStore'
@@ -52,7 +51,7 @@ const CartList = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell></TableCell>
+              <TableCell sx={{ position: 'sticky' }}></TableCell>
               <TableCell>
                 <Typography
                   variant="h6"
@@ -122,7 +121,15 @@ const CartList = () => {
                   key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell>
+                  <TableCell
+                    sx={{
+                      position: 'sticky',
+                      left: '0',
+                      background: 'white',
+                      minWidth: '150px',
+                      zIndex: 1,
+                    }}
+                  >
                     <Box className="centered">
                       <IconButton onClick={() => handeDelete(element)}>
                         <DeleteIcon sx={{ color: themeColors.primary }} />
@@ -177,7 +184,7 @@ const CartList = () => {
                       {element?.quantity}
                     </Typography>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>
                     {isAgent ? (
                       <TextField
                         value={element?.product.finalPrice}
@@ -198,7 +205,7 @@ const CartList = () => {
                       </Typography>
                     )}
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>
                     {isAgent ? (
                       <TextField
                         value={element?.discount}
@@ -221,7 +228,7 @@ const CartList = () => {
                       </Typography>
                     )}
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>
                     {isAgent ? (
                       <TextField
                         value={element?.price}
@@ -242,7 +249,7 @@ const CartList = () => {
                       </Typography>
                     )}
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>
                     <Typography variant="body1" color={themeColors.primary}>
                       ₪{element?.total}
                     </Typography>

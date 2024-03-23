@@ -86,44 +86,46 @@ const DocsFilter = () => {
     <Paper
       elevation={4}
       sx={{
-        display: 'flex',
+        display: { sm: 'flex', xs: 'block' },
         justifyContent: 'space-between',
         padding: '20px 20px',
       }}
     >
-      <Box sx={{ display: 'flex', gap: '20px' }}>
-        <Box>
-          <Typography variant="h6">מתאריך</Typography>
-          <Box
-            onClick={() => handleCalendar('from', new Date(dateFrom!))}
-            sx={{
-              border: '1px solid #f0f3ff',
-              padding: '5px 15px',
-              gap: '10px',
-            }}
-            className="centered"
-          >
-            <CalendarMonthIcon sx={{ fontSize: '25px' }} />
-            <Typography variant="body1">
-              {moment(dateFrom).format('DD/MM/YYYY')}
-            </Typography>
+      <Box sx={{ display: { sm: 'flex', xs: 'block' }, gap: '20px' }}>
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <Box>
+            <Typography variant="h6">מתאריך</Typography>
+            <Box
+              onClick={() => handleCalendar('from', new Date(dateFrom!))}
+              sx={{
+                border: '1px solid #f0f3ff',
+                padding: '5px 15px',
+                gap: '10px',
+              }}
+              className="centered"
+            >
+              <CalendarMonthIcon sx={{ fontSize: '25px' }} />
+              <Typography variant="body1">
+                {moment(dateFrom).format('DD/MM/YYYY')}
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box>
-          <Typography variant="h6">לתאריך</Typography>
-          <Box
-            onClick={() => handleCalendar('to', new Date(dateTo!))}
-            sx={{
-              border: '1px solid #f0f3ff',
-              padding: '5px 15px',
-              gap: '10px',
-            }}
-            className="centered"
-          >
-            <CalendarMonthIcon sx={{ fontSize: '25px' }} />
-            <Typography variant="body1">
-              {moment(dateTo).format('DD/MM/YYYY')}
-            </Typography>
+          <Box>
+            <Typography variant="h6">לתאריך</Typography>
+            <Box
+              onClick={() => handleCalendar('to', new Date(dateTo!))}
+              sx={{
+                border: '1px solid #f0f3ff',
+                padding: '5px 15px',
+                gap: '10px',
+              }}
+              className="centered"
+            >
+              <CalendarMonthIcon sx={{ fontSize: '25px' }} />
+              <Typography variant="body1">
+                {moment(dateTo).format('DD/MM/YYYY')}
+              </Typography>
+            </Box>
           </Box>
         </Box>
         <Button
@@ -139,32 +141,46 @@ const DocsFilter = () => {
           חפש
         </Button>
       </Box>
-      <Box sx={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
-        <Box className="centered">
-          <Typography color={themeColors.primary}>
-            סה"כ מסמכים: {total}
-          </Typography>
+      <Box
+        sx={{
+          display: { sm: 'flex', xs: 'block' },
+          gap: '20px',
+          marginTop: '30px',
+        }}
+      >
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <Box className="centered">
+            <Typography color={themeColors.primary}>
+              סה"כ מסמכים: {total}
+            </Typography>
+          </Box>
+          <FormControl fullWidth sx={{ width: '200px' }}>
+            <InputLabel id="demo-simple-select-label">מסמך</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={documentType}
+              sx={{ height: '40px' }}
+              label="מסמך"
+              onChange={(e) => handleSelect(e.target.value as IDocumentTypes)}
+            >
+              {documentTypes?.map((ele, ind) => {
+                return (
+                  <MenuItem value={ele.value} key={ind}>
+                    {ele.label}
+                  </MenuItem>
+                )
+              })}
+            </Select>
+          </FormControl>
         </Box>
-        <FormControl fullWidth sx={{ width: '200px' }}>
-          <InputLabel id="demo-simple-select-label">מסמך</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={documentType}
-            sx={{ height: '40px' }}
-            label="מסמך"
-            onChange={(e) => handleSelect(e.target.value as IDocumentTypes)}
-          >
-            {documentTypes?.map((ele, ind) => {
-              return (
-                <MenuItem value={ele.value} key={ind}>
-                  {ele.label}
-                </MenuItem>
-              )
-            })}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined" sx={{ width: '200px' }}>
+        <FormControl
+          variant="outlined"
+          sx={{
+            width: { sm: '200px', xs: '100%' },
+            marginTop: { sm: '0px', xs: '20px' },
+          }}
+        >
           <OutlinedInput
             id="outlined-adornment-password"
             type={'text'}

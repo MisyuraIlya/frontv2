@@ -9,21 +9,23 @@ import {
   Typography,
 } from '@mui/material'
 import useDataCategories from '../hook/useDataCategories'
+import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 
 const CatalogView = () => {
   const { data } = useDataCategories()
   const { lvl1 } = useParams()
   const navigate = useNavigate()
   return (
-    <Container maxWidth="lg">
-      <Grid container spacing={2} sx={{ marginTop: '200px' }}>
+    <Container maxWidth="lg" sx={{ marginBottom: '200px' }}>
+      <BreadCrumbsUtil array={[{ title: 'קטגוריות', link: '' }]} />
+      <Grid container spacing={2}>
         {data?.['hydra:member']?.map((element: ICategory, index) => {
           if (element?.parent?.id == lvl1) {
             return (
-              <Grid item xs={3} key={index}>
+              <Grid item sm={3} xs={6} key={index}>
                 <Card
                   elevation={0}
-                  sx={{ cursor: 'pointer' }}
+                  sx={{ cursor: 'pointer', height: '200px' }}
                   onClick={() =>
                     navigate(`/client/catalog/${element.id}/0/0?page=1`)
                   }

@@ -53,7 +53,7 @@ const BreadCrumbsUtil: FC<BreadCrumbsProps> = ({ array }) => {
       <Button
         endIcon={<ArrowBackIcon />}
         onClick={() => navigate(-1)}
-        sx={{ display: { xs: 'none' } }}
+        sx={{ display: { xs: 'none', sm: 'block' } }}
       >
         חזור
       </Button>

@@ -2,7 +2,6 @@ import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
-import { useAgentProfileStore } from '../store/agentProfile.store'
 import { Box, Card, Grid, Typography } from '@mui/material'
 import MyCheapButton from '../../../shared/MyCheapButton'
 import useDataAgentObjectives from '../hooks/useDataAgentObjectives'
@@ -68,23 +67,49 @@ const VisitsDashboard = () => {
   return (
     <Card sx={{ padding: '0 50px', marginTop: '50px' }}>
       <Grid container spacing={2}>
-        <Grid item xs={6} sx={{ display: 'flex', gap: '20px' }}>
+        <Grid
+          item
+          sm={6}
+          xs={12}
+          sx={{ display: { sm: 'flex', xs: 'block' }, gap: '20px' }}
+        >
           <Box className="centered">
             <Box>
-              <Typography variant="h6">ביקורים</Typography>
+              <Typography
+                variant="h6"
+                sx={{ width: '100%', textAlign: { sm: 'left', xs: 'center' } }}
+              >
+                ביקורים
+              </Typography>
               <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid
+                  item
+                  sm={6}
+                  xs={12}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: { sm: 'left', xs: 'center' },
+                  }}
+                >
                   <Typography variant="h6">בוצע</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item sm={6} xs={12}>
                   <MyCheapButton>{completedVisits}</MyCheapButton>
                 </Grid>
               </Grid>
               <Grid container spacing={2} sx={{ marginTop: '5px' }}>
-                <Grid item xs={6}>
+                <Grid
+                  item
+                  sm={6}
+                  xs={12}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: { sm: 'left', xs: 'center' },
+                  }}
+                >
                   <Typography variant="h6">לביצוע</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item sm={6} xs={12}>
                   <MyCheapButton>{totalVisits}</MyCheapButton>
                 </Grid>
               </Grid>
@@ -98,23 +123,49 @@ const VisitsDashboard = () => {
             height={250}
           />
         </Grid>
-        <Grid item xs={6} sx={{ display: 'flex', gap: '20px' }}>
+        <Grid
+          item
+          sm={6}
+          xs={12}
+          sx={{ display: { sm: 'flex', xs: 'block' }, gap: '20px' }}
+        >
           <Box className="centered">
             <Box>
-              <Typography variant="h6">משימות</Typography>
+              <Typography
+                variant="h6"
+                sx={{ width: '100%', textAlign: { sm: 'left', xs: 'center' } }}
+              >
+                משימות
+              </Typography>
               <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid
+                  item
+                  sm={6}
+                  xs={12}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: { sm: 'left', xs: 'center' },
+                  }}
+                >
                   <Typography variant="h6">בוצע</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item sm={6} xs={12}>
                   <MyCheapButton>{completedTasks}</MyCheapButton>
                 </Grid>
               </Grid>
               <Grid container spacing={2} sx={{ marginTop: '5px' }}>
-                <Grid item xs={6}>
+                <Grid
+                  item
+                  sm={6}
+                  xs={12}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: { sm: 'left', xs: 'center' },
+                  }}
+                >
                   <Typography variant="h6">לביצוע</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item sm={6} xs={12}>
                   <MyCheapButton>{totalTasks}</MyCheapButton>
                 </Grid>
               </Grid>

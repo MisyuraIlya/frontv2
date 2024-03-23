@@ -26,6 +26,7 @@ const PaginationUtil: FC<PaginationUtilProps> = ({ hydraPagination }) => {
         borderBottom: '1px solid rgba(65,67,106,.2117647059)',
         padding: '10px',
         margin: '30px 0',
+        marginBottom: '70px',
         display: 'flex',
         justifyContent: 'space-between',
       }}

@@ -25,6 +25,8 @@ interface IUser {
   maxObligo: float
   hp: string
   taxCode: string
+  agentId: IUser
+  isAgent: boolean
 }
 
 interface IAtarim {

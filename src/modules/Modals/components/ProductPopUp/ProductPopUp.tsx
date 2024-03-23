@@ -13,10 +13,10 @@ const ProductPopUp: FC<ProductPopUpProps> = ({ active, setActive }) => {
   return (
     <ModalWrapper active={active} setActive={setActive} height={90} width={80}>
       <Grid container spacing={2}>
-        <Grid item xs={5}>
+        <Grid item sm={5} xs={12}>
           <ProductRightSide />
         </Grid>
-        <Grid item xs={7}>
+        <Grid item sm={7} xs={12}>
           <ProductLeftSide />
         </Grid>
       </Grid>

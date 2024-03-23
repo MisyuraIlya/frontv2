@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Modal from '@mui/material/Modal'
-import { Box } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 type ModalWrapperProps = {
   active: boolean
@@ -33,7 +34,20 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
   return (
     <>
       <Modal open={active} onClose={() => setActive(false)} disableAutoFocus>
-        <Box sx={style}>{children}</Box>
+        <Box sx={style}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'end',
+              marginBottom: '20px',
+            }}
+          >
+            <IconButton onClick={() => setActive(false)}>
+              <CloseIcon sx={{ fontSize: '35px', cursor: 'pointer' }} />
+            </IconButton>
+          </Box>
+          {children}
+        </Box>
       </Modal>
     </>
   )

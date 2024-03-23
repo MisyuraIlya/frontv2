@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import ModalWrapper from '../../../../utils/ModalWrapper/ModalWrapper'
 import { useAuth } from '../../../Auth/store/useAuthStore'
 import useDataAgentObjectives from '../../hooks/useDataAgentObjectives'
+import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   Select,
   Switch,
   Typography,
+  useMediaQuery,
 } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
 import {
@@ -116,8 +117,15 @@ const VisitPopUp = ({
     setSelectedUser(user)
   }
 
+  const isMobile = useMediaQuery('(max-width:800px)')
+
   return (
-    <ModalWrapper active={open} setActive={setOpen} width={20} height={55}>
+    <ModalWrapper
+      active={open}
+      setActive={setOpen}
+      width={isMobile ? 80 : 20}
+      height={isMobile ? 70 : 55}
+    >
       <form className="centered" onSubmit={handleSubmit(handleClick)}>
         <Box>
           <Typography variant="h5" sx={{ padding: '20px 0' }}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ModalWrapper from '../../../../utils/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
 import {
   Box,
   Button,

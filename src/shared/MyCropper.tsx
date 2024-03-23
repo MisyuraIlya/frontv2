@@ -5,7 +5,7 @@ import { Box, Button, Grid, IconButton } from '@mui/material'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { themeColors } from '../styles/mui'
 import styled from 'styled-components'
-import ModalWrapper from '../utils/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../modules/Modals/components/ModalWrapper/ModalWrapper'
 
 interface MyCropperProps {
   aspectRatio: number

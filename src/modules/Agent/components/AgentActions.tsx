@@ -9,6 +9,7 @@ import { Card, Grid, Typography } from '@mui/material'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import RestorePageIcon from '@mui/icons-material/RestorePage'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
+import TourIcon from '@mui/icons-material/Tour'
 
 interface Action {
   title: string
@@ -21,7 +22,7 @@ interface AgentActionsProps {
   colsNumber: number
 }
 const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
-  const { user } = useAuth()
+  const { user, isAgent } = useAuth()
   const { setSelectedMode } = useCart()
   const navigate = useNavigate()
   const { setAgentOptions } = useModals()
@@ -78,11 +79,13 @@ const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
       <Typography variant="h4" sx={{ marginTop: '50px', marginBottom: '20px' }}>
         {'פעולות'}
       </Typography>
-      <Grid container spacing={30}>
+      <Grid container sx={{ marginBottom: '50px' }}>
         {actions?.map((item, key) => (
           <Grid
             item
-            xs={4}
+            key={key}
+            xs={12}
+            sm={4}
             onClick={() => {
               setSelectedMode(item.mode)
               navigate(item.link)
@@ -91,7 +94,12 @@ const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
           >
             <Card
               elevation={2}
-              sx={{ padding: '30px 50px', gap: '20px', cursor: 'pointer' }}
+              sx={{
+                padding: '30px 50px',
+                gap: '20px',
+                cursor: 'pointer',
+                margin: '20px 10px',
+              }}
               className="centered"
             >
               <Typography variant="h6">{item.title}</Typography>
@@ -99,6 +107,23 @@ const AgentActions: FC<AgentActionsProps> = ({ colsNumber }) => {
             </Card>
           </Grid>
         ))}
+        {isAgent && (
+          <Grid item xs={12} sm={4}>
+            <Card
+              elevation={2}
+              sx={{
+                padding: '30px 50px',
+                gap: '20px',
+                cursor: 'pointer',
+                margin: '20px 10px',
+              }}
+              className="centered"
+            >
+              <Typography variant="h6">{'ביקור'}</Typography>
+              <TourIcon />
+            </Card>
+          </Grid>
+        )}
       </Grid>
     </>
   )

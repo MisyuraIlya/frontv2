@@ -19,15 +19,18 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import { themeColors } from '../styles/mui'
 import { useAuth } from '../modules/Auth/store/useAuthStore'
 import { useCart } from '../modules/Cart/store/cart.store'
-import { clientURL } from '../enums/url'
+import { agentURL, clientURL } from '../enums/url'
 import { onAsk } from '../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
 import NotificationContainer from '../modules/PushNotifications/components/NotificationContainer/NotificationContainer'
+import StorefrontIcon from '@mui/icons-material/Storefront'
+import { useModals } from '../modules/Modals/provider/ModalProvider'
 
 const BottomNavigationMobile = () => {
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
-  const { user, agent, logOut } = useAuth()
+  const { user, agent, logOut, isAgent } = useAuth()
+  const { setOpenAuthModal } = useModals()
   const { selectedMode } = useCart()
   const [openDrawver, setOpenDrawver] = useState(false)
   const navigate = useNavigate()
@@ -39,13 +42,27 @@ const BottomNavigationMobile = () => {
     }
   }
 
+  const handleClick = (value: IURL) => {
+    if (value.LINK) {
+      navigate(value.LINK)
+    }
+
+    if (value.LABEL === clientURL.NOTIFICATIONS.LABEL) {
+      setOpenDrawver(true)
+    }
+    setOpen(false)
+  }
+
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
     if (newValue == '2') {
-      setOpen(!open)
-    } else {
-      setOpen(false)
+      if (user) {
+        setOpen(!open)
+      } else {
+        setOpenAuthModal(true)
+      }
     }
+
     if (newValue == '1') {
       beforeLogOut()
     }
@@ -55,6 +72,10 @@ const BottomNavigationMobile = () => {
 
     if (newValue == '4') {
       setOpenDrawver(true)
+    }
+
+    if (newValue == '5') {
+      navigate(`/agentClients/${user?.id}?page=1`)
     }
   }
 
@@ -71,7 +92,7 @@ const BottomNavigationMobile = () => {
                 position: 'fixed',
                 left: '10px',
                 bottom: '55px',
-                zIndex: 10,
+                zIndex: 101,
               }}
             >
               <Paper
@@ -137,7 +158,7 @@ const BottomNavigationMobile = () => {
                   if (value.SHOW_IN_PROFILE_MENU) {
                     return (
                       <MenuItem
-                        onClick={() => setOpen(false)}
+                        onClick={() => handleClick(value)}
                         key={key}
                         className="hoveredProfile"
                         sx={{ marginTop: '10px' }}
@@ -152,30 +173,50 @@ const BottomNavigationMobile = () => {
             </Paper>
           )}
           <Paper
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+            sx={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 100,
+            }}
             elevation={10}
           >
             <BottomNavigation value={value} onChange={handleChange}>
-              <BottomNavigationAction
-                label="יציאה"
-                value="1"
-                icon={<ExitToAppIcon />}
-              />
+              {user && (
+                <BottomNavigationAction
+                  label="יציאה"
+                  value="1"
+                  icon={<ExitToAppIcon />}
+                />
+              )}
               <BottomNavigationAction
                 label="פרופיל"
                 value="2"
                 icon={<PermIdentityIcon />}
               />
-              <BottomNavigationAction
-                label="עגלה"
-                value="3"
-                icon={<ShoppingCartIcon />}
-              />
-              <BottomNavigationAction
-                label="הודעות"
-                value="4"
-                icon={<NotificationsActiveIcon />}
-              />
+
+              {isAgent && (
+                <BottomNavigationAction
+                  label="לקוחות"
+                  value="5"
+                  icon={<StorefrontIcon />}
+                />
+              )}
+              {user && (
+                <BottomNavigationAction
+                  label="עגלה"
+                  value="3"
+                  icon={<ShoppingCartIcon />}
+                />
+              )}
+              {user && (
+                <BottomNavigationAction
+                  label="הודעות"
+                  value="4"
+                  icon={<NotificationsActiveIcon />}
+                />
+              )}
             </BottomNavigation>
           </Paper>
           <Drawer
