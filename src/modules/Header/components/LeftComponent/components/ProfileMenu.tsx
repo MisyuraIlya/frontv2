@@ -1,152 +1,26 @@
-import React from 'react'
-import moment from 'moment'
+import React, { useState } from 'react'
+import {
+  Box,
+  Button,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  Paper,
+  Typography,
+} from '@mui/material'
+import { themeColors } from '../../../../../styles/mui'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
-import { onAsk } from '../../../../../shared/MySweetAlert'
-import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../../Cart/store/cart.store'
-import { useModals } from '../../../../Modals/provider/ModalProvider'
-import AtarSelection from '../../../../Auth/components/AtarSelection'
+import { onAsk } from '../../../../../shared/MySweetAlert'
+import { useNavigate } from 'react-router-dom'
+import { clientURL } from '../../../../../enums/url'
 
-const ProfileMenu = ({
-  setOpenProfile,
-}: {
-  setOpenProfile: (value: boolean) => void
-}) => {
-  const {
-    isClient,
-    isAgent,
-    user,
-    isAdmin,
-    client,
-    logOut,
-    setSelectClient,
-    atarSelected,
-  } = useAuth()
-  const { selectedMode } = useCart()
+const ProfileMenu = () => {
+  const { user, isAgent, agent, setAction, logOut, setUser } = useAuth()
+  const { cart, selectedMode } = useCart()
   const navigate = useNavigate()
-  let from = moment().subtract(1, 'days').format('YYYY-MM-DD')
-  let to = moment().add(1, 'days').format('YYYY-MM-DD')
-  const { setAgentOptions } = useModals()
-  let profileObj = [
-    /*
-        {
-            Title: 'ראשי',
-            TitleEng: 'Shopping List',
-            Link: '/',
-            Img: 'home',
-            OnlyAgent: false,
-            OnlyAgentSuper: false,
-            OnlyDesktop:true
-        },*/
-
-    {
-      Title: 'מסמכי לקוח',
-      TitleEng: 'My Orders',
-      Link: `/documentPage?page=1&from=${from}&to=${to}`,
-      Img: 'storefront',
-      OnlyAgent: true,
-      OnlyAgentSuper: true,
-      OnlyDesktop: false,
-      notForMisrad: false,
-    },
-    {
-      Title: 'מוצרים קבועים',
-      TitleEng: 'My Products',
-      Link: '/client/regular/0/0/0/?page=1',
-      Img: 'shopping_bag',
-      OnlyAgent: false,
-      OnlyAgentSuper: false,
-      OnlyDesktop: false,
-      notForMisrad: false,
-    },
-    {
-      Title: 'מומלצים עבורך',
-      TitleEng: 'Recommended Products',
-      Link: '/client/recommended/0/0/0/?page=1',
-      Img: 'star',
-      OnlyAgent: false,
-      OnlyAgentSuper: false,
-      OnlyDesktop: false,
-      notForMisrad: false,
-    },
-    /*{
-            Title: 'רשימות קניות',
-            TitleEng: 'Shopping List',
-            Link: '/shoppinglist/',
-            Img: 'checklist',
-            OnlyAgent: false
-        },*/
-
-    // {
-    //     Title: 'מסמכים לאישור',
-    //     TitleEng: 'Approve Docs',
-    //     Link: '/approveDoc/1/',
-    //     Img: 'checklist_rtl',
-    //     OnlyAgent: true,
-    //     OnlyAgentSuper: true,
-    //     OnlyDesktop:false,
-    //     notForMisrad:true
-    // },
-    // {
-    //     Title: 'מסמכים',
-    //     TitleEng: 'Shopping List',
-    //     Link: '/docsAgent/1/',
-    //     Img: 'article',
-    //     OnlyAgent: true,
-    //     OnlyAgentSuper: false,
-    //     OnlyDesktop:false,
-    //     notForMisrad:false
-    // },
-    /*{
-            Title: 'טיוטות',
-            TitleEng: 'Shopping List',
-            Link: '/agentDrafts/1/',
-            Img: 'draft_orders',
-            OnlyAgent: true,
-            OnlyAgentSuper: false,
-            OnlyDesktop:false
-        },*/
-    // {
-    //     Title: 'טיוטות/הזמנות',
-    //     TitleEng: 'Shopping List',
-    //     Link: '/DocsHistoryAgent/1/',
-    //     Img: 'article',
-    //     OnlyAgent: true,
-    //     OnlyAgentSuper: false,
-    //     OnlyDesktop:false,
-    //     notForMisrad:false
-    // },
-    /*{
-            Title: 'גביה',
-            TitleEng: 'Shopping List',
-            Link: '/agentGviya/',
-            Img: 'account_balance_wallet',
-            OnlyAgent: true,
-            OnlyAgentSuper: false,
-            OnlyDesktop:false
-        },*/
-    // {
-    //     Title: 'אחרונים במלאי',
-    //     TitleEng: 'Shopping List',
-    //     Link: '/category/lastOnHand/0/0/0/1/0/',
-    //     Img: 'inventory_2',
-    //     OnlyAgent: true,
-    //     OnlyAgentSuper: false,
-    //     OnlyDesktop:false,
-    //     notForMisrad:false
-    // },
-
-    // {
-    //     Title: 'ביצועי סוכנים',
-    //     TitleEng: 'Shopping List',
-    //     Link: '/agent-statistics/1/',
-    //     Img: 'support_agent',
-    //     OnlyAgent: true,
-    //     OnlyAgentSuper: true,
-    //     OnlyDesktop:false,
-    //     notForMisrad:true
-    // }
-  ]
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
 
   const beforeLogOut = async () => {
     const ask = await onAsk('האם אתה בטוח?', 'כל המוצרים בסל ימחקו')
@@ -155,106 +29,104 @@ const ProfileMenu = ({
     }
   }
 
-  const logOutClient = () => {
-    setSelectClient(null)
-    navigate('/agentClients')
+  const handleClose = (value: IURL) => {
+    if (typeof value.LINK === 'string') navigate(value.LINK)
+    setAnchorEl(null)
   }
+
+  const handleProfileClick = (e: any) => {
+    e.stopPropagation()
+    // setOpenProfile(!openProfile);
+    setAction('login')
+  }
+
+  const handleLogOutClinet = async () => {
+    if (cart.length > 0) {
+      const ask = await onAsk('קיימים פריטים בסל', 'בטוח תרצה לצאת מהלקוח?')
+      if (ask) {
+        if (agent) {
+          setUser(agent)
+          navigate('/')
+        }
+      }
+    } else {
+      if (agent) {
+        setUser(agent)
+        navigate('/')
+      }
+    }
+  }
+
   return (
-    <div id="MyProfileMenu-cont" className="MyProfileMenu-cont">
-      <div className="MyProfileMenu-subcont">
-        <div className="userDet-main-cont">
-          <div className="userDet-sub-cont">
-            {isAdmin && (
-              <>
-                <p>{'אדמין'}</p>
-                <p className="line"></p>
-              </>
-            )}
-            {isClient && (
-              <div className="userDet-client-cont">
-                <p className="profile-cube-title">לקוח</p>
-                <p>{user?.name}</p>
-                <p>{user?.extId}</p>
-              </div>
-            )}
-            <>
-              <>
-                {selectedMode == 'order' && (
-                  <p className="actions-title">{'הזמנה'}</p>
-                )}
-                {selectedMode == 'quote' && (
-                  <p className="actions-title">{'ה.מחיר'}</p>
-                )}
-                {selectedMode == 'return' && (
-                  <p className="actions-title">{'החזרה'}</p>
-                )}
-                <div style={{ textAlign: 'right' }}>
-                  <AtarSelection />
-                </div>
-              </>
-            </>
-          </div>
-
-          <div className="userDet-sub-cont">
-            {isAgent && (
-              <div className="btn-cont col">
-                <div
-                  className="logOutCont agent-actions"
-                  onClick={() => setAgentOptions(true)}
-                >
-                  <p>{'פעולות'}</p>
-                </div>
-              </div>
-            )}
-            {!client ? (
-              <div className="btn-cont col">
-                <div className="logOutCont" onClick={() => beforeLogOut()}>
-                  <p>{'התנתק'}</p>
-                </div>
-              </div>
-            ) : (
-              <div className="btn-cont col">
-                <div className="logOutCont" onClick={() => logOutClient()}>
-                  <p>{'התנתק מלקוח'}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-        {user ? (
-          <>
-            {(isClient || client) && (
-              <Link to={'/profile'} onClick={() => setOpenProfile(false)}>
-                <div className="MyProfile-row" onClick={() => close()}>
-                  <span className="material-symbols-outlined search-img">
-                    {'person'}
-                  </span>
-                  <p>{'אזור אישי'}</p>
-                </div>
-              </Link>
-            )}
-
-            {user &&
-              profileObj?.map((item, key) => {
-                return (
-                  <Link key={key} to={item.Link}>
-                    <div
-                      key={key}
-                      className="MyProfile-row"
-                      onClick={() => close()}
-                    >
-                      <span className="material-symbols-outlined search-img">
-                        {item.Img}
-                      </span>
-                      <p>{item.Title}</p>
-                    </div>
-                  </Link>
-                )
-              })}
-          </>
-        ) : null}
-      </div>
-    </div>
+    <>
+      <Paper
+        elevation={4}
+        sx={{ margin: '5px 10px', padding: '10px', width: '180px' }}
+      >
+        <Typography
+          variant="body1"
+          sx={{
+            color: 'white',
+            background: themeColors.primary,
+            padding: '4px',
+          }}
+        >
+          לקוח
+        </Typography>
+        <Typography variant="body1" color={'black'} sx={{ margin: '5px 0' }}>
+          {user?.name}
+        </Typography>
+        <Typography variant="body1" color={'black'} sx={{ margin: '5px 0' }}>
+          {user?.extId}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: 'white',
+            background: themeColors.secondary,
+            padding: '4px',
+          }}
+        >
+          {selectedMode == 'order' && 'הזמנה'}
+          {selectedMode == 'quote' && 'ה.מחיר'}
+          {selectedMode == 'return' && 'החזרה'}
+        </Typography>
+        <Button
+          variant="outlined"
+          fullWidth={true}
+          sx={{ margin: '15px 0' }}
+          onClick={() => beforeLogOut()}
+        >
+          התנתק
+        </Button>
+        {agent?.id !== user?.id && (
+          <Button
+            variant="outlined"
+            fullWidth={true}
+            onClick={() => handleLogOutClinet()}
+          >
+            התנתק מהלקוח
+          </Button>
+        )}
+      </Paper>
+      <Box sx={{ margin: '25px 10px' }}>
+        {Object.entries(clientURL).map(([key, value]) => {
+          if (value.SHOW_IN_PROFILE_MENU) {
+            return (
+              <MenuItem
+                onClick={() => handleClose(value)}
+                key={key}
+                className="hoveredProfile"
+                sx={{ marginTop: '10px' }}
+              >
+                <ListItemIcon>{value.ICON}</ListItemIcon>
+                <ListItemText>{value.LABEL}</ListItemText>
+              </MenuItem>
+            )
+          }
+        })}
+      </Box>
+    </>
   )
 }
 

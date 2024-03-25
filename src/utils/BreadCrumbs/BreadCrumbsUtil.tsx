@@ -21,7 +21,6 @@ const BreadCrumbsUtil: FC<BreadCrumbsProps> = ({ array }) => {
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
-        marginTop: '150px',
         marginBottom: '30px',
       }}
     >

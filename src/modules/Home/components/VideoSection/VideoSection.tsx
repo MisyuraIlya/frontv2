@@ -9,7 +9,7 @@ const VideoSection = () => {
       width: '100%',
       height: '600px',
       overflow: 'hidden',
-      background: '#fff', // Add background color
+      background: '#fff',
     } as React.CSSProperties,
 
     video: {
@@ -19,7 +19,7 @@ const VideoSection = () => {
       position: 'absolute',
       top: '0',
       left: '0',
-      filter: 'brightness(50%)', // Add brightness filter
+      filter: 'brightness(50%)',
     } as React.CSSProperties,
     showcase: {
       position: 'absolute',
@@ -30,7 +30,6 @@ const VideoSection = () => {
       color: '#fff',
     } as React.CSSProperties,
     title: {
-      width: '90%',
       marginBottom: '120px',
     } as React.CSSProperties,
   }
@@ -49,22 +48,22 @@ const VideoSection = () => {
           x-webkit-airplay="allow"
           poster={`${process.env.REACT_APP_MEDIA}/poster.jpg`}
         >
-          {window.innerWidth > 1200 ? (
-            <source
-              src={`${process.env.REACT_APP_MEDIA}/video.mp4`}
-              type="video/mp4"
-            />
-          ) : (
-            <source
-              src={`${process.env.REACT_APP_MEDIA}/video.webm`}
-              type="video/webm"
-            />
-          )}
+          <source
+            src={`${process.env.REACT_APP_MEDIA}/video.mp4`}
+            type="video/mp4"
+          />
         </video>
       </Paper>
       <Box style={styles.showcase}>
         <Box className="centered">
-          <Typography variant="h3" style={styles.title}>
+          <Typography
+            variant="h3"
+            style={styles.title}
+            sx={{
+              width: { xs: '100%', md: '90%' },
+              fontSize: { xs: '25px', md: '42px' },
+            }}
+          >
             ברוכים הבאים למדי מרקט המקור שלך לתרופות וציוד רפואי בישראל
           </Typography>
         </Box>

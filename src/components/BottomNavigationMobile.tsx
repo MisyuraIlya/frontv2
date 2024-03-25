@@ -2,11 +2,7 @@ import React, { useState } from 'react'
 import {
   BottomNavigation,
   Box,
-  Button,
   Drawer,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
   Paper,
   Typography,
   useMediaQuery,
@@ -18,20 +14,18 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import { themeColors } from '../styles/mui'
 import { useAuth } from '../modules/Auth/store/useAuthStore'
-import { useCart } from '../modules/Cart/store/cart.store'
-import { agentURL, clientURL } from '../enums/url'
 import { onAsk } from '../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
 import NotificationContainer from '../modules/PushNotifications/components/NotificationContainer/NotificationContainer'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 import { useModals } from '../modules/Modals/provider/ModalProvider'
+import ProfileMenu from '../modules/Header/components/LeftComponent/components/ProfileMenu'
 
 const BottomNavigationMobile = () => {
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
   const { user, agent, logOut, isAgent } = useAuth()
   const { setOpenAuthModal } = useModals()
-  const { selectedMode } = useCart()
   const [openDrawver, setOpenDrawver] = useState(false)
   const navigate = useNavigate()
 
@@ -40,17 +34,6 @@ const BottomNavigationMobile = () => {
     if (ask) {
       logOut()
     }
-  }
-
-  const handleClick = (value: IURL) => {
-    if (value.LINK) {
-      navigate(value.LINK)
-    }
-
-    if (value.LABEL === clientURL.NOTIFICATIONS.LABEL) {
-      setOpenDrawver(true)
-    }
-    setOpen(false)
   }
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -95,81 +78,7 @@ const BottomNavigationMobile = () => {
                 zIndex: 101,
               }}
             >
-              <Paper
-                elevation={4}
-                sx={{ margin: '5px 10px', padding: '10px', width: '180px' }}
-              >
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: 'white',
-                    background: themeColors.primary,
-                    padding: '4px',
-                  }}
-                >
-                  לקוח
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color={'black'}
-                  sx={{ margin: '5px 0' }}
-                >
-                  {user?.name}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color={'black'}
-                  sx={{ margin: '5px 0' }}
-                >
-                  {user?.extId}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: 'white',
-                    background: themeColors.secondary,
-                    padding: '4px',
-                  }}
-                >
-                  {selectedMode == 'order' && 'הזמנה'}
-                  {selectedMode == 'quote' && 'ה.מחיר'}
-                  {selectedMode == 'return' && 'החזרה'}
-                </Typography>
-                <Button
-                  variant="outlined"
-                  fullWidth={true}
-                  sx={{ margin: '15px 0' }}
-                  onClick={() => beforeLogOut()}
-                >
-                  התנתק
-                </Button>
-                {agent && user?.role === 'ROLE_USER' && (
-                  <Button
-                    variant="outlined"
-                    fullWidth={true}
-                    onClick={() => beforeLogOut()}
-                  >
-                    התנתק מהלקוח
-                  </Button>
-                )}
-              </Paper>
-              <Box sx={{ margin: '25px 10px' }}>
-                {Object.entries(clientURL).map(([key, value]) => {
-                  if (value.SHOW_IN_PROFILE_MENU) {
-                    return (
-                      <MenuItem
-                        onClick={() => handleClick(value)}
-                        key={key}
-                        className="hoveredProfile"
-                        sx={{ marginTop: '10px' }}
-                      >
-                        <ListItemIcon>{value.ICON}</ListItemIcon>
-                        <ListItemText>{value.LABEL}</ListItemText>
-                      </MenuItem>
-                    )
-                  }
-                })}
-              </Box>
+              <ProfileMenu />
             </Paper>
           )}
           <Paper
@@ -218,6 +127,20 @@ const BottomNavigationMobile = () => {
                 />
               )}
             </BottomNavigation>
+            {agent && agent.id !== user?.id && (
+              <Box
+                className="centered"
+                sx={{
+                  background: themeColors.primary,
+                  color: 'white',
+                  padding: '5px 0',
+                }}
+              >
+                <Typography variant="body1">
+                  {user?.extId} - {user?.name}
+                </Typography>
+              </Box>
+            )}
           </Paper>
           <Drawer
             anchor="right"
