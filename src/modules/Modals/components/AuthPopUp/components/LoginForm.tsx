@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
-import { Box, Button, FormControl, TextField, Typography } from '@mui/material'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  TextField,
+  Typography,
+} from '@mui/material'
+import PersonIcon from '@mui/icons-material/Person'
+import { themeColors } from '../../../../../styles/mui'
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
 type LoginForm = {
   email: string
@@ -10,6 +20,7 @@ type LoginForm = {
 }
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false)
   const { login, setAction } = useAuth()
   const {
     register,
@@ -23,14 +34,36 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
-        <PersonOutlineOutlinedIcon sx={{ fontSize: '50px' }} />
-      </Box>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
+    <form onSubmit={handleSubmit(handleLogin)} style={{ margin: '0 8px' }}>
+      <Box sx={{ display: 'flex', gap: '16px' }}>
+        <PersonIcon sx={{ fontSize: '40px' }} />
         <Typography variant="h4">כניסה</Typography>
       </Box>
-      <Box sx={{ margin: '20px 50px' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '10px',
+          marginTop: '16px',
+          marginLeft: '5px',
+        }}
+      >
+        <Typography variant="subtitle1" color={'primary'} fontWeight={600}>
+          טרם נרשמת?
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          fontWeight={600}
+          sx={{
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            color: themeColors.info,
+          }}
+          onClick={() => setAction('validation')}
+        >
+          לחץ כאן להרשמה
+        </Typography>
+      </Box>
+      <Box>
         <FormControl fullWidth margin="normal">
           <Controller
             name="email"
@@ -47,7 +80,8 @@ const LoginForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="מייל"
+                placeholder="האימייל שלך"
+                label="מייל*"
                 type="mail"
                 error={!!errors.email}
                 helperText={errors.email?.message}
@@ -67,16 +101,31 @@ const LoginForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="סיסמא"
-                type="password"
+                label="סיסמה*"
+                placeholder="הסיסמה שלך"
+                type={showPassword ? 'text' : 'password'}
                 error={!!errors.password}
                 helperText={errors.password?.message}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <VisibilityOffOutlinedIcon color="primary" />
+                      ) : (
+                        <RemoveRedEyeOutlinedIcon color="primary" />
+                      )}
+                    </IconButton>
+                  ),
+                }}
               />
             )}
           />
         </FormControl>
         <Button
-          sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+          sx={{ marginTop: '40px' }}
           fullWidth={true}
           type="submit"
           variant="contained"
@@ -84,32 +133,20 @@ const LoginForm = () => {
         >
           כניסה
         </Button>
-        <Box className="centered" sx={{ marginTop: '30px' }}>
+        <Box sx={{ marginTop: '30px' }}>
           <Typography
+            fontWeight={600}
             onClick={() => setAction('forgotPassordStepOne')}
-            variant="body2"
-            sx={{ cursor: 'pointer', textDecoration: 'underline' }}
+            variant="subtitle1"
+            sx={{
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              color: themeColors.info,
+            }}
             color={'primary'}
           >
             שחזר סיסמה
           </Typography>
-        </Box>
-        <Box sx={{ marginTop: '30px' }}>
-          <Box className="centered">
-            <Typography variant="body1" color={'primary'}>
-              טרם נרשמת?
-            </Typography>
-          </Box>
-          <Button
-            sx={{ borderRadius: '12px', marginTop: '10px' }}
-            fullWidth={true}
-            type="submit"
-            variant="outlined"
-            color="primary"
-            onClick={() => setAction('validation')}
-          >
-            לחץ כאן להרשמה
-          </Button>
         </Box>
       </Box>
     </form>

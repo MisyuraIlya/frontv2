@@ -2,14 +2,14 @@ import { alpha, createTheme, lighten, darken } from '@mui/material'
 import { red } from '@mui/material/colors'
 
 export const themeColors = {
-  primary: '#2c1e5d',
-  secondary: '#c52a43',
+  primary: '#212121',
+  secondary: '#E1E0E4',
 
-  success: '#57CA22',
-  warning: '#FFA319',
-  error: '#E32D2D',
+  success: '#30AC5A',
+  warning: '#F3C521',
+  error: '#DA2F1B',
+  info: '#2196F3',
 
-  info: '#33C2FF',
   black: '#223354',
   white: '#ffffff',
   primaryAlt: '#000C57',
@@ -227,6 +227,17 @@ const theme = createTheme({
               backgroundColor: '#e0e0e0', // Set your desired background color for hover effect
             },
           },
+        },
+      },
+    },
+    // BUTTONS
+
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '4px',
+          fontWeight: 600,
+          fontSize: '16px',
         },
       },
     },

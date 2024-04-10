@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { Box, Button, FormControl, TextField, Typography } from '@mui/material'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import PersonIcon from '@mui/icons-material/Person'
 
 type ValidationForm = {
   userExtId: string
@@ -23,14 +23,16 @@ const ValidationForm = () => {
   }
 
   return (
-    <form className="register" onSubmit={handleSubmit(handleLogin)}>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
-        <PersonOutlineOutlinedIcon sx={{ fontSize: '50px' }} />
-      </Box>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
+    <form
+      className="register"
+      onSubmit={handleSubmit(handleLogin)}
+      style={{ margin: '0 8px' }}
+    >
+      <Box sx={{ display: 'flex', gap: '16px', alignItems: 'flex-end' }}>
+        <PersonIcon sx={{ fontSize: '50px' }} />
         <Typography variant="h4">אימות לקוח</Typography>
       </Box>
-      <Box sx={{ margin: '20px 50px' }}>
+      <Box sx={{ marginTop: '20px' }}>
         <FormControl fullWidth margin="normal">
           <Controller
             name="userExtId"
@@ -43,7 +45,8 @@ const ValidationForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="מספר לקוח"
+                label="מספר לקוח פנימי*"
+                placeholder="הכנס את המספר שלך"
                 type="text"
                 error={!!errors.userExtId}
                 helperText={errors.userExtId?.message}
@@ -58,13 +61,18 @@ const ValidationForm = () => {
             defaultValue=""
             rules={{
               required: 'טלפון שדה חובה',
+              minLength: {
+                value: 10,
+                message: 'טלפון חייב להכיל לפחות 10 תווים',
+              },
             }}
             render={({ field }) => (
               <TextField
                 {...field}
                 variant="standard"
-                label="טלפון"
-                type="text"
+                placeholder="00000000000"
+                label="טלפון*"
+                type="tel"
                 error={!!errors.phone}
                 helperText={errors.phone?.message}
               />
@@ -72,7 +80,7 @@ const ValidationForm = () => {
           />
         </FormControl>
         <Button
-          sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+          sx={{ marginTop: '40px' }}
           fullWidth={true}
           type="submit"
           variant="contained"

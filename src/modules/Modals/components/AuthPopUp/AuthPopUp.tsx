@@ -33,13 +33,12 @@ const AuthPopUp: FC<AuthPopUpProps> = ({ active, setActive }) => {
         elevation={9}
         sx={{
           width: '400px',
-          padding: '20px',
+          padding: '40px',
           outline: 'none',
+          position: 'relative',
         }}
       >
-        <Box
-          sx={{ display: 'flex', justifyContent: 'end', marginBottom: '20px' }}
-        >
+        <Box sx={{ position: 'absolute', right: '10px', top: '10px' }}>
           <IconButton onClick={() => setActive(false)}>
             <CloseIcon sx={{ fontSize: '35px', cursor: 'pointer' }} />
           </IconButton>

@@ -3,7 +3,7 @@ import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { useForm, Controller } from 'react-hook-form'
 import { useModals } from '../../../provider/ModalProvider'
 import { Box, Button, FormControl, TextField, Typography } from '@mui/material'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import PersonIcon from '@mui/icons-material/Person'
 
 type ForgotPasswordStepOne = {
   phone: string
@@ -27,13 +27,11 @@ const ForgotPasswordStepOne = () => {
 
   return (
     <form className="login" onSubmit={handleSubmit(handleLogin)}>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
-        <PersonOutlineOutlinedIcon sx={{ fontSize: '50px' }} />
-      </Box>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
+      <Box sx={{ display: 'flex', gap: '16px' }}>
+        <PersonIcon sx={{ fontSize: '40px' }} />
         <Typography variant="h4">שחזור סיסמא</Typography>
       </Box>
-      <Box sx={{ margin: '20px 50px' }}>
+      <Box sx={{ marginTop: '40px' }}>
         <FormControl fullWidth margin="normal">
           <Controller
             name="phone"
@@ -46,8 +44,9 @@ const ForgotPasswordStepOne = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="טלפון"
-                type="text"
+                label="טלפון*"
+                placeholder="00000000000"
+                type="tel"
                 error={!!errors.phone}
                 helperText={errors.phone?.message}
               />
@@ -55,7 +54,7 @@ const ForgotPasswordStepOne = () => {
           />
         </FormControl>
         <Button
-          sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+          sx={{ marginTop: '30px' }}
           fullWidth={true}
           type="submit"
           variant="contained"

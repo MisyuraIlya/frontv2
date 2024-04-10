@@ -7,10 +7,14 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  IconButton,
   TextField,
   Typography,
 } from '@mui/material'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import PersonIcon from '@mui/icons-material/Person'
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
+import { themeColors } from '../../../../../styles/mui'
 
 type RegistrationForm = {
   email: string
@@ -21,6 +25,8 @@ type RegistrationForm = {
 }
 
 const RegistrationForm = () => {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword2, setShowPassword2] = useState(false)
   const {
     register,
     handleSubmit,
@@ -39,13 +45,35 @@ const RegistrationForm = () => {
 
   return (
     <form className="login" onSubmit={handleSubmit(handleLogin)}>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
-        <PersonOutlineOutlinedIcon sx={{ fontSize: '50px' }} />
-      </Box>
-      <Box className="centered" sx={{ marginTop: '40px' }}>
+      <Box sx={{ display: 'flex', gap: '16px' }}>
+        <PersonIcon sx={{ fontSize: '40px' }} />
         <Typography variant="h4">הרשמה</Typography>
       </Box>
-      <Box sx={{ margin: '20px 50px' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '10px',
+          marginTop: '16px',
+          marginLeft: '5px',
+        }}
+      >
+        <Typography variant="subtitle1" color={'primary'} fontWeight={600}>
+          כבר יש לך חשבון?
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          fontWeight={600}
+          sx={{
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            color: themeColors.info,
+          }}
+          onClick={() => setAction('login')}
+        >
+          כניסה
+        </Typography>
+      </Box>
+      <Box sx={{ marginTop: '10px' }}>
         <FormControl fullWidth margin="normal">
           <Controller
             name="email"
@@ -62,7 +90,7 @@ const RegistrationForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="מייל"
+                label="מייל*"
                 type="mail"
                 error={!!errors.email}
                 helperText={errors.email?.message}
@@ -82,10 +110,24 @@ const RegistrationForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="סיסמא"
-                type="password"
+                label="סיסמא*"
+                type={showPassword ? 'text' : 'password'}
                 error={!!errors.password}
                 helperText={errors.password?.message}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <VisibilityOffOutlinedIcon color="primary" />
+                      ) : (
+                        <RemoveRedEyeOutlinedIcon color="primary" />
+                      )}
+                    </IconButton>
+                  ),
+                }}
               />
             )}
           />
@@ -102,10 +144,24 @@ const RegistrationForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="סיסמא"
-                type="password"
+                label="סיסמא*"
+                type={showPassword2 ? 'text' : 'password'}
                 error={!!errors.confirmPassword}
                 helperText={errors.confirmPassword?.message}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      onClick={() => setShowPassword2(!showPassword2)}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <VisibilityOffOutlinedIcon color="primary" />
+                      ) : (
+                        <RemoveRedEyeOutlinedIcon color="primary" />
+                      )}
+                    </IconButton>
+                  ),
+                }}
               />
             )}
           />
@@ -122,7 +178,7 @@ const RegistrationForm = () => {
               <TextField
                 {...field}
                 variant="standard"
-                label="קוד סודי"
+                label="קוד סודי*"
                 type="mail"
                 error={!!errors.token}
                 helperText={errors.token?.message}
@@ -131,6 +187,7 @@ const RegistrationForm = () => {
           />
         </FormControl>
         <FormControlLabel
+          sx={{ marginTop: '10px' }}
           control={
             <Controller
               name="privacy"
@@ -142,7 +199,7 @@ const RegistrationForm = () => {
           label="אנא קרא והסכם לתנאי שימוש"
         />
         <Button
-          sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+          sx={{ marginTop: '30px' }}
           fullWidth={true}
           type="submit"
           variant="contained"
@@ -150,28 +207,6 @@ const RegistrationForm = () => {
         >
           הרשמה
         </Button>
-        <Box className="centered" sx={{ marginTop: '30px' }}>
-          <Typography
-            onClick={() => setAction('forgotPassordStepOne')}
-            variant="body2"
-            sx={{ cursor: 'pointer', textDecoration: 'underline' }}
-            color={'primary'}
-          >
-            שחזר סיסמה
-          </Typography>
-        </Box>
-        <Box sx={{ marginTop: '30px' }}>
-          <Button
-            sx={{ borderRadius: '12px', marginTop: '10px' }}
-            fullWidth={true}
-            type="submit"
-            variant="outlined"
-            color="primary"
-            onClick={() => setAction('login')}
-          >
-            יש כבר משתמש?
-          </Button>
-        </Box>
       </Box>
     </form>
   )
