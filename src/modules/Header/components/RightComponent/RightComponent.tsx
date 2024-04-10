@@ -31,18 +31,18 @@ const RightComponent = () => {
 
   return (
     <Box sx={{ display: 'flex', gap: '20px' }} className="centered">
-      {isAdmin && (
-        <IconButton
-          sx={{
-            position: 'absolute',
-            left: '10px',
-            color: themeColors.primary,
-          }}
-          onClick={() => setOpenAdminSideBar(true)}
-        >
-          <AppsIcon sx={{ fontSize: '50px' }} />
-        </IconButton>
-      )}
+      {/* {isAdmin && ( */}
+      <IconButton
+        sx={{
+          position: 'absolute',
+          left: '10px',
+          color: themeColors.primary,
+        }}
+        onClick={() => setOpenAdminSideBar(true)}
+      >
+        <AppsIcon sx={{ fontSize: '50px' }} />
+      </IconButton>
+      {/* )} */}
       <Link to={'/'}>
         <img
           src={`${process.env.REACT_APP_MEDIA}/logo.png`}

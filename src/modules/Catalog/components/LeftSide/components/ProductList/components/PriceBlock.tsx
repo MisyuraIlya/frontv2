@@ -42,14 +42,13 @@ const PriceBlock: FC<PriceBlockProps> = ({ product }) => {
           </Grid>
         </Box>
       ) : null}
-
-      {user &&
+      {/* {user &&
       selectedMode &&
       product.finalPrice &&
       product.finalPrice !== 0 &&
-      product.stock !== 0 ? (
-        <AddToCart item={product} />
-      ) : null}
+      product.stock !== 0 ? ( */}
+      <AddToCart item={product} />
+      {/* ) : null} */}
     </Box>
   )
 }

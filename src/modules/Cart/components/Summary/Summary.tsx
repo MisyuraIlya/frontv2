@@ -5,8 +5,6 @@ import SendOrderButton from '../SendOrderButton/SendOrderButton'
 import { Box, Container, Paper, Typography } from '@mui/material'
 
 const Summary = () => {
-  const { isUserBlocked } = useAuth()
-
   return (
     <Container maxWidth="xl">
       <Box sx={{ textAlign: 'center' }}>

@@ -111,8 +111,8 @@ export const clientURL = {
 
 export const agentURL = {
   DOCUMENT_APPROCE: {
-    LINK: '/documentApprove',
-    LABEL: 'מסמכים לאישור',
+    LINK: '/agentDashboard/1/1',
+    LABEL: 'דאשבורד',
     ICON: <ChecklistRtlIcon />,
   },
   DOCUMENT_AGENT: {

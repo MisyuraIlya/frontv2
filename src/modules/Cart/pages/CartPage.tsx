@@ -6,7 +6,7 @@ import { Grid } from '@mui/material'
 
 const CartPage = () => {
   return (
-    <Grid container spacing={1} sx={{ marginTop: '100px' }}>
+    <Grid container spacing={1} sx={{ marginTop: '35px' }}>
       <Grid item xs={12} sm={9} sx={{ marginTop: '20px' }}>
         <CartOptions />
         <CartList />
