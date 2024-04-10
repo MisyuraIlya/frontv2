@@ -5,62 +5,93 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import { Box, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from '@mui/material'
+import useDataCategories from '../../../Catalog/hook/useDataCategories'
+import { themeColors, themeSettings } from '../../../../styles/mui'
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined'
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined'
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined'
 
-interface SliderSectionProps {
-  title: string
-  array: any[]
-  toShow: number
-  column: number
-  loading: boolean
-}
+const SliderSection = () => {
+  const { data } = useDataCategories()
 
-const SliderSection: FC<SliderSectionProps> = ({
-  title,
-  array,
-  toShow = 5,
-  column = 1,
-  loading,
-}) => {
-  const swiperRef = useRef<null>(null)
-  const params = {
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    spaceBetween: 30,
-    slidesPerView: toShow,
-    onSwiper: (swiper: any) => {
-      swiperRef.current = swiper
-    },
-    breakpoints: {
-      1400: {
-        slidesPerView: 6,
-        slidesPerColumn: 1,
-      },
-      1000: {
-        slidesPerView: 6,
-        slidesPerColumn: 1,
-      },
-      600: {
-        slidesPerView: 6,
-        slidesPerColumn: 1,
-      },
-      0: {
-        slidesPerView: 6,
-        slidesPerColumn: 1,
-      },
-    },
+  const settings = {
+    slidesPerView: 4,
+    loop: true,
+    spaceBetween: 20,
   }
+
   return (
     <Box>
-      <Typography variant="h4">{title}</Typography>
+      <Box sx={{ display: 'flex', gap: '10px' }}>
+        <IconButton
+          sx={{
+            bgcolor: '#F6F6F6',
+            borderRadius: themeSettings.borderRadius,
+            color: 'black',
+          }}
+        >
+          <ArrowForwardIosOutlinedIcon />
+        </IconButton>
+        <IconButton
+          sx={{
+            bgcolor: '#F6F6F6',
+            borderRadius: themeSettings.borderRadius,
+            color: 'black',
+          }}
+        >
+          <ArrowBackIosNewOutlinedIcon />
+        </IconButton>
+        <Typography variant="h4">{'קטגוריות'}</Typography>
+        <IconButton>
+          <ArrowBackOutlinedIcon sx={{ fontSize: '30px', color: 'black' }} />
+        </IconButton>
+      </Box>
       <Box>
-        <Swiper {...params}>
-          {array?.map((element, index) => {
+        <Swiper {...settings}>
+          {data?.['hydra:member']?.map((element, index) => {
             return (
               <SwiperSlide key={index}>
-                <Box>
+                <Card>
+                  <CardActionArea>
+                    <Box sx={{ height: '190px' }}>
+                      <CardMedia
+                        sx={{ objectFit: 'cover' }}
+                        component="img"
+                        image={`${process.env.REACT_APP_MEDIA + '/placeholder.jpg'}`}
+                        alt={`${index}`}
+                      />
+                    </Box>
+                    <CardContent
+                      sx={{
+                        backgroundColor: themeColors.primary,
+                        color: 'white',
+                        padding: '6px 12px',
+                      }}
+                    >
+                      <Typography gutterBottom variant="h6">
+                        {element?.title}
+                      </Typography>
+                      <Button
+                        endIcon={<ArrowBackOutlinedIcon />}
+                        sx={{ color: 'white' }}
+                      >
+                        לקטלוג
+                      </Button>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+                {/* <Box>
                   <Link to={`/client/catalog/${element?.identify}/0/0?page=1`}>
                     <Box>
                       <img
@@ -80,7 +111,7 @@ const SliderSection: FC<SliderSectionProps> = ({
                       </Typography>
                     </Box>
                   </Link>
-                </Box>
+                </Box> */}
               </SwiperSlide>
             )
           })}

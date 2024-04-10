@@ -16,8 +16,8 @@ export const themeColors = {
   text: '#303545',
 }
 
-const themeSettings = {
-  borderRadius: '16px',
+export const themeSettings = {
+  borderRadius: '4px',
 }
 
 export const colors = {
@@ -74,7 +74,7 @@ export const colors = {
   },
   alpha: {
     white: {
-      5: alpha(themeColors.white, 0.02),
+      5: alpha(themeColors.white, 0.05),
       10: alpha(themeColors.white, 0.1),
       30: alpha(themeColors.white, 0.3),
       50: alpha(themeColors.white, 0.5),

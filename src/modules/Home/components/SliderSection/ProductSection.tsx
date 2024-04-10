@@ -28,34 +28,10 @@ const ProductSection: FC<ProductSectionProps> = ({
   loading,
 }) => {
   const swiperRef = useRef<null>(null)
-  const params = {
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    spaceBetween: 30,
-    slidesPerView: toShow,
-    onSwiper: (swiper: any) => {
-      swiperRef.current = swiper
-    },
-    breakpoints: {
-      1400: {
-        slidesPerView: 5,
-        slidesPerColumn: 1,
-      },
-      1000: {
-        slidesPerView: 5,
-        slidesPerColumn: 1,
-      },
-      600: {
-        slidesPerView: 2,
-        slidesPerColumn: 1,
-      },
-      0: {
-        slidesPerView: 2,
-        slidesPerColumn: 1,
-      },
-    },
+  const settings = {
+    slidesPerView: 4,
+    loop: true,
+    spaceBetween: 20,
   }
 
   return (
@@ -64,18 +40,10 @@ const ProductSection: FC<ProductSectionProps> = ({
         <Typography variant="h4">{title}</Typography>
       </Box>
       <Typography>
-        <Swiper {...params}>
+        <Swiper {...settings}>
           {array?.map((element, index) => {
             return (
-              <SwiperSlide key={index} className="product-item">
-                <Box key={index}>
-                  <Box>
-                    <Tags product={element} />
-                    <BasicInfo product={element} />
-                    {/* <PriceBlock product={element} /> */}
-                  </Box>
-                </Box>
-              </SwiperSlide>
+              <SwiperSlide key={index} className="product-item"></SwiperSlide>
             )
           })}
         </Swiper>

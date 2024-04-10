@@ -11,171 +11,182 @@ import {
   Box,
   ListItemIcon,
   ListItemText,
+  FormControl,
 } from '@mui/material'
-import { themeColors } from '../styles/mui'
+import { colors, themeColors } from '../styles/mui'
+import { useForm, Controller } from 'react-hook-form'
 import BusinessIcon from '@mui/icons-material/Business'
 import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 
+type form = {
+  firstName: string
+  lastName: string
+  phone: string
+  email: string
+  description: string
+}
+
 const ContactFooter = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<form>()
+
   return (
     <Box sx={{ backgroundColor: themeColors.primary }}>
       <Container maxWidth="xl">
-        <Grid container spacing={12}>
-          <Grid item xs={12} lg={5}>
-            <Box sx={{ color: 'white' }}>
-              <Typography variant="h4">{'אודותינו'}</Typography>
-              <Typography variant="body2">
-                מדי-מרקט הינה החברה המובילה בתחום יבוא והפצת מגוון רחב של
-                תרופות, ציוד רפואי ומכשור רפואי עבור מגוון רחב של מוסדות
-                רפואיים.
-              </Typography>
-              <Typography variant="body2">
-                למדי-מרקט רישיון משרד הבריאות לניהול בית מרקחת ובית מסחר
-                לתרופות. החברה הינה בעלת תקן אירופאי GMP, GDP, בעלת אישור משרד
-                הבריאות ומפעילה מרכז הכנות לרקיחת הכנות מיוחדות (נוהל 132 ונוהל
-                135) וכמו כן מאושרת החברה לתקן ISO9001.
-              </Typography>
-              <Typography variant="body2">
-                הובלה ברכבים מבוקרי טמפרטורות בהתאם להוראות ה-GDP המחמירות, תוך
-                פיקוח הדוק וקפדני של רוקחים אחראיים המבקרים את ההובלה באמצעים
-                טכנולוגיים משוכללים על מנת להבטיח את הספקת התרופות במהירות
-                ובאחריות תוך שמירה על תנאי הובלה נאותים.
-              </Typography>
+        <Grid container spacing={10} sx={{ paddingTop: '50px' }}>
+          <Grid
+            item
+            xs={4}
+            sx={{ color: 'white', bgcolor: colors.alpha.white[5] }}
+          >
+            <Typography variant="h5">יש לכם שאלות? תצרו איתנו קשר</Typography>
+            <Box sx={{ display: 'flex', gap: '10px' }}>
+              <FormControl fullWidth margin="normal">
+                <Controller
+                  name="firstName"
+                  control={control}
+                  defaultValue=""
+                  rules={{
+                    required: 'מספר לקוח שדה חובה',
+                  }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      variant="standard"
+                      label="מספר לקוח פנימי*"
+                      placeholder="הכנס את המספר שלך"
+                      type="text"
+                      error={!!errors.firstName}
+                      helperText={errors.firstName?.message}
+                      sx={{
+                        color: 'white',
+                        '& .MuiInput-underline:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInput-underline:hover:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInputBase-input': {
+                          color: 'white',
+                        },
+                      }}
+                      InputLabelProps={{ style: { color: 'white' } }}
+                    />
+                  )}
+                />
+              </FormControl>
+              <FormControl fullWidth margin="normal">
+                <Controller
+                  name="lastName"
+                  control={control}
+                  defaultValue=""
+                  rules={{
+                    required: 'מספר לקוח שדה חובה',
+                  }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      variant="standard"
+                      label="מספר לקוח פנימי*"
+                      placeholder="הכנס את המספר שלך"
+                      type="text"
+                      error={!!errors.lastName}
+                      helperText={errors.lastName?.message}
+                      sx={{
+                        color: 'white',
+                        '& .MuiInput-underline:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInput-underline:hover:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInputBase-input': {
+                          color: 'white',
+                        },
+                      }}
+                      InputLabelProps={{ style: { color: 'white' } }}
+                    />
+                  )}
+                />
+              </FormControl>
+            </Box>
+            <Box sx={{ display: 'flex', gap: '10px' }}>
+              <FormControl fullWidth margin="normal">
+                <Controller
+                  name="firstName"
+                  control={control}
+                  defaultValue=""
+                  rules={{
+                    required: 'מספר לקוח שדה חובה',
+                  }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      variant="standard"
+                      label="מספר לקוח פנימי*"
+                      placeholder="הכנס את המספר שלך"
+                      type="text"
+                      error={!!errors.firstName}
+                      helperText={errors.firstName?.message}
+                      sx={{
+                        color: 'white',
+                        '& .MuiInput-underline:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInput-underline:hover:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInputBase-input': {
+                          color: 'white',
+                        },
+                      }}
+                      InputLabelProps={{ style: { color: 'white' } }}
+                    />
+                  )}
+                />
+              </FormControl>
+              <FormControl fullWidth margin="normal">
+                <Controller
+                  name="lastName"
+                  control={control}
+                  defaultValue=""
+                  rules={{
+                    required: 'מספר לקוח שדה חובה',
+                  }}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      variant="standard"
+                      label="מספר לקוח פנימי*"
+                      placeholder="הכנס את המספר שלך"
+                      type="text"
+                      error={!!errors.lastName}
+                      helperText={errors.lastName?.message}
+                      sx={{
+                        color: 'white',
+                        '& .MuiInput-underline:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInput-underline:hover:before': {
+                          borderBottomColor: 'white',
+                        },
+                        '& .MuiInputBase-input': {
+                          color: 'white',
+                        },
+                      }}
+                      InputLabelProps={{ style: { color: 'white' } }}
+                    />
+                  )}
+                />
+              </FormControl>
             </Box>
           </Grid>
-          <Grid item xs={12} lg={4}>
-            <Box>
-              <TextField
-                id="outlined-basic"
-                label="שם"
-                fullWidth
-                variant="filled"
-                sx={{
-                  color: 'white',
-                  '& .MuiInput-underline:before': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .MuiInput-underline:after': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .Mui-focused .MuiInputLabel-root': {
-                    color: 'white',
-                  },
-                }}
-                InputProps={{
-                  style: {
-                    color: 'white',
-                  },
-                }}
-                InputLabelProps={{
-                  style: { color: 'white' },
-                }}
-              />
-              <TextField
-                id="outlined-basic"
-                label="מייל"
-                fullWidth
-                variant="filled"
-                sx={{
-                  color: 'white',
-                  '& .MuiInput-underline:before': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .MuiInput-underline:after': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .Mui-focused .MuiInputLabel-root': {
-                    color: 'white',
-                  },
-                }}
-                InputProps={{
-                  style: {
-                    color: 'white',
-                  },
-                }}
-                InputLabelProps={{
-                  style: { color: 'white' },
-                }}
-              />
-              <TextField
-                id="outlined-basic"
-                label="טלפון"
-                fullWidth
-                variant="filled"
-                sx={{
-                  color: 'white',
-                  '& .MuiInput-underline:before': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .MuiInput-underline:after': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-                    borderBottomColor: 'white',
-                  },
-                  '& .Mui-focused .MuiInputLabel-root': {
-                    color: 'white',
-                  },
-                }}
-                InputProps={{
-                  style: {
-                    color: 'white',
-                  },
-                }}
-                InputLabelProps={{
-                  style: { color: 'white' },
-                }}
-              />
-              <TextareaAutosize
-                placeholder="הודעה"
-                style={{
-                  width: '100%',
-                  color: 'white',
-                  backgroundColor: themeColors.primary,
-                }}
-              />
-              <Button variant="contained" color="secondary">
-                {'שלח'}
-              </Button>
-            </Box>
-          </Grid>
-          <Grid item xs={12} lg={3}>
-            <Box sx={{ '& .MuiTypography-root': { color: 'white' } }}>
-              <List>
-                <ListItem disablePadding>
-                  <ListItemIcon>
-                    <BusinessIcon sx={{ color: 'white' }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="כתובת:"
-                    secondary={'הקטיף 3, פארק תעשיות עמק חפר'}
-                  />
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemIcon>
-                    <PhoneEnabledIcon sx={{ color: 'white' }} />
-                  </ListItemIcon>
-                  <ListItemText primary="טלפון:" secondary={'09-8844452'} />
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemIcon>
-                    <AlternateEmailIcon sx={{ color: 'white' }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="אימייל:"
-                    secondary={'humane-info@medi-market.co.il'}
-                  />
-                </ListItem>
-              </List>
-            </Box>
-          </Grid>
+          <Grid item xs={8}></Grid>
         </Grid>
       </Container>
     </Box>

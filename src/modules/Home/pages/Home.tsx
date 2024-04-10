@@ -6,39 +6,37 @@ import { useCatalog } from '../../Catalog/store/CatalogStore'
 import ProductSection from '../components/SliderSection/ProductSection'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import { Box, Container } from '@mui/material'
+import useDataCategories from '../../Catalog/hook/useDataCategories'
+import ProductsEditList from '../../Admin/components/ProductsEdit/ProductsEditList'
 const HomePage = () => {
   const { user } = useAuth()
-
   return (
     <Box>
-      <VideoSection />
-      <Container maxWidth="lg">
-        {/* <SliderSection
-          title={'מחלקות החברה'}
-          array={categoriesLvl1}
-          toShow={5}
-          column={1}
-          loading={loading}
-        /> */}
-        {/* {user && (
-          <>
-            <ProductSection
-              title={'מומלצים עבורך'}
-              array={recommendedPoductsHomePage}
-              toShow={5}
-              column={1}
-              loading={loadingRecommendedProds}
-            />
-
-            <ProductSection
-              title={'מוצרים קבועים'}
-              array={regularProductsHomePage}
-              toShow={5}
-              column={1}
-              loading={loadingRegularProds}
-            />
-          </>
-        )} */}
+      <Container maxWidth="xl" sx={{ marginBottom: '200px' }}>
+        <Box sx={{ marginTop: '70px' }}>
+          <VideoSection />
+        </Box>
+        <Box sx={{ marginTop: '50px' }}>
+          <SliderSection />
+        </Box>
+        <Box>
+          <ProductSection
+            title={'מוצרים קבועים'}
+            array={[]}
+            toShow={5}
+            column={1}
+            loading={false}
+          />
+        </Box>
+        <Box>
+          <ProductSection
+            title={'מוצרים קבועים'}
+            array={[]}
+            toShow={5}
+            column={1}
+            loading={false}
+          />
+        </Box>
       </Container>
       <ContactFooter />
     </Box>
