@@ -105,10 +105,10 @@ export const useAuth = create(
             } else {
               set({ isClient: true })
             }
-            onSuccessAlert('ברוכים הבאים', '')
+            // onSuccessAlert('ברוכים הבאים', '')
             setTimeout(() => {
               location.reload()
-            }, 1000)
+            }, 500)
           } else {
             onErrorAlert('שגיאה', '')
           }

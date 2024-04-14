@@ -16,10 +16,10 @@ const HomePage = () => {
         <Box sx={{ marginTop: '70px' }}>
           <VideoSection />
         </Box>
-        <Box sx={{ marginTop: '50px' }}>
+        {/* <Box sx={{ marginTop: '50px' }}>
           <SliderSection />
-        </Box>
-        <Box>
+        </Box> */}
+        {/* <Box>
           <ProductSection
             title={'מוצרים קבועים'}
             array={[]}
@@ -36,7 +36,7 @@ const HomePage = () => {
             column={1}
             loading={false}
           />
-        </Box>
+        </Box> */}
       </Container>
       <ContactFooter />
     </Box>

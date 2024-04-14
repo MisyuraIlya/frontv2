@@ -4,6 +4,7 @@ import { useAuth } from '../../../../Auth/store/useAuthStore'
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   TextField,
@@ -13,6 +14,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import { themeColors } from '../../../../../styles/mui'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
+import { green } from '@mui/material/colors'
 
 type LoginForm = {
   email: string
@@ -21,7 +23,7 @@ type LoginForm = {
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
-  const { login, setAction } = useAuth()
+  const { login, setAction, loading } = useAuth()
   const {
     register,
     handleSubmit,
@@ -124,7 +126,7 @@ const LoginForm = () => {
             )}
           />
         </FormControl>
-        <Button
+        {/* <Button
           sx={{ marginTop: '40px' }}
           fullWidth={true}
           type="submit"
@@ -132,7 +134,31 @@ const LoginForm = () => {
           color="primary"
         >
           כניסה
-        </Button>
+        </Button> */}
+        <Box sx={{ position: 'relative', marginTop: '40px' }}>
+          <Button
+            sx={{ height: '44px' }}
+            variant="contained"
+            type={!loading ? 'submit' : 'button'}
+            fullWidth
+          >
+            {!loading && 'כניסה'}
+          </Button>
+          {loading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: 'white',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          )}
+        </Box>
+
         <Box sx={{ marginTop: '30px' }}>
           <Typography
             fontWeight={600}
