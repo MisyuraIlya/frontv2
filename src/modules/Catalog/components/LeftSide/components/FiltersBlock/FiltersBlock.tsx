@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 import { useCatalog } from '../../../../store/CatalogStore'
 import { useDebounce } from 'use-debounce'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -12,6 +12,8 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
@@ -20,6 +22,9 @@ import CloseIcon from '@mui/icons-material/Close'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import WindowIcon from '@mui/icons-material/Window'
 import useDataCatalog from '../../../../hook/useDataCatalog'
+import GridViewIcon from '@mui/icons-material/GridView'
+import TocIcon from '@mui/icons-material/Toc'
+import SearchInput from '../../../../../../utils/SearchInput/SearchInput'
 
 const arrOrden = [
   { value: '1', label: 'שם' },
@@ -79,171 +84,218 @@ const FiltersBlock = () => {
     }
   }
 
+  const [alignment, setAlignment] = React.useState<string | null>('left')
+
+  const handleAlignment = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string | null
+  ) => {
+    setAlignment(newAlignment)
+  }
+
   useEffect(() => {
     handleSearchValue(searchDebounce)
   }, [searchDebounce])
 
   return (
-    <Grid
-      container
-      spacing={2}
-      sx={{
-        padding: '10px 0',
-        borderBottom: '1px solid rgba(65, 67, 106, 0.2117647059)',
-        borderTop: '1px solid rgba(65, 67, 106, 0.2117647059)',
-      }}
-    >
-      <Grid
-        item
-        xs={6}
-        sm={2}
-        sx={{
-          paddingTop: '10px !important',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="body1" color={themeColors.primary}>
-          {'נמצאו: ' + totalItems + ' מוצרים'}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        xs={6}
-        sm={4}
-        className="centered"
-        sx={{ paddingTop: '10px !important' }}
-      >
-        <TextField
-          placeholder="חיפוש מוצר.."
+    <Box sx={{ display: 'flex', gap: '12px', justifyContent: 'space-between' }}>
+      <Box sx={{ width: '100%' }}>
+        <SearchInput
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          sx={{
-            border: '1px solid gray',
-            borderRadius: '4px',
-            padding: '0',
-            '& input': {
-              padding: '7px 10px',
-            },
-          }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start" sx={{ cursor: 'pointer' }}>
-                {search ? (
-                  <CloseIcon onClick={() => setSearch('')} />
-                ) : (
-                  <SearchIcon />
-                )}
-              </InputAdornment>
-            ),
-          }}
-          variant="outlined"
+          setValue={setSearch}
+          // handleFunction={handleDebounced}
+          placeholder="חפש מוצר..."
         />
-      </Grid>
-      <Grid
-        item
-        xs={6}
-        sm={2}
-        sx={{
-          paddingTop: '10px !important',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <Typography
-          variant="body1"
-          fontWeight={500}
-          color={themeColors.primary}
-          sx={{ paddingRight: '8px' }}
+      </Box>
+      <Box sx={{ display: 'flex', gap: '12px' }}>
+        <Select value={sortProdSetting.value} onChange={handleOrderBy}>
+          {arrOrden?.map((item, index) => (
+            <MenuItem key={index} value={item.value}>
+              {item.label}
+            </MenuItem>
+          ))}
+        </Select>
+        <ToggleButtonGroup
+          value={alignment}
+          exclusive
+          onChange={handleAlignment}
+          sx={{ bgcolor: themeColors.primary }}
+          aria-label="text alignment"
         >
-          מוצרים:
-        </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120, margin: '0px' }} size="small">
-          <Select value={prodsPerPage} onChange={handleChangeItemsPerPage}>
-            {arrProdsPerPage?.map((item, key) => (
-              <MenuItem key={key} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid
-        item
-        xs={6}
-        sm={2}
-        sx={{
-          paddingTop: '10px !important',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'end',
-        }}
-      >
-        <Typography
-          variant="body1"
-          fontWeight={500}
-          color={themeColors.primary}
-          sx={{ paddingRight: '8px' }}
-        >
-          מיון:
-        </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120, margin: '0px' }} size="small">
-          <Select value={sortProdSetting.value} onChange={handleOrderBy}>
-            {arrOrden?.map((item, index) => (
-              <MenuItem key={index} value={item.value}>
-                {item.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sm={2}
-        sx={{
-          paddingTop: '10px !important',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <Typography
-          variant="body1"
-          fontWeight={500}
-          color={themeColors.primary}
-          sx={{ paddingRight: '5px' }}
-        >
-          תצוגה:
-        </Typography>
-        <Box sx={{ display: 'flex', gap: '20px' }}>
-          <IconButton
-            style={{
-              border: !listView
-                ? '1px solid rgba(65, 67, 106, 0.2117647059)'
-                : '',
-              borderRadius: '0px',
-              padding: '7px',
-            }}
-            onClick={() => setListView(false)}
-          >
-            <WindowIcon sx={{ fontSize: '25px' }} />
-          </IconButton>
-          <IconButton
-            style={{
-              border: listView
-                ? '1px solid rgba(65, 67, 106, 0.2117647059)'
-                : '',
-              borderRadius: '0px',
-              padding: '7px',
-            }}
-            onClick={() => setListView(true)}
-          >
-            <FormatListBulletedIcon sx={{ fontSize: '25px' }} />
-          </IconButton>
-        </Box>
-      </Grid>
-    </Grid>
+          <ToggleButton value="grid" aria-label="bold">
+            <GridViewIcon
+              sx={{ color: alignment == 'grid' ? 'white' : 'black' }}
+            />
+          </ToggleButton>
+          <ToggleButton value="line" aria-label="italic">
+            <TocIcon sx={{ color: alignment == 'line' ? 'white' : 'black' }} />
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Box>
+    </Box>
   )
 }
 
 export default FiltersBlock
+
+{
+  /* <Grid
+container
+spacing={2}
+sx={{
+  padding: '10px 0',
+  borderBottom: '1px solid rgba(65, 67, 106, 0.2117647059)',
+  borderTop: '1px solid rgba(65, 67, 106, 0.2117647059)',
+}}
+>
+<Grid
+  item
+  xs={6}
+  sm={2}
+  sx={{
+    paddingTop: '10px !important',
+    display: 'flex',
+    alignItems: 'center',
+  }}
+>
+  <Typography variant="body1" color={themeColors.primary}>
+    {'נמצאו: ' + totalItems + ' מוצרים'}
+  </Typography>
+</Grid>
+<Grid
+  item
+  xs={6}
+  sm={4}
+  className="centered"
+  sx={{ paddingTop: '10px !important' }}
+>
+  <TextField
+    placeholder="חיפוש מוצר.."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    sx={{
+      border: '1px solid gray',
+      borderRadius: '4px',
+      padding: '0',
+      '& input': {
+        padding: '7px 10px',
+      },
+    }}
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="start" sx={{ cursor: 'pointer' }}>
+          {search ? (
+            <CloseIcon onClick={() => setSearch('')} />
+          ) : (
+            <SearchIcon />
+          )}
+        </InputAdornment>
+      ),
+    }}
+    variant="outlined"
+  />
+</Grid>
+<Grid
+  item
+  xs={6}
+  sm={2}
+  sx={{
+    paddingTop: '10px !important',
+    display: 'flex',
+    alignItems: 'center',
+  }}
+>
+  <Typography
+    variant="body1"
+    fontWeight={500}
+    color={themeColors.primary}
+    sx={{ paddingRight: '8px' }}
+  >
+    מוצרים:
+  </Typography>
+  <FormControl sx={{ m: 1, minWidth: 120, margin: '0px' }} size="small">
+    <Select value={prodsPerPage} onChange={handleChangeItemsPerPage}>
+      {arrProdsPerPage?.map((item, key) => (
+        <MenuItem key={key} value={item}>
+          {item}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+</Grid>
+<Grid
+  item
+  xs={6}
+  sm={2}
+  sx={{
+    paddingTop: '10px !important',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'end',
+  }}
+>
+  <Typography
+    variant="body1"
+    fontWeight={500}
+    color={themeColors.primary}
+    sx={{ paddingRight: '8px' }}
+  >
+    מיון:
+  </Typography>
+  <FormControl sx={{ m: 1, minWidth: 120, margin: '0px' }} size="small">
+    <Select value={sortProdSetting.value} onChange={handleOrderBy}>
+      {arrOrden?.map((item, index) => (
+        <MenuItem key={index} value={item.value}>
+          {item.label}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+</Grid>
+<Grid
+  item
+  xs={12}
+  sm={2}
+  sx={{
+    paddingTop: '10px !important',
+    display: 'flex',
+    alignItems: 'center',
+  }}
+>
+  <Typography
+    variant="body1"
+    fontWeight={500}
+    color={themeColors.primary}
+    sx={{ paddingRight: '5px' }}
+  >
+    תצוגה:
+  </Typography>
+  <Box sx={{ display: 'flex', gap: '20px' }}>
+    <IconButton
+      style={{
+        border: !listView
+          ? '1px solid rgba(65, 67, 106, 0.2117647059)'
+          : '',
+        borderRadius: '0px',
+        padding: '7px',
+      }}
+      onClick={() => setListView(false)}
+    >
+      <WindowIcon sx={{ fontSize: '25px' }} />
+    </IconButton>
+    <IconButton
+      style={{
+        border: listView
+          ? '1px solid rgba(65, 67, 106, 0.2117647059)'
+          : '',
+        borderRadius: '0px',
+        padding: '7px',
+      }}
+      onClick={() => setListView(true)}
+    >
+      <FormatListBulletedIcon sx={{ fontSize: '25px' }} />
+    </IconButton>
+  </Box>
+</Grid>
+</Grid> */
+}

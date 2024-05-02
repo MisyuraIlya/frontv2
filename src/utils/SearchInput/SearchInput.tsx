@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useDebounce } from 'use-debounce'
 import CloseIcon from '@mui/icons-material/Close'
 import MicIcon from '@mui/icons-material/Mic'
+import { themeColors, themeSettings } from '../../styles/mui'
 
 interface SearchInputProps {
   placeholder: string
@@ -53,7 +54,10 @@ const SearchInput: FC<SearchInputProps> = ({
       <TextField
         fullWidth={true}
         placeholder={placeholder}
-        sx={{ backgroundColor: '#f3f5f9' }}
+        sx={{
+          backgroundColor: '#f3f5f9',
+          borderRadius: themeSettings.borderRadius,
+        }}
         onChange={(e) => setValue(e.target.value)}
         value={value}
         InputProps={{

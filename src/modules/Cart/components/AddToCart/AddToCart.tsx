@@ -109,29 +109,30 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
         <>
           <Grid
             item
-            xs={11}
+            xs={12}
             container
-            sx={{ border: '1px solid black' }}
-            style={{ padding: '0px' }}
+            sx={{ backgroundColor: themeColors.primary }}
           >
             <Grid
               item
               xs={4}
               className="centered"
-              sx={{ borderRight: '1px solid black' }}
+              sx={{ borderRight: '1px solid white' }}
             >
               <IconButton
                 onClick={() => increaseCartFunc()}
                 sx={{ borderRadius: '0px', width: '100%' }}
               >
-                <AddIcon />
+                <AddIcon sx={{ color: 'white' }} />
               </IconButton>
             </Grid>
             <Grid item xs={4} className="centered">
               <Input
-                type="number"
+                type="text"
                 value={Quantity}
                 sx={{
+                  color: 'white',
+                  fontWeight: 600,
                   '& input': {
                     textAlign: 'center',
                     justifyContent: 'center',
@@ -153,7 +154,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
               item
               xs={4}
               className="centered"
-              sx={{ borderLeft: '1px solid black' }}
+              sx={{ borderLeft: '1px solid white' }}
             >
               <IconButton
                 onClick={
@@ -163,7 +164,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
                 }
                 sx={{ borderRadius: '0px', width: '100%' }}
               >
-                <RemoveIcon />
+                <RemoveIcon sx={{ color: 'white' }} />
               </IconButton>
             </Grid>
           </Grid>
@@ -171,9 +172,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
       ) : (
         <Grid
           item
-          xs={11}
           container
-          sx={{ border: '1px solid black' }}
           style={{ padding: '0px' }}
           onClick={isInCart ? undefined : () => addToCartFunc()}
         >
@@ -182,6 +181,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
             xs={12}
             className="centered"
             sx={{
+              bgcolor: '#F6F6F6',
               cursor: 'pointer',
               height: '40px',
               color: themeColors.primary,
@@ -191,7 +191,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
               },
             }}
           >
-            {'הוספה לסל'}
+            <Typography variant="button">{'הוספה לסל'}</Typography>
           </Grid>
         </Grid>
       )}

@@ -1,104 +1,154 @@
 import React, { FC } from 'react'
-import Tags from './LeftSide/components/ProductList/components/Tags'
-import BasicInfo from './LeftSide/components/ProductList/components/BasicInfo'
-import PriceBlock from './LeftSide/components/ProductList/components/PriceBlock'
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
+  Chip,
   Divider,
   Grid,
   Typography,
 } from '@mui/material'
-import { useAuth } from '../../Auth/store/useAuthStore'
-import AgentHandler from './LeftSide/components/ProductList/components/AgentHandler'
 import { useModals } from '../../Modals/provider/ModalProvider'
+import { themeColors } from '../../../styles/mui'
+import { useCart } from '../../Cart/store/cart.store'
+import AddToCart from '../../Cart/components/AddToCart/AddToCart'
 
 interface ProductCardProps {
   product: IProduct
   listView?: boolean
 }
 const ProductCard: FC<ProductCardProps> = ({ product, listView = false }) => {
-  const { isAgent } = useAuth()
+  const { getCartItem } = useCart()
   const { selectProduct } = useModals()
+  const inCart = getCartItem(product)
   return (
-    <Card sx={{ position: 'relative', paddingBottom: '20px' }}>
-      <Box sx={{ height: '150px' }}>
-        <CardMedia
-          onClick={() => selectProduct(product)}
-          component="img"
-          height={120}
-          sx={{
-            cursor: 'pointer',
-            objectFit: 'contain',
-            transition: 'transform 0.3s ease-in-out',
-            '&:hover': {
-              transform: 'scale(1.2)',
-            },
-          }}
-          image={
-            product.defaultImagePath
-              ? `${process.env.REACT_APP_MEDIA}/product/${product.defaultImagePath}`
-              : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
-          }
-          alt={product.title}
+    <Card
+      sx={{
+        border: inCart ? `1px solid ${themeColors.primary}` : `1px solid white`,
+        position: 'relative',
+      }}
+    >
+      {product?.discount ? (
+        <Chip
+          label={`מבצע ${product?.discount}%`}
+          color="info"
+          sx={{ position: 'absolute', right: '12px', top: '12px', zIndex: 10 }}
         />
-      </Box>
-      <CardContent>
-        <Typography variant="subtitle1" color={'black'}>
+      ) : null}
+      <CardMedia
+        onClick={() => selectProduct(product)}
+        component="img"
+        height={150}
+        sx={{
+          cursor: 'pointer',
+          objectFit: 'contain',
+          transition: 'transform 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'scale(1.2)',
+          },
+        }}
+        image={
+          product.defaultImagePath
+            ? `${process.env.REACT_APP_MEDIA}/product/${product.defaultImagePath}`
+            : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
+        }
+        alt={product.title}
+      />
+      <CardContent sx={{ p: '12px 16px' }}>
+        <Typography
+          variant="subtitle2"
+          color={themeColors.primary}
+          fontWeight={600}
+          lineHeight={'20px'}
+          fontStyle={'normal'}
+          sx={{ minHeight: '45px' }}
+        >
           {product.title}
         </Typography>
-        <Box sx={{ display: 'flex', gap: '5px' }}>
-          <Typography variant="body1">מק״ט:</Typography>
-          <Typography variant="body1">{product?.sku}</Typography>
-        </Box>
-        {product?.barcode && (
-          <Box sx={{ display: 'flex', gap: '5px' }}>
-            <Typography variant="body1">ברקוד:</Typography>
-            <Typography variant="body1">{product.barcode}</Typography>
-          </Box>
-        )}
-        <Box sx={{ display: 'flex', gap: '10px' }}>
-          <Typography variant="body1">מארז:</Typography>
-          <Typography variant="body1">
-            {`${product?.packQuantity} יח'`}
+        <Grid spacing={0} container sx={{ paddingTop: '10px' }}>
+          <Grid item xs={2.5}>
+            <Typography variant="caption" color={themeColors.asphalt}>
+              מק״ט:
+            </Typography>
+          </Grid>
+          <Grid item xs={9.5}>
+            <Typography variant="caption" color={themeColors.asphalt}>
+              {product?.sku}
+            </Typography>
+          </Grid>
+          {product?.barcode && (
+            <>
+              <Grid item xs={2.5}>
+                <Typography variant="caption" color={themeColors.asphalt}>
+                  ברקוד:
+                </Typography>
+              </Grid>
+              <Grid item xs={9.5}>
+                <Typography variant="caption" color={themeColors.asphalt}>
+                  {product.barcode}
+                </Typography>
+              </Grid>
+            </>
+          )}
+          <Grid item xs={2.5}>
+            <Typography variant="caption" color={themeColors.asphalt}>
+              מארז:
+            </Typography>
+          </Grid>
+          <Grid item xs={9.5}>
+            <Typography variant="caption" color={themeColors.asphalt}>
+              {`${product?.packQuantity} יח'`}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider sx={{ margin: '10px 0' }} />
+        <Box sx={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+            fontWeight={500}
+            lineHeight={'24px'}
+          >
+            {product?.finalPrice} ₪
+          </Typography>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+            fontSize={'12px'}
+            fontWeight={500}
+            lineHeight={'18px'}
+            sx={{ textDecoration: 'line-through' }}
+          >
+            {product?.discount} ₪
           </Typography>
         </Box>
-        <Divider sx={{ marginTop: '10px' }} />
+        <Typography variant="caption" color={themeColors.asphalt}>
+          {`מחיר יח'`}
+        </Typography>
+        <Divider sx={{ margin: '10px 0' }} />
+        <Box sx={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Typography
+            variant="body1"
+            color={themeColors.primary}
+            fontWeight={500}
+            lineHeight={'24px'}
+          >
+            {inCart?.total} ₪
+          </Typography>
+          <Typography
+            variant="caption"
+            color={inCart ? themeColors.info : themeColors.asphalt}
+            lineHeight={'18px'}
+            fontWeight={500}
+          >
+            {`סה״כ להזמנה ל- `}
+            {inCart?.quantity}
+            {" יח'"}
+          </Typography>
+        </Box>
       </CardContent>
-      {/* <Tags product={product} />
-        <Grid item xs={listView ? 6 : 12}>
-          <BasicInfo product={product} />
-        </Grid>
-        {isAgent && (
-          <Box
-            sx={{
-              height: '10x',
-              marginBottom: '5px',
-              borderTop: '1px solid rgba(65,67,106,.43137254901960786);',
-              width: '100%',
-            }}
-          />
-        )}
-
-        {isAgent && <AgentHandler product={product} />}
-        {isAgent && (
-          <Box
-            sx={{
-              height: '10x',
-              marginTop: '5px',
-              borderBottom: '1px solid rgba(65,67,106,.43137254901960786);',
-              width: '100%',
-            }}
-          />
-        )}
-
-        <Grid item xs={listView ? 6 : 12}>
-          <Box>
-            <PriceBlock product={product} />
-          </Box>
-        </Grid> */}
+      <AddToCart item={product} />
     </Card>
   )
 }

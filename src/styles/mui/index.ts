@@ -14,10 +14,11 @@ export const themeColors = {
   white: '#ffffff',
   primaryAlt: '#000C57',
   text: '#303545',
+  asphalt: '#73727F',
 }
 
 export const themeSettings = {
-  borderRadius: '4px',
+  borderRadius: '6px',
 }
 
 export const colors = {
@@ -141,11 +142,54 @@ const theme = createTheme({
   direction: 'rtl',
   typography: {
     fontFamily: 'Ploni, Arial',
-    body1: {
+    h2: {
+      fontSize: '60px',
+      lineHeight: '72px',
+    },
+    h3: {
+      fontSize: '48px',
+      lineHeight: '62px',
+    },
+    h4: {
+      fontSize: '34px',
+      lineHeight: '44px',
+    },
+    h5: {
+      fontSize: '24px',
+      lineHeight: '32px',
+    },
+    h6: {
+      fontSize: '20px',
+      lineHeight: '28px',
+    },
+    subtitle1: {
+      fontSize: '16px',
+      lineHeight: '24px',
+    },
+    subtitle2: {
       fontSize: '14px',
+      lineHeight: '20px',
+    },
+    body1: {
+      fontSize: '16px',
+      lineHeight: '24px',
     },
     body2: {
-      fontSize: '13px',
+      fontSize: '14px',
+      lineHeight: '20px',
+    },
+    caption: {
+      fontSize: '12px',
+      lineHeight: '18px',
+      fontWeight: 500,
+    },
+    overline: {
+      fontSize: '12px',
+      lineHeight: '32px',
+    },
+    button: {
+      fontSize: '14px',
+      lineHeight: '16px',
     },
   },
   palette: {
