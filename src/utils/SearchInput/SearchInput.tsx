@@ -12,6 +12,7 @@ interface SearchInputProps {
   setValue: (value: string) => void
   handleFunction?: (value: string) => void
   ListComponent?: any
+  sx?: React.CSSProperties | Record<string, any>
 }
 
 const SearchInput: FC<SearchInputProps> = ({
@@ -20,6 +21,7 @@ const SearchInput: FC<SearchInputProps> = ({
   placeholder,
   handleFunction,
   ListComponent,
+  sx,
 }) => {
   const [valueDebounced] = useDebounce(value, 1000)
 
@@ -57,6 +59,7 @@ const SearchInput: FC<SearchInputProps> = ({
         sx={{
           backgroundColor: '#f3f5f9',
           borderRadius: themeSettings.borderRadius,
+          ...sx,
         }}
         onChange={(e) => setValue(e.target.value)}
         value={value}

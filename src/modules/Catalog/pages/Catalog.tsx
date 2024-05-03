@@ -14,6 +14,7 @@ const Catalog = () => {
   const res2 = findCategoryTitleById(+lvl2!, categoriesArray)
   const res3 = findCategoryTitleById(+lvl3!, categoriesArray)
   const isMobile = useMediaQuery('(max-width:800px)')
+
   return (
     <Container maxWidth="xl" sx={{ marginTop: '50px' }}>
       <BreadCrumbsUtil

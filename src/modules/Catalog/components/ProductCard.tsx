@@ -103,12 +103,12 @@ const ProductCard: FC<ProductCardProps> = ({ product, listView = false }) => {
           </Grid>
         </Grid>
         <Divider sx={{ margin: '10px 0' }} />
-        <Box sx={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', gap: '12px', alignItems: 'end' }}>
           <Typography
             variant="body1"
             color={themeColors.primary}
             fontWeight={500}
-            lineHeight={'24px'}
+            lineHeight={'21px'}
           >
             {product?.finalPrice} ₪
           </Typography>
@@ -127,12 +127,12 @@ const ProductCard: FC<ProductCardProps> = ({ product, listView = false }) => {
           {`מחיר יח'`}
         </Typography>
         <Divider sx={{ margin: '10px 0' }} />
-        <Box sx={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', gap: '12px', alignItems: 'end' }}>
           <Typography
             variant="body1"
             color={themeColors.primary}
             fontWeight={500}
-            lineHeight={'24px'}
+            lineHeight={'22px'}
           >
             {inCart?.total} ₪
           </Typography>

@@ -1,6 +1,10 @@
 import { create } from 'zustand'
 
 type typeMode = 'list' | 'grid'
+type arr = {
+  value: string
+  label: string
+}
 
 interface useCatalogState {
   listView: typeMode
@@ -9,8 +13,9 @@ interface useCatalogState {
   prodsPerPage: string
   setProdsPerPage: (value: string) => void
 
-  sortProdSetting: { value: string; label: string }
-  setSortProdSetting: (value: string, label: string) => void
+  sortProdSetting: string
+  setSortProdSetting: (value: string) => void
+  sortArr: arr[]
 }
 
 export const useCatalog = create<useCatalogState>((set, get) => ({
@@ -20,7 +25,10 @@ export const useCatalog = create<useCatalogState>((set, get) => ({
   prodsPerPage: '24',
   setProdsPerPage: (prodsPerPage) => set({ prodsPerPage }),
 
-  sortProdSetting: { value: '1', label: 'שם' },
-  setSortProdSetting: (value: string, label: string) =>
-    set({ sortProdSetting: { value: value, label: label } }),
+  sortProdSetting: 'שם',
+  setSortProdSetting: (sortProdSetting: string) => set({ sortProdSetting }),
+  sortArr: [
+    { value: '1', label: 'שם' },
+    { value: '2', label: 'מומלץ' },
+  ],
 }))

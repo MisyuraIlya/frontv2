@@ -286,6 +286,29 @@ const theme = createTheme({
       },
     },
 
+    // TOGGLE GROUP
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        grouped: {
+          '&.Mui-selected': {
+            backgroundColor: colors.primary.main,
+            color: themeColors.white,
+            borderRadius: '4px',
+            '&:hover': {
+              backgroundColor: darken(colors.primary.main, 0.2),
+            },
+          },
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          // Other styles for ToggleButton if needed
+        },
+      },
+    },
+
     // MODAL
 
     // MuiBackdrop: {
@@ -410,16 +433,38 @@ const theme = createTheme({
     //         },
     //     },
     // },
-    // MuiSelect: {
-    //     styleOverrides: {
-    //         iconOutlined: {
-    //             color: colors.alpha.black[50],
-    //         },
-    //         icon: {
-    //             top: "calc(50% - 14px)",
-    //         },
-    //     },
-    // },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          padding: '10px 14px 10px 10px',
+          '&:focus': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+          },
+          '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+          },
+          '&.Mui-focused': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+          },
+          '&.Mui-error': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+          },
+          '&.Mui-disabled': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+          },
+          '&[aria-expanded="true"]': {
+            backgroundColor: '#212121',
+            color: '#ffffff',
+          },
+          '&.Mui-focused.Mui-error': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+          },
+        },
+        // icon: {
+        //   fill: '#ffffff', // Set the color of the icon to white
+        // },
+      },
+    },
     // MuiChip: {
     //     styleOverrides: {
     //         colorSecondary: {

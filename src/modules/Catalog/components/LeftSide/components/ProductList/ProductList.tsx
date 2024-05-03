@@ -8,7 +8,7 @@ const ProductList = () => {
   const { listView } = useCatalog()
   const { data, isLoading } = useDataCatalog()
   return (
-    <Grid container spacing={2} sx={{ marginTop: '20px' }}>
+    <Grid container spacing={2}>
       {isLoading ? (
         <>
           {Array.from({ length: 24 }).map((_, index) => (
@@ -32,9 +32,9 @@ const ProductList = () => {
           {data?.['hydra:member']?.map((product, index) => (
             <Grid
               item
-              xs={listView ? 12 : 6}
+              xs={listView == 'list' ? 12 : 6}
               key={index}
-              sm={listView ? 12 : 3}
+              sm={listView == 'list' ? 12 : 3}
             >
               <ProductCard product={product} />
             </Grid>
