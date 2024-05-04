@@ -20,9 +20,10 @@ const DocsTotal = () => {
       }}
     >
       <Paper
+        elevation={0}
         sx={{
-          width: { sm: '350px', xs: '100%' },
-          boxShadow: '0px 2px 40px rgba(132,147,168,.15)',
+          width: '100%',
+          padding: '0 40px',
         }}
       >
         <Typography
@@ -41,7 +42,6 @@ const DocsTotal = () => {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              backgroundColor: '#f0f0f0',
             }}
           >
             <Typography color={themeColors.primary}>סה״כ</Typography>
@@ -59,7 +59,6 @@ const DocsTotal = () => {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              backgroundColor: '#f0f0f0',
             }}
           >
             <Typography color={themeColors.primary}>אחרי הנחה</Typography>
@@ -77,7 +76,6 @@ const DocsTotal = () => {
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              backgroundColor: '#f0f0f0',
             }}
           >
             <Typography color={themeColors.primary}>לתשלום</Typography>

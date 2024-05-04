@@ -22,14 +22,8 @@ import { onAsk } from '../../../../shared/MySweetAlert'
 import { useAuth } from '../../../Auth/store/useAuthStore'
 
 const CartList = () => {
-  const {
-    cart,
-    CartTitle,
-    deleteFromCart,
-    changePrice,
-    changeDiscount,
-    changeSum,
-  } = useCart()
+  const { cart, deleteFromCart, changePrice, changeDiscount, changeSum } =
+    useCart()
   const { selectProduct } = useModals()
   const { isAgent } = useAuth()
 
@@ -44,14 +38,11 @@ const CartList = () => {
   }
   return (
     <>
-      <Container maxWidth="lg">
-        <Typography variant="h5">{CartTitle()}</Typography>
-      </Container>
+      <Container maxWidth="lg"></Container>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ position: 'sticky' }}></TableCell>
               <TableCell>
                 <Typography
                   variant="h6"
@@ -112,6 +103,7 @@ const CartList = () => {
                   סה״כ להזמנה
                 </Typography>
               </TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -121,26 +113,11 @@ const CartList = () => {
                   key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell
-                    sx={{
-                      position: 'sticky',
-                      left: '0',
-                      background: 'white',
-                      minWidth: '150px',
-                      zIndex: 1,
-                    }}
-                  >
-                    <Box className="centered">
-                      <IconButton onClick={() => handeDelete(element)}>
-                        <DeleteIcon sx={{ color: themeColors.primary }} />
-                      </IconButton>
-                      <AddToCart item={element?.product} />
-                    </Box>
-                  </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: '10px', width: '350px' }}>
                       <img
                         width={120}
+                        style={{ objectFit: 'contain' }}
                         src={
                           element?.product?.defaultImagePath
                             ? process.env.REACT_APP_MEDIA +
@@ -160,11 +137,10 @@ const CartList = () => {
                       >
                         <Box sx={{ width: '100%', textAlign: 'right' }}>
                           <Typography
-                            variant="body1"
+                            variant="body2"
                             sx={{ textAlign: 'left' }}
                             color={themeColors.primary}
                           >
-                            {' '}
                             #{element?.product?.sku}
                           </Typography>
                           <Typography
@@ -179,10 +155,16 @@ const CartList = () => {
                       </Box>
                     </Box>
                   </TableCell>
-                  <TableCell sx={{ minWidth: '100px' }}>
-                    <Typography variant="body1" color={themeColors.primary}>
-                      {element?.quantity}
-                    </Typography>
+                  <TableCell
+                    sx={{
+                      position: 'sticky',
+                      left: '0',
+                      background: 'white',
+                      minWidth: '150px',
+                      zIndex: 1,
+                    }}
+                  >
+                    <AddToCart item={element?.product} />
                   </TableCell>
                   <TableCell sx={{ minWidth: '100px' }}>
                     {isAgent ? (
@@ -253,6 +235,13 @@ const CartList = () => {
                     <Typography variant="body1" color={themeColors.primary}>
                       ₪{element?.total}
                     </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Box className="centered">
+                      <IconButton onClick={() => handeDelete(element)}>
+                        <DeleteIcon color="error" />
+                      </IconButton>
+                    </Box>
                   </TableCell>
                 </TableRow>
               )

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelectedProduct } from '../../../../../store/selecterdProduct.store'
-import { Typography, Link, Grid, IconButton } from '@mui/material'
+import { Typography, Link, Grid, IconButton, Divider } from '@mui/material'
 import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined'
 
 const ProductMainInfo = () => {
@@ -49,6 +49,25 @@ const ProductMainInfo = () => {
           </Grid>
         </Grid>
       )}
+      <Divider />
+      <Grid container sx={{ margin: '20px 0px' }}>
+        <Grid item xs={4}>
+          <Typography variant="body1">{"מחיר יח'"}</Typography>
+        </Grid>
+        <Grid
+          item
+          xs={8}
+          sx={{ display: 'flex', gap: '10px', alignItems: 'end' }}
+        >
+          <Typography variant="h5" lineHeight={'25px'}>
+            ₪{selectedProd?.finalPrice}
+          </Typography>
+          <Typography variant="body2" sx={{ textDecoration: 'line-through' }}>
+            ₪{selectedProd?.basePrice}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Divider />
     </>
   )
 }

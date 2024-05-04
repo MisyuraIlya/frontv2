@@ -95,3 +95,8 @@ body {
 .muirtl-5ajf1d-MuiSvgIcon-root-MuiSelect-icon {
   color: white !important;
 }
+
+.muirtl-1upho0b-MuiStack-root > .MuiTextField-root,
+.muirtl-1upho0b-MuiStack-root > .MuiPickersTextField-root {
+  min-width: 170px !important;
+}

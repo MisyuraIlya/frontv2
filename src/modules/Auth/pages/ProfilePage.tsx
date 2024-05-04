@@ -6,7 +6,7 @@ import { Container } from '@mui/material'
 import BreadCrumbsUtil from '../../../utils/BreadCrumbs/BreadCrumbsUtil'
 const ProfilePage = () => {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
       <BreadCrumbsUtil
         array={[
           {

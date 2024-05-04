@@ -63,20 +63,22 @@ const DocumentsPage = () => {
   return (
     <Container maxWidth="xl">
       {isLoading && <Loader />}
-      <CalendarUtil
+      {/* <CalendarUtil
         show={showCalendar}
         closeHandler={() => setShowCalendar(false)}
         value={currentDate}
         handleCalendar={handleDate}
-      />
-      <BreadCrumbsUtil
-        array={[
-          {
-            title: findDocumentTypeTitle(documentType),
-            link: '',
-          },
-        ]}
-      />
+      /> */}
+      <Box sx={{ mt: '50px' }}>
+        <BreadCrumbsUtil
+          array={[
+            {
+              title: findDocumentTypeTitle(documentType),
+              link: '',
+            },
+          ]}
+        />
+      </Box>
       <DocsFilter />
       {componentToRender}
       {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}

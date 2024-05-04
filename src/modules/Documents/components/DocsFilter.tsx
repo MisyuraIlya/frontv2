@@ -29,6 +29,9 @@ import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import { themeColors } from '../../../styles/mui'
 import useDataDocuments from '../hook/useDataDocuments'
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+
 const DocsFilter = () => {
   const { handleCalendar } = useDocuments()
   const navigate = useNavigate()
@@ -88,55 +91,42 @@ const DocsFilter = () => {
       sx={{
         display: { sm: 'flex', xs: 'block' },
         justifyContent: 'space-between',
-        padding: '20px 20px',
+        padding: '15px 20px',
       }}
     >
-      <Box sx={{ display: { sm: 'flex', xs: 'block' }, gap: '20px' }}>
-        <Box sx={{ display: 'flex', gap: '20px' }}>
-          <Box>
-            <Typography variant="h6">מתאריך</Typography>
-            <Box
-              onClick={() => handleCalendar('from', new Date(dateFrom!))}
-              sx={{
-                border: '1px solid #f0f3ff',
-                padding: '5px 15px',
-                gap: '10px',
-              }}
-              className="centered"
-            >
-              <CalendarMonthIcon sx={{ fontSize: '25px' }} />
-              <Typography variant="body1">
-                {moment(dateFrom).format('DD/MM/YYYY')}
-              </Typography>
-            </Box>
-          </Box>
-          <Box>
-            <Typography variant="h6">לתאריך</Typography>
-            <Box
-              onClick={() => handleCalendar('to', new Date(dateTo!))}
-              sx={{
-                border: '1px solid #f0f3ff',
-                padding: '5px 15px',
-                gap: '10px',
-              }}
-              className="centered"
-            >
-              <CalendarMonthIcon sx={{ fontSize: '25px' }} />
-              <Typography variant="body1">
-                {moment(dateTo).format('DD/MM/YYYY')}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+      <Box
+        sx={{
+          display: { sm: 'flex', xs: 'block' },
+          gap: '20px',
+          alignItems: 'center',
+        }}
+      >
+        <DemoContainer
+          components={['DatePicker']}
+          sx={{
+            width: '170px',
+            pt: '10px',
+            '& .MuiOutlinedInput-input': { padding: '10px 16px' },
+            '& .MuiInputLabel-root': { top: '-7px' },
+          }}
+        >
+          <DatePicker label="מתאריך" />
+        </DemoContainer>
+        <DemoContainer
+          components={['DatePicker']}
+          sx={{
+            pt: '10px',
+            width: '170px',
+            '& .MuiOutlinedInput-input': { padding: '10px 16px' },
+            '& .MuiInputLabel-root': { top: '-7px' },
+          }}
+        >
+          <DatePicker label="לתאריך" />
+        </DemoContainer>
         <Button
           variant="contained"
-          sx={{
-            height: '35px',
-            width: '90px',
-            fontSize: '18px',
-            marginTop: '32px',
-          }}
           onClick={() => mutate()}
+          sx={{ height: '43px', mt: '8px' }}
         >
           חפש
         </Button>
@@ -145,15 +135,11 @@ const DocsFilter = () => {
         sx={{
           display: { sm: 'flex', xs: 'block' },
           gap: '20px',
-          marginTop: '30px',
+          alignItems: 'center',
+          pt: '8px',
         }}
       >
         <Box sx={{ display: 'flex', gap: '20px' }}>
-          <Box className="centered">
-            <Typography color={themeColors.primary}>
-              סה"כ מסמכים: {total}
-            </Typography>
-          </Box>
           <FormControl fullWidth sx={{ width: '200px' }}>
             <InputLabel id="demo-simple-select-label">מסמך</InputLabel>
             <Select
@@ -177,7 +163,7 @@ const DocsFilter = () => {
         <FormControl
           variant="outlined"
           sx={{
-            width: { sm: '200px', xs: '100%' },
+            width: { sm: '300px', xs: '100%' },
             marginTop: { sm: '0px', xs: '20px' },
           }}
         >

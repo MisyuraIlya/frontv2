@@ -8,6 +8,8 @@ import rtlPlugin from 'stylis-plugin-rtl'
 import createCache from '@emotion/cache'
 import { ThemeProvider } from '@mui/material'
 import theme from './styles/mui'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
 const cacheRtl = createCache({
   key: 'muirtl',
@@ -19,11 +21,13 @@ function App() {
     <BrowserRouter>
       <CacheProvider value={cacheRtl}>
         <ThemeProvider theme={theme}>
-          <ModalsProvider>
-            <NotificationsProvider>
-              <RouterApp />
-            </NotificationsProvider>
-          </ModalsProvider>
+          <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="he">
+            <ModalsProvider>
+              <NotificationsProvider>
+                <RouterApp />
+              </NotificationsProvider>
+            </ModalsProvider>
+          </LocalizationProvider>
         </ThemeProvider>
       </CacheProvider>
     </BrowserRouter>

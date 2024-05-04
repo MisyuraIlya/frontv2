@@ -32,7 +32,6 @@ interface useCartState {
   deliveryDate: string
   Maam: number
   discount: number
-  CartTitle: () => string
   setSelectedMode: (type: IDocumentType) => void
   setComment: (value: string) => void
   // ========== CART PAGE ==========
@@ -183,18 +182,7 @@ export const useCart = create(
       Maam: 17,
       comment: '',
       setSelectedMode: (type: IDocumentType) => set({ selectedMode: type }),
-      CartTitle: () => {
-        let totalTitle = 'סיכום'
-        if (get().selectedMode == 'order') {
-          totalTitle += ' ' + 'הזמנה'
-        } else if (get().selectedMode == 'quote') {
-          totalTitle += ' ' + 'ה.מחיר'
-        } else if (get().selectedMode == 'return') {
-          totalTitle += ' ' + 'החזרה'
-        }
-        totalTitle += ' | ' + getUserFromStorage().name
-        return totalTitle
-      },
+
       setComment: (value) => set({ comment: value }),
       // ========== CART PAGE ==========
 

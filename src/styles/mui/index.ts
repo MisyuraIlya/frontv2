@@ -223,27 +223,27 @@ const theme = createTheme({
     },
 
     // TEXT FIELD
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          borderRadius: 10,
-          '& .MuiOutlinedInput-root': {
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'transparent',
-              border: 'none',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'transparent',
-              border: 'none',
-            },
-          },
-          '&:focus-within .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'transparent',
-            border: 'none',
-          },
-        },
-      },
-    },
+    // MuiTextField: {
+    //   styleOverrides: {
+    //     root: {
+    //       borderRadius: 10,
+    //       '& .MuiOutlinedInput-root': {
+    //         '&:hover .MuiOutlinedInput-notchedOutline': {
+    //           borderColor: 'transparent',
+    //           border: 'none',
+    //         },
+    //         '& .MuiOutlinedInput-notchedOutline': {
+    //           borderColor: 'transparent',
+    //           border: 'none',
+    //         },
+    //       },
+    //       '&:focus-within .MuiOutlinedInput-notchedOutline': {
+    //         borderColor: 'transparent',
+    //         border: 'none',
+    //       },
+    //     },
+    //   },
+    // },
 
     //Pagination
     MuiPagination: {
@@ -465,6 +465,20 @@ const theme = createTheme({
         // },
       },
     },
+
+    //MUI BADHE
+    MuiBadge: {
+      styleOverrides: {
+        badge: {
+          top: '5px',
+          width: '24px',
+          height: '24px',
+          backgroundColor: '#C62828',
+          color: 'white',
+        },
+      },
+    },
+
     // MuiChip: {
     //     styleOverrides: {
     //         colorSecondary: {

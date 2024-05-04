@@ -11,6 +11,7 @@ import {
   InputAdornment,
   OutlinedInput,
   Paper,
+  Typography,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
@@ -51,13 +52,16 @@ const DocsItemFilter = () => {
 
   return (
     <Paper
-      elevation={4}
+      elevation={0}
       sx={{
         display: { sm: 'flex', xs: 'block' },
         justifyContent: 'space-between',
         padding: '20px 20px',
       }}
     >
+      <Typography variant="h5" fontWeight={600}>
+        מוצרי מסמכים
+      </Typography>
       <Box sx={{ display: 'flex', gap: '10px' }}>
         {data?.files['hydra:member']?.map((file, index) => (
           <Button
@@ -82,35 +86,36 @@ const DocsItemFilter = () => {
         )}
         <Button
           sx={{ height: '40px', whiteSpace: 'nowrap' }}
-          variant="outlined"
+          variant="contained"
           startIcon={<ShoppingCartCheckoutIcon sx={{ fontSize: '30px' }} />}
           onClick={() => handleResoreCart()}
         >
           שחזר הזמנה
         </Button>
+
+        <FormControl
+          variant="outlined"
+          sx={{
+            width: { sm: '200px', xs: '100%' },
+            marginTop: { sm: '0px', xs: '20px' },
+          }}
+        >
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={search}
+            placeholder="חיפוש..."
+            onChange={(e) => setSearch(e.target.value)}
+            sx={{ height: '40px' }}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton aria-label="toggle password visibility">
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
       </Box>
-      <FormControl
-        variant="outlined"
-        sx={{
-          width: { sm: '200px', xs: '100%' },
-          marginTop: { sm: '0px', xs: '20px' },
-        }}
-      >
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={search}
-          placeholder="חיפוש..."
-          onChange={(e) => setSearch(e.target.value)}
-          sx={{ height: '40px' }}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton aria-label="toggle password visibility">
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
     </Paper>
   )
 }

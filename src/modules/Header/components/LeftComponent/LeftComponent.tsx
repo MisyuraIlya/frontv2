@@ -16,13 +16,17 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-
+import PersonIcon from '@mui/icons-material/Person'
 import { clientURL } from '../../../../enums/url'
 import NotificationContainer from '../../../PushNotifications/components/NotificationContainer/NotificationContainer'
 import { themeColors } from '../../../../styles/mui'
 import { onAsk } from '../../../../shared/MySweetAlert'
 import useDataNotificationUser from '../../../PushNotifications/hooks/useDataNotificationUser'
 import ProfileMenu from './components/ProfileMenu'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import NotificationsIcon from '@mui/icons-material/Notifications'
+import StorefrontIcon from '@mui/icons-material/Storefront'
+
 const LeftComponent = () => {
   const { user, isAgent, agent, setAction, logOut, setUser } = useAuth()
   const { cart, selectedMode } = useCart()
@@ -33,87 +37,54 @@ const LeftComponent = () => {
 
   const [openDrawver, setOpenDrawver] = useState(false)
 
-  const handleOnMouseOver = (
-    value: IURL,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    if (value.LABEL === clientURL.PROFILE.LABEL) {
-      setOpenProfile(true)
-    }
-  }
-
-  const handleOnLeftMouse = (
-    value: IURL,
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    if (value.LABEL === clientURL.PROFILE.LABEL) {
-      setOpenProfile(false)
-    }
-  }
-  const handleClick = (value: IURL) => {
-    if (value.LINK) {
-      navigate(value.LINK)
-    }
-
-    if (value.LABEL === clientURL.NOTIFICATIONS.LABEL) {
-      setOpenDrawver(true)
-    }
-  }
-
   return (
     <>
       <Box
         sx={{ display: 'flex', gap: '10px', position: 'relative' }}
         onMouseLeave={() => setOpenProfile(false)}
       >
-        {user ? (
-          Object.entries(clientURL).map(([key, value]) => {
-            if (value.SHOW_IN_HEADER) {
-              if (value.FOR_AGENT && !isAgent) return
-              return (
-                <IconButton
-                  key={key}
-                  sx={{
-                    height: '50px',
-                    width: '50px',
-                    backgroundColor: '#f3f5f9',
-                  }}
-                  onClick={() => handleClick(value)}
-                  onMouseEnter={(e) => handleOnMouseOver(value, e)}
-                >
-                  {value === clientURL.CART && (
-                    <Tooltip title={value.LABEL}>
-                      <Badge badgeContent={cart.length ?? 0} color="secondary">
-                        {value.ICON}
-                      </Badge>
-                    </Tooltip>
-                  )}
-                  {value === clientURL.NOTIFICATIONS && (
-                    <Tooltip title={value.LABEL}>
-                      <Badge
-                        badgeContent={
-                          notificationData?.['hydra:totalItems'] ?? 0
-                        }
-                        color="secondary"
-                      >
-                        {value.ICON}
-                      </Badge>
-                    </Tooltip>
-                  )}
-                  {value !== clientURL.CART &&
-                    value !== clientURL.NOTIFICATIONS && (
-                      <Tooltip title={value.LABEL}>{value.ICON}</Tooltip>
-                    )}
-                </IconButton>
-              )
-            }
-          })
-        ) : (
+        <IconButton
+          sx={{
+            height: '50px',
+            border: '1px solid #E0E0E0',
+            borderRadius: '100px',
+            padding: '0 12px',
+            gap: '6px',
+          }}
+          onMouseOver={() => setOpenProfile(true)}
+        >
+          <Tooltip title={clientURL.PROFILE.LABEL}>
+            <PersonIcon />
+          </Tooltip>
+          <Typography
+            sx={{ fontSize: '14px', fontWeight: 600, lineHeight: '18px' }}
+          >
+            ה.מחיר
+          </Typography>
+        </IconButton>
+
+        <IconButton
+          sx={{
+            height: '50px',
+            width: '50px',
+            border: '1px solid #E0E0E0',
+          }}
+          onClick={() => {
+            setOpenAuthModal(true)
+            setAction('login')
+          }}
+        >
+          <Tooltip title={clientURL.PROFILE.LABEL}>
+            <StorefrontIcon />
+          </Tooltip>
+        </IconButton>
+
+        <Badge badgeContent={cart.length ?? 0}>
           <IconButton
             sx={{
               height: '50px',
               width: '50px',
-              backgroundColor: '#f3f5f9',
+              border: '1px solid #E0E0E0',
             }}
             onClick={() => {
               setOpenAuthModal(true)
@@ -121,10 +92,28 @@ const LeftComponent = () => {
             }}
           >
             <Tooltip title={clientURL.PROFILE.LABEL}>
-              {clientURL.PROFILE.ICON}
+              <ShoppingCartIcon />
             </Tooltip>
           </IconButton>
-        )}
+        </Badge>
+
+        <Badge badgeContent={cart.length ?? 0}>
+          <IconButton
+            sx={{
+              height: '50px',
+              width: '50px',
+              border: '1px solid #E0E0E0',
+            }}
+            onClick={() => {
+              setOpenAuthModal(true)
+              setAction('login')
+            }}
+          >
+            <Tooltip title={clientURL.PROFILE.LABEL}>
+              <NotificationsIcon />
+            </Tooltip>
+          </IconButton>
+        </Badge>
 
         {openProfile && (
           <Paper
@@ -140,6 +129,7 @@ const LeftComponent = () => {
           </Paper>
         )}
       </Box>
+
       <Drawer
         anchor="right"
         open={openDrawver}

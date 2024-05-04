@@ -16,6 +16,7 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
 import { themeColors } from '../styles/mui'
 import { getAgentFromStorage } from '../modules/Auth/helpers/auth.helper'
+import NotificationsIcon from '@mui/icons-material/Notifications'
 
 const dateFrom = moment().subtract(1, 'day').format('YYYY-MM-DD')
 const dateTo = moment().format('YYYY-MM-DD')
@@ -25,14 +26,7 @@ export const clientURL = {
   PROFILE: {
     LINK: '/profile',
     LABEL: 'פרופיל',
-    ICON: (
-      <span
-        className="material-symbols-outlined"
-        style={{ color: themeColors.primary }}
-      >
-        person
-      </span>
-    ),
+    ICON: <PersonIcon />,
     FOR_AGENT: false,
     SHOW_IN_PROFILE_MENU: true,
     SHOW_IN_HEADER: true,
@@ -42,14 +36,7 @@ export const clientURL = {
   CART: {
     LINK: '/cart',
     LABEL: 'עגלה',
-    ICON: (
-      <span
-        className="material-symbols-outlined"
-        style={{ color: themeColors.primary }}
-      >
-        shopping_cart
-      </span>
-    ),
+    ICON: <ShoppingCartIcon />,
     FOR_AGENT: false,
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,
@@ -76,14 +63,7 @@ export const clientURL = {
   NOTIFICATIONS: {
     LINK: '',
     LABEL: 'הודעות',
-    ICON: (
-      <span
-        className="material-symbols-outlined"
-        style={{ color: themeColors.primary }}
-      >
-        campaign
-      </span>
-    ),
+    ICON: <NotificationsIcon />,
     FOR_AGENT: false,
     SHOW_IN_PROFILE_MENU: false,
     SHOW_IN_HEADER: true,

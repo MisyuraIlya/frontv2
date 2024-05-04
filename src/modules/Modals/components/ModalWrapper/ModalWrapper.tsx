@@ -7,8 +7,9 @@ type ModalWrapperProps = {
   active: boolean
   setActive: (bool: boolean) => void
   children: any
-  height: number
-  width: number
+  height: number | string
+  width: number | string
+  component?: React.ReactNode
 }
 
 const ModalWrapper: FC<ModalWrapperProps> = ({
@@ -17,6 +18,7 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
   children,
   height,
   width,
+  component,
 }) => {
   const isMobile = window.innerWidth <= 800
 
@@ -28,7 +30,8 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
-    width: isMobile ? '80%' : '60%',
+    width: isMobile ? `80%` : `${width}%`,
+    height: `auto`,
   }
 
   return (
@@ -38,10 +41,12 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
           <Box
             sx={{
               display: 'flex',
-              justifyContent: 'end',
+              justifyContent: 'space-between',
               marginBottom: '20px',
+              alignItems: 'center',
             }}
           >
+            <Box>{component}</Box>
             <IconButton onClick={() => setActive(false)}>
               <CloseIcon sx={{ fontSize: '35px', cursor: 'pointer' }} />
             </IconButton>

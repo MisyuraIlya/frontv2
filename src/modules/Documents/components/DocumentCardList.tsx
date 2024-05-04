@@ -20,7 +20,7 @@ const DocumentCardList = () => {
   const { data, isLoading } = useDataDocumentsItem()
   return (
     <Box sx={{ marginTop: '30px' }}>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={0}>
         <Table>
           <TableHead>
             <TableRow>
