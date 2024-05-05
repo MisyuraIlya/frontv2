@@ -63,8 +63,19 @@ const MyCropper: FC<MyCropperProps> = ({
   }
   return (
     <>
-      <Box sx={{ position: 'relative' }} className="centered">
-        <img src={itemImage!} style={{ objectFit: 'cover' }} width={100} />
+      <Box
+        sx={{
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'left',
+          alignItems: 'center',
+        }}
+      >
+        <img
+          src={itemImage!}
+          style={{ objectFit: 'cover', position: 'absolute' }}
+          width={100}
+        />
         <IconButton
           component="label"
           role={undefined}

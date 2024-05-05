@@ -7,8 +7,21 @@ import {
 } from 'react-beautiful-dnd'
 import { AdminCatalogService } from '../../services/catalog.service'
 import CategoryEditItem from './CategoryEditItem'
-import { Box, Grid, Typography } from '@mui/material'
+import {
+  Box,
+  Grid,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import useDataCategoryEdit from '../../hooks/useDataCategoryEdit'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 
 const CategoriesEditList = () => {
   const { data } = useDataCategoryEdit()
@@ -60,29 +73,6 @@ const CategoriesEditList = () => {
 
   return (
     <Box>
-      <Box sx={{ borderBottom: '5px solid #e2e3e6', width: '100%' }}>
-        <Grid container spacing={1} sx={{ margin: '0 20px' }}>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'כניסה'}</Typography>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'סדר'}</Typography>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'תמונה'}</Typography>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'מזהה'}</Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h6">{'כותרת'}</Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h6">{'סטאטוס'}</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
@@ -92,31 +82,67 @@ const CategoriesEditList = () => {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {categories?.map((element, index) => {
-                return (
-                  <Box key={index} sx={{ margin: '10px 0px' }}>
-                    <Draggable
-                      key={element.id}
-                      draggableId={element.id + ''}
-                      index={index}
+              <TableContainer component={Paper}>
+                <Table className="lines-sub-cont">
+                  <TableHead>
+                    <TableRow className="heading">
+                      <TableCell className="col-cont sticky-col"></TableCell>
+                      <TableCell className="col-cont sticky-col">
+                        <Typography variant="subtitle2">תמונה</Typography>
+                      </TableCell>
+                      <TableCell className="col-cont sticky-col">
+                        <Typography variant="subtitle2">מזהה</Typography>
+                      </TableCell>
+                      <TableCell className="col-cont sticky-col">
+                        <Typography variant="subtitle2">שם קטגוריה</Typography>
+                      </TableCell>
+                      <TableCell className="col-cont sticky-col">
+                        <Typography variant="subtitle2">סטאטוס</Typography>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {/* {data?.['hydra:member']?.map((element, index) => {
+                  return (
+                    <TableRow
+                      key={index}
+                      className={'item'}
                     >
-                      {(provided, snapshot) => (
-                        <Box
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
+                      <TableCell>
+                        <Typography variant="body2">
+                          
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  )
+              })} */}
+
+                    {categories?.map((element, index) => {
+                      return (
+                        <Draggable
+                          key={element.id}
+                          draggableId={element.id + ''}
+                          index={index}
                         >
-                          <CategoryEditItem element={element} />
-                        </Box>
-                      )}
-                    </Draggable>
-                  </Box>
-                )
-              })}
+                          {(provided, snapshot) => (
+                            <TableRow
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={getItemStyle(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                              )}
+                            >
+                              <CategoryEditItem element={element} />
+                            </TableRow>
+                          )}
+                        </Draggable>
+                      )
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Box>
           )}
         </Droppable>

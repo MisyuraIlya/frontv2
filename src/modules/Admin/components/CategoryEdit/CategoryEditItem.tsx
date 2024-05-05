@@ -6,9 +6,11 @@ import { base64ToFile } from '../../../../helpers/base64ToFile'
 import { MediaObjectService } from '../../services/mediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
 import {
+  Button,
   Checkbox,
   Grid,
   IconButton,
+  TableCell,
   TextField,
   Typography,
 } from '@mui/material'
@@ -69,18 +71,13 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
   }, [valueDebounced])
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
-        <IconButton onClick={() => navigate(handleLink())}>
-          <LoginIcon sx={{ fontSize: '35px' }} />
-        </IconButton>
-      </Grid>
-      <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
-        <IconButton>
-          <DragIndicatorIcon sx={{ fontSize: '35px' }} />
-        </IconButton>
-      </Grid>
-      <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+    <>
+      <TableCell sx={{ width: '10%' }}>
+        <Button onClick={() => navigate(handleLink())} variant="outlined">
+          כניסה
+        </Button>
+      </TableCell>
+      <TableCell sx={{ width: '20%' }}>
         <MyCropper
           aspectRatio={16 / 16}
           uploadImg={uploadImg}
@@ -90,11 +87,11 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
               : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
           }
         />
-      </Grid>
-      <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+      </TableCell>
+      <TableCell sx={{ width: '15%' }}>
         <Typography variant="body1">{element.id}</Typography>
-      </Grid>
-      <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
+      </TableCell>
+      <TableCell sx={{ width: '40%' }}>
         <Grid
           container
           item
@@ -108,15 +105,18 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </Grid>
-      </Grid>
-      <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
+      </TableCell>
+      <TableCell sx={{ width: '15%' }}>
         <Checkbox
           checked={checked}
           onChange={() => unpublishHandle()}
           sx={{ color: themeColors.primary, cursor: 'pointer' }}
         />
-      </Grid>
-    </Grid>
+        <IconButton>
+          <DragIndicatorIcon sx={{ fontSize: '35px' }} />
+        </IconButton>
+      </TableCell>
+    </>
   )
 }
 

@@ -18,7 +18,7 @@ const CategoryEdit = () => {
   const res2 = findCategoryTitleById(+lvl2!, categoriesArray)
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
       <BreadCrumbsUtil
         array={[
           {
