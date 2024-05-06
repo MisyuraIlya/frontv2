@@ -10,6 +10,8 @@ import {
   Menu,
   MenuItem,
   Switch,
+  TableCell,
+  TableRow,
   TextField,
   Typography,
 } from '@mui/material'
@@ -31,6 +33,8 @@ import { useForm, Controller } from 'react-hook-form'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
 import { AdminClinetsService } from '../../services/clients.service'
 import { useParams } from 'react-router-dom'
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 
 interface ClientItemProps {
   element: IUser
@@ -47,6 +51,8 @@ type RouteParams = {
   userRole: ROLE_TYPES
 }
 const UserItem: FC<ClientItemProps> = ({ element, index }) => {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword2, setShowPassword2] = useState(false)
   const { userRole } = useParams<RouteParams>()
   const isUser = userRole === 'ROLE_USER'
   const isAgent = userRole === 'ROLE_AGENT'
@@ -141,118 +147,99 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
 
   return (
     <>
-      <Grid container spacing={2} key={index}>
-        <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="body1">{element?.extId}</Typography>
-        </Grid>
-        <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="body1">{element?.name}</Typography>
-        </Grid>
-        <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
-          {UserStatus(element)}
-        </Grid>
-        <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+      <TableRow>
+        <TableCell>
           <IconButton onClick={() => setOpenInfo(true)}>
-            <InfoIcon sx={{ color: themeColors.primary }} />
+            <InfoIcon color="info" />
           </IconButton>
-        </Grid>
-        <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+        </TableCell>
+        <TableCell>
+          <Typography variant="subtitle2">{element?.extId}</Typography>
+        </TableCell>
+        <TableCell>
+          <Typography variant="body1">{element?.name}</Typography>
+        </TableCell>
+        <TableCell>{UserStatus(element)}</TableCell>
+
+        <TableCell>
           <IconButton onClick={handleOpenMenu}>
-            <SettingsIcon sx={{ color: themeColors.primary }} />
+            <SettingsIcon />
           </IconButton>
-        </Grid>
+        </TableCell>
         {isAgent && (
-          <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
+          <TableCell>
             <Switch checked={isMaster} onChange={() => handleMaster()} />
-          </Grid>
+          </TableCell>
         )}
-      </Grid>
+      </TableRow>
 
       {/* INFO MODAL */}
       <ModalWrapper
         active={openInfo}
         setActive={setOpenInfo}
         height={25}
-        width={20}
+        width={40}
+        component={
+          <Typography variant="h6" sx={{ margin: '10px 0' }}>
+            {isUser ? ' מידע לקוח' : ' מידע סוכן'}
+          </Typography>
+        }
       >
-        <Typography variant="h6" sx={{ margin: '10px 0' }}>
-          {isUser ? ' מידע לקוח' : ' מידע סוכן'}
-        </Typography>
-        <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px 0',
-          }}
-        >
-          <Typography variant="body1" fontWeight={800}>
-            {isUser ? 'שם הלקוח' : 'שם הסוכן'}
-          </Typography>
-          <Typography variant="body1">{element.name}</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px 0',
-          }}
-        >
-          <Typography variant="body1" fontWeight={800}>
-            טלפון
-          </Typography>
-          <Typography variant="body1">{element.phone}</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px 0',
-          }}
-        >
-          <Typography variant="body1" fontWeight={800}>
-            {isUser ? "מס' לקוח" : "מס' סוכן"}
-          </Typography>
-          <Typography variant="body1">{element.extId}</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px 0',
-          }}
-        >
-          <Typography variant="body1" fontWeight={800}>
-            שם משתמש
-          </Typography>
-          <Typography variant="body1">{element.email}</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px 0',
-          }}
-        >
-          <Typography variant="body1" fontWeight={800}>
-            סיסמא
-          </Typography>
-          <Typography variant="body1">{element.passwordUnencrypted}</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px 0',
-          }}
-        >
-          <Typography variant="body1" fontWeight={800}>
-            עודכן לאחרונה
-          </Typography>
-          <Typography variant="body1">
-            {moment(element?.updatedAt).format('DD-MM-YYYY HH:mm:ss')}
-          </Typography>
-        </Box>
+        <Divider sx={{ mb: '20px' }} />
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <Typography variant="body1" fontWeight={800}>
+              {isUser ? 'שם הלקוח' : 'שם הסוכן'}
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">{element?.name ?? '-'}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="body1" fontWeight={800}>
+              טלפון
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">{element?.phone ?? '-'}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="body1" fontWeight={800}>
+              {isUser ? "מס' לקוח" : "מס' סוכן"}
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">{element?.extId ?? '-'}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="body1" fontWeight={800}>
+              שם משתמש
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">{element?.email ?? '-'}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="body1" fontWeight={800}>
+              סיסמא
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">
+              {element?.passwordUnencrypted ?? '-'}
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="body1" fontWeight={800}>
+              עודכן לאחרונה
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">
+              {moment(element?.updatedAt).format('DD-MM-YYYY HH:mm:ss') ?? '-'}
+            </Typography>
+          </Grid>
+        </Grid>
       </ModalWrapper>
 
       {/* MENU */}
@@ -308,23 +295,55 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
         active={openSettings}
         setActive={setOpenSettings}
         height={50}
-        width={15}
-      >
-        <Box>
-          <Typography variant="h6" sx={{ margin: '10px 0' }}>
-            פרטי כניסה
-          </Typography>
-          <Divider />
-          <Box>
-            <Typography variant="body1" sx={{ margin: '10px 0' }}>
-              {isUser ? 'מספר לקוח: ' : 'מספר סוכן: '}
-              {element.extId}
-            </Typography>
-            <Typography variant="body1" sx={{ margin: '10px 0' }}>
-              {isUser ? ' לקוח: ' : 'סוכן: '}
-              {element.name}
+        width={40}
+        component={
+          <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <PersonAddIcon sx={{ fontSize: '40px' }} />
+            <Typography
+              variant="h4"
+              sx={{ display: 'flex', alignItems: 'center' }}
+            >
+              פרטי כניסה
             </Typography>
           </Box>
+        }
+      >
+        <Box>
+          <Divider />
+          <Grid container spacing={0}>
+            <Grid item xs={2}>
+              <Typography
+                variant="body1"
+                sx={{ margin: '10px 0', color: themeColors.asphalt }}
+              >
+                {isUser ? 'מספר לקוח: ' : 'מספר סוכן: '}
+              </Typography>
+            </Grid>
+            <Grid item xs={10}>
+              <Typography
+                variant="body1"
+                sx={{ margin: '10px 0', color: themeColors.asphalt }}
+              >
+                {element?.extId ?? '-'}
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography
+                variant="body1"
+                sx={{ margin: '10px 0', color: themeColors.asphalt }}
+              >
+                {isUser ? ' לקוח: ' : 'סוכן: '}
+              </Typography>
+            </Grid>
+            <Grid item xs={10}>
+              <Typography
+                variant="body1"
+                sx={{ margin: '10px 0', color: themeColors.asphalt }}
+              >
+                {element?.name ?? '-'}
+              </Typography>
+            </Grid>
+          </Grid>
           <form onSubmit={handleSubmit(handleUpdate)}>
             <FormControl fullWidth margin="normal">
               <Controller
@@ -363,9 +382,23 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
                     {...field}
                     variant="standard"
                     label="סיסמא"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     error={!!errors.password}
                     helperText={errors.password?.message}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          edge="end"
+                        >
+                          {showPassword ? (
+                            <VisibilityOffOutlinedIcon color="primary" />
+                          ) : (
+                            <RemoveRedEyeOutlinedIcon color="primary" />
+                          )}
+                        </IconButton>
+                      ),
+                    }}
                   />
                 )}
               />
@@ -383,15 +416,29 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
                     {...field}
                     variant="standard"
                     label="אימות סיסמא"
-                    type="password"
+                    type={showPassword2 ? 'text' : 'password'}
                     error={!!errors.confirmPassword}
                     helperText={errors.confirmPassword?.message}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          onClick={() => setShowPassword2(!showPassword2)}
+                          edge="end"
+                        >
+                          {showPassword2 ? (
+                            <VisibilityOffOutlinedIcon color="primary" />
+                          ) : (
+                            <RemoveRedEyeOutlinedIcon color="primary" />
+                          )}
+                        </IconButton>
+                      ),
+                    }}
                   />
                 )}
               />
             </FormControl>
             <Button
-              sx={{ borderRadius: '12px', marginTop: '50px', fontSize: '18px' }}
+              sx={{ padding: '11px 0', mt: '20px' }}
               fullWidth={true}
               type="submit"
               variant="contained"

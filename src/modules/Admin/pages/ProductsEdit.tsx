@@ -19,7 +19,7 @@ const ProductsEdit = () => {
   const res3 = findCategoryTitleById(+lvl2!, categoriesArray)
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
       {isLoading && <Loader />}
       <BreadCrumbsUtil
         array={[

@@ -7,7 +7,15 @@ import { AdminProductService } from '../../services/products.service'
 import { useModals } from '../../../Modals/provider/ModalProvider'
 import { MediaObjectService } from '../../services/mediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
-import { Box, Checkbox, Grid, IconButton, Typography } from '@mui/material'
+import {
+  Box,
+  Checkbox,
+  Grid,
+  IconButton,
+  TableCell,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import CollectionsIcon from '@mui/icons-material/Collections'
 import { themeColors } from '../../../../styles/mui'
@@ -60,66 +68,60 @@ const ProductsEditItem: FC<ProductsEditItemProps> = ({ element, index }) => {
   }
 
   return (
-    <Box key={index}>
-      <Draggable key={element.id} draggableId={element.id + ''} index={index}>
-        {(provided, snapshot) => (
-          <Box
-            className="item"
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            style={getItemStyle(
-              snapshot.isDragging,
-              provided.draggableProps.style
-            )}
-          >
-            <Grid container spacing={1}>
-              <Grid item xs={1}>
-                <IconButton>
-                  <DragIndicatorIcon sx={{ fontSize: '35px' }} />
-                </IconButton>
-              </Grid>
-              <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
-                <MyCropper
-                  aspectRatio={16 / 16}
-                  uploadImg={uploadImg}
-                  itemImage={
-                    element?.defaultImagePath
-                      ? `${process.env.REACT_APP_MEDIA}/product/${element?.defaultImagePath}`
-                      : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
-                  }
-                />
-              </Grid>
-              <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
-                <IconButton
-                  onClick={() => {
-                    setGallery(true)
-                    setSelectedProduct(element)
-                  }}
-                >
-                  <CollectionsIcon
-                    sx={{ fontSize: '35px', color: themeColors.primary }}
-                  />
-                </IconButton>
-              </Grid>
-              <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant="body1">{element?.title}</Typography>
-              </Grid>
-              <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant="body1">{element?.sku}</Typography>
-              </Grid>
-              <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
-                <Checkbox
-                  checked={checked}
-                  onChange={() => unpublishHandle()}
-                  sx={{ color: themeColors.primary, cursor: 'pointer' }}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-        )}
-      </Draggable>
-    </Box>
+    <Draggable key={element.id} draggableId={element.id + ''} index={index}>
+      {(provided, snapshot) => (
+        <TableRow
+          className="item"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={getItemStyle(
+            snapshot.isDragging,
+            provided.draggableProps.style
+          )}
+        >
+          <TableCell sx={{ width: '10%' }}>
+            <MyCropper
+              aspectRatio={16 / 16}
+              uploadImg={uploadImg}
+              itemImage={
+                element?.defaultImagePath
+                  ? `${process.env.REACT_APP_MEDIA}/product/${element?.defaultImagePath}`
+                  : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
+              }
+            />
+          </TableCell>
+          <TableCell sx={{ width: '10%' }}>
+            <IconButton
+              onClick={() => {
+                setGallery(true)
+                setSelectedProduct(element)
+              }}
+            >
+              <CollectionsIcon
+                sx={{ fontSize: '35px', color: themeColors.primary }}
+              />
+            </IconButton>
+          </TableCell>
+          <TableCell sx={{ width: '10%' }}>
+            <Typography variant="body1">{element?.sku}</Typography>
+          </TableCell>
+          <TableCell sx={{ width: '55%' }}>
+            <Typography variant="body1">{element?.title}</Typography>
+          </TableCell>
+          <TableCell sx={{ width: '15%' }}>
+            <Checkbox
+              checked={checked}
+              onChange={() => unpublishHandle()}
+              sx={{ color: themeColors.primary, cursor: 'pointer' }}
+            />
+            <IconButton>
+              <DragIndicatorIcon sx={{ fontSize: '35px' }} />
+            </IconButton>
+          </TableCell>
+        </TableRow>
+      )}
+    </Draggable>
   )
 }
 

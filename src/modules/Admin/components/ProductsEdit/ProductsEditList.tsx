@@ -2,7 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import ProductsEditItem from './ProductsEditItem'
 import { AdminProductService } from '../../services/products.service'
-import { Box, Grid, Typography } from '@mui/material'
+import {
+  Box,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import useDataProductsEdit from '../../hooks/useDataProductsEdit'
 const ProductsEditList = () => {
   const [products, setProducts] = useState<IProduct[]>([])
@@ -40,8 +51,59 @@ const ProductsEditList = () => {
   }, [data?.['hydra:member']])
 
   return (
-    <Box>
-      <Box sx={{ borderBottom: '5px solid #e2e3e6', width: '100%' }}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <Box
+            sx={{ margin: '0' }}
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={getListStyle(snapshot.isDraggingOver)}
+          >
+            <TableContainer component={Paper}>
+              <Table className="lines-sub-cont">
+                <TableHead>
+                  <TableRow className="heading">
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">תמונה</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">גלריה</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">מק״ט</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">כותרת מוצר</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">סטטוס</Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {products.map((element, index) => {
+                    return <ProductsEditItem element={element} index={index} />
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        )}
+      </Droppable>
+    </DragDropContext>
+  )
+}
+
+{
+  /* {products?.length == 0 && (
+        <Box className="centered">
+          <Typography variant="body2">אין פריטים עבור קטגוריה זה</Typography>
+        </Box>
+      )} */
+}
+{
+  /* <Box sx={{ borderBottom: '5px solid #e2e3e6', width: '100%' }}>
         <Grid container spacing={1} sx={{ margin: '0 20px' }}>
           <Grid item xs={1}>
             <Typography variant="h6">{'סדר'}</Typography>
@@ -62,31 +124,6 @@ const ProductsEditList = () => {
             <Typography variant="h6">{'סטאטוס'}</Typography>
           </Grid>
         </Grid>
-      </Box>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <Box
-              sx={{ margin: '10px 20px' }}
-              className="items"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {products.map((element, index) => {
-                return <ProductsEditItem element={element} index={index} />
-              })}
-            </Box>
-          )}
-        </Droppable>
-      </DragDropContext>
-      {products?.length == 0 && (
-        <Box className="centered">
-          <Typography variant="body2">אין פריטים עבור קטגוריה זה</Typography>
-        </Box>
-      )}
-    </Box>
-  )
+      </Box> */
 }
-
 export default ProductsEditList

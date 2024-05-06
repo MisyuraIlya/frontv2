@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import { Box, Typography } from '@mui/material'
 import useDataClients from '../../hooks/useDataUsers'
+import { themeColors } from '../../../../styles/mui'
 
 type RouteParams = {
   userRole: ROLE_TYPES
@@ -30,8 +31,17 @@ const UserFilter = () => {
         display: 'flex',
         justifyContent: 'space-between',
         margin: '20px 0',
+        alignItems: 'center',
       }}
     >
+      <Box sx={{ display: 'flex', gap: '10px', alignItems: 'end' }}>
+        <Typography variant="h5">
+          {userRole == 'ROLE_AGENT' ? 'סוכנים' : 'לקוחות'}
+        </Typography>
+        <Typography variant="body1" color={themeColors.asphalt}>
+          {'נמצאו: ' + total + ' לקוחות'}
+        </Typography>
+      </Box>
       <Box>
         <SearchInput
           placeholder="חיפוש לקוח"
@@ -39,9 +49,6 @@ const UserFilter = () => {
           value={search}
           setValue={setSearch}
         />
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography variant="body1">{'נמצאו: ' + total + ' לקוחות'}</Typography>
       </Box>
     </Box>
   )

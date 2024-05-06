@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { TableCell, TableHead, Typography } from '@mui/material'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -11,28 +11,24 @@ const HeadUser = () => {
   const isUser = userRole === 'ROLE_USER'
   const isAgent = userRole === 'ROLE_AGENT'
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
-        <Typography variant="body1">מס'</Typography>
-      </Grid>
-      <Grid item xs={3}>
-        <Typography variant="body1">{isUser ? 'לקוח' : 'סוכן'}</Typography>
-      </Grid>
-      <Grid item xs={2}>
-        <Typography variant="body1">סטאטוס</Typography>
-      </Grid>
-      <Grid item xs={1}>
-        <Typography variant="body1">מידע</Typography>
-      </Grid>
-      <Grid item xs={1}>
-        <Typography variant="body1">פעולות</Typography>
-      </Grid>
+    <TableHead>
+      <TableCell></TableCell>
+      <TableCell>
+        <Typography variant="subtitle2">מס'</Typography>
+      </TableCell>
+      <TableCell>
+        <Typography variant="subtitle2">{isUser ? 'לקוח' : 'סוכן'}</Typography>
+      </TableCell>
+      <TableCell>
+        <Typography variant="subtitle2">סטאטוס</Typography>
+      </TableCell>
+      <TableCell></TableCell>
       {isAgent && (
-        <Grid item xs={1}>
-          <Typography variant="body1">מאסטר</Typography>
-        </Grid>
+        <TableCell>
+          <Typography variant="subtitle2">מאסטר</Typography>
+        </TableCell>
       )}
-    </Grid>
+    </TableHead>
   )
 }
 

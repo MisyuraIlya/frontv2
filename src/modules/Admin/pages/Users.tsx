@@ -28,7 +28,7 @@ const Users = () => {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
       {isLoading && <Loader />}
       <BreadCrumbsUtil
         array={[
@@ -38,9 +38,7 @@ const Users = () => {
           },
         ]}
       />
-      <Typography variant="h5">
-        {userRole == 'ROLE_AGENT' ? 'סוכנים' : 'לקוחות'}
-      </Typography>
+
       <UserFilter />
       {componentToRender}
       {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}

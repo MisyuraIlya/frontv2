@@ -9,8 +9,6 @@ import { AdminCatalogService } from '../../services/catalog.service'
 import CategoryEditItem from './CategoryEditItem'
 import {
   Box,
-  Grid,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -21,7 +19,6 @@ import {
   Typography,
 } from '@mui/material'
 import useDataCategoryEdit from '../../hooks/useDataCategoryEdit'
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 
 const CategoriesEditList = () => {
   const { data } = useDataCategoryEdit()
@@ -72,82 +69,65 @@ const CategoriesEditList = () => {
   }, [data?.['hydra:member']])
 
   return (
-    <Box>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <Box
-              sx={{ margin: '0 25px' }}
-              {...provided.innerRef}
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              <TableContainer component={Paper}>
-                <Table className="lines-sub-cont">
-                  <TableHead>
-                    <TableRow className="heading">
-                      <TableCell className="col-cont sticky-col"></TableCell>
-                      <TableCell className="col-cont sticky-col">
-                        <Typography variant="subtitle2">תמונה</Typography>
-                      </TableCell>
-                      <TableCell className="col-cont sticky-col">
-                        <Typography variant="subtitle2">מזהה</Typography>
-                      </TableCell>
-                      <TableCell className="col-cont sticky-col">
-                        <Typography variant="subtitle2">שם קטגוריה</Typography>
-                      </TableCell>
-                      <TableCell className="col-cont sticky-col">
-                        <Typography variant="subtitle2">סטאטוס</Typography>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {/* {data?.['hydra:member']?.map((element, index) => {
-                  return (
-                    <TableRow
-                      key={index}
-                      className={'item'}
-                    >
-                      <TableCell>
-                        <Typography variant="body2">
-                          
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  )
-              })} */}
-
-                    {categories?.map((element, index) => {
-                      return (
-                        <Draggable
-                          key={element.id}
-                          draggableId={element.id + ''}
-                          index={index}
-                        >
-                          {(provided, snapshot) => (
-                            <TableRow
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              style={getItemStyle(
-                                snapshot.isDragging,
-                                provided.draggableProps.style
-                              )}
-                            >
-                              <CategoryEditItem element={element} />
-                            </TableRow>
-                          )}
-                        </Draggable>
-                      )
-                    })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Box>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </Box>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <Box
+            sx={{ margin: '0' }}
+            {...provided.innerRef}
+            ref={provided.innerRef}
+            style={getListStyle(snapshot.isDraggingOver)}
+          >
+            <TableContainer component={Paper}>
+              <Table className="lines-sub-cont">
+                <TableHead>
+                  <TableRow className="heading">
+                    <TableCell className="col-cont sticky-col"></TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">תמונה</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">מזהה</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">שם קטגוריה</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">סטאטוס</Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {categories?.map((element, index) => {
+                    return (
+                      <Draggable
+                        key={element.id}
+                        draggableId={element.id + ''}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <TableRow
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <CategoryEditItem element={element} />
+                          </TableRow>
+                        )}
+                      </Draggable>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        )}
+      </Droppable>
+    </DragDropContext>
   )
 }
 
