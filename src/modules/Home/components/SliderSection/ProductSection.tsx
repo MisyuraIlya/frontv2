@@ -1,16 +1,15 @@
 import React, { FC, useRef } from 'react'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { SwiperOptions } from 'swiper/types'
-import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
-import Tags from '../../../Catalog/components/LeftSide/components/ProductList/components/Tags'
-import BasicInfo from '../../../Catalog/components/LeftSide/components/ProductList/components/BasicInfo'
-import PriceBlock from '../../../Catalog/components/LeftSide/components/ProductList/components/PriceBlock'
-import { TailSpin } from 'react-loader-spinner'
-import { Box, Typography } from '@mui/material'
+import { Box, Grid, IconButton, Typography } from '@mui/material'
+import ProductCard from '../../../Catalog/components/ProductCard'
+import { themeColors, themeSettings } from '../../../../styles/mui'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined'
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined'
 
 interface ProductSectionProps {
   title: string
@@ -20,34 +19,89 @@ interface ProductSectionProps {
   loading: boolean
 }
 
-const ProductSection: FC<ProductSectionProps> = ({
-  title,
-  array,
-  toShow = 5,
-  column = 1,
-  loading,
-}) => {
-  const swiperRef = useRef<null>(null)
+const ProductSection: FC<ProductSectionProps> = ({ title, array }) => {
+  const swiperRef = useRef(null)
+
   const settings = {
     slidesPerView: 4,
     loop: true,
     spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  }
+
+  const goToNextSlide = () => {
+    //@ts-ignore
+    if (swiperRef.current && swiperRef.current.swiper) {
+      //@ts-ignore
+      swiperRef.current.swiper.slideNext()
+    }
+  }
+
+  const goToPrevSlide = () => {
+    //@ts-ignore
+    if (swiperRef.current && swiperRef.current.swiper) {
+      //@ts-ignore
+      swiperRef.current.swiper.slidePrev()
+    }
   }
 
   return (
     <Box>
-      <Box className="title-wrapper">
-        <Typography variant="h4">{title}</Typography>
-      </Box>
-      <Typography>
-        <Swiper {...settings}>
-          {array?.map((element, index) => {
-            return (
-              <SwiperSlide key={index} className="product-item"></SwiperSlide>
-            )
-          })}
-        </Swiper>
-      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <Box
+            sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+          >
+            <Box>
+              <Typography variant="h5">{title}</Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <Typography sx={{ color: themeColors.info }} variant="body1">
+                  {`לכל המוצרים`}
+                </Typography>
+                <ArrowBackIosNewIcon
+                  sx={{ color: themeColors.info, fontSize: '15px' }}
+                />
+              </Box>
+            </Box>
+            <Box sx={{ marginTop: 'auto', display: 'flex', gap: '15px' }}>
+              <IconButton
+                sx={{
+                  bgcolor: '#F6F6F6',
+                  borderRadius: themeSettings.borderRadius,
+                  color: 'black',
+                }}
+                onClick={() => goToPrevSlide()}
+              >
+                <ArrowForwardIosOutlinedIcon />
+              </IconButton>
+              <IconButton
+                sx={{
+                  bgcolor: '#F6F6F6',
+                  borderRadius: themeSettings.borderRadius,
+                  color: 'black',
+                }}
+                onClick={() => goToNextSlide()}
+              >
+                <ArrowBackIosNewOutlinedIcon />
+              </IconButton>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={9}>
+          <Swiper {...settings} ref={swiperRef}>
+            {array?.map((element, index) => {
+              return (
+                <SwiperSlide key={index}>
+                  <ProductCard product={element} />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+        </Grid>
+      </Grid>
     </Box>
   )
 }

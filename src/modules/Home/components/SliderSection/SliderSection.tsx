@@ -1,6 +1,5 @@
-import React, { FC, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Link } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -10,7 +9,6 @@ import {
   Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   IconButton,
@@ -24,11 +22,32 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 
 const SliderSection = () => {
   const { data } = useDataCategories()
+  const swiperRef = useRef(null)
 
   const settings = {
     slidesPerView: 4,
     loop: true,
     spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  }
+
+  const goToNextSlide = () => {
+    //@ts-ignore
+    if (swiperRef.current && swiperRef.current.swiper) {
+      //@ts-ignore
+      swiperRef.current.swiper.slideNext()
+    }
+  }
+
+  const goToPrevSlide = () => {
+    //@ts-ignore
+    if (swiperRef.current && swiperRef.current.swiper) {
+      //@ts-ignore
+      swiperRef.current.swiper.slidePrev()
+    }
   }
 
   return (
@@ -40,6 +59,7 @@ const SliderSection = () => {
             borderRadius: themeSettings.borderRadius,
             color: 'black',
           }}
+          onClick={() => goToPrevSlide()}
         >
           <ArrowForwardIosOutlinedIcon />
         </IconButton>
@@ -49,6 +69,7 @@ const SliderSection = () => {
             borderRadius: themeSettings.borderRadius,
             color: 'black',
           }}
+          onClick={() => goToNextSlide()}
         >
           <ArrowBackIosNewOutlinedIcon />
         </IconButton>
@@ -57,8 +78,8 @@ const SliderSection = () => {
           <ArrowBackOutlinedIcon sx={{ fontSize: '30px', color: 'black' }} />
         </IconButton>
       </Box>
-      <Box>
-        <Swiper {...settings}>
+      <Box sx={{ marginTop: '30px' }}>
+        <Swiper {...settings} ref={swiperRef}>
           {data?.['hydra:member']?.map((element, index) => {
             return (
               <SwiperSlide key={index}>
@@ -91,27 +112,6 @@ const SliderSection = () => {
                     </CardContent>
                   </CardActionArea>
                 </Card>
-                {/* <Box>
-                  <Link to={`/client/catalog/${element?.identify}/0/0?page=1`}>
-                    <Box>
-                      <img
-                        className="img"
-                        src={
-                          element?.MediaObject?.filePath
-                            ? process.env.REACT_APP_MEDIA +
-                              '/category/' +
-                              element?.MediaObject?.filePath
-                            : process.env.REACT_APP_MEDIA + '/placeholder.jpg'
-                        }
-                      />
-                    </Box>
-                    <Box>
-                      <Typography variant="h6" fontSize={16}>
-                        {element?.title}
-                      </Typography>
-                    </Box>
-                  </Link>
-                </Box> */}
               </SwiperSlide>
             )
           })}
