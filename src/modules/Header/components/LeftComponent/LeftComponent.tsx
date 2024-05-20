@@ -37,6 +37,15 @@ const LeftComponent = () => {
 
   const [openDrawver, setOpenDrawver] = useState(false)
 
+  const handleClick = () => {
+    if (!user) {
+      setOpenAuthModal(true)
+      setAction('login')
+    } else {
+      navigate('/profile')
+    }
+  }
+
   return (
     <>
       <Box
@@ -51,11 +60,10 @@ const LeftComponent = () => {
             padding: '0 12px',
             gap: '6px',
           }}
-          onMouseOver={() => setOpenProfile(true)}
+          onClick={() => handleClick()}
+          onMouseEnter={() => setOpenProfile(true)}
         >
-          <Tooltip title={clientURL.PROFILE.LABEL}>
-            <PersonIcon />
-          </Tooltip>
+          <PersonIcon />
           <Typography
             sx={{ fontSize: '14px', fontWeight: 600, lineHeight: '18px' }}
           >
@@ -120,7 +128,8 @@ const LeftComponent = () => {
             elevation={4}
             sx={{
               position: 'absolute',
-              left: '-180px',
+              width: '300px',
+              left: '-70px',
               top: '50px',
               zIndex: 10,
             }}

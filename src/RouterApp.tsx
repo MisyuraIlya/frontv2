@@ -31,11 +31,10 @@ const RouterApp = () => {
   return (
     <>
       <Box>
-        <Header />
-        <Box>
+        {/* <Header /> */}
+        {/* <Box>
           <Routes>
             <Route>
-              {/* CLIENT */}
               <Route path="/" element={<Home />} />
               <Route
                 path="/client/:documentType/:lvl1/:lvl2/:lvl3"
@@ -53,7 +52,6 @@ const RouterApp = () => {
                 element={<DocumentsItemPage />}
               />
 
-              {/* ADMIN */}
               <Route
                 path="/admin/category-edit/:lvl1/:lvl2"
                 element={<CategoryEdit />}
@@ -68,7 +66,6 @@ const RouterApp = () => {
                 element={<NotificationPage />}
               />
 
-              {/* AGENT */}
               <Route path="/agentClients/:agentId" element={<AgentClinets />} />
               <Route
                 path="/agentDashboard/:tab/:id"
@@ -77,7 +74,7 @@ const RouterApp = () => {
             </Route>
           </Routes>
         </Box>
-        <BottomNavigationMobile />
+        <BottomNavigationMobile /> */}
       </Box>
     </>
   )

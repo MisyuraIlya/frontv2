@@ -10,8 +10,8 @@ import {
   Grid,
   ListItemButton,
 } from '@mui/material'
-import { themeColors } from '../../../../styles/mui'
-import useDataCategories from '../../../Catalog/hook/useDataCategories'
+import { themeColors } from '../../styles/mui'
+import useDataCategories from '../../modules/Catalog/hook/useDataCategories'
 
 const CategoryNavBar = () => {
   const { data } = useDataCategories()

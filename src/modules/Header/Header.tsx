@@ -3,7 +3,7 @@ import LeftComponent from './components/LeftComponent/LeftComponent'
 import { useAuth } from '../Auth/store/useAuthStore'
 import RightComponent from './components/RightComponent/RightComponent'
 import CenterComponent from './components/CenterComponent/CenterComponent'
-import CategoryNavBar from './components/CategoryNavBar/CategoryNavBar'
+import CategoryNavBar from '../../components/header/CategoryNavBar'
 import { AppBar, Grid, Toolbar, useMediaQuery } from '@mui/material'
 import Mobile from './components/Mobile'
 const Header = () => {
