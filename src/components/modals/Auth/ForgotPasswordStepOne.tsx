@@ -1,9 +1,9 @@
 import React from 'react'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { useForm, Controller } from 'react-hook-form'
-import { useModals } from '../../../provider/ModalProvider'
 import { Box, Button, FormControl, TextField, Typography } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
+import { useAuth } from '../../../modules/Auth/store/useAuthStore'
+import { useModals } from '../../../provider/ModalProvider'
 
 type ForgotPasswordStepOne = {
   phone: string

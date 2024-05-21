@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../../Auth/store/useAuthStore'
-import { useModals } from '../../../Modals/provider/ModalProvider'
-import { useCart } from '../../../Cart/store/cart.store'
+import { useModals } from '../../../../provider/ModalProvider'
+import { useCart } from '../../../../store/cart.store'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   Badge,
@@ -21,7 +21,7 @@ import { clientURL } from '../../../../enums/url'
 import NotificationContainer from '../../../PushNotifications/components/NotificationContainer/NotificationContainer'
 import { themeColors } from '../../../../styles/mui'
 import { onAsk } from '../../../../shared/MySweetAlert'
-import useDataNotificationUser from '../../../PushNotifications/hooks/useDataNotificationUser'
+import useDataNotificationUser from '../../../../hooks/useDataNotificationUser'
 import ProfileMenu from './components/ProfileMenu'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import NotificationsIcon from '@mui/icons-material/Notifications'

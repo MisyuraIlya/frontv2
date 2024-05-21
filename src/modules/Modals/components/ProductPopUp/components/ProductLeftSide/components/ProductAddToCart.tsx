@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelectedProduct } from '../../../../../store/selecterdProduct.store'
-import { useCart } from '../../../../../../Cart/store/cart.store'
+import { useCart } from '../../../../../../../store/cart.store'
 import { getUserFromStorage } from '../../../../../../Auth/helpers/auth.helper'
 import AddToCart from '../../../../../../Cart/components/AddToCart/AddToCart'
 import { useAuth } from '../../../../../../Auth/store/useAuthStore'

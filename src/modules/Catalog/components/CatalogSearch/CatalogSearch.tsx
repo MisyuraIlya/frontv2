@@ -4,7 +4,7 @@ import { useSearchStore } from '../../store/SearchStore'
 import { useDebounce } from 'use-debounce'
 import { Link } from 'react-router-dom'
 import Loader from '../../../../shared/Loader'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 import { TailSpin } from 'react-loader-spinner'
 const CatalogSearch = () => {
   const { isAgent, user } = useAuth()

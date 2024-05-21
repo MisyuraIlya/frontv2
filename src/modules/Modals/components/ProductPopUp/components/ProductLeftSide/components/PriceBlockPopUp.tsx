@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useAuth } from '../../../../../../Auth/store/useAuthStore'
-import { useCart } from '../../../../../../Cart/store/cart.store'
+import { useCart } from '../../../../../../../store/cart.store'
 import AddToCart from '../../../../../../Cart/components/AddToCart/AddToCart'
 import { Typography, Grid, Box, TextField } from '@mui/material'
 

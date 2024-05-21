@@ -1,7 +1,7 @@
 import React from 'react'
 import Pagination from '../../../../shared/Pagination'
 import { useAgentProfileStore } from '../../../Agent/store/agentProfile.store'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 
 const AgentsList = () => {
   const { agentList } = useAgentProfileStore()

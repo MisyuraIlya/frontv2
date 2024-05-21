@@ -9,7 +9,6 @@ import CartPage from './modules/Cart/pages/CartPage'
 import ProfilePage from './modules/Auth/pages/ProfilePage'
 import DocumentsItemPage from './modules/Documents/pages/DocumentsItemPage'
 import DocumentsPage from './modules/Documents/pages/DocumentsPage'
-import Header from './modules/Header/Header'
 import NotificationPage from './modules/PushNotifications/pages/NotificationPage'
 import AgentClinets from './modules/Agent/pages/AgentClinets'
 import AgentDashboard from './modules/Agent/pages/AgentDashboard'
@@ -17,7 +16,7 @@ import { useAuth } from './modules/Auth/store/useAuthStore'
 import { Box } from '@mui/material'
 import Users from './modules/Admin/pages/Users'
 import BottomNavigationMobile from './components/BottomNavigationMobile'
-
+import Header from './components/header'
 const RouterApp = () => {
   const { user } = useAuth()
   const isAuthenticated = !!user
@@ -31,7 +30,7 @@ const RouterApp = () => {
   return (
     <>
       <Box>
-        {/* <Header /> */}
+        <Header />
         {/* <Box>
           <Routes>
             <Route>

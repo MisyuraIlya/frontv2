@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, List, ListItem, ListItemText } from '@mui/material'
-import { useCart } from '../../store/cart.store'
+import { useCart } from '../../../../store/cart.store'
 import { themeColors } from '../../../../styles/mui'
 
 const MainSummary = () => {

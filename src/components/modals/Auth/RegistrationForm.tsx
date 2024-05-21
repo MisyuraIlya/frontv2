@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { useForm, Controller } from 'react-hook-form'
 import {
   Box,
@@ -14,7 +13,8 @@ import {
 import PersonIcon from '@mui/icons-material/Person'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
-import { themeColors } from '../../../../../styles/mui'
+import { themeColors } from '../../../styles/mui'
+import { useAuth } from '../../../modules/Auth/store/useAuthStore'
 
 type RegistrationForm = {
   email: string

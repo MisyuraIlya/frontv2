@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import ModalWrapper from '../ModalWrapper/ModalWrapper'
-import { useModals } from '../../provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 
 interface PdfViwerProps {
   active: boolean

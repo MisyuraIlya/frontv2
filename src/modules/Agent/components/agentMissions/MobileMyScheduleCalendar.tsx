@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import Loader from '../../../../shared/Loader'
 import { useMyScheduleCalendar } from '../../store/ScheduleCalendar.store'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 import { ConvertHebrewNameDayToWeeksDate } from '../../helpers/ScheduleCalendar.helper'
 import { HourOfDay } from '../../store/ScheduleCalendar.store'
 

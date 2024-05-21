@@ -10,25 +10,45 @@ const AppBarComponent = () => {
   const { isAdmin, isAgent } = useAuth()
   return (
     <AppBar position="sticky">
-      <Toolbar>
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
+      <Toolbar
+        sx={{
+          height: '80px',
+          alignContent: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Grid container spacing={2} maxWidth={'xl'}>
+          <Grid
+            item
+            xs={3}
+            sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}
+          >
             {isAdmin && <Right.AdminDrawver />}
-            {isAgent && <Right.AgentMenu />}
             <Right.Logo />
+            {isAgent && <Right.AgentMenu />}
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6}>
             <Center />
           </Grid>
-          <Grid item xs={3}>
+          <Grid
+            item
+            xs={3}
+            sx={{
+              display: 'flex',
+              gap: '20px',
+              alignItems: 'center',
+              justifyContent: 'end',
+            }}
+          >
             <Left.ProfileButton />
-            {isAgent && <Left.ClientsButton />}
+            {isAgent || (isAdmin && <Left.ClientsButton />)}
             <Left.CartButton />
             <Left.NotificationButton />
           </Grid>
         </Grid>
       </Toolbar>
-      <CategoryNavBar />
+      {/* <CategoryNavBar /> */}
     </AppBar>
   )
 }

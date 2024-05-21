@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Input, Grid, IconButton, Box, Typography } from '@mui/material'
-import { useCart } from '../../store/cart.store'
+import { useCart } from '../../../../store/cart.store'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import { themeColors } from '../../../../styles/mui'

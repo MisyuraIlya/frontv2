@@ -1,5 +1,5 @@
 import React from 'react'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 
 const AgentsFilter = () => {
   const { setAgentsModal } = useModals()

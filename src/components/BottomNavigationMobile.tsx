@@ -18,7 +18,7 @@ import { onAsk } from '../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
 import NotificationContainer from '../modules/PushNotifications/components/NotificationContainer/NotificationContainer'
 import StorefrontIcon from '@mui/icons-material/Storefront'
-import { useModals } from '../modules/Modals/provider/ModalProvider'
+import { useModals } from '../provider/ModalProvider'
 import ProfileMenu from '../modules/Header/components/LeftComponent/components/ProfileMenu'
 
 const BottomNavigationMobile = () => {

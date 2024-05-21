@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import './NotificationCard.styles.scss'
 import moment from 'moment'
-import { useOneSignalStore } from '../../store/oneSignalStore'
+import { useOneSignalStore } from '../../../modules/PushNotifications/store/oneSignalStore'
 import {
   Accordion,
   AccordionDetails,
@@ -14,8 +14,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined'
-import { themeColors } from '../../../../styles/mui'
-import useDataNotificationUser from '../../hooks/useDataNotificationUser'
+import { themeColors } from '../../../styles/mui'
+import useDataNotificationUser from '../../../hooks/useDataNotificationUser'
 
 interface NotificationCardProps {
   element: INotificationUser

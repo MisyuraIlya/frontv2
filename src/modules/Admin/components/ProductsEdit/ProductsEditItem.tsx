@@ -4,7 +4,7 @@ import { base64ToFile } from '../../../../helpers/base64ToFile'
 // import MyCropper from '../../../../components/tools/MyCropper';
 import { useProductsEditStore } from '../../store/ProductsEditStore'
 import { AdminProductService } from '../../services/products.service'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 import { MediaObjectService } from '../../services/mediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
 import {

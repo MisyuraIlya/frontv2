@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useAuth } from '../../../../../../Auth/store/useAuthStore'
-import { useModals } from '../../../../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../../../../provider/ModalProvider'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useCatalog } from '../../../../../store/CatalogStore'

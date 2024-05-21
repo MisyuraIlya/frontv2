@@ -1,8 +1,8 @@
 import React from 'react'
-import NotificationCard from '../NotificationCard/NotificationCard'
+import NotificationCard from '../../../../components/header/Left/NotificationCard'
 import './NotificationContainer.styles.scss'
 import { Box, Typography } from '@mui/material'
-import useDataNotificationUser from '../../hooks/useDataNotificationUser'
+import useDataNotificationUser from '../../../../hooks/useDataNotificationUser'
 import { themeColors } from '../../../../styles/mui'
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff'
 

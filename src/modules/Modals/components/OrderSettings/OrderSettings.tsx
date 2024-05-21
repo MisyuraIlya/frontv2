@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useModals } from '../../provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 import ModalWrapper from '../ModalWrapper/ModalWrapper'
 import Calendar from 'react-calendar'
 

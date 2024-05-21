@@ -1,6 +1,6 @@
 import { Box, Grid, TextField, Typography } from '@mui/material'
 import React, { FC } from 'react'
-import { useCart } from '../../../../../../Cart/store/cart.store'
+import { useCart } from '../../../../../../../store/cart.store'
 
 type AgentHandler = {
   product: IProduct

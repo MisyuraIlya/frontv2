@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDocuments } from '../store/DocumentsStore'
 import moment from 'moment'
-import { useCart } from '../../Cart/store/cart.store'
+import { useCart } from '../../../store/cart.store'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useModals } from '../../Modals/provider/ModalProvider'
+import { useModals } from '../../../provider/ModalProvider'
 import { useAuth } from '../../Auth/store/useAuthStore'
 import Loader from '../../../shared/Loader'
 

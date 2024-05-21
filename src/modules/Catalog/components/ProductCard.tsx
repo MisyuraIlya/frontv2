@@ -9,9 +9,9 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
-import { useModals } from '../../Modals/provider/ModalProvider'
+import { useModals } from '../../../provider/ModalProvider'
 import { themeColors } from '../../../styles/mui'
-import { useCart } from '../../Cart/store/cart.store'
+import { useCart } from '../../../store/cart.store'
 import AddToCart from '../../Cart/components/AddToCart/AddToCart'
 
 interface ProductCardProps {

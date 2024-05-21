@@ -7,7 +7,7 @@ export const themeColors = {
 
   success: '#30AC5A',
   warning: '#F3C521',
-  error: '#DA2F1B',
+  error: '#C52A43',
   info: '#2196F3',
 
   black: '#223354',
@@ -214,10 +214,10 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          paddingTop: '15px',
+          // paddingTop: '15px',
           backgroundColor: '#fff',
-          color: '#303545',
-          iconColor: '#303545',
+          // color: '#303545',
+          // iconColor: '#303545',
         },
       },
     },

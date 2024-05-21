@@ -1,8 +1,8 @@
 import useSWR, { SWRConfiguration } from 'swr'
 import { CatalogServices } from '../services/catalog.service'
 import { useLocation, useParams } from 'react-router-dom'
-import { HydraHandler } from '../../../helpers/hydraHandler'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { HydraHandler } from '../helpers/hydraHandler'
+import { useAuth } from '../modules/Auth/store/useAuthStore'
 
 const fetchData = async (
   lvl1: string | number,
@@ -22,22 +22,23 @@ const fetchData = async (
   )
 }
 
-const useDataCatalog = () => {
+const useDataCatalog = (search: string = '') => {
   const { lvl1, lvl2, lvl3, documentType } = useParams()
   const location = useLocation()
   const { user } = useAuth()
-  const { data, error, isValidating, mutate } = useSWR<GetCatalogResponse>(
-    `/api/catalog/${documentType}/${lvl1}/${lvl2}/${lvl3}${location.search}&userId=${user?.id}`,
-    () =>
-      fetchData(
-        lvl1 ?? '0',
-        lvl2 ?? '0',
-        lvl3 ?? '0',
-        location.search,
-        documentType as CatalogDocumentType,
-        user!
-      )
-  )
+  const { data, error, isLoading, isValidating, mutate } =
+    useSWR<GetCatalogResponse>(
+      `/api/catalog/${documentType}/${lvl1}/${lvl2}/${lvl3}${search ?? location.search}&userId=${user?.id}`,
+      () =>
+        fetchData(
+          lvl1 ?? '0',
+          lvl2 ?? '0',
+          lvl3 ?? '0',
+          `?search=${search}` ?? location.search,
+          documentType as CatalogDocumentType,
+          user!
+        )
+    )
   let hydraPagination
   if (data) {
     hydraPagination = HydraHandler.paginationHandler(data)
@@ -45,7 +46,7 @@ const useDataCatalog = () => {
   return {
     data,
     hydraPagination,
-    isLoading: !data && !error,
+    isLoading: isLoading,
     isError: error,
     isValidating,
     mutate,

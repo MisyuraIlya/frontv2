@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
-import { useModals } from '../../../provider/ModalProvider'
 import {
   Box,
   Button,
@@ -13,6 +11,8 @@ import {
 import PersonIcon from '@mui/icons-material/Person'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
+import { useModals } from '../../../provider/ModalProvider'
+import { useAuth } from '../../../modules/Auth/store/useAuthStore'
 
 type ForgotPasswordStepTwo = {
   token: string

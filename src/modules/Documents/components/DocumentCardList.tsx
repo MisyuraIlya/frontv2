@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
-import { useModals } from '../../Modals/provider/ModalProvider'
+import { useModals } from '../../../provider/ModalProvider'
 import { themeColors } from '../../../styles/mui'
 import useDataDocumentsItem from '../hook/useDataDocumentsItem'
 

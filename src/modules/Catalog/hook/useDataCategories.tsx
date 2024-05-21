@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { CatalogServices } from '../services/catalog.service'
+import { CatalogServices } from '../../../services/catalog.service'
 
 const fetchData = async (): Promise<GetCategoriesResponse> => {
   return await CatalogServices.GetCategories()

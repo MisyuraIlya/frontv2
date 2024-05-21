@@ -1,8 +1,8 @@
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
 import { Box, Button, FormControl, TextField, Typography } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
+import { useAuth } from '../../../modules/Auth/store/useAuthStore'
 
 type ValidationForm = {
   userExtId: string

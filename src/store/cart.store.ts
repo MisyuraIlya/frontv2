@@ -1,13 +1,13 @@
 import { create } from 'zustand'
-import CartServices from '../services/cart.services'
-import { onErrorAlert, onSuccessAlert } from '../../../shared/MySweetAlert'
+import CartServices from '../modules/Cart/services/cart.services'
+import { onErrorAlert, onSuccessAlert } from '../shared/MySweetAlert'
 import moment from 'moment'
-import { AdminOrderService } from '../../Admin/services/orders.service'
+import { AdminOrderService } from '../modules/Admin/services/orders.service'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
 import {
   getAgentFromStorage,
   getUserFromStorage,
-} from '../../Auth/helpers/auth.helper'
+} from '../modules/Auth/helpers/auth.helper'
 
 interface useCartState {
   loading: boolean
@@ -28,6 +28,7 @@ interface useCartState {
 
   // ========== CART PAGE ==========
   selectedMode: IDocumentType
+  modes: { key: IDocumentType; value: string }[]
   comment: string
   deliveryDate: string
   Maam: number
@@ -177,7 +178,12 @@ export const useCart = create(
       // ========== HANDLE CART ==========
 
       // ========== CART PAGE ==========
-      selectedMode: 'order', // 1 - order | 2 - Request | 3 - Return
+      selectedMode: 'order',
+      modes: [
+        { key: 'order', value: 'הזמנה' },
+        { key: 'quote', value: 'ה.מחיר' },
+        { key: 'return', value: 'שחזור' },
+      ],
       deliveryDate: '2023-11-21', //TODO
       Maam: 17,
       comment: '',

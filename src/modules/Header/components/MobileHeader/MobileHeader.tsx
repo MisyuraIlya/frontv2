@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 import { useNavigate, Link } from 'react-router-dom'
 type MobileHeaderProps = {
   mobileSearchOn: boolean

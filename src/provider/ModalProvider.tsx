@@ -6,19 +6,19 @@ import React, {
   useContext,
   ReactNode,
 } from 'react'
-import AuthPopUp from '../components/AuthPopUp/AuthPopUp'
-import OrderSettings from '../components/OrderSettings/OrderSettings'
-import ProductPopUp from '../components/ProductPopUp/ProductPopUp'
-import TablePopUp from '../components/TablePopUp/TablePopUp'
-import PayPopUp from '../components/PayPopUp/PayPopUp'
-import ClientRightSideBar from '../adminComponents/ClientRightSideBar/ClientRightSideBar'
-import Gallery from '../adminComponents/Galerry/Gallery'
-import { useSelectedProduct } from '../store/selecterdProduct.store'
-import AgentOptions from '../agentComponents/AgentOptions'
-import { useClientStore } from '../../Admin/store/ClientsStore'
-import RestoreCartModal from '../agentComponents/RestoreCartModal'
-import PdfViwer from '../components/PdfViwer/PdfViwer'
-import ImageModal from '../components/ImageModal/ImageModal'
+import OrderSettings from '../modules/Modals/components/OrderSettings/OrderSettings'
+import ProductPopUp from '../modules/Modals/components/ProductPopUp/ProductPopUp'
+import TablePopUp from '../modules/Modals/components/TablePopUp/TablePopUp'
+import PayPopUp from '../modules/Modals/components/PayPopUp/PayPopUp'
+import ClientRightSideBar from '../modules/Modals/adminComponents/ClientRightSideBar/ClientRightSideBar'
+import Gallery from '../modules/Modals/adminComponents/Galerry/Gallery'
+import { useSelectedProduct } from '../modules/Modals/store/selecterdProduct.store'
+import AgentOptions from '../modules/Modals/agentComponents/AgentOptions'
+import { useClientStore } from '../modules/Admin/store/ClientsStore'
+import RestoreCartModal from '../modules/Modals/agentComponents/RestoreCartModal'
+import PdfViwer from '../modules/Modals/components/PdfViwer/PdfViwer'
+import ImageModal from '../modules/Modals/components/ImageModal/ImageModal'
+import Modals from '../components/modals'
 // Defines
 interface ModalContextType {
   openAuthModal: boolean
@@ -135,39 +135,36 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
 
   return (
     <ModalContext.Provider value={value}>
-      <OrderSettings
+      {/* <OrderSettings
         active={openCartSettings}
         setActive={setOpenCartSettings}
       />
       <ProductPopUp
         active={selectedProduct}
         setActive={onCloseSelectedProduct}
-      />
+      /> */}
       {openAuthModal && (
-        <AuthPopUp active={openAuthModal} setActive={setOpenAuthModal} />
+        <Modals.Auth active={openAuthModal} setActive={setOpenAuthModal} />
       )}
-      {/* <MobileSideBar active={openMobileSideBar} setActive={setOpenMobileSideBar}/> */}
+      {/* <MobileSideBar active={openMobileSideBar} setActive={setOpenMobileSideBar}/>
       <TablePopUp active={activeTablePopUp} setActive={setActiveTablePopUp} />
       {openPopUpPay && (
         <PayPopUp active={openPopUpPay} setActive={setOpenPopUpPay} />
-      )}
-
+      )} */}
+      {/* 
       <ClientRightSideBar
         active={clientRightSideBar}
         setActive={setClientRightSideBar}
       />
 
-      {/* ADMINS */}
       <Gallery active={gallery} setActive={setGallery} />
-
-      {/* implement AGENT MODALS */}
       <AgentOptions active={agentOptions} setActive={setAgentOptions} />
       <PdfViwer active={pdfViwer} setActive={setPdfViwer} />
       <ImageModal active={imageModal} setActive={setImageModal} />
       <RestoreCartModal
         active={restoreCartModal}
         setActive={setRestoreCartModal}
-      />
+      /> */}
       {children}
     </ModalContext.Provider>
   )

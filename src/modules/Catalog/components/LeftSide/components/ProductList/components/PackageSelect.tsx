@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Select from 'react-select'
-import { useCart } from '../../../../../../Cart/store/cart.store'
+import { useCart } from '../../../../../../../store/cart.store'
 type PackageSelectProps = {
   product: IProduct
 }

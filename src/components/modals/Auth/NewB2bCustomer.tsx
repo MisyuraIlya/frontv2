@@ -1,9 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
+import AuthInput from '../../../modules/Auth/components/AuthInput/AuthInput'
+import { onErrorAlert } from '../../../shared/MySweetAlert'
 import { useModals } from '../../../provider/ModalProvider'
-import { onErrorAlert } from '../../../../../shared/MySweetAlert'
-import AuthInput from '../../../../Auth/components/AuthInput/AuthInput'
+import { useAuth } from '../../../modules/Auth/store/useAuthStore'
 
 const NewB2bCustomer = () => {
   const {

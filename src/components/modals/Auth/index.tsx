@@ -1,21 +1,20 @@
 import React, { FC } from 'react'
-import Loader from '../../../../shared/Loader'
-import LoginForm from './components/LoginForm'
-import { useAuth } from '../../../Auth/store/useAuthStore'
-import RegistrationForm from './components/RegistrationForm'
-import ForgotPasswordStepOne from './components/ForgotPasswordStepOne'
-import ForgotPasswordStepTwo from './components/ForgotPasswordStepTwo'
-import ValidationForm from './components/ValidationForm'
-import NewB2bCustomer from './components/NewB2bCustomer'
+import LoginForm from './LoginForm'
+import RegistrationForm from './RegistrationForm'
+import ForgotPasswordStepOne from './ForgotPasswordStepOne'
+import ForgotPasswordStepTwo from './ForgotPasswordStepTwo'
+import ValidationForm from './ValidationForm'
+import NewB2bCustomer from './NewB2bCustomer'
 import { Box, IconButton, Modal, Paper } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+import { useAuth } from '../../../modules/Auth/store/useAuthStore'
 
 type AuthPopUpProps = {
   active: boolean
   setActive: (bol: boolean) => void
 }
 
-const AuthPopUp: FC<AuthPopUpProps> = ({ active, setActive }) => {
+const Auth: FC<AuthPopUpProps> = ({ active, setActive }) => {
   const { loading, action, login, registration, validation } = useAuth()
   return (
     <Modal
@@ -54,4 +53,4 @@ const AuthPopUp: FC<AuthPopUpProps> = ({ active, setActive }) => {
   )
 }
 
-export default AuthPopUp
+export default Auth

@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { themeColors } from '../../../../../styles/mui'
 import { useAuth } from '../../../../Auth/store/useAuthStore'
-import { useCart } from '../../../../Cart/store/cart.store'
+import { useCart } from '../../../../../store/cart.store'
 import { onAsk } from '../../../../../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
 import { clientURL } from '../../../../../enums/url'

@@ -4,9 +4,9 @@ import { Box } from '@mui/material'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import ProductList from '../../../../utils/SearchInput/components/ProductList'
 import useSWR from 'swr'
-import { CatalogServices } from '../../../Catalog/services/catalog.service'
+import { CatalogServices } from '../../../../services/catalog.service'
 import { useDebounce } from 'use-debounce'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 
 const CenterComponent = () => {
   const [search, setSearch] = useState<string>('')

@@ -11,12 +11,11 @@ import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
 
 interface AuthState {
   loading: boolean
-  isClient: boolean
   isAdmin: boolean
   isAgent: boolean
   isSuperAgent: boolean
   user: IUser | null
-  agent: IUser | null
+  client: IUser | null
   setUser: (user: IUser | null) => void
   setAgent: (user: IUser | null) => void
   // ========== STATES FOR AUTH MODAL ==========
@@ -66,12 +65,11 @@ export const useAuth = create(
   persist(
     (set, get) => ({
       loading: false,
-      isClient: false,
       isAdmin: false,
       isAgent: false,
       isSuperAgent: false,
       user: null,
-      agent: null,
+      client: null,
       setUser: (user) => set({ user }),
       setAgent: (agent) => set({ agent }),
       // ========== STATES FOR AUTH MODAL ==========

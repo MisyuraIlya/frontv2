@@ -6,7 +6,7 @@ import { Box, Button, Grid } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
-import { useModals } from '../../provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 type ProductPopUpProps = {
   active: boolean
   setActive: (bool: boolean) => void

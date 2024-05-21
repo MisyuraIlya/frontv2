@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import RouterApp from './RouterApp'
-import { ModalsProvider } from './modules/Modals/provider/ModalProvider'
+import { ModalsProvider } from './provider/ModalProvider'
 import { NotificationsProvider } from './modules/PushNotifications/provider/PushNotification'
 import { CacheProvider } from '@emotion/react'
 import { prefixer } from 'stylis'

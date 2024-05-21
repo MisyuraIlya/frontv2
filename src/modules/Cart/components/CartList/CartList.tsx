@@ -1,7 +1,7 @@
 import React from 'react'
-import { useCart } from '../../store/cart.store'
+import { useCart } from '../../../../store/cart.store'
 import AddToCart from '../AddToCart/AddToCart'
-import { useModals } from '../../../Modals/provider/ModalProvider'
+import { useModals } from '../../../../provider/ModalProvider'
 import {
   Box,
   Typography,
