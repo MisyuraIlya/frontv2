@@ -77,6 +77,12 @@ const ProductsEditList = () => {
                       <Typography variant="subtitle2">כותרת מוצר</Typography>
                     </TableCell>
                     <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">חדש?</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
+                      <Typography variant="subtitle2">נמכר ביותר?</Typography>
+                    </TableCell>
+                    <TableCell className="col-cont sticky-col">
                       <Typography variant="subtitle2">סטטוס</Typography>
                     </TableCell>
                   </TableRow>
@@ -95,35 +101,4 @@ const ProductsEditList = () => {
   )
 }
 
-{
-  /* {products?.length == 0 && (
-        <Box className="centered">
-          <Typography variant="body2">אין פריטים עבור קטגוריה זה</Typography>
-        </Box>
-      )} */
-}
-{
-  /* <Box sx={{ borderBottom: '5px solid #e2e3e6', width: '100%' }}>
-        <Grid container spacing={1} sx={{ margin: '0 20px' }}>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'סדר'}</Typography>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'תמונה'}</Typography>
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6">{'גלריה'}</Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h6">{'כותרת'}</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography variant="h6">{'מק״ט'}</Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography variant="h6">{'סטאטוס'}</Typography>
-          </Grid>
-        </Grid>
-      </Box> */
-}
 export default ProductsEditList

@@ -6,42 +6,78 @@ export const URLS = {
   HOME: {
     LINK: '/',
     LABEL: 'עגלה',
+    ROUTER: '/',
   },
   CATALOG: {
     LINK: '/',
     LABEL: 'קטלוג',
+    ROUTER: '/client/:documentType/:lvl1/:lvl2/:lvl3',
+  },
+  CATALOG_VIEW: {
+    LINK: '/',
+    LABEL: 'קטגוריות',
+    ROUTER: '/CatalogView',
   },
   CART: {
     LINK: '/cart',
     LABEL: 'עגלה',
+    ROUTER: '/cart',
+  },
+  PROFILE: {
+    LINK: '/profile',
+    LABEL: 'פרופיל',
+    ROUTER: '/profile',
+  },
+  DOCUMENTS: {
+    LINK: `/documentPage/order/${dateFrom}/${dateTo}?page=1`,
+    LABEL: 'מסמכים',
+    ROUTER: '/documentPage/:documentType/:dateFrom/:dateTo',
+  },
+  DOCUMENT_ITEM: {
+    LINK: ``,
+    LABEL: 'מסמכים',
+    ROUTER: '/documentItemPage/:documentItemType/:id',
+  },
+
+  ADMIN_EDIT_CATALOG: {
+    LINK: '/admin/category-edit/0/0',
+    LABEL: 'ניהול קטלוג',
+    ROUTER: '/admin/category-edit/:lvl1/:lvl2',
+  },
+  ADMIN_EDIT_PRODUCT: {
+    LINK: '/admin/products-edit/0/0',
+    LABEL: 'ניהול קטלוג',
+    ROUTER: '/admin/products-edit/:lvl1/:lvl2/:lvl3',
+  },
+  ADMIN_CLIENTS: {
+    LINK: '/admin/ROLE_USER?page=1',
+    LABEL: 'לקוחות',
+    ROUTER: '/admin/:userRole',
+  },
+  ADMIN_AGENTS: {
+    LINK: '/admin/ROLE_AGENT?page=1',
+    LABEL: 'סוכנים',
+    ROUTER: '/admin/:userRole',
+  },
+  ADMIN_NOTIFICATIONS: {
+    LINK: `/admin/notification`,
+    LABEL: 'הודעות',
+    ROUTER: '/admin/notification',
   },
   HISTORY: {
     LINK: `/documentPage/history/${dateFrom}/${dateTo}`,
     LABEL: 'הסטוריית רכישה',
   },
-  DOCUMENTS: {
-    LINK: `/documentPage/order/${dateFrom}/${dateTo}?page=1`,
-    LABEL: 'מסמכים',
-  },
-  PROFILE: {
-    LINK: '/profile',
-    LABEL: 'פרופיל',
-  },
-  ADMIN_EDIT_CATALOG: {
-    LINK: '/admin/category-edit/0/0',
-    LABEL: 'ניהול קטלוג',
-  },
-  ADMIN_CLIENTS: {
-    LINK: '/admin/ROLE_USER?page=1',
+
+  AGENT_CLIENTS: {
+    LINK: ``,
     LABEL: 'לקוחות',
+    ROUTER: '/agentClients/:agentId',
   },
-  ADMIN_AGENTS: {
-    LINK: '/admin/ROLE_AGENT?page=1',
-    LABEL: 'סוכנים',
-  },
-  ADMIN_NOTIFICATIONS: {
-    LINK: `/admin/notification`,
-    LABEL: 'הודעות',
+  AGENT_DASHBOARD: {
+    LINK: ``,
+    LABEL: 'דאשבורד',
+    ROUTER: '/agentDashboard/:tab/:id',
   },
   AGNET_DASHBOARD: {
     LINK: `/documentPage/history/${dateFrom}/${dateTo}`,

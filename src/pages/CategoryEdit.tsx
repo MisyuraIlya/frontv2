@@ -8,7 +8,7 @@ import { Container } from '@mui/material'
 import useDataCategoryEdit from '../hooks/useAdminDataCategoryEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import useDataCategories from '../hooks/useDataCategories'
-
+import Admin from '../components/admin'
 const CategoryEdit = () => {
   const { isLoading } = useDataCategoryEdit()
   const { lvl1, lvl2 } = useParams()
@@ -19,7 +19,7 @@ const CategoryEdit = () => {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
-      <BreadCrumbsUtil
+      {/* <BreadCrumbsUtil
         array={[
           {
             title: res1 ?? '',
@@ -33,7 +33,9 @@ const CategoryEdit = () => {
       />
       {isLoading && <Loader />}
       <CategoryEditFilters />
-      <CategoriesEditList />
+      <CategoriesEditList /> */}
+      <Admin.Categories.Filter />
+      <Admin.Categories.List />
     </Container>
   )
 }

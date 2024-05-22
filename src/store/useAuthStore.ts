@@ -96,12 +96,12 @@ export const useAuth = create(
               response.user.role === 'ROLE_AGENT' ||
               response.user.role === 'ROLE_SUPER_AGENT'
             ) {
-              set({ agent: response.user, isAgent: true })
+              set({ isAgent: true })
               if (response.user.role === 'ROLE_SUPER_AGENT') {
                 set({ isSuperAgent: true })
               }
-            } else {
-              set({ isClient: true })
+            } else if (response.user.role === 'ROLE_ADMIN') {
+              set({ isAdmin: true })
             }
             // onSuccessAlert('ברוכים הבאים', '')
             setTimeout(() => {
@@ -227,7 +227,6 @@ export const useAuth = create(
         set({
           isAdmin: false,
           isAgent: false,
-          isClient: false,
           isSuperAgent: false,
         })
         localStorage.clear()

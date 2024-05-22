@@ -13,7 +13,7 @@ import {
   ListItemText,
   FormControl,
 } from '@mui/material'
-import { colors, themeColors } from '../styles/mui'
+import { themeColors, colors } from '../../styles/mui'
 import { useForm, Controller } from 'react-hook-form'
 import BusinessIcon from '@mui/icons-material/Business'
 import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled'
@@ -27,7 +27,7 @@ type form = {
   description: string
 }
 
-const ContactFooter = () => {
+const Footer = () => {
   const {
     register,
     handleSubmit,
@@ -36,7 +36,10 @@ const ContactFooter = () => {
   } = useForm<form>()
 
   return (
-    <Box sx={{ backgroundColor: themeColors.primary, padding: '40px 100px' }}>
+    <Box
+      sx={{ backgroundColor: themeColors.primary, padding: '40px 100px' }}
+      component={'footer'}
+    >
       <Box sx={{ minHeight: '400px' }}>
         <Grid container spacing={4}>
           <Grid item xs={4}>
@@ -197,8 +200,8 @@ const ContactFooter = () => {
               alt=""
               style={{ width: '120px' }}
             />
-            <Box sx={{ width: '600px' }}>
-              <Typography variant="body2" color={'white'}>
+            <Box sx={{ maxWidth: '70%', paddingTop: '40px' }}>
+              <Typography variant="body2" color={'#FFFFFF99'}>
                 Lacus fringilla laoreet quam euismod eu lectus quam aliquet
                 nisi. Cras interdum aliquet leo justo sed pellentesque commodo
                 commodo. Risus turpis turpis cursus quam dictum mattis odio
@@ -210,9 +213,13 @@ const ContactFooter = () => {
                 felis morbi. Bibendum porttitor ornare viverra velit amet nibh.
               </Typography>
             </Box>
-            <Grid container sx={{ width: '400px' }} spacing={'8px'}>
+            <Grid
+              container
+              sx={{ maxWidth: '70%', paddingTop: '24px' }}
+              spacing={'8px'}
+            >
               <Grid item xs={2}>
-                <Typography variant="body2" color={'white'}>
+                <Typography variant="body2" color={'#FFFFFF99'}>
                   כתובת
                 </Typography>
               </Grid>
@@ -222,7 +229,7 @@ const ContactFooter = () => {
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                <Typography variant="body2" color={'white'}>
+                <Typography variant="body2" color={'#FFFFFF99'}>
                   טלפון
                 </Typography>
               </Grid>
@@ -232,7 +239,7 @@ const ContactFooter = () => {
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                <Typography variant="body2" color={'white'}>
+                <Typography variant="body2" color={'#FFFFFF99'}>
                   מייל
                 </Typography>
               </Grid>
@@ -269,4 +276,4 @@ const ContactFooter = () => {
   )
 }
 
-export default ContactFooter
+export default Footer

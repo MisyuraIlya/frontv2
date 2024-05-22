@@ -8,7 +8,7 @@ import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
 import useDataProductsEdit from '../hooks/useAdminDataProductsEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import useDataCategories from '../hooks/useDataCategories'
-
+import Admin from '../components/admin'
 const ProductsEdit = () => {
   const { lvl1, lvl2, lvl3 } = useParams()
   const { isLoading } = useDataProductsEdit()
@@ -20,7 +20,7 @@ const ProductsEdit = () => {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />}
       <BreadCrumbsUtil
         array={[
           {
@@ -34,7 +34,9 @@ const ProductsEdit = () => {
         ]}
       />
       <ProductsEditFilters />
-      <ProductsEditList />
+      <ProductsEditList /> */}
+      <Admin.Products.Filter />
+      <Admin.Products.List />
     </Container>
   )
 }

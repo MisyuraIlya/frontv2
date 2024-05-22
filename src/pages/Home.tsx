@@ -1,7 +1,6 @@
 import React from 'react'
 import VideoSection from '../modules/Home/components/VideoSection/VideoSection'
 import SliderSection from '../modules/Home/components/SliderSection/SliderSection'
-import ContactFooter from '../shared/ContactFooter'
 import ProductSection from '../modules/Home/components/SliderSection/ProductSection'
 import { useAuth } from '../store/useAuthStore'
 import { Box, Container } from '@mui/material'
@@ -13,10 +12,9 @@ const HomePage = () => {
   const { data: recommended, isLoading: loadingRecommended } =
     useDataRecommended()
   const { data: newCatalog, isLoading: loadingNewCatalog } = useDataNewCatalog()
-  console.log('recommended', recommended, newCatalog)
   return (
     <Box>
-      <Box sx={{ marginTop: '35px' }}>
+      <Box>
         <VideoSection />
       </Box>
       <Container maxWidth="xl" sx={{ marginBottom: '200px' }}>
@@ -46,7 +44,6 @@ const HomePage = () => {
           )}
         </Box>
       </Container>
-      <ContactFooter />
     </Box>
   )
 }

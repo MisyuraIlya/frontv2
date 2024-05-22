@@ -8,6 +8,7 @@ import { useAuth } from '../../store/useAuthStore'
 
 const AppBarComponent = () => {
   const { isAdmin, isAgent } = useAuth()
+  console.log('isAdmin', isAdmin)
   return (
     <AppBar position="sticky">
       <Toolbar

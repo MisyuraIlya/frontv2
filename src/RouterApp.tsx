@@ -13,10 +13,11 @@ import NotificationPage from './pages/NotificationPage'
 import AgentClinets from './pages/AgentClinets'
 import AgentDashboard from './pages/AgentDashboard'
 import { useAuth } from './store/useAuthStore'
-import { Box } from '@mui/material'
 import Users from './pages/Users'
 import BottomNavigationMobile from './components/BottomNavigationMobile'
 import Header from './components/header'
+import Footer from './components/footer'
+import { URLS } from './enums/urls'
 const RouterApp = () => {
   const { user } = useAuth()
   const isAuthenticated = !!user
@@ -29,52 +30,46 @@ const RouterApp = () => {
 
   return (
     <>
-      <Box>
-        <Header />
-        {/* <Box>
-          <Routes>
-            <Route>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/client/:documentType/:lvl1/:lvl2/:lvl3"
-                element={<Catalog />}
-              />
-              <Route path="/CatalogView" element={<CatalogView />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route
-                path="/documentPage/:documentType/:dateFrom/:dateTo"
-                element={<DocumentsPage />}
-              />
-              <Route
-                path="/documentItemPage/:documentItemType/:id"
-                element={<DocumentsItemPage />}
-              />
-
-              <Route
-                path="/admin/category-edit/:lvl1/:lvl2"
-                element={<CategoryEdit />}
-              />
-              <Route
-                path="/admin/products-edit/:lvl1/:lvl2/:lvl3"
-                element={<ProductsEdit />}
-              />
-              <Route path="/admin/:userRole" element={<Users />} />
-              <Route
-                path="/admin/notification"
-                element={<NotificationPage />}
-              />
-
-              <Route path="/agentClients/:agentId" element={<AgentClinets />} />
-              <Route
-                path="/agentDashboard/:tab/:id"
-                element={<AgentDashboard />}
-              />
-            </Route>
-          </Routes>
-        </Box>
-        <BottomNavigationMobile /> */}
-      </Box>
+      <Header />
+      <main>
+        <Routes>
+          <Route>
+            <Route path={URLS.HOME.ROUTER} element={<Home />} />
+            <Route path={URLS.CATALOG.ROUTER} element={<Catalog />} />
+            <Route path={URLS.CATALOG_VIEW.ROUTER} element={<CatalogView />} />
+            <Route path={URLS.CART.ROUTER} element={<CartPage />} />
+            <Route path={URLS.PROFILE.ROUTER} element={<ProfilePage />} />
+            <Route path={URLS.DOCUMENTS.ROUTER} element={<DocumentsPage />} />
+            <Route
+              path={URLS.DOCUMENT_ITEM.ROUTER}
+              element={<DocumentsItemPage />}
+            />
+            <Route
+              path={URLS.ADMIN_EDIT_CATALOG.ROUTER}
+              element={<CategoryEdit />}
+            />
+            <Route
+              path={URLS.ADMIN_EDIT_PRODUCT.ROUTER}
+              element={<ProductsEdit />}
+            />
+            <Route path={URLS.ADMIN_CLIENTS.ROUTER} element={<Users />} />
+            <Route
+              path={URLS.ADMIN_NOTIFICATIONS.ROUTER}
+              element={<NotificationPage />}
+            />
+            <Route
+              path={URLS.AGENT_CLIENTS.ROUTER}
+              element={<AgentClinets />}
+            />
+            <Route
+              path={URLS.AGENT_DASHBOARD.ROUTER}
+              element={<AgentDashboard />}
+            />
+          </Route>
+        </Routes>
+      </main>
+      <Footer />
+      <BottomNavigationMobile />
     </>
   )
 }
