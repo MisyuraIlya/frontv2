@@ -1,8 +1,6 @@
 import React from 'react'
-import ProductsEditList from '../modules/Admin/components/ProductsEdit/ProductsEditList'
 import { useParams } from 'react-router-dom'
 import { Container } from '@mui/material'
-import ProductsEditFilters from '../modules/Admin/components/ProductsEdit/ProductsEditFilters'
 import Loader from '../shared/Loader'
 import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
 import useDataProductsEdit from '../hooks/useAdminDataProductsEdit'
@@ -20,7 +18,7 @@ const ProductsEdit = () => {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
-      {/* {isLoading && <Loader />}
+      {isLoading && <Loader />}
       <BreadCrumbsUtil
         array={[
           {
@@ -33,8 +31,6 @@ const ProductsEdit = () => {
           },
         ]}
       />
-      <ProductsEditFilters />
-      <ProductsEditList /> */}
       <Admin.Products.Filter />
       <Admin.Products.List />
     </Container>

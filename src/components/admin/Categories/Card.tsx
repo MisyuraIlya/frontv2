@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AdminCatalogService } from '../../../../services/AdminCatalog.service'
+import { AdminCatalogService } from '../../../services/AdminCatalog.service'
 import { useDebounce } from 'use-debounce'
-import { base64ToFile } from '../../../../helpers/base64ToFile'
-import { MediaObjectService } from '../../../../services/AdminMediaObject.service'
-import MyCropper from '../../../../shared/MyCropper'
+import { base64ToFile } from '../../../helpers/base64ToFile'
+import { MediaObjectService } from '../../../services/AdminMediaObject.service'
+import MyCropper from '../../../shared/MyCropper'
 import {
   Button,
   Checkbox,
@@ -16,12 +16,12 @@ import {
 } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
-import { themeColors } from '../../../../styles/mui'
+import { themeColors } from '../../../styles/mui'
 interface CategoryEditItemProps {
   element: ICategory
 }
 
-const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
+const Card: FC<CategoryEditItemProps> = ({ element }) => {
   const [activeEdit, setActiveEdit] = useState<boolean>(false)
   const [checked, setCheked] = useState(element.isPublished)
   const [title, setTitle] = useState(element.title)
@@ -120,4 +120,4 @@ const CategoryEditItem: FC<CategoryEditItemProps> = ({ element }) => {
   )
 }
 
-export default CategoryEditItem
+export default Card

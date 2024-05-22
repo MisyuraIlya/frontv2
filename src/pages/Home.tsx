@@ -1,7 +1,4 @@
 import React from 'react'
-import VideoSection from '../modules/Home/components/VideoSection/VideoSection'
-import SliderSection from '../modules/Home/components/SliderSection/SliderSection'
-import ProductSection from '../modules/Home/components/SliderSection/ProductSection'
 import { useAuth } from '../store/useAuthStore'
 import { Box, Container } from '@mui/material'
 import useDataRecommended from '../hooks/useDataRecommended'
@@ -14,16 +11,16 @@ const HomePage = () => {
   const { data: newCatalog, isLoading: loadingNewCatalog } = useDataNewCatalog()
   return (
     <Box>
-      {/* <Box>
-        <VideoSection />
+      <Box>
+        <Home.Video />
       </Box>
       <Container maxWidth="xl" sx={{ marginBottom: '200px' }}>
         <Box sx={{ marginTop: '50px' }}>
-          <SliderSection />
+          <Home.Categories />
         </Box>
         <Box sx={{ marginTop: '120px' }}>
           {recommended?.['hydra:member'] && (
-            <ProductSection
+            <Home.Products
               title={'מוצרים קבועים'}
               array={recommended?.['hydra:member']}
               toShow={5}
@@ -34,7 +31,7 @@ const HomePage = () => {
         </Box>
         <Box sx={{ marginTop: '120px' }}>
           {newCatalog?.['hydra:member'] && (
-            <ProductSection
+            <Home.Products
               title={'מוצרים קבועים'}
               array={newCatalog?.['hydra:member']}
               toShow={5}
@@ -43,12 +40,7 @@ const HomePage = () => {
             />
           )}
         </Box>
-      </Container> */}
-
-      <Home.Video />
-      <Home.Categories />
-      <Home.TopProducts />
-      <Home.NewProducts />
+      </Container>
     </Box>
   )
 }

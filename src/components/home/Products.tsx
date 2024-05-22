@@ -5,12 +5,11 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import { Box, Grid, IconButton, Typography } from '@mui/material'
-import ProductCard from '../../../Catalog/components/ProductCard'
-import { themeColors, themeSettings } from '../../../../styles/mui'
+import { themeColors, themeSettings } from '../../styles/mui'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined'
-
+import ProductCard from '../ProductCard'
 interface ProductSectionProps {
   title: string
   array: IProduct[]
@@ -19,7 +18,7 @@ interface ProductSectionProps {
   loading: boolean
 }
 
-const ProductSection: FC<ProductSectionProps> = ({ title, array }) => {
+const Products: FC<ProductSectionProps> = ({ title, array }) => {
   const swiperRef = useRef(null)
 
   const settings = {
@@ -106,4 +105,4 @@ const ProductSection: FC<ProductSectionProps> = ({ title, array }) => {
   )
 }
 
-export default ProductSection
+export default Products
