@@ -7,6 +7,7 @@ import useDataClients from '../hooks/useAdminDataUsers'
 import { useParams } from 'react-router-dom'
 import UserList from '../modules/Admin/components/Clients/UserList'
 import UserFilter from '../modules/Admin/components/Clients/UserFilter'
+import Admin from '../components/Admin'
 
 type RouteParams = {
   userRole: ROLE_TYPES
@@ -21,7 +22,7 @@ const Users = () => {
     case 'ROLE_USER':
     case 'ROLE_AGENT':
     case 'ROLE_SUPER_AGENT':
-      componentToRender = <UserList />
+      componentToRender = <Admin.Clients.List />
       break
     default:
       componentToRender = <Box>{'לא נמצא סוג לקוח כזה'}</Box>
@@ -29,7 +30,7 @@ const Users = () => {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />}
       <BreadCrumbsUtil
         array={[
           {
@@ -41,7 +42,9 @@ const Users = () => {
 
       <UserFilter />
       {componentToRender}
-      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}
+      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
+      <Admin.Clients.Filter />
+      {componentToRender}
     </Container>
   )
 }

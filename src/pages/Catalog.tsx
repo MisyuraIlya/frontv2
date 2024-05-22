@@ -6,6 +6,7 @@ import useDataCategories from '../hooks/useDataCategories'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
 import RightSide from '../modules/Catalog/components/RightSide'
+import CatalogComponent from '../components/Catalog'
 const Catalog = () => {
   const { lvl1, lvl2, lvl3 } = useParams()
   const { data } = useDataCategories()
@@ -17,7 +18,7 @@ const Catalog = () => {
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: '50px' }}>
-      <BreadCrumbsUtil
+      {/* <BreadCrumbsUtil
         array={[
           {
             title: res1 ?? '',
@@ -43,6 +44,22 @@ const Catalog = () => {
         </Grid>
         <Grid item xs={12} sm={9}>
           <LeftSide />
+        </Grid>
+      </Grid> */}
+      <Grid container spacing={2}>
+        <Grid item xs={0} sm={3}>
+          {isMobile ? (
+            <RightSide.MobileRightSide />
+          ) : (
+            <>
+              <CatalogComponent.Right.Filter />
+              <CatalogComponent.Right.List />
+              <CatalogComponent.Right.Pagination />
+            </>
+          )}
+        </Grid>
+        <Grid item xs={12} sm={9}>
+          <CatalogComponent.Left.Categories />
         </Grid>
       </Grid>
     </Container>

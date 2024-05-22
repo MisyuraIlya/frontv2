@@ -12,6 +12,7 @@ import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
 import Loader from '../shared/Loader'
 import useDataDocuments from '../hooks/useDataDocuments'
 import { findDocumentTypeTitle } from '../helpers/handleBreadCrumbs'
+import Documents from '../components/Documents'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -62,13 +63,7 @@ const DocumentsPage = () => {
 
   return (
     <Container maxWidth="xl">
-      {isLoading && <Loader />}
-      {/* <CalendarUtil
-        show={showCalendar}
-        closeHandler={() => setShowCalendar(false)}
-        value={currentDate}
-        handleCalendar={handleDate}
-      /> */}
+      {/* {isLoading && <Loader />}
       <Box sx={{ mt: '50px' }}>
         <BreadCrumbsUtil
           array={[
@@ -81,7 +76,11 @@ const DocumentsPage = () => {
       </Box>
       <DocsFilter />
       {componentToRender}
-      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}
+      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
+      <Documents.Document.Filter />
+      <Documents.Document.Head />
+      <Documents.Document.List />
+      <Documents.Document.Pagination />
     </Container>
   )
 }

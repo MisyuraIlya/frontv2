@@ -4,10 +4,11 @@ import AgentMyProfile from '../modules/Auth/components/AgentMyProfile/AgentMyPro
 import AgentActions from '../modules/Agent/components/AgentActions'
 import { Container } from '@mui/material'
 import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import Profile from '../components/Profile'
 const ProfilePage = () => {
   return (
     <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
-      <BreadCrumbsUtil
+      {/* <BreadCrumbsUtil
         array={[
           {
             title: 'פרופיל',
@@ -17,7 +18,10 @@ const ProfilePage = () => {
       />
       <MyProfile />
       <AgentMyProfile />
-      <AgentActions colsNumber={3} />
+      <AgentActions colsNumber={3} /> */}
+      <Profile.Info />
+      <Profile.Money />
+      <Profile.Actions />
     </Container>
   )
 }

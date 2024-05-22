@@ -17,7 +17,7 @@ import { useClientStore } from '../store/AdminClientsStore'
 import RestoreCartModal from '../modules/Modals/agentComponents/RestoreCartModal'
 import PdfViwer from '../modules/Modals/components/PdfViwer/PdfViwer'
 import ImageModal from '../modules/Modals/components/ImageModal/ImageModal'
-import Modals from '../components/modals'
+import Modals from '../components/Modals'
 // Defines
 interface ModalContextType {
   openAuthModal: boolean

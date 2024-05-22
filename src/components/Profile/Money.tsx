@@ -1,7 +1,7 @@
 import React from 'react'
 
-const List = () => {
+const Money = () => {
   return <div></div>
 }
 
-export default List
+export default Money

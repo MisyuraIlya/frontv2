@@ -6,7 +6,7 @@ import { useAuth } from '../store/useAuthStore'
 import { Box, Container } from '@mui/material'
 import useDataRecommended from '../hooks/useDataRecommended'
 import useDataNewCatalog from '../hooks/useDataNewCatalog'
-
+import Home from '../components/Home'
 const HomePage = () => {
   const { user } = useAuth()
   const { data: recommended, isLoading: loadingRecommended } =
@@ -14,7 +14,7 @@ const HomePage = () => {
   const { data: newCatalog, isLoading: loadingNewCatalog } = useDataNewCatalog()
   return (
     <Box>
-      <Box>
+      {/* <Box>
         <VideoSection />
       </Box>
       <Container maxWidth="xl" sx={{ marginBottom: '200px' }}>
@@ -43,7 +43,12 @@ const HomePage = () => {
             />
           )}
         </Box>
-      </Container>
+      </Container> */}
+
+      <Home.Video />
+      <Home.Categories />
+      <Home.TopProducts />
+      <Home.NewProducts />
     </Box>
   )
 }

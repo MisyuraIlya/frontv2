@@ -8,7 +8,7 @@ import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
 import useDataProductsEdit from '../hooks/useAdminDataProductsEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import useDataCategories from '../hooks/useDataCategories'
-import Admin from '../components/admin'
+import Admin from '../components/Admin'
 const ProductsEdit = () => {
   const { lvl1, lvl2, lvl3 } = useParams()
   const { isLoading } = useDataProductsEdit()

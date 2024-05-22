@@ -8,7 +8,7 @@ import { Container } from '@mui/material'
 import useDataCategoryEdit from '../hooks/useAdminDataCategoryEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import useDataCategories from '../hooks/useDataCategories'
-import Admin from '../components/admin'
+import Admin from '../components/Admin'
 const CategoryEdit = () => {
   const { isLoading } = useDataCategoryEdit()
   const { lvl1, lvl2 } = useParams()

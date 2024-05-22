@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Filter = () => {
+const Actions = () => {
   return <div></div>
 }
 
-export default Filter
+export default Actions

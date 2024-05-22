@@ -6,7 +6,7 @@ import PaginationUtil from '../utils/pagination/PaginationUtil'
 import AgentClientsList from '../modules/Agent/components/agentClients/AgentClientsList'
 import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
 import AgentClientsFilter from '../modules/Agent/components/agentClients/AgentClientsFilter'
-
+import Agent from '../components/Agent'
 const AgentClinets = () => {
   const { hydraPagination, isLoading } = useDataAgentClients()
 
@@ -20,10 +20,13 @@ const AgentClinets = () => {
           },
         ]}
       />
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />}
       <AgentClientsFilter />
       <AgentClientsList />
-      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />}
+      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
+      <Agent.Clients.Filter />
+      <Agent.Clients.List />
+      <Agent.Clients.Pagination />
     </Container>
   )
 }

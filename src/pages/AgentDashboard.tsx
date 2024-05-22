@@ -7,24 +7,47 @@ import AgentVisits from '../modules/Agent/Tabs/AgentVisits'
 import AgentTargets from '../modules/Agent/Tabs/AgentTargets'
 import AgentDashBoard from '../modules/Agent/Tabs/AgentDashBoard'
 import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
-
+import Agent from '../components/Agent'
 const AgentDashboard = () => {
   const components = [
     {
       title: 'דאשבורד',
-      component: <AgentDashBoard />,
+      component: (
+        <>
+          <Agent.Dashboard.MainInfo />
+          <Agent.Dashboard.Daily />
+          <Agent.Dashboard.Tasks />
+          <Agent.Dashboard.Targets />
+        </>
+      ),
     },
     {
       title: 'משימות',
-      component: <AgentMissions />,
+      component: (
+        <>
+          <Agent.Missions.Filter />
+          <Agent.Missions.Shedular />
+        </>
+      ),
     },
     {
       title: 'תבניות ביקורים',
-      component: <AgentVisits />,
+      component: (
+        <>
+          <Agent.Visits.Filter />
+          <Agent.Visits.List />
+          <Agent.Visits.Pagination />
+        </>
+      ),
     },
     {
       title: 'יעדים',
-      component: <AgentTargets />,
+      component: (
+        <>
+          <Agent.Targets.Filter />
+          <Agent.Targets.List />
+        </>
+      ),
     },
   ]
 
@@ -34,7 +57,7 @@ const AgentDashboard = () => {
       <Grid container spacing={2}>
         <Grid item sm={3} xs={12}>
           {/* {(isSuperAgent || isAdmin) &&  */}
-          <AgentsList />
+          <Agent.SideBar />
           {/* // } */}
         </Grid>
         <Grid item sm={9} xs={12}>

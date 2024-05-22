@@ -3,7 +3,7 @@ import RightSide from '../modules/PushNotifications/components/NotificationPage/
 import LeftSide from '../modules/PushNotifications/components/NotificationPage/LeftSide'
 import { Container, Grid } from '@mui/material'
 import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
-
+import Admin from '../components/Admin'
 const NotificationPage = () => {
   return (
     <Container maxWidth="lg">
@@ -17,10 +17,12 @@ const NotificationPage = () => {
       />
       <Grid container spacing={2}>
         <Grid item xs={8}>
-          <RightSide />
+          <Admin.Notification.Filter />
+          <Admin.Notification.List />
         </Grid>
         <Grid item xs={4}>
-          <LeftSide />
+          <Admin.Notification.Edit />
+          {/* <LeftSide /> */}
         </Grid>
       </Grid>
     </Container>

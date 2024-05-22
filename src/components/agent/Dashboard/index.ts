@@ -1,6 +1,6 @@
 import MainInfo from './MainInfo'
 import Daily from './Daily'
-import Targets from '../Targets'
+import Targets from './Targets'
 import Tasks from './Tasks'
 
 export default {

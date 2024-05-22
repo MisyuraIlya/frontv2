@@ -1,5 +1,5 @@
 import React from 'react'
-import NotificationCard from '../../../../components/header/Left/NotificationCard'
+import NotificationCard from '../../../../components/Header/Left/NotificationCard'
 import './NotificationContainer.styles.scss'
 import { Box, Typography } from '@mui/material'
 import useDataNotificationUser from '../../../../hooks/useDataNotificationUser'

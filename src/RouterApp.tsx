@@ -15,8 +15,8 @@ import AgentDashboard from './pages/AgentDashboard'
 import { useAuth } from './store/useAuthStore'
 import Users from './pages/Users'
 import BottomNavigationMobile from './components/BottomNavigationMobile'
-import Header from './components/header'
-import Footer from './components/footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import { URLS } from './enums/urls'
 const RouterApp = () => {
   const { user } = useAuth()
