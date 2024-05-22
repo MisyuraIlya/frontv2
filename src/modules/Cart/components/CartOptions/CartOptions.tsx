@@ -7,7 +7,7 @@ import { Box, Button, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
-import { useAuth } from '../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../store/useAuthStore'
 import { themeColors } from '../../../../styles/mui'
 
 const CartOptions = () => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Card, Grid, IconButton, Typography } from '@mui/material'
 import Loader from '../../../../shared/Loader'
 import moment from 'moment'
-import useDataAgentObjectives from '../../hooks/useDataAgentObjectives'
+import useDataAgentObjectives from '../../../../hooks/useDataAgentObjectives'
 import VisitItem from './VisitItem'
 
 const VisitsList = () => {

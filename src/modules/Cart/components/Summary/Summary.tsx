@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../store/useAuthStore'
 import MainSummary from '../MainSummary/MainSummary'
 import SendOrderButton from '../SendOrderButton/SendOrderButton'
 import { Box, Container, Paper, Typography } from '@mui/material'

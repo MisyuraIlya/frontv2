@@ -2,11 +2,11 @@ import React, { FC, useState } from 'react'
 import ModalWrapper from '../components/ModalWrapper/ModalWrapper'
 import { useForm, Controller } from 'react-hook-form'
 import Select from 'react-select'
-import { ReactSelectOptionsOfFullHour } from '../../Agent/helpers/arrayOfMonths'
+import { ReactSelectOptionsOfFullHour } from '../../../helpers/arrayOfMonths'
 import Calendar from 'react-calendar'
 import moment from 'moment'
-import { useMyScheduleCalendar } from '../../Agent/store/ScheduleCalendar.store'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useMyScheduleCalendar } from '../../../store/ScheduleCalendar.store'
+import { useAuth } from '../../../store/useAuthStore'
 
 type ObjectiveCreateModalProps = {
   active: boolean

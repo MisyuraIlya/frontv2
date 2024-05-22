@@ -10,13 +10,13 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataAgentClients from '../../hooks/useDataAgentClients'
+import useDataAgentClients from '../../../../hooks/useDataAgentClients'
 import { themeColors } from '../../../../styles/mui'
 import { UserStatus } from '../../../../enums/status'
 import { useCart } from '../../../../store/cart.store'
 import { onAsk } from '../../../../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../store/useAuthStore'
 
 const AgentClientsList = () => {
   const { data, isLoading } = useDataAgentClients()

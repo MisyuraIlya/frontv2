@@ -3,7 +3,7 @@ import MyCard from '../../../shared/MyCard'
 import Select from 'react-select'
 import MyInputV2 from '../../../shared/MyInputV2'
 import moment from 'moment'
-import { MONTH_HEBREW_3, findMonthName } from '../helpers/arrayOfMonths'
+import { MONTH_HEBREW_3, findMonthName } from '../../../helpers/arrayOfMonths'
 
 const AgentFormFilter = () => {
   const dates = [

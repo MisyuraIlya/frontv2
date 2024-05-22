@@ -31,7 +31,7 @@ import {
 } from '../../../../shared/MySweetAlert'
 import { useForm, Controller } from 'react-hook-form'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
-import { AdminClinetsService } from '../../services/clients.service'
+import { AdminClinetsService } from '../../../../services/AdminClients.service'
 import { useParams } from 'react-router-dom'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'

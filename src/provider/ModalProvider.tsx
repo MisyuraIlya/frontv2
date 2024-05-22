@@ -13,7 +13,7 @@ import ClientRightSideBar from '../modules/Modals/adminComponents/ClientRightSid
 import Gallery from '../modules/Modals/adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../modules/Modals/store/selecterdProduct.store'
 import AgentOptions from '../modules/Modals/agentComponents/AgentOptions'
-import { useClientStore } from '../modules/Admin/store/ClientsStore'
+import { useClientStore } from '../store/AdminClientsStore'
 import RestoreCartModal from '../modules/Modals/agentComponents/RestoreCartModal'
 import PdfViwer from '../modules/Modals/components/PdfViwer/PdfViwer'
 import ImageModal from '../modules/Modals/components/ImageModal/ImageModal'

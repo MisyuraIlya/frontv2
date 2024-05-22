@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useDocuments } from '../store/DocumentsStore'
+import { useDocuments } from '../../../store/DocumentsStore'
 import moment from 'moment'
 const DocsHead = () => {
   const { setDocumentType, clearItems } = useDocuments()

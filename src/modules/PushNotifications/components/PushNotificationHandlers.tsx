@@ -1,7 +1,7 @@
 import React from 'react'
 import IosHandler from './IosHandler/IosHandler'
 import AndroidHandler from './AndroidHandler/AndroidHandler'
-import { useMobile } from '../../Mobile/store/mobile.store'
+import { useMobile } from '../../../store/mobile.store'
 
 const PushNotificationHandlers = () => {
   const { isAndroid, isIPhone } = useMobile()

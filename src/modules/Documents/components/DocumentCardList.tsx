@@ -13,7 +13,7 @@ import {
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import { useModals } from '../../../provider/ModalProvider'
 import { themeColors } from '../../../styles/mui'
-import useDataDocumentsItem from '../hook/useDataDocumentsItem'
+import useDataDocumentsItem from '../../../hooks/useDataDocumentsItem'
 
 const DocumentCardList = () => {
   const { selectProduct } = useModals()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../store/useAuthStore'
 import { useCart } from '../../../../store/cart.store'
 import { useModals } from '../../../../provider/ModalProvider'
 import { Box, Button, Container, Grid } from '@mui/material'

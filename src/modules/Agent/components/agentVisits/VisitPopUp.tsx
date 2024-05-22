@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useAuth } from '../../../Auth/store/useAuthStore'
-import useDataAgentObjectives from '../../hooks/useDataAgentObjectives'
+import { useAuth } from '../../../../store/useAuthStore'
+import useDataAgentObjectives from '../../../../hooks/useDataAgentObjectives'
 import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
 import {
   Box,
@@ -17,7 +17,7 @@ import { Controller, useForm } from 'react-hook-form'
 import {
   HEBREW_DAYS,
   ReactSelectOptionsOfFullHour,
-} from '../../helpers/arrayOfMonths'
+} from '../../../../helpers/arrayOfMonths'
 import moment from 'moment'
 import SearchUserList from '../../../../utils/SearchInput/SearchUserList'
 import { onAsk, onSuccessAlert } from '../../../../shared/MySweetAlert'

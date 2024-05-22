@@ -4,12 +4,12 @@ import MobileMyScheduleCalendar from './MobileMyScheduleCalendar'
 import {
   HourOfDay,
   useMyScheduleCalendar,
-} from '../../store/ScheduleCalendar.store'
+} from '../../../../store/ScheduleCalendar.store'
 import Loader from '../../../../shared/Loader'
-import { ConvertHebrewNameDayToWeekDateByWeekName } from '../../helpers/ScheduleCalendar.helper'
-import { useMobile } from '../../../Mobile/store/mobile.store'
+import { ConvertHebrewNameDayToWeekDateByWeekName } from '../../../../helpers/ScheduleCalendar.helper'
+import { useMobile } from '../../../../store/mobile.store'
 import './MyScheduleCalendar.styles.scss'
-import useDataAgentMissions from '../../hooks/useDataAgentMissions'
+import useDataAgentMissions from '../../../../hooks/useDataAgentMissions'
 import MissionModal from './UpdateMissionModal'
 import MySheduleCalendarItem from './MySheduleCalendarItem'
 

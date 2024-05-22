@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import ModalWrapper from '../components/ModalWrapper/ModalWrapper'
-import { useDocuments } from '../../Documents/store/DocumentsStore'
+import { useDocuments } from '../../../store/DocumentsStore'
 import Loader from '../../../shared/Loader'
 import { useCart } from '../../../store/cart.store'
 import ClientsSearch from '../../../shared/ClientsSearch'

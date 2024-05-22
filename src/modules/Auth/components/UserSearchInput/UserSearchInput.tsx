@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
-import { AdminClinetsService } from '../../../Admin/services/clients.service'
+import { AdminClinetsService } from '../../../../services/AdminClients.service'
 import Loader from '../../../../shared/Loader'
 
 interface UserSearchInputProps {

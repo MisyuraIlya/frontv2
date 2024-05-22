@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useAuth } from '../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../store/useAuthStore'
 import { useSearchStore } from '../../store/SearchStore'
 import { useDebounce } from 'use-debounce'
 import { Link } from 'react-router-dom'

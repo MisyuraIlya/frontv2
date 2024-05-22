@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDocuments } from '../store/DocumentsStore'
+import { useDocuments } from '../../../store/DocumentsStore'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import { useModals } from '../../../provider/ModalProvider'
 const HistoryCardList = () => {

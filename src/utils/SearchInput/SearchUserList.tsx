@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import SearchInput from './SearchInput'
 import useSWR from 'swr'
-import { userService } from '../../modules/Auth/services/user.service'
+import { userService } from '../../services/user.service'
 import { useDebounce } from 'use-debounce'
 
 interface SearchUserListProps {

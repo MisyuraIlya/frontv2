@@ -1,6 +1,6 @@
 import React from 'react'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
 import { Box, Card, Grid, Typography } from '@mui/material'
@@ -9,7 +9,7 @@ import LegendToggleIcon from '@mui/icons-material/LegendToggle'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import GroupIcon from '@mui/icons-material/Group'
 import MyCheapButton from '../../../shared/MyCheapButton'
-import useDataAgentProfile from '../hooks/useDataAgentProfile'
+import useDataAgentProfile from '../../../hooks/useDataAgentProfile'
 
 const AgentPerformanceInfo = () => {
   const { agent, isAdmin, isSuperAgent } = useAuth()

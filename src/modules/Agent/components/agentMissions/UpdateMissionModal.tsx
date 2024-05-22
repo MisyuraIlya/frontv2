@@ -7,8 +7,8 @@ import FeaturedPlayListOutlinedIcon from '@mui/icons-material/FeaturedPlayListOu
 import NotInterestedIcon from '@mui/icons-material/NotInterested'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import { themeColors } from '../../../../styles/mui'
-import useDataAgentMissions from '../../hooks/useDataAgentMissions'
-import { useMyScheduleCalendar } from '../../store/ScheduleCalendar.store'
+import useDataAgentMissions from '../../../../hooks/useDataAgentMissions'
+import { useMyScheduleCalendar } from '../../../../store/ScheduleCalendar.store'
 import { onSuccessAlert } from '../../../../shared/MySweetAlert'
 import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
 const MissionModal = ({

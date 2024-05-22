@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableRow,
 } from '@mui/material'
-import useDataUsers from '../../hooks/useDataUsers'
+import useDataUsers from '../../../../hooks/useAdminDataUsers'
 import HeadUser from './HeadUser'
 import Loader from '../../../../shared/Loader'
 

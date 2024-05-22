@@ -6,7 +6,7 @@ import PaginationUtil from '../../../../utils/pagination/PaginationUtil'
 import useDataCatalog from '../../../../hooks/useDataCatalog'
 import { useParams } from 'react-router-dom'
 import { findCategoryTitleById } from '../../../../helpers/handleBreadCrumbs'
-import useDataCategories from '../../hook/useDataCategories'
+import useDataCategories from '../../../../hooks/useDataCategories'
 import { themeColors } from '../../../../styles/mui'
 
 const LeftSide = () => {

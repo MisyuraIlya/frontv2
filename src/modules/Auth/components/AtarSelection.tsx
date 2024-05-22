@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 
 const AtarSelection = () => {
   const { user, setAtarSelected, atarSelected } = useAuth()

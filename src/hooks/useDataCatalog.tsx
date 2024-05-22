@@ -2,7 +2,7 @@ import useSWR, { SWRConfiguration } from 'swr'
 import { CatalogServices } from '../services/catalog.service'
 import { useLocation, useParams } from 'react-router-dom'
 import { HydraHandler } from '../helpers/hydraHandler'
-import { useAuth } from '../modules/Auth/store/useAuthStore'
+import { useAuth } from '../store/useAuthStore'
 
 const fetchData = async (
   lvl1: string | number,

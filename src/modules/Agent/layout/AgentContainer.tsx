@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, MouseEvent, useEffect } from 'react'
 import AgentsList from '../components/AgentList'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 import { useAgentProfileStore } from '../store/agentProfile.store'
 import { Container, Grid } from '@mui/material'
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import useDataAgents from '../hooks/useDataAgents'
+import useDataAgents from '../../../hooks/useDataAgents'
 import {
   Avatar,
   Divider,

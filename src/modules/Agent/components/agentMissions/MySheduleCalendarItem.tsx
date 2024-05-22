@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { HourOfDay } from '../../store/ScheduleCalendar.store'
+import { HourOfDay } from '../../../../store/ScheduleCalendar.store'
 import MissionModal from './UpdateMissionModal'
 
 type DayOfWeek = 'ראשון' | 'שני' | 'שלישי' | 'רביעי' | 'חמישי' | 'שישי' | 'שבת'

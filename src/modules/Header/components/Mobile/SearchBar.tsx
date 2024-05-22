@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMobile } from '../../../Mobile/store/mobile.store'
+import { useMobile } from '../../../../store/mobile.store'
 import { Box } from '@mui/material'
 import CenterComponent from '../CenterComponent/CenterComponent'
 

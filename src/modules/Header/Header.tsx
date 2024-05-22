@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LeftComponent from './components/LeftComponent/LeftComponent'
-import { useAuth } from '../Auth/store/useAuthStore'
+import { useAuth } from '../../store/useAuthStore'
 import RightComponent from './components/RightComponent/RightComponent'
 import CenterComponent from './components/CenterComponent/CenterComponent'
 import CategoryNavBar from '../../components/header/CategoryNavBar'

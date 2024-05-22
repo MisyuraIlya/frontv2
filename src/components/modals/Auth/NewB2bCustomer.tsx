@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import AuthInput from '../../../modules/Auth/components/AuthInput/AuthInput'
 import { onErrorAlert } from '../../../shared/MySweetAlert'
 import { useModals } from '../../../provider/ModalProvider'
-import { useAuth } from '../../../modules/Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 
 const NewB2bCustomer = () => {
   const {

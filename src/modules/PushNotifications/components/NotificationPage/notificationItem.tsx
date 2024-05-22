@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { useNotificationStore } from '../../store/notificationStore'
+import { useNotificationStore } from '../../../../store/notificationStore'
 import moment from 'moment'
 import {
   Accordion,
@@ -21,7 +21,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import Radio from '@mui/material/Radio'
 import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
-import useDataNotification from '../../hooks/useDataNotification'
+import useDataNotification from '../../../../hooks/useDataNotification'
 
 interface NotificationItemProps {
   element: INotification

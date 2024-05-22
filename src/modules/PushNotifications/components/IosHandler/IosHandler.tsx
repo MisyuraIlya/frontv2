@@ -1,9 +1,9 @@
 import React from 'react'
-import { useNotifications } from '../../provider/PushNotification'
+import { useNotifications } from '../../../../provider/PushNotification'
 import './IosHandler.styles.scss'
 import IssueHandler from '../IssueHandler/IssueHandler'
-import { useMobile } from '../../../Mobile/store/mobile.store'
-import { useOneSignalStore } from '../../store/oneSignalStore'
+import { useMobile } from '../../../../store/mobile.store'
+import { useOneSignalStore } from '../../../../store/oneSignalStore'
 
 const IosHandler = () => {
   const { isPwa } = useMobile()

@@ -5,7 +5,7 @@ import { themeColors } from '../../../../styles/mui'
 import SearchIcon from '@mui/icons-material/Search'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { useNavigate } from 'react-router-dom'
-import { useMobile } from '../../../Mobile/store/mobile.store'
+import { useMobile } from '../../../../store/mobile.store'
 
 const Left = () => {
   const navigate = useNavigate()

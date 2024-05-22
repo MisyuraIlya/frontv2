@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useCart } from '../../../store/cart.store'
 import { useLocation } from 'react-router-dom'
 import { useModals } from '../../../provider/ModalProvider'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 import {
   Box,
   Button,
@@ -17,8 +17,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
-import useDataDocumentsItem from '../hook/useDataDocumentsItem'
-import { ExcelGeneratorIDocuments } from '../helpers/ExcelGenerator'
+import useDataDocumentsItem from '../../../hooks/useDataDocumentsItem'
+import { ExcelGeneratorIDocuments } from '../../../helpers/ExcelGenerator'
 
 const DocsItemFilter = () => {
   const [search, setSearch] = useState<string>('')

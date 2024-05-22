@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import MyCropper from '../../../../shared/MyCropper'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
-import { MediaObjectService } from '../../../Admin/services/mediaObject.service'
+import { MediaObjectService } from '../../../../services/AdminMediaObject.service'
 import {
   TextField,
   TextareaAutosize,
@@ -11,9 +11,9 @@ import {
   Paper,
   Box,
 } from '@mui/material'
-import { useNotificationStore } from '../../store/notificationStore'
+import { useNotificationStore } from '../../../../store/notificationStore'
 import AddIcon from '@mui/icons-material/Add'
-import useDataNotification from '../../hooks/useDataNotification'
+import useDataNotification from '../../../../hooks/useDataNotification'
 
 interface LeftSideForm {
   title: string

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { List, ListItem, ListItemText } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
-import useDataCategories from '../../hook/useDataCategories'
+import useDataCategories from '../../../../hooks/useDataCategories'
 const RightSide = () => {
   const { data } = useDataCategories()
   const { lvl1, lvl2, lvl3, documentType } = useParams()

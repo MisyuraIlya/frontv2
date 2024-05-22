@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AdminCatalogService } from '../../services/catalog.service'
+import { AdminCatalogService } from '../../../../services/AdminCatalog.service'
 import { useDebounce } from 'use-debounce'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
-import { MediaObjectService } from '../../services/mediaObject.service'
+import { MediaObjectService } from '../../../../services/AdminMediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
 import {
   Button,

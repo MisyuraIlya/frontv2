@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import ProductsEditItem from './ProductsEditItem'
-import { AdminProductService } from '../../services/products.service'
+import { AdminProductService } from '../../../../services/AdminProducts.service'
 import {
   Box,
   Grid,
@@ -14,7 +14,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataProductsEdit from '../../hooks/useDataProductsEdit'
+import useDataProductsEdit from '../../../../hooks/useAdminDataProductsEdit'
 const ProductsEditList = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const { data } = useDataProductsEdit()

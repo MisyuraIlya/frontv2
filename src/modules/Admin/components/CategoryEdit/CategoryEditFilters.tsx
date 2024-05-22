@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
-import { useAdminCategories } from '../../store/CategoriesStore'
+import { useAdminCategories } from '../../../../store/AdminCategoriesStore'
 
 const CategoryEditFilters = () => {
   const { search, setSearch } = useAdminCategories()

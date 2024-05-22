@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationItem from './notificationItem'
 import { Box } from '@mui/material'
-import useDataNotification from '../../hooks/useDataNotification'
+import useDataNotification from '../../../../hooks/useDataNotification'
 
 const RightSide = () => {
   const { data } = useDataNotification()

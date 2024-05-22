@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, List, ListItem, Paper, Box } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
-import useDataDocumentsItem from '../hook/useDataDocumentsItem'
+import useDataDocumentsItem from '../../../hooks/useDataDocumentsItem'
 
 const DocsTotal = () => {
   const { data } = useDataDocumentsItem()

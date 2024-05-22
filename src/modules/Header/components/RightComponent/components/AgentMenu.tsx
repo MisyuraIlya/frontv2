@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../../store/useAuthStore'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 

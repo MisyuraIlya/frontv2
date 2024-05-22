@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 
 interface AuthButtonProps {
   username: string

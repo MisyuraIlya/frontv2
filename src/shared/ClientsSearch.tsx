@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FC } from 'react'
 import { useDebounce } from 'use-debounce'
 import Loader from './Loader'
-import { AdminClinetsService } from '../modules/Admin/services/clients.service'
+import { AdminClinetsService } from '../services/AdminClients.service'
 
 interface ClientsSearchProps {
   onChooseClient: (client: IUser) => void

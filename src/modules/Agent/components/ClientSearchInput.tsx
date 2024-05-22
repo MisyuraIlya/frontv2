@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 
 import { useDebounce } from 'use-debounce'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 import Loader from '../../../shared/Loader'
 
 interface ClientSearchInputProps {

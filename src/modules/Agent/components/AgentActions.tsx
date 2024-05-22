@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useAuth } from '../../Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 import { useCart } from '../../../store/cart.store'
 import { useNavigate } from 'react-router-dom'
 import { useModals } from '../../../provider/ModalProvider'

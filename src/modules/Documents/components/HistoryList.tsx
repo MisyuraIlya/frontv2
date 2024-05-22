@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDocuments } from '../store/DocumentsStore'
+import { useDocuments } from '../../../store/DocumentsStore'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 

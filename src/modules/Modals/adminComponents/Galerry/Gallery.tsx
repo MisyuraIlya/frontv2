@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import ModalWrapper from '../../components/ModalWrapper/ModalWrapper'
 import { onAsk } from '../../../../shared/MySweetAlert'
-import { useProductsEditStore } from '../../../Admin/store/ProductsEditStore'
+import { useProductsEditStore } from '../../../../store/AdminProductsEditStore'
 import { useParams } from 'react-router-dom'
 
 type GalleryProps = {

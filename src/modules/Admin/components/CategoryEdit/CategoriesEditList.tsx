@@ -5,7 +5,7 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd'
-import { AdminCatalogService } from '../../services/catalog.service'
+import { AdminCatalogService } from '../../../../services/AdminCatalog.service'
 import CategoryEditItem from './CategoryEditItem'
 import {
   Box,
@@ -18,7 +18,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataCategoryEdit from '../../hooks/useDataCategoryEdit'
+import useDataCategoryEdit from '../../../../hooks/useAdminDataCategoryEdit'
 
 const CategoriesEditList = () => {
   const { data } = useDataCategoryEdit()

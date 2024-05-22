@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuth } from '../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../store/useAuthStore'
 import { useModals } from '../../../../provider/ModalProvider'
 import { useCart } from '../../../../store/cart.store'
 import { Link, useNavigate } from 'react-router-dom'

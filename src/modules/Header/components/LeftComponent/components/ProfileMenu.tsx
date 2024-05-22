@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import { themeColors } from '../../../../../styles/mui'
-import { useAuth } from '../../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../../store/useAuthStore'
 import { useCart } from '../../../../../store/cart.store'
 import { onAsk } from '../../../../../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'

@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import { useAuth } from '../../../../../../Auth/store/useAuthStore'
+import { useAuth } from '../../../../../../../store/useAuthStore'
 import { useModals } from '../../../../../../../provider/ModalProvider'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useCatalog } from '../../../../../store/CatalogStore'
+import { useCatalog } from '../../../../../../../store/CatalogStore'
 import {
   Card,
   CardContent,

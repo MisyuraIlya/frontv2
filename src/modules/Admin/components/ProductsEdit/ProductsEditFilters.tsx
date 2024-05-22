@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
-import { useProductsEditStore } from '../../store/ProductsEditStore'
+import { useProductsEditStore } from '../../../../store/AdminProductsEditStore'
 
 const ProductsEditFilters = () => {
   const { search, setSearch } = useProductsEditStore()

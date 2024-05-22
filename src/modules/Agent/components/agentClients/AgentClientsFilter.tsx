@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import { Box, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
-import useDataAgentClients from '../../hooks/useDataAgentClients'
+import useDataAgentClients from '../../../../hooks/useDataAgentClients'
 
 const AgentClientsFilter = () => {
   const [search, setSearch] = useState('')

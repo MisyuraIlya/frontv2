@@ -1,9 +1,9 @@
 import useSWR from 'swr'
-import { NotificationsServices } from '../modules/PushNotifications/services/notifications.service'
+import { NotificationsServices } from '../services/notifications.service'
 import moment from 'moment'
 import { onAsk } from '../shared/MySweetAlert'
-import { clientNotifications } from '../modules/PushNotifications/services/clientNotifications.service'
-import { useAuth } from '../modules/Auth/store/useAuthStore'
+import { clientNotifications } from '../services/clientNotifications.service'
+import { useAuth } from '../store/useAuthStore'
 
 const fetchData = async (userId: number | string) => {
   return await clientNotifications.getNotificationByUserId(userId)

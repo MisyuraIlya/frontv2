@@ -14,7 +14,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material'
-import useDataCategories from '../../../Catalog/hook/useDataCategories'
+import useDataCategories from '../../../../hooks/useDataCategories'
 import { themeColors, themeSettings } from '../../../../styles/mui'
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined'
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined'

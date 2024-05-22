@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCatalog } from '../../../store/CatalogStore'
+import { useCatalog } from '../../../../../store/CatalogStore'
 import { useParams } from 'react-router-dom'
 import AttributeCheckbox from './AttributeCheckbox'
 

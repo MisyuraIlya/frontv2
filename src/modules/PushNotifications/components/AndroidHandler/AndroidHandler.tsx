@@ -1,7 +1,7 @@
 import React from 'react'
 import './AndroidHandler.styles.scss'
 import IssueHandler from '../IssueHandler/IssueHandler'
-import { useOneSignalStore } from '../../store/oneSignalStore'
+import { useOneSignalStore } from '../../../../store/oneSignalStore'
 const AndroidHandler = () => {
   const { detectBrowser } = useOneSignalStore()
   return (

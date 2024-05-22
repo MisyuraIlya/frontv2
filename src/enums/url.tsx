@@ -15,7 +15,7 @@ import GroupIcon from '@mui/icons-material/Group'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd'
 import { themeColors } from '../styles/mui'
-import { getAgentFromStorage } from '../modules/Auth/helpers/auth.helper'
+import { getAgentFromStorage } from '../helpers/auth.helper'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 
 const dateFrom = moment().subtract(1, 'day').format('YYYY-MM-DD')

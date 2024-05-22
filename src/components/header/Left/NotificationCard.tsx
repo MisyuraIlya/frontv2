@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import './NotificationCard.styles.scss'
 import moment from 'moment'
-import { useOneSignalStore } from '../../../modules/PushNotifications/store/oneSignalStore'
+import { useOneSignalStore } from '../../../store/oneSignalStore'
 import {
   Accordion,
   AccordionDetails,

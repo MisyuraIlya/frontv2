@@ -2,10 +2,10 @@ import React, { FC, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
 // import MyCropper from '../../../../components/tools/MyCropper';
-import { useProductsEditStore } from '../../store/ProductsEditStore'
-import { AdminProductService } from '../../services/products.service'
+import { useProductsEditStore } from '../../../../store/AdminProductsEditStore'
+import { AdminProductService } from '../../../../services/AdminProducts.service'
 import { useModals } from '../../../../provider/ModalProvider'
-import { MediaObjectService } from '../../services/mediaObject.service'
+import { MediaObjectService } from '../../../../services/AdminMediaObject.service'
 import MyCropper from '../../../../shared/MyCropper'
 import {
   Box,

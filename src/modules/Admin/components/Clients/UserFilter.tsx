@@ -1,9 +1,9 @@
 import React from 'react'
-import { useClientStore } from '../../store/ClientsStore'
+import { useClientStore } from '../../../../store/AdminClientsStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import SearchInput from '../../../../utils/SearchInput/SearchInput'
 import { Box, Typography } from '@mui/material'
-import useDataClients from '../../hooks/useDataUsers'
+import useDataClients from '../../../../hooks/useAdminDataUsers'
 import { themeColors } from '../../../../styles/mui'
 
 type RouteParams = {

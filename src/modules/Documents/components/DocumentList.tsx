@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDocuments } from '../store/DocumentsStore'
+import { useDocuments } from '../../../store/DocumentsStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment'
 import {
@@ -14,9 +14,9 @@ import {
   Typography,
 } from '@mui/material' // Import Material-UI components
 import { themeColors } from '../../../styles/mui'
-import { DocumentTypeHebrew } from '../helpers/DocumentTypeHebrew'
-import { useAuth } from '../../Auth/store/useAuthStore'
-import useDataDocuments from '../hook/useDataDocuments'
+import { DocumentTypeHebrew } from '../../../helpers/DocumentTypeHebrew'
+import { useAuth } from '../../../store/useAuthStore'
+import useDataDocuments from '../../../hooks/useDataDocuments'
 
 const DocumentList = () => {
   const { showCalendar } = useDocuments()

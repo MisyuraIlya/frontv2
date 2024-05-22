@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import './IssueHandler.styles.scss'
-import { useNotifications } from '../../provider/PushNotification'
-import { useMobile } from '../../../Mobile/store/mobile.store'
+import { useNotifications } from '../../../../provider/PushNotification'
+import { useMobile } from '../../../../store/mobile.store'
 
 interface IssueHandlerProps {
   title: string

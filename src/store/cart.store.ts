@@ -1,13 +1,10 @@
 import { create } from 'zustand'
-import CartServices from '../modules/Cart/services/cart.services'
+import CartServices from '../services/cart.services'
 import { onErrorAlert, onSuccessAlert } from '../shared/MySweetAlert'
 import moment from 'moment'
-import { AdminOrderService } from '../modules/Admin/services/orders.service'
+import { AdminOrderService } from '../services/AdminOrders.service'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
-import {
-  getAgentFromStorage,
-  getUserFromStorage,
-} from '../modules/Auth/helpers/auth.helper'
+import { getAgentFromStorage, getUserFromStorage } from '../helpers/auth.helper'
 
 interface useCartState {
   loading: boolean

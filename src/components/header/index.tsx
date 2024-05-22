@@ -4,7 +4,7 @@ import Center from './Center'
 import CategoryNavBar from './CategoryNavBar'
 import Right from './Right'
 import Left from './Left'
-import { useAuth } from '../../modules/Auth/store/useAuthStore'
+import { useAuth } from '../../store/useAuthStore'
 
 const AppBarComponent = () => {
   const { isAdmin, isAgent } = useAuth()

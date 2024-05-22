@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCatalog } from '../../../../store/CatalogStore'
+import { useCatalog } from '../../../../../../store/CatalogStore'
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import ProductCard from '../../../ProductCard'
 import useDataCatalog from '../../../../../../hooks/useDataCatalog'

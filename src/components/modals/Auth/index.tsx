@@ -7,7 +7,7 @@ import ValidationForm from './ValidationForm'
 import NewB2bCustomer from './NewB2bCustomer'
 import { Box, IconButton, Modal, Paper } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import { useAuth } from '../../../modules/Auth/store/useAuthStore'
+import { useAuth } from '../../../store/useAuthStore'
 
 type AuthPopUpProps = {
   active: boolean
