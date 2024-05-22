@@ -12,7 +12,7 @@ import {
 import { useModals } from '../../../provider/ModalProvider'
 import { themeColors } from '../../../styles/mui'
 import { useCart } from '../../../store/cart.store'
-import AddToCart from '../../Cart/components/AddToCart/AddToCart'
+import AddToCart from '../../../components/AddToCart'
 
 interface ProductCardProps {
   product: IProduct

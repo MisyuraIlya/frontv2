@@ -1,10 +1,11 @@
 import React from 'react'
-import { useSelectedProduct } from '../../../../store/selecterdProduct.store'
-import AdditionalImages from '../AdditionalImages'
-import { useModals } from '../../../../../../provider/ModalProvider'
+import { useSelectedProduct } from '../../../modules/Modals/store/selecterdProduct.store'
+import AdditionalImages from './AdditionalImages'
+import { useModals } from '../../../provider/ModalProvider'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined'
 import { Box, IconButton } from '@mui/material'
+
 const ProductRightSide = () => {
   const { selectedProd } = useSelectedProduct()
   const { handleImageModal } = useModals()

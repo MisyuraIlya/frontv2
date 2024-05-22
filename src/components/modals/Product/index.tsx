@@ -1,18 +1,18 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../ModalWrapper/ModalWrapper'
-import ProductLeftSide from './components/ProductLeftSide/ProductLeftSide'
-import ProductRightSide from './components/ProductRightSide/ProductRightSide'
+import ModalWrapper from '../../../modules/Modals/components/ModalWrapper/ModalWrapper'
+import ProductLeftSide from './ProductLeftSide'
+import ProductRightSide from './ProductRightSide'
 import { Box, Button, Grid } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
-import { useModals } from '../../../../provider/ModalProvider'
+import { useModals } from '../../../provider/ModalProvider'
 type ProductPopUpProps = {
   active: boolean
   setActive: (bool: boolean) => void
 }
 
-const ProductPopUp: FC<ProductPopUpProps> = ({ active, setActive }) => {
+const Product: FC<ProductPopUpProps> = ({ active, setActive }) => {
   const { setActiveTablePopUp } = useModals()
 
   const handleOpen = () => {
@@ -55,4 +55,4 @@ const ProductPopUp: FC<ProductPopUpProps> = ({ active, setActive }) => {
   )
 }
 
-export default ProductPopUp
+export default Product

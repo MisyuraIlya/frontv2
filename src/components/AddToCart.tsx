@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import { Input, Grid, IconButton, Box, Typography } from '@mui/material'
-import { useCart } from '../../../../store/cart.store'
+import { useCart } from '../store/cart.store'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
-import { themeColors } from '../../../../styles/mui'
+import { themeColors } from '../styles/mui'
 import Snackbar from '@mui/material/Snackbar'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
@@ -111,7 +111,7 @@ const AddToCart: FC<AddToCartProps> = ({ item }) => {
             item
             xs={12}
             container
-            sx={{ backgroundColor: themeColors.primary }}
+            sx={{ backgroundColor: themeColors.primary, borderRadius: '4px' }}
           >
             <Grid
               item

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCart } from '../../../../store/cart.store'
-import AddToCart from '../AddToCart/AddToCart'
+import AddToCart from '../../../../components/AddToCart'
 import { useModals } from '../../../../provider/ModalProvider'
 import {
   Box,

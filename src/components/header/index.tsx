@@ -48,7 +48,7 @@ const AppBarComponent = () => {
           </Grid>
         </Grid>
       </Toolbar>
-      {/* <CategoryNavBar /> */}
+      <CategoryNavBar />
     </AppBar>
   )
 }

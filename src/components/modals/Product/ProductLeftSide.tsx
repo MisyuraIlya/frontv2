@@ -1,13 +1,16 @@
 import React from 'react'
-import { useSelectedProduct } from '../../../../../store/selecterdProduct.store'
-import { Typography, Link, Grid, IconButton, Divider } from '@mui/material'
+import { useSelectedProduct } from '../../../modules/Modals/store/selecterdProduct.store'
+import { Box, Divider, Grid, IconButton, Typography, Link } from '@mui/material'
+import PriceBlockPopUp from './PriceBlockPopUp'
 import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined'
+import { useCart } from '../../../store/cart.store'
 
-const ProductMainInfo = () => {
+const ProductLeftSide = () => {
   const { selectedProd } = useSelectedProduct()
-
+  const { getCartItem } = useCart()
+  const inCart = getCartItem(selectedProd)
   return (
-    <>
+    <Box>
       <Typography variant="h5">{selectedProd?.title}</Typography>
       {selectedProd?.sku && (
         <Grid container sx={{ margin: '20px 0px' }}>
@@ -62,14 +65,37 @@ const ProductMainInfo = () => {
           <Typography variant="h5" lineHeight={'25px'}>
             ₪{selectedProd?.finalPrice}
           </Typography>
-          <Typography variant="body2" sx={{ textDecoration: 'line-through' }}>
-            ₪{selectedProd?.basePrice}
-          </Typography>
+          {selectedProd?.finalPrice < selectedProd?.basePrice && (
+            <Typography variant="body2" sx={{ textDecoration: 'line-through' }}>
+              ₪{selectedProd?.basePrice}
+            </Typography>
+          )}
         </Grid>
       </Grid>
       <Divider />
-    </>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginTop: '50px',
+        }}
+      >
+        <Box sx={{ display: 'flex', gap: '100px', alignItems: 'center' }}>
+          {inCart?.total > 0 && (
+            <>
+              <Typography variant="subtitle1" sx={{ color: '#2196F3' }}>
+                סה״כ להזמנה
+              </Typography>
+              <Typography variant="h5">₪{inCart?.total}</Typography>
+            </>
+          )}
+        </Box>
+        <Box sx={{ width: { sm: '50%', xs: '100%' } }}>
+          <PriceBlockPopUp product={selectedProd} />
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
-export default ProductMainInfo
+export default ProductLeftSide

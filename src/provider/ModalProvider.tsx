@@ -7,7 +7,6 @@ import React, {
   ReactNode,
 } from 'react'
 import OrderSettings from '../modules/Modals/components/OrderSettings/OrderSettings'
-import ProductPopUp from '../modules/Modals/components/ProductPopUp/ProductPopUp'
 import TablePopUp from '../modules/Modals/components/TablePopUp/TablePopUp'
 import PayPopUp from '../modules/Modals/components/PayPopUp/PayPopUp'
 import ClientRightSideBar from '../modules/Modals/adminComponents/ClientRightSideBar/ClientRightSideBar'
@@ -138,11 +137,11 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
       {/* <OrderSettings
         active={openCartSettings}
         setActive={setOpenCartSettings}
-      />
-      <ProductPopUp
+      /> */}
+      <Modals.Product
         active={selectedProduct}
         setActive={onCloseSelectedProduct}
-      /> */}
+      />
       {openAuthModal && (
         <Modals.Auth active={openAuthModal} setActive={setOpenAuthModal} />
       )}
