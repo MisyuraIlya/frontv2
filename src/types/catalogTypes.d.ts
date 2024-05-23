@@ -95,7 +95,7 @@ interface ProductDocument {
   SUFFIX: string
 }
 
-type CatalogDocumentType = 'catalog' | 'search' | 'recommended' | 'new'
+type CatalogDocumentType = 'catalog' | 'search' | 'special' | 'new'
 
 interface GetCatalogResponse extends Hydra {
   'hydra:member': IProduct[] // Define a more specific type if possible

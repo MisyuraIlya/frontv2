@@ -22,20 +22,23 @@ const fetchData = async (
   )
 }
 
-const useDataCatalog = (search: string = '') => {
+const useDataCatalog = (
+  search: string = '',
+  document: null | CatalogDocumentType = null
+) => {
   const { lvl1, lvl2, lvl3, documentType } = useParams()
   const location = useLocation()
   const { user } = useAuth()
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<GetCatalogResponse>(
-      `/api/catalog/${documentType}/${lvl1}/${lvl2}/${lvl3}${search ?? location.search}&userId=${user?.id}`,
+      `/api/catalog/${document ?? documentType}/${lvl1}/${lvl2}/${lvl3}${search ?? location.search}&userId=${user?.id}`,
       () =>
         fetchData(
           lvl1 ?? '0',
           lvl2 ?? '0',
           lvl3 ?? '0',
           `?search=${search}` ?? location.search,
-          documentType as CatalogDocumentType,
+          document ?? (documentType as CatalogDocumentType),
           user!
         )
     )

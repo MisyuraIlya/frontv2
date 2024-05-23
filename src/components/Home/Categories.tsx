@@ -48,7 +48,6 @@ const Categories = () => {
       swiperRef.current.swiper.slidePrev()
     }
   }
-
   return (
     <Box>
       <Box sx={{ display: 'flex', gap: '10px' }}>
@@ -84,7 +83,7 @@ const Categories = () => {
               <SwiperSlide key={index}>
                 <Card>
                   <CardActionArea>
-                    <Box sx={{ height: '190px' }}>
+                    <Box>
                       <CardMedia
                         sx={{ objectFit: 'cover' }}
                         component="img"
