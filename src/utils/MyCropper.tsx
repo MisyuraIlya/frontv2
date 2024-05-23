@@ -86,7 +86,11 @@ const MyCropper: FC<MyCropperProps> = ({
               opacity: '0.5',
             }}
           />
-          <VisuallyHiddenInput type="file" onChange={handleFileChange} />
+          <VisuallyHiddenInput
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
         </IconButton>
       </Box>
       <Modals.ModalWrapper

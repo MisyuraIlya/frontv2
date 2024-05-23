@@ -9,7 +9,7 @@ import Loader from '../../../../shared/Loader'
 import { ConvertHebrewNameDayToWeekDateByWeekName } from '../../../../helpers/ScheduleCalendar.helper'
 import { useMobile } from '../../../../store/mobile.store'
 import './MyScheduleCalendar.styles.scss'
-import useDataAgentMissions from '../../../../hooks/useDataAgentMissions'
+import useDataAgentMissions from '../../../../hooks/useAgentDataMissions'
 import MissionModal from './UpdateMissionModal'
 import MySheduleCalendarItem from './MySheduleCalendarItem'
 

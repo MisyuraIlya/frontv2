@@ -4,10 +4,10 @@ import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
 import { Box, Card, Grid, Typography } from '@mui/material'
 import MyCheapButton from '../../../shared/MyCheapButton'
-import useDataAgentObjectives from '../../../hooks/useDataAgentObjectives'
-import useDataAgentMissions from '../../../hooks/useDataAgentMissions'
+import useDataAgentObjectives from '../../../hooks/useAgentDataObjectives'
+import useDataAgentMissions from '../../../hooks/useAgentDataMissions'
 import moment from 'moment'
-import useDataAgentDashboard from '../../../hooks/useDataAgentDashboard'
+import useDataAgentDashboard from '../../../hooks/useAgentDataDashboard'
 
 const VisitsDashboard = () => {
   const { data } = useDataAgentDashboard(

@@ -2,7 +2,7 @@ import React from 'react'
 import Loader from '../../../../shared/Loader'
 import { useAuth } from '../../../../store/useAuthStore'
 import { Box, Card, Grid, Typography } from '@mui/material'
-import useDataAgentTargets from '../../../../hooks/useDataAgentTargets'
+import useDataAgentTargets from '../../../../hooks/useAgentDataTargets'
 import { themeColors } from '../../../../styles/mui'
 
 import { MONTH_HEBREW_1 } from '../../../../helpers/arrayOfMonths'

@@ -3,10 +3,10 @@ import ProductList from './components/ProductList/ProductList'
 import FiltersBlock from './components/FiltersBlock/FiltersBlock'
 import { Box, Typography } from '@mui/material'
 import PaginationUtil from '../../../../utils/PaginationUtil'
-import useDataCatalog from '../../../../hooks/useDataCatalog'
+import useDataCatalog from '../../../../hooks/useClientDataCatalog'
 import { useParams } from 'react-router-dom'
 import { findCategoryTitleById } from '../../../../helpers/handleBreadCrumbs'
-import useDataCategories from '../../../../hooks/useDataCategories'
+import useDataCategories from '../../../../hooks/useClientDataCategories'
 import { themeColors } from '../../../../styles/mui'
 
 const LeftSide = () => {

@@ -10,7 +10,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataAgentClients from '../../../../hooks/useDataAgentClients'
+import useDataAgentClients from '../../../../hooks/useAgentDataClients'
 import { themeColors } from '../../../../styles/mui'
 import { UserStatus } from '../../../../enums/status'
 import { useCart } from '../../../../store/cart.store'

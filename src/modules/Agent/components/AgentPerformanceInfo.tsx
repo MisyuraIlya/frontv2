@@ -9,10 +9,10 @@ import LegendToggleIcon from '@mui/icons-material/LegendToggle'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import GroupIcon from '@mui/icons-material/Group'
 import MyCheapButton from '../../../shared/MyCheapButton'
-import useDataAgentProfile from '../../../hooks/useDataAgentProfile'
+import useDataAgentProfile from '../../../hooks/useAgentDataProfile'
 
 const AgentPerformanceInfo = () => {
-  const { agent, isAdmin, isSuperAgent } = useAuth()
+  const { isAdmin, isSuperAgent } = useAuth()
   const { data } = useDataAgentProfile()
   return (
     <Card sx={{ padding: '10px' }}>

@@ -12,7 +12,7 @@ import {
   ListItemIcon,
 } from '@mui/material'
 import { themeColors } from '../../../../styles/mui'
-import useDataCategories from '../../../../hooks/useDataCategories'
+import useDataCategories from '../../../../hooks/useClientDataCategories'
 import CategoryNavItem from './CategoryNavItem'
 
 const CategoryNavBarMobile = () => {

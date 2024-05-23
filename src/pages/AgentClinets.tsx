@@ -1,7 +1,7 @@
 import React from 'react'
 import Loader from '../shared/Loader'
 import { Container } from '@mui/material'
-import useDataAgentClients from '../hooks/useDataAgentClients'
+import useDataAgentClients from '../hooks/useAgentDataClients'
 import PaginationUtil from '../utils/PaginationUtil'
 import AgentClientsList from '../modules/Agent/components/agentClients/AgentClientsList'
 import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'

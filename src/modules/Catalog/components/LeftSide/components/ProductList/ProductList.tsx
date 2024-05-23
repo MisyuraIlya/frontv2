@@ -2,7 +2,7 @@ import React from 'react'
 import { useCatalog } from '../../../../../../store/CatalogStore'
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import ProductCard from '../../../../../../components/ProductCard'
-import useDataCatalog from '../../../../../../hooks/useDataCatalog'
+import useDataCatalog from '../../../../../../hooks/useClientDataCatalog'
 
 const ProductList = () => {
   const { listView } = useCatalog()

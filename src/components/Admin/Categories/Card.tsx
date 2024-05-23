@@ -24,7 +24,7 @@ interface CategoryEditItemProps {
 
 const Card: FC<CategoryEditItemProps> = ({ element }) => {
   const [activeEdit, setActiveEdit] = useState<boolean>(false)
-  const { mutate } = useDataCategoryEdit()
+  const { mutate, handleUpdate } = useDataCategoryEdit()
   const [checked, setCheked] = useState(element.isPublished)
   const [title, setTitle] = useState(element.title)
   const [valueDebounced] = useDebounce(title, 1000)
@@ -48,7 +48,7 @@ const Card: FC<CategoryEditItemProps> = ({ element }) => {
 
   const unpublishHandle = async () => {
     setCheked(!checked)
-    await AdminCatalogService.updateCategory({
+    handleUpdate({
       id: element.id,
       isPublished: !checked,
     })

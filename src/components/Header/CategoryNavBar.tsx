@@ -11,7 +11,7 @@ import {
   ListItemButton,
 } from '@mui/material'
 import { themeColors } from '../../styles/mui'
-import useDataCategories from '../../hooks/useDataCategories'
+import useDataCategories from '../../hooks/useClientDataCategories'
 
 const CategoryNavBar = () => {
   const { data } = useDataCategories()

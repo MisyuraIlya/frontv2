@@ -1,7 +1,7 @@
 import { Box, Card, MenuItem, Select } from '@mui/material'
 import React, { useState } from 'react'
 import TargetList from '../components/agentTargets/TargetList'
-import useDataAgentTargets from '../../../hooks/useDataAgentTargets'
+import useDataAgentTargets from '../../../hooks/useAgentDataTargets'
 import moment from 'moment'
 
 interface OptionType {

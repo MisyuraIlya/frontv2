@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ProductList from '../../utils/SearchInput/components/ProductList'
 import { useDebounce } from 'use-debounce'
 import SearchInput from '../../utils/SearchInput/SearchInput'
-import useDataCatalog from '../../hooks/useDataCatalog'
+import useDataCatalog from '../../hooks/useClientDataCatalog'
 import { useModals } from '../../provider/ModalProvider'
 
 const Center = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../../../store/useAuthStore'
-import useDataAgentObjectives from '../../../../hooks/useDataAgentObjectives'
+import useDataAgentObjectives from '../../../../hooks/useAgentDataObjectives'
 import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import {
   Box,

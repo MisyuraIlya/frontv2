@@ -18,12 +18,17 @@ const useDataCategoryEdit = () => {
     () => fetchData(lvl1!, lvl2!)
   )
 
+  const handleUpdate = async (category: any) => {
+    await AdminCatalogService.updateCategory(category)
+  }
+
   return {
     data,
     isLoading: isLoading,
     isError: error,
     isValidating,
     mutate,
+    handleUpdate,
   }
 }
 

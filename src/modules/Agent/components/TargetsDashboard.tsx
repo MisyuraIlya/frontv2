@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
 import { Card, MenuItem, Select, Typography } from '@mui/material'
 import moment from 'moment'
-import useDataAgentTargets from '../../../hooks/useDataAgentTargets'
+import useDataAgentTargets from '../../../hooks/useAgentDataTargets'
 import { MONTH_HEBREW_1 } from '../../../helpers/arrayOfMonths'
 import { themeColors } from '../../../styles/mui'
 
