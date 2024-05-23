@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import {
   Box,
   Button,
@@ -18,7 +18,7 @@ import { useMyScheduleCalendar } from '../../../../store/ScheduleCalendar.store'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import { Controller, useForm } from 'react-hook-form'
 import { ReactSelectOptionsOfFullHour } from '../../../../helpers/arrayOfMonths'
-import CalendarUtil from '../../../../utils/Calendar/CalendarUtil'
+import CalendarUtil from '../../../../utils/CalendarUtil'
 import moment from 'moment'
 import { useAuth } from '../../../../store/useAuthStore'
 import { onSuccessAlert } from '../../../../shared/MySweetAlert'

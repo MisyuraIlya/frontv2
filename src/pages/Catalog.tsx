@@ -4,7 +4,7 @@ import { Grid, Container, useMediaQuery } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import useDataCategories from '../hooks/useDataCategories'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import RightSide from '../modules/Catalog/components/RightSide'
 import CatalogComponent from '../components/Catalog'
 const Catalog = () => {

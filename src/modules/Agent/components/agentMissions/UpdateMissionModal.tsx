@@ -10,7 +10,7 @@ import { themeColors } from '../../../../styles/mui'
 import useDataAgentMissions from '../../../../hooks/useDataAgentMissions'
 import { useMyScheduleCalendar } from '../../../../store/ScheduleCalendar.store'
 import { onSuccessAlert } from '../../../../shared/MySweetAlert'
-import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 const MissionModal = ({
   open,
   setOpen,

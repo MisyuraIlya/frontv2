@@ -6,7 +6,7 @@ import AgentMissions from '../modules/Agent/Tabs/AgentMissions'
 import AgentVisits from '../modules/Agent/Tabs/AgentVisits'
 import AgentTargets from '../modules/Agent/Tabs/AgentTargets'
 import AgentDashBoard from '../modules/Agent/Tabs/AgentDashBoard'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import Agent from '../components/Agent'
 const AgentDashboard = () => {
   const components = [

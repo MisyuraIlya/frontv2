@@ -19,9 +19,11 @@ import {
 } from '@mui/material'
 import useDataCategoryEdit from '../../../hooks/useAdminDataCategoryEdit'
 import Card from './Card'
+import { useAdminStore } from '../../../store/admin.store'
 
 const List = () => {
   const { data } = useDataCategoryEdit()
+  const { searchCategories } = useAdminStore()
   const [categories, setCategories] = useState<ICategory[]>([])
 
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
@@ -78,49 +80,55 @@ const List = () => {
             ref={provided.innerRef}
             style={getListStyle(snapshot.isDraggingOver)}
           >
-            <TableContainer component={Paper}>
-              <Table className="lines-sub-cont">
+            <TableContainer component={Paper} elevation={0}>
+              <Table>
                 <TableHead>
-                  <TableRow className="heading">
-                    <TableCell className="col-cont sticky-col"></TableCell>
-                    <TableCell className="col-cont sticky-col">
-                      <Typography variant="subtitle2">תמונה</Typography>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell>
+                      <Typography>תמונה</Typography>
                     </TableCell>
-                    <TableCell className="col-cont sticky-col">
-                      <Typography variant="subtitle2">מזהה</Typography>
+                    <TableCell>
+                      <Typography>מזהה</Typography>
                     </TableCell>
-                    <TableCell className="col-cont sticky-col">
-                      <Typography variant="subtitle2">שם קטגוריה</Typography>
+                    <TableCell>
+                      <Typography>שם קטגוריה</Typography>
                     </TableCell>
-                    <TableCell className="col-cont sticky-col">
-                      <Typography variant="subtitle2">סטאטוס</Typography>
+                    <TableCell>
+                      <Typography>סטאטוס</Typography>
                     </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {categories?.map((element, index) => {
-                    return (
-                      <Draggable
-                        key={element.id}
-                        draggableId={element.id + ''}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <TableRow
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyle(
-                              snapshot.isDragging,
-                              provided.draggableProps.style
-                            )}
-                          >
-                            <Card element={element} />
-                          </TableRow>
-                        )}
-                      </Draggable>
-                    )
-                  })}
+                  {categories
+                    ?.filter((element) => {
+                      if (!searchCategories) return true
+                      const searchLower = searchCategories.toLowerCase()
+                      return element.title.toLowerCase().includes(searchLower)
+                    })
+                    .map((element, index) => {
+                      return (
+                        <Draggable
+                          key={element.id}
+                          draggableId={element.id + ''}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <TableRow
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={getItemStyle(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                              )}
+                            >
+                              <Card element={element} />
+                            </TableRow>
+                          )}
+                        </Draggable>
+                      )
+                    })}
                 </TableBody>
               </Table>
             </TableContainer>

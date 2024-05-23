@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../components/Modals/ModalWrapper'
 import AgentActions from '../../Agent/components/AgentActions'
 
 interface AgentOptionsProps {

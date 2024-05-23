@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useModals } from '../../../../provider/ModalProvider'
-import ModalWrapper from '../ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import Calendar from 'react-calendar'
 
 type OrderSettingsProps = {

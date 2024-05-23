@@ -2,7 +2,7 @@ import React from 'react'
 import RightSide from '../modules/PushNotifications/components/NotificationPage/RightSide'
 import LeftSide from '../modules/PushNotifications/components/NotificationPage/LeftSide'
 import { Container, Grid } from '@mui/material'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import Admin from '../components/Admin'
 const NotificationPage = () => {
   return (

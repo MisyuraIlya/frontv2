@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import ModalWrapper from '../components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../components/Modals/ModalWrapper'
 import { useForm, Controller } from 'react-hook-form'
 import Select from 'react-select'
 import { ReactSelectOptionsOfFullHour } from '../../../helpers/arrayOfMonths'

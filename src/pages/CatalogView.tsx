@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material'
 import useDataCategories from '../hooks/useDataCategories'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 
 const CatalogView = () => {
   const { data } = useDataCategories()

@@ -3,7 +3,7 @@ import CartOptions from '../modules/Cart/components/CartOptions/CartOptions'
 import CartList from '../modules/Cart/components/CartList/CartList'
 import Summary from '../modules/Cart/components/Summary/Summary'
 import { Box, Grid } from '@mui/material'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import Cart from '../components/Cart'
 
 const CartPage = () => {

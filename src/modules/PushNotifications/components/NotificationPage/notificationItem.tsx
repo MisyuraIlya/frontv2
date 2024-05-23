@@ -20,7 +20,7 @@ import SendIcon from '@mui/icons-material/Send'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import Radio from '@mui/material/Radio'
-import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import useDataNotification from '../../../../hooks/useDataNotification'
 
 interface NotificationItemProps {

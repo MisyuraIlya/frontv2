@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import MyCropper from '../../../../shared/MyCropper'
+import MyCropper from '../../../../utils/MyCropper'
 import { base64ToFile } from '../../../../helpers/base64ToFile'
 import { MediaObjectService } from '../../../../services/AdminMediaObject.service'
 import {

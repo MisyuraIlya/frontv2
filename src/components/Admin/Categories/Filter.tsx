@@ -1,10 +1,10 @@
 import React from 'react'
-import { useAdminCategories } from '../../../store/AdminCategoriesStore'
 import { Box, Typography } from '@mui/material'
 import SearchInput from '../../../utils/SearchInput/SearchInput'
+import { useAdminStore } from '../../../store/admin.store'
 
 const Filter = () => {
-  const { search, setSearch } = useAdminCategories()
+  const { searchCategories, setSearchCategories } = useAdminStore()
   return (
     <Box
       sx={{
@@ -16,8 +16,8 @@ const Filter = () => {
       <Typography variant="h5">קטגוריות</Typography>
       <Box sx={{ width: '40%' }}>
         <SearchInput
-          value={search}
-          setValue={setSearch}
+          value={searchCategories}
+          setValue={setSearchCategories}
           placeholder="חיפוש לפי שם קטגוריה"
         />
       </Box>

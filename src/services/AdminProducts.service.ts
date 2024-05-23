@@ -39,11 +39,16 @@ export const AdminProductService = {
   async GetProducts(
     lvl1: number | string,
     lvl2: number | string,
-    lvl3: number | string
+    lvl3: number | string,
+    showAll: boolean | null = false
   ): Promise<productResponse> {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/catalog/catalog/${lvl1}/${lvl2}/${lvl3}`
-    )
+    let url = `${process.env.REACT_APP_API}/api/catalog/catalog/${lvl1}/${lvl2}/${lvl3}`
+
+    if (showAll) {
+      url += '?showAll=true'
+    }
+
+    const response = await axios.get(url)
     return response.data
   },
 }

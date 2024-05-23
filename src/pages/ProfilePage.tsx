@@ -3,7 +3,7 @@ import MyProfile from '../modules/Auth/components/MyProfile/MyProfile'
 import AgentMyProfile from '../modules/Auth/components/AgentMyProfile/AgentMyProfile'
 import AgentActions from '../modules/Agent/components/AgentActions'
 import { Container } from '@mui/material'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import Profile from '../components/Profile'
 const ProfilePage = () => {
   return (

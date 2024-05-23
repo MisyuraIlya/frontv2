@@ -4,7 +4,7 @@ import { AdminCatalogService } from '../../../services/AdminCatalog.service'
 import { useDebounce } from 'use-debounce'
 import { base64ToFile } from '../../../helpers/base64ToFile'
 import { MediaObjectService } from '../../../services/AdminMediaObject.service'
-import MyCropper from '../../../shared/MyCropper'
+import MyCropper from '../../../utils/MyCropper'
 import {
   Button,
   Checkbox,
@@ -17,12 +17,14 @@ import {
 import LoginIcon from '@mui/icons-material/Login'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import { themeColors } from '../../../styles/mui'
+import useDataCategoryEdit from '../../../hooks/useAdminDataCategoryEdit'
 interface CategoryEditItemProps {
   element: ICategory
 }
 
 const Card: FC<CategoryEditItemProps> = ({ element }) => {
   const [activeEdit, setActiveEdit] = useState<boolean>(false)
+  const { mutate } = useDataCategoryEdit()
   const [checked, setCheked] = useState(element.isPublished)
   const [title, setTitle] = useState(element.title)
   const [valueDebounced] = useDebounce(title, 1000)
@@ -36,11 +38,12 @@ const Card: FC<CategoryEditItemProps> = ({ element }) => {
       id: element.id,
       MediaObject: res['@id'],
     })
-    await MediaObjectService.ftpUploader(
-      res2.MediaObject.filePath,
-      'src/img3/category',
-      'category'
-    )
+    // await MediaObjectService.ftpUploader(
+    //   res2.MediaObject.filePath,
+    //   'src/img3/category',
+    //   'category'
+    // )
+    mutate()
   }
 
   const unpublishHandle = async () => {

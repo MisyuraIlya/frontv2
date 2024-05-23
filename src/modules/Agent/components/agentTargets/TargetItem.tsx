@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import { numberWithCommas } from '../../../../helpers/numberWithCommas'
-import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import { useAuth } from '../../../../store/useAuthStore'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import DateRangeIcon from '@mui/icons-material/DateRange'

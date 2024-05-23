@@ -18,7 +18,7 @@ import {
 import InfoIcon from '@mui/icons-material/Info'
 import { themeColors } from '../../../../styles/mui'
 import SettingsIcon from '@mui/icons-material/Settings'
-import ModalWrapper from '../../../Modals/components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import { UserStatus } from '../../../../enums/status'
 import moment from 'moment'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'

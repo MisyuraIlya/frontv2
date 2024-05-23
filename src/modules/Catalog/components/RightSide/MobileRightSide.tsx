@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import RightSide from './RightSide'
-import MyDrawer from '../../../../utils/Drawer/MyDrawer'
+import MyDrawer from '../../../../utils/MyDrawer'
 
 const MobileRightSide = () => {
   return (

@@ -5,7 +5,7 @@ import { Box, Button, Grid, IconButton } from '@mui/material'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { themeColors } from '../styles/mui'
 import styled from 'styled-components'
-import ModalWrapper from '../modules/Modals/components/ModalWrapper/ModalWrapper'
+import Modals from '../components/Modals'
 
 interface MyCropperProps {
   aspectRatio: number
@@ -43,6 +43,7 @@ const MyCropper: FC<MyCropperProps> = ({
 
   const handleSave = () => {
     uploadImg(cropData, fileName)
+    setOpenModal(false)
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -71,16 +72,12 @@ const MyCropper: FC<MyCropperProps> = ({
           alignItems: 'center',
         }}
       >
-        <img
-          src={itemImage!}
-          style={{ objectFit: 'cover', position: 'absolute' }}
-          width={100}
-        />
+        <img src={itemImage!} style={{ objectFit: 'cover', width: '80px' }} />
         <IconButton
           component="label"
           role={undefined}
           tabIndex={-1}
-          sx={{ position: 'absolute', zIndex: 10 }}
+          sx={{ position: 'absolute', zIndex: 10, left: '10px' }}
         >
           <ControlPointIcon
             sx={{
@@ -92,7 +89,7 @@ const MyCropper: FC<MyCropperProps> = ({
           <VisuallyHiddenInput type="file" onChange={handleFileChange} />
         </IconButton>
       </Box>
-      <ModalWrapper
+      <Modals.ModalWrapper
         active={openModal}
         setActive={setOpenModal}
         width={40}
@@ -146,7 +143,7 @@ const MyCropper: FC<MyCropperProps> = ({
             />
           </Grid>
         </Grid>
-      </ModalWrapper>
+      </Modals.ModalWrapper>
     </>
   )
 }

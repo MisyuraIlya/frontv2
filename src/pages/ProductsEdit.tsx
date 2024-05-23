@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { Container } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import Loader from '../shared/Loader'
-import BreadCrumbsUtil from '../utils/BreadCrumbs/BreadCrumbsUtil'
+import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import useDataProductsEdit from '../hooks/useAdminDataProductsEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import useDataCategories from '../hooks/useDataCategories'
@@ -32,7 +32,9 @@ const ProductsEdit = () => {
         ]}
       />
       <Admin.Products.Filter />
-      <Admin.Products.List />
+      <Box sx={{ paddingTop: '16px' }}>
+        <Admin.Products.List />
+      </Box>
     </Container>
   )
 }

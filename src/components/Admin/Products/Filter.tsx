@@ -1,10 +1,10 @@
 import React from 'react'
 import SearchInput from '../../../utils/SearchInput/SearchInput'
-import { useProductsEditStore } from '../../../store/AdminProductsEditStore'
 import { Box, Typography } from '@mui/material'
+import { useAdminStore } from '../../../store/admin.store'
 
 const Filter = () => {
-  const { search, setSearch } = useProductsEditStore()
+  const { searchProducts, setSearchProducts } = useAdminStore()
   return (
     <Box
       sx={{
@@ -16,8 +16,8 @@ const Filter = () => {
       <Typography variant="h5">מוצרים</Typography>
       <Box sx={{ width: '40%' }}>
         <SearchInput
-          value={search}
-          setValue={setSearch}
+          value={searchProducts}
+          setValue={setSearchProducts}
           placeholder="חיפוש לפי שם numr"
         />
       </Box>

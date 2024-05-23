@@ -20,6 +20,8 @@ interface IProduct {
   packProducts: packProducts[]
   link: string
   linkTitle: string
+  isNew: boolean
+  isSpecial: boolean
 }
 
 interface packProducts {

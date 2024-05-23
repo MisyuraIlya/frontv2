@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Box, Breadcrumbs, Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { themeColors } from '../../styles/mui'
+import { themeColors } from '../styles/mui'
 
 interface BreadCrumbsArr {
   title: string

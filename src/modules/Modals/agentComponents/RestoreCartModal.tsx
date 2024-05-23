@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../components/ModalWrapper/ModalWrapper'
+import ModalWrapper from '../../../components/Modals/ModalWrapper'
 import { useDocuments } from '../../../store/DocumentsStore'
 import Loader from '../../../shared/Loader'
 import { useCart } from '../../../store/cart.store'

@@ -31,7 +31,7 @@ const RouterApp = () => {
   return (
     <>
       <Header />
-      <main>
+      <main style={{ minHeight: '90vh' }}>
         <Routes>
           <Route>
             <Route path={URLS.HOME.ROUTER} element={<Home />} />

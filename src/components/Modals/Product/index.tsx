@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../../../modules/Modals/components/ModalWrapper/ModalWrapper'
 import ProductLeftSide from './ProductLeftSide'
 import ProductRightSide from './ProductRightSide'
 import { Box, Button, Grid } from '@mui/material'
@@ -7,6 +6,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import InsertLinkIcon from '@mui/icons-material/InsertLink'
 import { useModals } from '../../../provider/ModalProvider'
+import Modals from '../../../components/Modals'
 type ProductPopUpProps = {
   active: boolean
   setActive: (bool: boolean) => void
@@ -20,7 +20,7 @@ const Product: FC<ProductPopUpProps> = ({ active, setActive }) => {
   }
 
   return (
-    <ModalWrapper
+    <Modals.ModalWrapper
       active={active}
       setActive={setActive}
       height={'auto'}
@@ -51,7 +51,7 @@ const Product: FC<ProductPopUpProps> = ({ active, setActive }) => {
           <ProductLeftSide />
         </Grid>
       </Grid>
-    </ModalWrapper>
+    </Modals.ModalWrapper>
   )
 }
 

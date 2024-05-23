@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
-import ProductsEditItem from '../../../modules/Admin/components/ProductsEdit/ProductsEditItem'
 import { AdminProductService } from '../../../services/AdminProducts.service'
 import {
   Box,
@@ -15,9 +14,12 @@ import {
   Typography,
 } from '@mui/material'
 import useDataProductsEdit from '../../../hooks/useAdminDataProductsEdit'
+import Card from './Card'
+import { useAdminStore } from '../../../store/admin.store'
 const List = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const { data } = useDataProductsEdit()
+  const { searchProducts } = useAdminStore()
 
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
     background: isDraggingOver ? '#e5e5e5' : '#ddd',
@@ -60,7 +62,7 @@ const List = () => {
             ref={provided.innerRef}
             style={getListStyle(snapshot.isDraggingOver)}
           >
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} elevation={0}>
               <Table className="lines-sub-cont">
                 <TableHead>
                   <TableRow className="heading">
@@ -88,9 +90,20 @@ const List = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {products.map((element, index) => {
-                    return <ProductsEditItem element={element} index={index} />
-                  })}
+                  {products
+                    .filter((element) => {
+                      if (!searchProducts) return true
+                      const searchLower = searchProducts.toLowerCase()
+                      return (
+                        element.title.toLowerCase().includes(searchLower) ||
+                        element.sku.toLowerCase().includes(searchLower)
+                      )
+                    })
+                    .map((element, index) => {
+                      return (
+                        <Card key={index} element={element} index={index} />
+                      )
+                    })}
                 </TableBody>
               </Table>
             </TableContainer>
