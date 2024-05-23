@@ -16,10 +16,9 @@ import {
   Typography,
 } from '@mui/material'
 import InfoIcon from '@mui/icons-material/Info'
-import { themeColors } from '../../../../styles/mui'
+import { themeColors } from '../../../styles/mui'
 import SettingsIcon from '@mui/icons-material/Settings'
-import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-import { UserStatus } from '../../../../enums/status'
+import { UserStatus } from '../../../enums/status'
 import moment from 'moment'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import PersonOffIcon from '@mui/icons-material/PersonOff'
@@ -28,14 +27,15 @@ import {
   onAsk,
   onErrorAlert,
   onSuccessAlert,
-} from '../../../../shared/MySweetAlert'
+} from '../../../shared/MySweetAlert'
+
 import { useForm, Controller } from 'react-hook-form'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'
-import { AdminClinetsService } from '../../../../services/AdminClients.service'
+import { AdminClinetsService } from '../../../services/AdminClients.service'
 import { useParams } from 'react-router-dom'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
-
+import Modals from '../../Modals'
 interface ClientItemProps {
   element: IUser
   index: number
@@ -50,7 +50,7 @@ type RegistrationForm = {
 type RouteParams = {
   userRole: ROLE_TYPES
 }
-const UserItem: FC<ClientItemProps> = ({ element, index }) => {
+const Card: FC<ClientItemProps> = ({ element, index }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showPassword2, setShowPassword2] = useState(false)
   const { userRole } = useParams<RouteParams>()
@@ -174,7 +174,7 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
       </TableRow>
 
       {/* INFO MODAL */}
-      <ModalWrapper
+      <Modals.ModalWrapper
         active={openInfo}
         setActive={setOpenInfo}
         height={25}
@@ -240,7 +240,7 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
             </Typography>
           </Grid>
         </Grid>
-      </ModalWrapper>
+      </Modals.ModalWrapper>
 
       {/* MENU */}
       <Menu
@@ -291,7 +291,7 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
       </Menu>
 
       {/* SETTINGS MODAL */}
-      <ModalWrapper
+      <Modals.ModalWrapper
         active={openSettings}
         setActive={setOpenSettings}
         height={50}
@@ -448,9 +448,9 @@ const UserItem: FC<ClientItemProps> = ({ element, index }) => {
             </Button>
           </form>
         </Box>
-      </ModalWrapper>
+      </Modals.ModalWrapper>
     </>
   )
 }
 
-export default UserItem
+export default Card

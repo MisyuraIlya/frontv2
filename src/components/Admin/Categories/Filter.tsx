@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-import SearchInput from '../../../utils/SearchInput/SearchInput'
+import Utils from '../../../utils'
 import { useAdminStore } from '../../../store/admin.store'
 
 const Filter = () => {
@@ -15,7 +15,7 @@ const Filter = () => {
     >
       <Typography variant="h5">קטגוריות</Typography>
       <Box sx={{ width: '40%' }}>
-        <SearchInput
+        <Utils.SearchInput
           value={searchCategories}
           setValue={setSearchCategories}
           placeholder="חיפוש לפי שם קטגוריה"

@@ -8,11 +8,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import moment from 'moment'
 import PaginationUtil from '../utils/PaginationUtil'
 import KartessetLst from '../modules/Documents/components/KartessetLst'
-import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import Loader from '../shared/Loader'
 import useDataDocuments from '../hooks/useDataDocuments'
 import { findDocumentTypeTitle } from '../helpers/handleBreadCrumbs'
 import Documents from '../components/Documents'
+import Utils from '../utils'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -63,9 +63,9 @@ const DocumentsPage = () => {
 
   return (
     <Container maxWidth="xl">
-      {/* {isLoading && <Loader />}
+      {isLoading && <Loader />}
       <Box sx={{ mt: '50px' }}>
-        <BreadCrumbsUtil
+        <Utils.BreadCrumbsUtil
           array={[
             {
               title: findDocumentTypeTitle(documentType),
@@ -74,7 +74,7 @@ const DocumentsPage = () => {
           ]}
         />
       </Box>
-      <DocsFilter />
+      {/* <DocsFilter />
       {componentToRender}
       {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
       <Documents.Document.Filter />

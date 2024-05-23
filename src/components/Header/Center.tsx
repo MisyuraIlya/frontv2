@@ -2,9 +2,9 @@ import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import ProductList from '../../utils/SearchInput/components/ProductList'
 import { useDebounce } from 'use-debounce'
-import SearchInput from '../../utils/SearchInput/SearchInput'
 import useDataCatalog from '../../hooks/useClientDataCatalog'
 import { useModals } from '../../provider/ModalProvider'
+import Utils from '../../utils'
 
 const Center = () => {
   const [search, setSearch] = useState<string>('')
@@ -13,7 +13,7 @@ const Center = () => {
   const { selectProduct } = useModals()
   return (
     <Box sx={{ width: '100%', position: 'relative', zIndex: 10 }}>
-      <SearchInput
+      <Utils.SearchInput
         value={search}
         setValue={setSearch}
         placeholder="חפש מוצר..."

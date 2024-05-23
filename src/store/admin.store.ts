@@ -6,6 +6,8 @@ interface useAdminStore {
   setSearchProducts: (search: string) => void
   searchCategories: string
   setSearchCategories: (search: string) => void
+  searchClients: string
+  setSearchClients: (search: string) => void
 }
 
 export const useAdminStore = create(
@@ -15,6 +17,8 @@ export const useAdminStore = create(
       setSearchProducts: (searchProducts) => set({ searchProducts }),
       searchCategories: '',
       setSearchCategories: (searchCategories) => set({ searchCategories }),
+      searchClients: '',
+      setSearchClients: (searchClients) => set({ searchClients }),
     }),
     {
       name: 'admin-storage',

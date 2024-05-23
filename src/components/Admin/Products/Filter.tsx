@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchInput from '../../../utils/SearchInput/SearchInput'
+import Utils from '../../../utils'
 import { Box, Typography } from '@mui/material'
 import { useAdminStore } from '../../../store/admin.store'
 
@@ -15,7 +15,7 @@ const Filter = () => {
     >
       <Typography variant="h5">מוצרים</Typography>
       <Box sx={{ width: '40%' }}>
-        <SearchInput
+        <Utils.SearchInput
           value={searchProducts}
           setValue={setSearchProducts}
           placeholder="חיפוש לפי שם numr"

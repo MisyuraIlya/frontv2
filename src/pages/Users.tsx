@@ -1,13 +1,10 @@
 import React from 'react'
-import { Box, Container, Typography } from '@mui/material'
-import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
-import PaginationUtil from '../utils/PaginationUtil'
+import { Box, Container } from '@mui/material'
 import Loader from '../shared/Loader'
 import useDataClients from '../hooks/useAdminDataUsers'
 import { useParams } from 'react-router-dom'
-import UserList from '../modules/Admin/components/Clients/UserList'
-import UserFilter from '../modules/Admin/components/Clients/UserFilter'
 import Admin from '../components/Admin'
+import Utils from '../utils'
 
 type RouteParams = {
   userRole: ROLE_TYPES
@@ -30,8 +27,8 @@ const Users = () => {
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: '50px' }}>
-      {/* {isLoading && <Loader />}
-      <BreadCrumbsUtil
+      {isLoading && <Loader />}
+      <Utils.BreadCrumbsUtil
         array={[
           {
             title: userRole == 'ROLE_AGENT' ? 'סוכנים' : 'לקוחות',
@@ -40,11 +37,11 @@ const Users = () => {
         ]}
       />
 
-      <UserFilter />
-      {componentToRender}
-      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
       <Admin.Clients.Filter />
-      {componentToRender}
+      <Box sx={{ paddingTop: '16px' }}>{componentToRender}</Box>
+      {hydraPagination && (
+        <Utils.PaginationUtil hydraPagination={hydraPagination} />
+      )}
     </Container>
   )
 }
