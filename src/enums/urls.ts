@@ -38,6 +38,11 @@ export const URLS = {
     LABEL: 'מסמכים',
     ROUTER: '/documentItemPage/:documentItemType/:id',
   },
+  CARTESSET: {
+    LINK: `/cartesset/${dateFrom}/${dateTo}?page=1`,
+    LABEL: 'כרטסת',
+    ROUTER: '/cartesset/:dateFrom/:dateTo',
+  },
 
   ADMIN_EDIT_CATALOG: {
     LINK: '/admin/category-edit/0/0',

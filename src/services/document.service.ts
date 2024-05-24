@@ -59,18 +59,15 @@ export const DocumentsService = {
     }
   },
 
-  // async createPdf(data: IPdfDocument) {
-  //   const response = await axios.post(
-  //     `${process.env.REACT_APP_API}/api/pdf`,
-  //     data
-  //   )
-  //   return response.data
-  // },
-  // async createXl(data: IPdfDocument) {
-  //   const response = await axios.post(
-  //     `${process.env.REACT_APP_API}/api/xl`,
-  //     data
-  //   )
-  //   return response.data
-  // },
+  async GetCartesset(
+    user: IUser,
+    fromDate: Date,
+    toDate: Date
+  ): Promise<CartessetResponse> {
+    const fromConverted = moment(fromDate).format('YYYY-MM-DD')
+    const toDateConverted = moment(toDate).format('YYYY-MM-DD')
+    let apiUrl = `${process.env.REACT_APP_API}/api/cartesset/${fromConverted}/${toDateConverted}/${user?.extId}`
+    const response = await axios.get(apiUrl)
+    return response.data
+  },
 }

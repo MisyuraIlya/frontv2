@@ -68,3 +68,20 @@ interface IDocumentItemsFile {
 interface DocumentsResponse extends Hydra {
   'hydra:member': IDocument[]
 }
+
+interface ICartesset {
+  createdAt: string
+  tnua: string
+  asmahta1: string
+  dateEreh: string
+  description: string
+  hova: string
+  zhut: string
+  yetra: string
+}
+
+interface CartessetResponse extends Hydra {
+  lines: {
+    'hydra:member': ICartesset[]
+  }
+}

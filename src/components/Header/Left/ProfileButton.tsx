@@ -32,6 +32,11 @@ const clientURL = {
     LABEL: URLS.DOCUMENTS.LABEL,
     ICON: <PersonIcon />,
   },
+  CARTESSET: {
+    LINK: URLS.CARTESSET.LINK,
+    LABEL: URLS.CARTESSET.LABEL,
+    ICON: <PersonIcon />,
+  },
 }
 
 const ProfileButton = () => {

@@ -18,6 +18,7 @@ import BottomNavigationMobile from './components/BottomNavigationMobile'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { URLS } from './enums/urls'
+import CartessetPage from './pages/CartessetPage'
 const RouterApp = () => {
   const { user } = useAuth()
   const isAuthenticated = !!user
@@ -44,6 +45,7 @@ const RouterApp = () => {
               path={URLS.DOCUMENT_ITEM.ROUTER}
               element={<DocumentsItemPage />}
             />
+            <Route path={URLS.CARTESSET.ROUTER} element={<CartessetPage />} />
             <Route
               path={URLS.ADMIN_EDIT_CATALOG.ROUTER}
               element={<CategoryEdit />}
