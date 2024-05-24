@@ -1,13 +1,6 @@
 import React from 'react'
-import { useDocuments } from '../store/DocumentsStore'
-import DocsFilter from '../modules/Documents/components/DocsFilter'
-import DocumentList from '../modules/Documents/components/DocumentList'
 import { Box, Container } from '@mui/material'
-import CalendarUtil from '../utils/CalendarUtil'
-import { useNavigate, useParams } from 'react-router-dom'
-import moment from 'moment'
-import PaginationUtil from '../utils/PaginationUtil'
-import KartessetLst from '../modules/Documents/components/KartessetLst'
+import { useParams } from 'react-router-dom'
 import Loader from '../shared/Loader'
 import useDataDocuments from '../hooks/useDataDocuments'
 import { findDocumentTypeTitle } from '../helpers/handleBreadCrumbs'
@@ -21,26 +14,9 @@ type RouteParams = {
 }
 
 const DocumentsPage = () => {
-  const navigate = useNavigate()
-  const { currentDate, setCurrentDate, showCalendar, setShowCalendar, type } =
-    useDocuments()
-
-  const { documentType, dateFrom, dateTo } = useParams<RouteParams>()
-  const handleDate = (date: Date) => {
-    setCurrentDate(date)
-    if (type === 'from') {
-      const updatedPathname = `/documentPage/${documentType}/${moment(date).format('YYYY-MM-DD')}/${dateTo}?page=1`
-      navigate(updatedPathname)
-    }
-    if (type === 'to') {
-      const updatedPathname = `/documentPage/${documentType}/${dateFrom}/${moment(date).format('YYYY-MM-DD')}?page=1`
-      navigate(updatedPathname)
-    }
-    setShowCalendar(false)
-  }
+  const { documentType } = useParams<RouteParams>()
 
   let componentToRender: React.ReactNode
-
   switch (documentType) {
     case 'history':
     case 'draft':
@@ -50,10 +26,10 @@ const DocumentsPage = () => {
     case 'aiInvoice':
     case 'ciInvoice':
     case 'returnOrder':
-      componentToRender = <DocumentList />
+      componentToRender = <Documents.Document.List />
       break
     case 'kartesset':
-      componentToRender = <KartessetLst />
+      componentToRender = <Documents.Cartesset.List />
       break
     default:
       componentToRender = <Box>{'לא נמצא סוג מסמך כזה'}</Box>
@@ -74,13 +50,11 @@ const DocumentsPage = () => {
           ]}
         />
       </Box>
-      {/* <DocsFilter />
-      {componentToRender}
-      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
       <Documents.Document.Filter />
-      <Documents.Document.Head />
-      <Documents.Document.List />
-      <Documents.Document.Pagination />
+      {componentToRender}
+      {hydraPagination && (
+        <Utils.PaginationUtil hydraPagination={hydraPagination} />
+      )}
     </Container>
   )
 }

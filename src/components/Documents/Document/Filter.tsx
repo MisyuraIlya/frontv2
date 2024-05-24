@@ -1,7 +1,159 @@
 import React from 'react'
+import moment from 'moment'
+import { useNavigate, useParams } from 'react-router-dom'
+import { documentTypes } from '../../../enums/documentsTypes'
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Paper,
+  Select,
+} from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import useDataDocuments from '../../../hooks/useDataDocuments'
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 const Filter = () => {
-  return <div></div>
+  const { documentType, dateFrom, dateTo } = useParams()
+  const navigate = useNavigate()
+
+  const handleDateFrom = (e: moment.Moment | null) => {
+    if (e) {
+      const updatedPathname = `/documentPage/${documentType}/${e.format('YYYY-MM-DD')}/${dateTo}?page=1`
+      navigate(updatedPathname)
+    }
+  }
+
+  const handleDateTo = (e: moment.Moment | null) => {
+    if (e) {
+      const updatedPathname = `/documentPage/${documentType}/${dateFrom}/${e.format('YYYY-MM-DD')}?page=1`
+      navigate(updatedPathname)
+    }
+  }
+
+  const handleSelect = (parameter: IDocumentTypes) => {
+    navigate(`/documentPage/${parameter}/${dateFrom}/${dateTo}?page=1`)
+  }
+
+  const { data, mutate } = useDataDocuments()
+  const total = data?.['hydra:totalItems'] ?? 0
+  return (
+    <Paper
+      elevation={4}
+      sx={{
+        display: { sm: 'flex', xs: 'block' },
+        justifyContent: 'space-between',
+        padding: '15px 20px',
+      }}
+    >
+      <Box
+        sx={{
+          display: { sm: 'flex', xs: 'block' },
+          gap: '20px',
+          alignItems: 'center',
+        }}
+      >
+        <DemoContainer
+          components={['DatePicker']}
+          sx={{
+            width: '170px',
+            pt: '10px',
+            '& .MuiOutlinedInput-input': { padding: '10px 16px' },
+            '& .MuiInputLabel-root': { top: '-7px' },
+          }}
+        >
+          <DatePicker
+            label="מתאריך"
+            value={moment(dateFrom)}
+            onChange={(e) => handleDateFrom(e)}
+          />
+        </DemoContainer>
+        <DemoContainer
+          components={['DatePicker']}
+          sx={{
+            pt: '10px',
+            width: '170px',
+            '& .MuiOutlinedInput-input': { padding: '10px 16px' },
+            '& .MuiInputLabel-root': { top: '-7px' },
+          }}
+        >
+          <DatePicker
+            label="לתאריך"
+            value={moment(dateTo)}
+            onChange={(e) => handleDateTo(e)}
+          />
+        </DemoContainer>
+        <Button
+          variant="contained"
+          onClick={() => mutate()}
+          sx={{ height: '43px', mt: '8px' }}
+        >
+          חפש
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          display: { sm: 'flex', xs: 'block' },
+          gap: '20px',
+          alignItems: 'center',
+          pt: '8px',
+        }}
+      >
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <FormControl fullWidth sx={{ width: '200px' }}>
+            <InputLabel id="demo-simple-select-label">מסמך</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={documentType}
+              sx={{ height: '40px' }}
+              label="מסמך"
+              onChange={(e) => handleSelect(e.target.value as IDocumentTypes)}
+            >
+              {documentTypes?.map((ele, ind) => {
+                return (
+                  <MenuItem value={ele.value} key={ind}>
+                    {ele.label}
+                  </MenuItem>
+                )
+              })}
+            </Select>
+          </FormControl>
+        </Box>
+        <FormControl
+          variant="outlined"
+          sx={{
+            width: { sm: '300px', xs: '100%' },
+            marginTop: { sm: '0px', xs: '20px' },
+          }}
+        >
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={'text'}
+            placeholder="חיפוש..."
+            sx={{ height: '40px' }}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  // onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                >
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </Box>
+    </Paper>
+  )
 }
 
 export default Filter
