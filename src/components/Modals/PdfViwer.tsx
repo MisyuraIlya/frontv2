@@ -1,15 +1,17 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-import { useModals } from '../../../../provider/ModalProvider'
+import Modals from '.'
 
 interface PdfViwerProps {
   active: boolean
   setActive: (value: boolean) => void
+  pdfLinkOrBase64: string
 }
 
-const PdfViwer: FC<PdfViwerProps> = ({ active, setActive }) => {
-  const { pdfLinkOrBase64 } = useModals()
-
+const PdfViwer: FC<PdfViwerProps> = ({
+  active,
+  setActive,
+  pdfLinkOrBase64,
+}) => {
   const isPdfDataURI = (str: string) => {
     const regex = /^data:application\/pdf;base64,/
     return regex.test(str)
@@ -77,9 +79,14 @@ const PdfViwer: FC<PdfViwerProps> = ({ active, setActive }) => {
   }
 
   return (
-    <ModalWrapper active={active} setActive={setActive} height={90} width={40}>
+    <Modals.ModalWrapper
+      active={active}
+      setActive={setActive}
+      height={90}
+      width={40}
+    >
       {renderPdfContent()}
-    </ModalWrapper>
+    </Modals.ModalWrapper>
   )
 }
 

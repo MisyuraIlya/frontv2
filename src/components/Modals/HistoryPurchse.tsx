@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-import { useSelectedProduct } from '../../../../store/selecterdProduct.store'
+import ModalWrapper from './ModalWrapper'
+import { useSelectedProduct } from '../../store/selecterdProduct.store'
 import moment from 'moment'
 import {
   Box,
@@ -14,7 +14,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import { themeColors } from '../../../../styles/mui'
+import { themeColors } from '../../styles/mui'
 import useDataPurchesHistory from '../../hooks/useDataPurchesHistory'
 
 type TablePopUpProps = {
@@ -22,7 +22,7 @@ type TablePopUpProps = {
   setActive: (bool: boolean) => void
 }
 
-const TablePopUp: FC<TablePopUpProps> = ({ active, setActive }) => {
+const HistoryPurchse: FC<TablePopUpProps> = ({ active, setActive }) => {
   const { selectedProd } = useSelectedProduct()
   const { data, isLoading } = useDataPurchesHistory(selectedProd.sku)
   return (
@@ -183,4 +183,4 @@ const TablePopUp: FC<TablePopUpProps> = ({ active, setActive }) => {
   )
 }
 
-export default TablePopUp
+export default HistoryPurchse

@@ -1,14 +1,12 @@
 import React, { FC } from 'react'
-import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-import { useModals } from '../../../../provider/ModalProvider'
 
 interface ImageModalProps {
   active: boolean
   setActive: (value: boolean) => void
+  src: string
 }
 
-const ImageModal: FC<ImageModalProps> = ({ active, setActive }) => {
-  const { srcImageModal } = useModals()
+const ImageModal: FC<ImageModalProps> = ({ active, setActive, src }) => {
   return (
     <>
       {active && (
@@ -17,7 +15,7 @@ const ImageModal: FC<ImageModalProps> = ({ active, setActive }) => {
             <span className="material-symbols-outlined">close</span>
           </div>
           <div className="img-wrapper">
-            <img src={srcImageModal} />
+            <img src={src} />
           </div>
         </div>
       )}
