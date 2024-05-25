@@ -12,7 +12,7 @@ import {
 import { useCart } from '../../../store/cart.store'
 import { themeColors } from '../../../styles/mui'
 import { useModals } from '../../../provider/ModalProvider'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 
 const Summary = () => {
   const { user } = useAuth()

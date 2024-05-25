@@ -8,6 +8,8 @@ interface useAdminStore {
   setSearchCategories: (search: string) => void
   searchClients: string
   setSearchClients: (search: string) => void
+  choosedItemNotification: INotification | null
+  setChoosedItemNotification: (value: INotification | null) => void
 }
 
 export const useAdminStore = create(
@@ -19,6 +21,9 @@ export const useAdminStore = create(
       setSearchCategories: (searchCategories) => set({ searchCategories }),
       searchClients: '',
       setSearchClients: (searchClients) => set({ searchClients }),
+      choosedItemNotification: null,
+      setChoosedItemNotification: (value: INotification | null) =>
+        set({ choosedItemNotification: value }),
     }),
     {
       name: 'admin-storage',

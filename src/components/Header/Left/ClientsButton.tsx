@@ -3,7 +3,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront'
 import { IconButton, Tooltip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { URLS } from '../../../enums/urls'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 
 const ClientsButton = () => {
   const navigate = useNavigate()

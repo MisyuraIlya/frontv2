@@ -1,6 +1,6 @@
 import React from 'react'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 import MyCard from '../../../shared/MyCard'
 import Wrap from '../../../shared/Wrap'
 import { Box, Card, Grid, Typography } from '@mui/material'

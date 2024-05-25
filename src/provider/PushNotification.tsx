@@ -7,8 +7,8 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react'
-import { useAuth } from '../store/useAuthStore'
-import { useOneSignalStore } from '../store/oneSignalStore'
+import { useAuth } from '../store/auth.store'
+import { useOneSignalStore } from '../store/oneSignal.store'
 
 interface NotificationsContextType {
   // handleRemoveIosPromt: () => void

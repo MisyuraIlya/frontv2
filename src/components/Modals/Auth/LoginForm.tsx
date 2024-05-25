@@ -14,7 +14,7 @@ import { themeColors } from '../../../styles/mui'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 import { green } from '@mui/material/colors'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 
 type LoginForm = {
   email: string

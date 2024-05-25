@@ -3,7 +3,7 @@ import { NotificationsServices } from '../services/notifications.service'
 import moment from 'moment'
 import { onAsk } from '../utils/MySweetAlert'
 import { clientNotifications } from '../services/clientNotifications.service'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../store/auth.store'
 
 const fetchData = async (userId: number | string) => {
   return await clientNotifications.getNotificationByUserId(userId)

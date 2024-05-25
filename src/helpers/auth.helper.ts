@@ -27,23 +27,3 @@ export const removeFromStorage = () => {
 export const saveToStorage = (data: IAuthResponse): void => {
   saveTokensStorage(data)
 }
-
-export const getUserFromStorage = () => {
-  const data = localStorage.getItem('user-storage')
-  if (data) {
-    const res = JSON.parse(data)
-    return res.state.user
-  } else {
-    return null
-  }
-}
-
-export const getAgentFromStorage = () => {
-  const data = localStorage.getItem('user-storage')
-  if (data) {
-    const res = JSON.parse(data)
-    return res.state.agent
-  } else {
-    return null
-  }
-}

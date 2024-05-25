@@ -11,7 +11,7 @@ import {
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import Modals from '../../Modals'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'

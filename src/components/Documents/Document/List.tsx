@@ -14,7 +14,7 @@ import {
 } from '@mui/material' // Import Material-UI components
 import { themeColors } from '../../../styles/mui'
 import { DocumentTypeHebrew } from '../../../helpers/DocumentTypeHebrew'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 import useDataDocuments from '../../../hooks/useDataDocuments'
 
 const List = () => {

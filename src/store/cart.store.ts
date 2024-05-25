@@ -4,7 +4,6 @@ import { onErrorAlert, onSuccessAlert } from '../utils/MySweetAlert'
 import moment from 'moment'
 import { AdminOrderService } from '../services/AdminOrders.service'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
-import { getAgentFromStorage, getUserFromStorage } from '../helpers/auth.helper'
 
 interface useCartState {
   loading: boolean
@@ -196,9 +195,9 @@ export const useCart = create(
           set({ loading: true })
           const response = await CartServices.CreateOrder(
             get().comment,
-            getUserFromStorage().id,
+            // getUserFromStorage().id,
             get().finalPrice(),
-            getAgentFromStorage().id,
+            // getAgentFromStorage().id,
             false,
             get().discount,
             get().selectedMode,

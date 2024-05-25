@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
 import { DocumentsService } from '../services/document.service'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../store/auth.store'
 
 type RouteParams = {
   documentItemType: IDocumentTypes

@@ -20,7 +20,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import Radio from '@mui/material/Radio'
 import useDataNotification from '../../../hooks/useDataNotification'
-import { useAdminNotification } from '../../../store/adminNotification.store'
+import { useAdminStore } from '../../../store/admin.store'
 import Modals from '../../Modals'
 import { NotificationsServices } from '../../../services/notifications.service'
 
@@ -29,7 +29,7 @@ interface NotificationItemProps {
   index: number
 }
 const Card: FC<NotificationItemProps> = ({ element, index }) => {
-  const { setChoosedItem } = useAdminNotification()
+  const { setChoosedItemNotification } = useAdminStore()
   const [openModal, setOpenModal] = useState(false)
   const [selectedValue, setSelectedValue] = useState('')
 
@@ -109,7 +109,7 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
             <Button
               variant="outlined"
               startIcon={<ModeEditIcon />}
-              onClick={() => setChoosedItem(element)}
+              onClick={() => setChoosedItemNotification(element)}
             >
               עדכן
             </Button>

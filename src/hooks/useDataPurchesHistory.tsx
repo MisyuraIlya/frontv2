@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { CatalogServices } from '../services/catalog.service'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../store/auth.store'
 
 const fetchData = async (
   userExId: string,

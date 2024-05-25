@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useCart } from '../../../store/cart.store'
 import { useModals } from '../../../provider/ModalProvider'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 import {
   Box,
   Button,

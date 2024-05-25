@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useCatalog } from '../../../store/CatalogStore'
+import { useCatalog } from '../../../store/catalog.store'
 import { useDebounce } from 'use-debounce'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {

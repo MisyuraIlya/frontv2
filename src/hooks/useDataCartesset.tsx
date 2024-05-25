@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../store/auth.store'
 import { DocumentsService } from '../services/document.service'
 import moment from 'moment'
 

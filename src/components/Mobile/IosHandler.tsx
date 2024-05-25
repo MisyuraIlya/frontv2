@@ -3,7 +3,7 @@ import React from 'react'
 import { useMobile } from '../../provider/MobileProvider'
 // import { useOneSignalStore } from '../../../../store/oneSignalStore'
 import PwaHandler from './PwaHandler'
-import { useOneSignalStore } from '../../store/oneSignalStore'
+import { useOneSignalStore } from '../../store/oneSignal.store'
 
 const IosHandler = () => {
   const { isPwa, detectBrowser } = useMobile()

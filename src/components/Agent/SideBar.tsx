@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../store/useAuthStore'
+import { useAuth } from '../../store/auth.store'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import useDataAgents from '../../hooks/useAgentsData'
 import {

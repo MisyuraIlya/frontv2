@@ -6,7 +6,7 @@ import ForgotPasswordStepTwo from './ForgotPasswordStepTwo'
 import ValidationForm from './ValidationForm'
 import { Box, IconButton, Modal, Paper } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 
 type AuthPopUpProps = {
   active: boolean

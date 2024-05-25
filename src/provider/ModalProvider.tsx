@@ -6,17 +6,7 @@ import React, {
   useContext,
   ReactNode,
 } from 'react'
-import OrderSettings from '../modules/Modals/components/OrderSettings/OrderSettings'
-import TablePopUp from '../modules/Modals/components/TablePopUp/TablePopUp'
-import PayPopUp from '../modules/Modals/components/PayPopUp/PayPopUp'
-import ClientRightSideBar from '../modules/Modals/adminComponents/ClientRightSideBar/ClientRightSideBar'
-import Gallery from '../modules/Modals/adminComponents/Galerry/Gallery'
 import { useSelectedProduct } from '../store/selecterdProduct.store'
-import AgentOptions from '../modules/Modals/agentComponents/AgentOptions'
-import { useClientStore } from '../store/AdminClientsStore'
-import RestoreCartModal from '../modules/Modals/agentComponents/RestoreCartModal'
-import PdfViwer from '../modules/Modals/components/PdfViwer/PdfViwer'
-import ImageModal from '../modules/Modals/components/ImageModal/ImageModal'
 import Modals from '../components/Modals'
 // Defines
 interface ModalContextType {
@@ -75,7 +65,6 @@ const ModalsProvider: FC<ModalsProviderProps> = ({ children }) => {
   const [srcImageModal, setImageSrcModal] = useState('')
   const [imageModal, setImageModal] = useState(false)
   //ADMINS
-  const { setSelectedAgent } = useClientStore()
   const [gallery, setGallery] = useState(false)
 
   //AGENTS

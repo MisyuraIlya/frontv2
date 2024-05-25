@@ -7,7 +7,7 @@ import { Box, Button, Container, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 import { themeColors } from '../../../styles/mui'
 import { useModals } from '../../../provider/ModalProvider'
 

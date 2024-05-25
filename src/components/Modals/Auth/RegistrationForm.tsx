@@ -14,7 +14,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 import { themeColors } from '../../../styles/mui'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 
 type RegistrationForm = {
   email: string

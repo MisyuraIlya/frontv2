@@ -19,7 +19,7 @@ import {
 import { themeColors } from '../../../styles/mui'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { onAsk } from '../../../utils/MySweetAlert'
-import { useAuth } from '../../../store/useAuthStore'
+import { useAuth } from '../../../store/auth.store'
 
 const List = () => {
   const { cart, deleteFromCart, changePrice, changeDiscount, changeSum } =

@@ -10,10 +10,10 @@ import {
   Paper,
   Box,
 } from '@mui/material'
-import { useAdminNotification } from '../../../store/adminNotification.store'
 import AddIcon from '@mui/icons-material/Add'
 import useDataNotification from '../../../hooks/useDataNotification'
 import Utils from '../../../utils'
+import { useAdminStore } from '../../../store/admin.store'
 interface LeftSideForm {
   title: string
   description: string
@@ -21,7 +21,8 @@ interface LeftSideForm {
 }
 
 const Edit = () => {
-  const { choosedItem, setChoosedItem } = useAdminNotification()
+  const { choosedItemNotification, setChoosedItemNotification } =
+    useAdminStore()
   const { updateMutation, createMutation } = useDataNotification()
   const {
     register,
@@ -31,12 +32,12 @@ const Edit = () => {
   } = useForm<LeftSideForm>()
 
   const handleForm = async (data: LeftSideForm) => {
-    if (choosedItem) {
-      choosedItem.title = data.title
-      choosedItem.description = data.description
-      choosedItem.link = data.link
-      updateMutation(choosedItem)
-      setChoosedItem(null)
+    if (choosedItemNotification) {
+      choosedItemNotification.title = data.title
+      choosedItemNotification.description = data.description
+      choosedItemNotification.link = data.link
+      updateMutation(choosedItemNotification)
+      setChoosedItemNotification(null)
     }
   }
 
@@ -46,24 +47,24 @@ const Edit = () => {
       convertFile,
       'notifications'
     )
-    if (choosedItem) {
+    if (choosedItemNotification) {
       //@ts-ignore
-      choosedItem.image = res['@id']
-      await updateMutation(choosedItem)
+      choosedItemNotification.image = res['@id']
+      await updateMutation(choosedItemNotification)
     }
   }
 
   useEffect(() => {
-    if (choosedItem) {
-      setValue('title', choosedItem.title || '')
-      setValue('description', choosedItem.description || '')
-      setValue('link', choosedItem.link || '')
+    if (choosedItemNotification) {
+      setValue('title', choosedItemNotification.title || '')
+      setValue('description', choosedItemNotification.description || '')
+      setValue('link', choosedItemNotification.link || '')
     }
-  }, [choosedItem])
+  }, [choosedItemNotification])
 
   return (
     <>
-      {choosedItem?.id ? (
+      {choosedItemNotification?.id ? (
         <Paper elevation={4} sx={{ minHeight: '500px', borderRadius: '10px' }}>
           <form onSubmit={handleSubmit(handleForm)}>
             <Box sx={{ padding: '10px' }}>
@@ -98,8 +99,8 @@ const Edit = () => {
                   aspectRatio={16 / 16}
                   uploadImg={uploadImg}
                   itemImage={
-                    choosedItem?.image?.filePath
-                      ? `${process.env.REACT_APP_MEDIA}/notifications/${choosedItem?.image?.filePath}`
+                    choosedItemNotification?.image?.filePath
+                      ? `${process.env.REACT_APP_MEDIA}/notifications/${choosedItemNotification?.image?.filePath}`
                       : `${process.env.REACT_APP_MEDIA}/placeholder.jpg`
                   }
                 />

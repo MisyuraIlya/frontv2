@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../store/useAuthStore'
+import { useAuth } from '../../store/auth.store'
 import { Paper, Typography, Grid, Button, Box } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'

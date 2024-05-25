@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../store/useAuthStore'
+import { useAuth } from '../../store/auth.store'
 import { Paper, Typography, Grid } from '@mui/material'
 
 const Money = () => {

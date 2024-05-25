@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../store/auth.store'
 import { Box, Container } from '@mui/material'
 import Home from '../components/Home'
 import useDataCatalog from '../hooks/useDataCatalog'

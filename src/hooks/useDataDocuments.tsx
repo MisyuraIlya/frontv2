@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom'
 import { HydraHandler } from '../helpers/hydraHandler'
 import { DocumentsService } from '../services/document.service'
 import moment from 'moment'
-import { useAuth } from '../store/useAuthStore'
+import { useAuth } from '../store/auth.store'
 
 type RouteParams = {
   documentType: IDocumentTypes

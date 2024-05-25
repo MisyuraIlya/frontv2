@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuth } from '../../../../store/useAuthStore'
+import { useAuth } from '../../../../store/auth.store'
 import useDataAgentObjectives from '../../../../hooks/useAgentDataObjectives'
 import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import {
