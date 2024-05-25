@@ -19,11 +19,9 @@ import SendIcon from '@mui/icons-material/Send'
 import DeleteIcon from '@mui/icons-material/Delete'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import Radio from '@mui/material/Radio'
-import useDataNotification from '../../../hooks/useDataNotification'
 import { useAdminStore } from '../../../store/admin.store'
 import Modals from '../../Modals'
-import { NotificationsServices } from '../../../services/admin/AdminNotifications.service'
-
+import hooks from '../../../hooks'
 interface NotificationItemProps {
   element: INotification
   index: number
@@ -51,7 +49,7 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
     // }
   }
 
-  const { createMutation, deleteMutation } = useDataNotification()
+  const { createMutation, deleteMutation } = hooks.admin.useDataNotification()
 
   return (
     <>

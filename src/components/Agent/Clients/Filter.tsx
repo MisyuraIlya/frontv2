@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import Utils from '../../../utils'
 import { Box, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
-import useDataAgentClients from '../../../hooks/useAgentDataClients'
+import hooks from '../../../hooks'
 
 const Filter = () => {
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
   const { agentId } = useParams()
-  const { data } = useDataAgentClients()
+  const { data } = hooks.agent.useDataAgentClients()
 
   const handleDebouce = (value: string) => {
     const urlSearchParams = new URLSearchParams(location.search)

@@ -11,9 +11,9 @@ import {
   Box,
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import useDataNotification from '../../../hooks/useDataNotification'
 import Utils from '../../../utils'
 import { useAdminStore } from '../../../store/admin.store'
+import hooks from '../../../hooks'
 interface LeftSideForm {
   title: string
   description: string
@@ -23,7 +23,7 @@ interface LeftSideForm {
 const Edit = () => {
   const { choosedItemNotification, setChoosedItemNotification } =
     useAdminStore()
-  const { updateMutation, createMutation } = useDataNotification()
+  const { updateMutation, createMutation } = hooks.admin.useDataNotification()
   const {
     register,
     handleSubmit,

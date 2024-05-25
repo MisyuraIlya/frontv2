@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
-import services from '../services'
+import services from '../../services'
 
 type RouteParams = {
   lvl1: string

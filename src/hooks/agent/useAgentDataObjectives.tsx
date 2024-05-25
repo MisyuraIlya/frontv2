@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useLocation, useParams } from 'react-router-dom'
-import { HydraHandler } from '../helpers/hydraHandler'
-import services from '../services'
+import { HydraHandler } from '../../helpers/hydraHandler'
+import services from '../../services'
 
 const fetchData = async (
   page: string = '1',

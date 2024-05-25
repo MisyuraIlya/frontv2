@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Paper } from '@mui/material'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import useDataCartesset from '../../../hooks/useDataCartesset'
+import hooks from '../../../hooks'
 
 const Filter = () => {
   const { dateFrom, dateTo } = useParams()
@@ -24,7 +24,7 @@ const Filter = () => {
     }
   }
 
-  const { data, mutate } = useDataCartesset()
+  const { data, mutate } = hooks.useDataCartesset()
   const total = data?.['hydra:totalItems'] ?? 0
   return (
     <Paper

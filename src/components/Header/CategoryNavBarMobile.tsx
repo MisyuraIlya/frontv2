@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, List, ListItem, ListItemText, Paper } from '@mui/material'
 import { themeColors } from '../../styles/mui'
-import useDataCategories from '../../hooks/useDataCategories'
 import CategoryNavItem from './CategoryNavItem'
+import hooks from '../../hooks'
 
 const CategoryNavBarMobile = () => {
-  const { data } = useDataCategories()
+  const { data } = hooks.useDataCategories()
   const [active, setActive] = useState<number>(0)
   const { lvl1 } = useParams()
   const handleClick = (value: number) => {

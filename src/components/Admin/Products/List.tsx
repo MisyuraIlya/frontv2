@@ -13,12 +13,13 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataProductsEdit from '../../../hooks/useAdminDataProductsEdit'
 import Card from './Card'
 import { useAdminStore } from '../../../store/admin.store'
+import hooks from '../../../hooks'
+
 const List = () => {
   const [products, setProducts] = useState<IProduct[]>([])
-  const { data } = useDataProductsEdit()
+  const { data } = hooks.admin.useDataProductsEdit()
   const { searchProducts } = useAdminStore()
 
   const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({

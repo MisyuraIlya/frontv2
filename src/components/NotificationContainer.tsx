@@ -1,12 +1,12 @@
 import React from 'react'
 import NotificationCard from './Header/Left/NotificationCard'
 import { Box, Typography } from '@mui/material'
-import useDataNotificationUser from '../hooks/useDataNotificationUser'
+import hooks from '../hooks'
 import { themeColors } from '../styles/mui'
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff'
 
 const NotificationContainer = () => {
-  const { data } = useDataNotificationUser()
+  const { data } = hooks.useDataNotificationUser()
 
   return (
     <Box sx={{ width: '100%' }}>

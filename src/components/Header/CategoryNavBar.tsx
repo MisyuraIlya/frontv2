@@ -11,10 +11,10 @@ import {
   ListItemButton,
 } from '@mui/material'
 import { themeColors } from '../../styles/mui'
-import useDataCategories from '../../hooks/useDataCategories'
+import hooks from '../../hooks'
 
 const CategoryNavBar = () => {
-  const { data } = useDataCategories()
+  const { data } = hooks.useDataCategories()
   const [active, setActive] = useState<number>(0)
   const navigate = useNavigate()
 

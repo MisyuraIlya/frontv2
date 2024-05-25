@@ -7,10 +7,10 @@ import FeaturedPlayListOutlinedIcon from '@mui/icons-material/FeaturedPlayListOu
 import NotInterestedIcon from '@mui/icons-material/NotInterested'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import { themeColors } from '../../../../styles/mui'
-import useDataAgentMissions from '../../../../hooks/useAgentDataMissions'
 import { useMyScheduleCalendar } from '../../../../store/ScheduleCalendar.store'
 import { onSuccessAlert } from '../../../../utils/MySweetAlert'
 import ModalWrapper from '../../../../components/Modals/ModalWrapper'
+import hooks from '../../../../hooks'
 
 const Update = ({
   open,
@@ -23,7 +23,7 @@ const Update = ({
 }) => {
   const [secondOpen, setSecondOpen] = useState(false)
   const { weekFrom, weekTo } = useMyScheduleCalendar()
-  const { updateObjective } = useDataAgentMissions(weekFrom, weekTo)
+  const { updateObjective } = hooks.agent.useDataAgentMissions(weekFrom, weekTo)
   const [choosed, setChoosed] = useState<IAgentObjective | null>()
 
   const handleStatusFunc = (value: boolean) => {

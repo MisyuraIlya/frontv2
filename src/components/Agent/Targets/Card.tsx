@@ -16,9 +16,8 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 import { themeColors } from '../../../styles/mui'
-import useDataAgentTargets from '../../../hooks/useAgentDataTargets'
-import useDataAgentObjectives from '../../../hooks/useAgentDataObjectives'
 import { onSuccessAlert } from '../../../utils/MySweetAlert'
+import hooks from '../../../hooks'
 
 interface TargetItemProps {
   item: IAgentTaget
@@ -28,8 +27,10 @@ const Card: FC<TargetItemProps> = ({ item, index }) => {
   const [open, setOpen] = useState(false)
   const [number, setNumber] = useState(item.targetValue)
   const { user } = useAuth()
-  const { createTarget, updateTarget } = useDataAgentTargets(item.year!)
-  const { isLoading, data } = useDataAgentObjectives('visit')
+  const { createTarget, updateTarget } = hooks.agent.useDataAgentTargets(
+    item.year!
+  )
+  const { isLoading, data } = hooks.agent.useDataAgentObjectives('visit')
 
   const completedType = (item: IAgentTaget) => {
     let answer = ''

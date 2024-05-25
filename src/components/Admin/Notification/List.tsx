@@ -1,10 +1,10 @@
 import React from 'react'
-import useDataNotification from '../../../hooks/useDataNotification'
+import hooks from '../../../hooks'
 import { Box } from '@mui/material'
 import Card from './Card'
 
 const List = () => {
-  const { data } = useDataNotification()
+  const { data } = hooks.admin.useDataNotification()
   return (
     <Box>
       {data?.['hydra:member']?.map((element, index) => {

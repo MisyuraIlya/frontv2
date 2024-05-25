@@ -8,11 +8,11 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
-import useDataCategories from '../hooks/useDataCategories'
 import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
+import hooks from '../hooks'
 
 const CatalogView = () => {
-  const { data } = useDataCategories()
+  const { data } = hooks.useDataCategories()
   const { lvl1 } = useParams()
   const navigate = useNavigate()
   return (

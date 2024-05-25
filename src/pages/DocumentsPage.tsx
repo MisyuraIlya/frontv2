@@ -2,10 +2,10 @@ import React from 'react'
 import { Box, Container } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import Loader from '../utils/Loader'
-import useDataDocuments from '../hooks/useDataDocuments'
 import { findDocumentTypeTitle } from '../helpers/handleBreadCrumbs'
 import Documents from '../components/Documents'
 import Utils from '../utils'
+import hooks from '../hooks'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -35,7 +35,7 @@ const DocumentsPage = () => {
       componentToRender = <Box>{'לא נמצא סוג מסמך כזה'}</Box>
   }
 
-  const { hydraPagination, isLoading } = useDataDocuments()
+  const { hydraPagination, isLoading } = hooks.useDataDocuments()
 
   return (
     <Container maxWidth="xl">

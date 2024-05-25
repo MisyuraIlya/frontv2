@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
 import { Card, MenuItem, Select, Typography } from '@mui/material'
 import moment from 'moment'
-import useDataAgentTargets from '../../../hooks/useAgentDataTargets'
 import { MONTH_HEBREW_1 } from '../../../helpers/arrayOfMonths'
 import { themeColors } from '../../../styles/mui'
+import hooks from '../../../hooks'
 
 interface OptionType {
   value: string
@@ -24,7 +24,7 @@ const Targets = () => {
       label: (moment().year() + 1).toString(),
     },
   ]
-  const { data } = useDataAgentTargets(year)
+  const { data } = hooks.agent.useDataAgentTargets(year)
   const sales: IMonthAgenthSale[] = MONTH_HEBREW_1.map((item) => {
     const matchingData = data?.['hydra:member']?.find(
       (res) => item.name === res.month

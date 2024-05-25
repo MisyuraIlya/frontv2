@@ -9,13 +9,13 @@ import {
   Typography,
 } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
-import useDataNotificationUser from '../../../hooks/useDataNotificationUser'
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff'
 import NotificationCard from './NotificationCard'
+import hooks from '../../../hooks'
 
 const NotificationButton = () => {
   const [openDrawver, setOpenDrawver] = useState(false)
-  const { data } = useDataNotificationUser()
+  const { data } = hooks.useDataNotificationUser()
   return (
     <>
       <Badge badgeContent={3}>

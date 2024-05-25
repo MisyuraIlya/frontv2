@@ -20,12 +20,10 @@ import CollectionsIcon from '@mui/icons-material/Collections'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import { themeColors } from '../../../styles/mui'
 import Modals from '../../Modals'
-import StarBorderIcon from '@mui/icons-material/StarBorder'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'
-import useDataProductsEdit from '../../../hooks/useAdminDataProductsEdit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { onAsk } from '../../../utils/MySweetAlert'
+import hooks from '../../../hooks'
 
 interface ProductsEditItemProps {
   element: IProduct
@@ -38,7 +36,7 @@ const Card: FC<ProductsEditItemProps> = ({ element, index }) => {
   const [checkedIsSpecial, setCheckedIsSpecial] = useState(element?.isSpecial)
 
   const [active, setActive] = useState(false)
-  const { handleUpdate, handleDelete } = useDataProductsEdit()
+  const { handleUpdate, handleDelete } = hooks.admin.useDataProductsEdit()
 
   const getItemStyle = (
     isDragging: boolean,

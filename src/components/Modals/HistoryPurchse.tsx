@@ -15,7 +15,7 @@ import {
   Typography,
 } from '@mui/material'
 import { themeColors } from '../../styles/mui'
-import useDataPurchesHistory from '../../hooks/useDataPurchesHistory'
+import hooks from '../../hooks'
 
 type TablePopUpProps = {
   active: boolean
@@ -24,7 +24,7 @@ type TablePopUpProps = {
 
 const HistoryPurchse: FC<TablePopUpProps> = ({ active, setActive }) => {
   const { selectedProd } = useSelectedProduct()
-  const { data, isLoading } = useDataPurchesHistory(selectedProd.sku)
+  const { data, isLoading } = hooks.useDataPurchesHistory(selectedProd.sku)
   return (
     <ModalWrapper width={50} height={65} active={active} setActive={setActive}>
       <Box>

@@ -1,19 +1,16 @@
 import React from 'react'
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import { useAuth } from '../../../store/auth.store'
-import MyCard from '../../../shared/MyCard'
-import Wrap from '../../../shared/Wrap'
 import { Box, Card, Grid, Typography } from '@mui/material'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import LegendToggleIcon from '@mui/icons-material/LegendToggle'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
-import GroupIcon from '@mui/icons-material/Group'
 import MyCheapButton from '../../../utils/MyCheapButton'
-import useDataAgentProfile from '../../../hooks/useAgentDataProfile'
+import hooks from '../../../hooks'
 
 const MainInfo = () => {
   const { isAdmin, isSuperAgent } = useAuth()
-  const { data } = useDataAgentProfile()
+  const { data } = hooks.agent.useDataAgentProfile()
   const { user } = useAuth()
   return (
     <Card sx={{ padding: '10px' }}>

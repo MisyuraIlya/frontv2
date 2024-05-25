@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
 import Loader from '../utils/Loader'
 import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
-import useDataProductsEdit from '../hooks/useAdminDataProductsEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
-import useDataCategories from '../hooks/useDataCategories'
 import Admin from '../components/Admin'
+import hooks from '../hooks'
+
 const ProductsEdit = () => {
   const { lvl1, lvl2, lvl3 } = useParams()
-  const { isLoading } = useDataProductsEdit()
-  const { data } = useDataCategories()
+  const { isLoading } = hooks.admin.useDataProductsEdit()
+  const { data } = hooks.useDataCategories()
   const categoriesArray = data?.['hydra:member'] || []
   const res1 = findCategoryTitleById(+lvl1!, categoriesArray)
   const res2 = findCategoryTitleById(+lvl2!, categoriesArray)

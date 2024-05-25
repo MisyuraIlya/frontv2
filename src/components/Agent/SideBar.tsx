@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth } from '../../store/auth.store'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import useDataAgents from '../../hooks/useAgentsData'
+import { useNavigate, useParams } from 'react-router-dom'
+import hooks from '../../hooks'
 import {
   Avatar,
   Divider,
@@ -19,7 +19,7 @@ const SideBar = () => {
   console.log('user', user)
   // const { pathname } = useLocation()
   // const page = pathname.split('/')[1]
-  const { data } = useDataAgents()
+  const { data } = hooks.agent.useDataAgents()
   const navigate = useNavigate()
 
   const handleChange = (agent: IUser) => {

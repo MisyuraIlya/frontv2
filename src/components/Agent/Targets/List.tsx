@@ -2,16 +2,13 @@ import React from 'react'
 import Loader from '../../../utils/Loader'
 import { useAuth } from '../../../store/auth.store'
 import { Box, Card as MuiCard, Grid, Typography } from '@mui/material'
-import useDataAgentTargets from '../../../hooks/useAgentDataTargets'
-import { themeColors } from '../../../styles/mui'
 import { MONTH_HEBREW_1 } from '../../../helpers/arrayOfMonths'
-import { useParams } from 'react-router-dom'
-import Modals from '../../Modals'
 import Card from './Card'
+import hooks from '../../../hooks'
 
 const List = ({ year }: { year: string }) => {
   const { user } = useAuth()
-  const { data, isLoading } = useDataAgentTargets(year)
+  const { data, isLoading } = hooks.agent.useDataAgentTargets(year)
 
   const targets: IAgentTaget[] = MONTH_HEBREW_1.map((item) => {
     const matchingData = data?.['hydra:member']?.find(

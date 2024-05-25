@@ -17,12 +17,12 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataCategoryEdit from '../../../hooks/useAdminDataCategoryEdit'
 import Card from './Card'
 import { useAdminStore } from '../../../store/admin.store'
+import hooks from '../../../hooks'
 
 const List = () => {
-  const { data } = useDataCategoryEdit()
+  const { data } = hooks.admin.useDataCategoryEdit()
   const { searchCategories } = useAdminStore()
   const [categories, setCategories] = useState<ICategory[]>([])
 

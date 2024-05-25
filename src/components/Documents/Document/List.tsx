@@ -15,11 +15,11 @@ import {
 import { themeColors } from '../../../styles/mui'
 import { DocumentTypeHebrew } from '../../../helpers/DocumentTypeHebrew'
 import { useAuth } from '../../../store/auth.store'
-import useDataDocuments from '../../../hooks/useDataDocuments'
+import hooks from '../../../hooks'
 
 const List = () => {
   const { documentType } = useParams()
-  const { data, isLoading } = useDataDocuments()
+  const { data, isLoading } = hooks.useDataDocuments()
   const { user } = useAuth()
   const navigate = useNavigate()
 

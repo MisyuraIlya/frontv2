@@ -11,11 +11,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import useDataCartesset from '../../../hooks/useDataCartesset'
 import moment from 'moment'
+import hooks from '../../../hooks'
 
 const List = () => {
-  const { data, isLoading } = useDataCartesset()
+  const { data, isLoading } = hooks.useDataCartesset()
   return (
     <Box sx={{ margin: '50px 0px' }}>
       {data?.lines?.['hydra:member'].length === 0 && !isLoading ? (

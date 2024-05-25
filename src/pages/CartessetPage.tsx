@@ -1,12 +1,12 @@
 import React from 'react'
 import Loader from '../utils/Loader'
-import useDataCartesset from '../hooks/useDataCartesset'
 import Utils from '../utils'
 import Documents from '../components/Documents'
 import { Box, Container } from '@mui/material'
+import hooks from '../hooks'
 
 const CartessetPage = () => {
-  const { isLoading } = useDataCartesset()
+  const { isLoading } = hooks.useDataCartesset()
   return (
     <Container maxWidth="xl">
       {isLoading && <Loader />}

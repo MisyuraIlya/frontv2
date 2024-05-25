@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../../../store/auth.store'
-import useDataAgentObjectives from '../../../../hooks/useAgentDataObjectives'
 import ModalWrapper from '../../../../components/Modals/ModalWrapper'
 import {
   Box,
@@ -22,6 +21,7 @@ import moment from 'moment'
 import SearchUserList from '../../../../utils/SearchInput/SearchUserList'
 import { onAsk, onSuccessAlert } from '../../../../utils/MySweetAlert'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import hooks from '../../../../hooks'
 
 type EditAndCreateVisitForm = {
   week1: boolean
@@ -45,7 +45,7 @@ const Create = ({
   const { user } = useAuth()
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null)
   const { createVisit, updateVisit, deleteVisit } =
-    useDataAgentObjectives('visit')
+    hooks.agent.useDataAgentObjectives('visit')
   const {
     register,
     handleSubmit,

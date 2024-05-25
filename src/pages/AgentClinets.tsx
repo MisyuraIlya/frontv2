@@ -1,11 +1,11 @@
 import React from 'react'
 import Loader from '../utils/Loader'
 import { Container } from '@mui/material'
-import useDataAgentClients from '../hooks/useAgentDataClients'
+import hooks from '../hooks'
 import Utils from '../utils'
 import Agent from '../components/Agent'
 const AgentClinets = () => {
-  const { hydraPagination, isLoading } = useDataAgentClients()
+  const { hydraPagination, isLoading } = hooks.agent.useDataAgentClients()
 
   return (
     <Container maxWidth="lg" sx={{ marginTop: '20px' }}>

@@ -1,16 +1,12 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
-import MyCard from '../../../shared/MyCard'
-import Wrap from '../../../shared/Wrap'
 import { Box, Card, Grid, Typography } from '@mui/material'
 import MyCheapButton from '../../../utils/MyCheapButton'
-import useDataAgentObjectives from '../../../hooks/useAgentDataObjectives'
-import useDataAgentMissions from '../../../hooks/useAgentDataMissions'
 import moment from 'moment'
-import useDataAgentDashboard from '../../../hooks/useAgentDataDashboard'
+import hooks from '../../../hooks'
 
 const Daily = () => {
-  const { data } = useDataAgentDashboard(
+  const { data } = hooks.agent.useDataAgentDashboard(
     moment().format('YYYY-MM-DD'),
     moment().format('YYYY-MM-DD')
   )

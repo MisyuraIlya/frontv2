@@ -9,11 +9,11 @@ import {
   ToggleButtonGroup,
 } from '@mui/material'
 
-import useDataCatalog from '../../../hooks/useDataCatalog'
 import GridViewIcon from '@mui/icons-material/GridView'
 import TocIcon from '@mui/icons-material/Toc'
 import Utils from '../../../utils'
 import CustomSelectBox from '../../../utils/CustomSelectBox'
+import hooks from '../../../hooks'
 
 const Filter = () => {
   const [search, setSearch] = useState<string>('')
@@ -26,7 +26,7 @@ const Filter = () => {
     setSortProdSetting,
     sortArr,
   } = useCatalog()
-  const { data } = useDataCatalog()
+  const { data } = hooks.useDataCatalog()
   const location = useLocation()
   const navigate = useNavigate()
   const [searchDebounce] = useDebounce(search, 1000)

@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useLocation } from 'react-router-dom'
-import { HydraHandler } from '../helpers/hydraHandler'
-import services from '../services'
+import { HydraHandler } from '../../helpers/hydraHandler'
+import services from '../../services'
 
 const fetchData = async () => {
   return await services.Admin.AdminClinetsService.getUsers('ROLE_AGENT', 1, '')

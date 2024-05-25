@@ -1,17 +1,16 @@
 import React from 'react'
 import { Grid, Container, useMediaQuery, Box, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import useDataCategories from '../hooks/useDataCategories'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import Utils from '../utils'
 import CatalogComponent from '../components/Catalog'
-import useDataCatalog from '../hooks/useDataCatalog'
 import { themeColors } from '../styles/mui'
+import hooks from '../hooks'
 
 const Catalog = () => {
   const { lvl1, lvl2, lvl3 } = useParams()
-  const { data, data: catalog } = useDataCategories()
-  const { hydraPagination } = useDataCatalog()
+  const { data, data: catalog } = hooks.useDataCategories()
+  const { hydraPagination } = hooks.useDataCatalog()
   const categoriesArray = data?.['hydra:member'] || []
   const res1 = findCategoryTitleById(+lvl1!, categoriesArray)
   const res2 = findCategoryTitleById(+lvl2!, categoriesArray)

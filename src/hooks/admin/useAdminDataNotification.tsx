@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import moment from 'moment'
-import { onAsk } from '../utils/MySweetAlert'
-import services from '../services'
+import { onAsk } from '../../utils/MySweetAlert'
+import services from '../../services'
 const fetchData = async () => {
   const data =
     await services.Admin.AdminNotificationsServices.fetchNotifications()

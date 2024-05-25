@@ -16,15 +16,15 @@ import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import ArticleIcon from '@mui/icons-material/Article'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout'
-import useDataDocumentsItem from '../../../hooks/useDataDocumentsItem'
 import { ExcelGeneratorIDocuments } from '../../../helpers/ExcelGenerator'
+import hooks from '../../../hooks'
 
 const Filter = () => {
   const [search, setSearch] = useState<string>('')
   const { isAdmin, isAgent, isSuperAgent } = useAuth()
   const { cart, setCart } = useCart()
   const { setRestoreCartModal, handlePdfViwer } = useModals()
-  const { data } = useDataDocumentsItem()
+  const { data } = hooks.useDataDocumentsItem()
 
   const handleResoreCart = async () => {
     // try {

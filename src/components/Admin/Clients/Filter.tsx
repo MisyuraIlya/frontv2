@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Utils from '../../../utils'
 import { Box, Typography } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
-import useDataUsers from '../../../hooks/useAdminDataUsers'
 import { useAdminStore } from '../../../store/admin.store'
+import hooks from '../../../hooks'
 
 type RouteParams = {
   userRole: ROLE_TYPES
@@ -13,7 +13,7 @@ type RouteParams = {
 const Filter = () => {
   const { searchClients, setSearchClients } = useAdminStore()
   const navigate = useNavigate()
-  const { data } = useDataUsers()
+  const { data } = hooks.admin.useDataUsers()
   const { userRole } = useParams<RouteParams>()
 
   const handleDebouce = (value: string) => {

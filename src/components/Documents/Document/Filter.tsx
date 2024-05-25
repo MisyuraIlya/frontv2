@@ -15,9 +15,9 @@ import {
   Select,
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import useDataDocuments from '../../../hooks/useDataDocuments'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import hooks from '../../../hooks'
 
 const Filter = () => {
   const { documentType, dateFrom, dateTo } = useParams()
@@ -41,7 +41,7 @@ const Filter = () => {
     navigate(`/documentPage/${parameter}/${dateFrom}/${dateTo}?page=1`)
   }
 
-  const { data, mutate } = useDataDocuments()
+  const { data, mutate } = hooks.useDataDocuments()
   const total = data?.['hydra:totalItems'] ?? 0
   return (
     <Paper

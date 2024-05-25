@@ -9,18 +9,17 @@ import {
   Typography,
 } from '@mui/material'
 import 'react-loading-skeleton/dist/skeleton.css'
-import useDataUsers from '../../../hooks/useAdminDataUsers'
 import Loader from '../../../utils/Loader'
 import { useParams } from 'react-router-dom'
 import Card from './Card'
-
+import hooks from '../../../hooks'
 type RouteParams = {
   userRole: ROLE_TYPES
 }
 
 const List = () => {
   const { userRole } = useParams<RouteParams>()
-  const { data, isLoading } = useDataUsers()
+  const { data, isLoading } = hooks.admin.useDataUsers()
   const isUser = userRole === 'ROLE_USER'
   const isAgent = userRole === 'ROLE_AGENT'
 

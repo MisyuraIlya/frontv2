@@ -3,15 +3,15 @@ import { useParams } from 'react-router-dom'
 import moment from 'moment'
 import { Box, Divider, Grid } from '@mui/material'
 import Loader from '../utils/Loader'
-import useDataDocumentsItem from '../hooks/useDataDocumentsItem'
 import DocumentItem from '../components/DocumentItem'
 import Utils from '../utils'
+import hooks from '../hooks'
 
 const DocumentsItemPage = () => {
   const { documentItemType, id } = useParams()
   let from = moment().subtract(1, 'months').format('YYYY-MM-DD')
   let to = moment().format('YYYY-MM-DD')
-  const { isLoading } = useDataDocumentsItem()
+  const { isLoading } = hooks.useDataDocumentsItem()
 
   return (
     <>

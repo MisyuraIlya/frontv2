@@ -2,15 +2,17 @@ import React from 'react'
 import { useAuth } from '../store/auth.store'
 import { Box, Container } from '@mui/material'
 import Home from '../components/Home'
-import useDataCatalog from '../hooks/useDataCatalog'
+import hooks from '../hooks'
+
 const HomePage = () => {
   const { user } = useAuth()
 
-  const { data: specialCatalog, isLoading: specialLoading } = useDataCatalog(
+  const { data: specialCatalog, isLoading: specialLoading } =
+    hooks.useDataCatalog('', 'special')
+  const { data: newCatalog, isLoading: newLoading } = hooks.useDataCatalog(
     '',
-    'special'
+    'new'
   )
-  const { data: newCatalog, isLoading: newLoading } = useDataCatalog('', 'new')
   return (
     <Box>
       <Box>

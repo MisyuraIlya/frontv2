@@ -13,11 +13,11 @@ import {
 import { numberWithCommas } from '../../../helpers/numberWithCommas'
 import { useModals } from '../../../provider/ModalProvider'
 import { themeColors } from '../../../styles/mui'
-import useDataDocumentsItem from '../../../hooks/useDataDocumentsItem'
+import hooks from '../../../hooks'
 
 const List = () => {
   const { selectProduct } = useModals()
-  const { data, isLoading } = useDataDocumentsItem()
+  const { data, isLoading } = hooks.useDataDocumentsItem()
   return (
     <Box sx={{ marginTop: '30px' }}>
       <TableContainer component={Paper} elevation={0}>

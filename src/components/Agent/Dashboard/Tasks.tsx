@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import moment from 'moment'
 import { Box, Card, Grid, IconButton, Typography } from '@mui/material'
-import useDataAgentDashboard from '../../../hooks/useAgentDataDashboard'
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import NotInterestedIcon from '@mui/icons-material/NotInterested'
@@ -10,6 +9,7 @@ import AssignmentLateOutlinedIcon from '@mui/icons-material/AssignmentLateOutlin
 import Modals from '../../Modals'
 import { onSuccessAlert } from '../../../utils/MySweetAlert'
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined'
+import hooks from '../../../hooks'
 
 const Tasks = () => {
   const [open, setOpen] = useState(false)
@@ -17,7 +17,7 @@ const Tasks = () => {
     null
   )
 
-  const { data, updateObjective } = useDataAgentDashboard(
+  const { data, updateObjective } = hooks.agent.useDataAgentDashboard(
     moment().format('YYYY-MM-DD'),
     moment().format('YYYY-MM-DD')
   )

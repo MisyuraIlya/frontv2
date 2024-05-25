@@ -8,11 +8,11 @@ import {
 } from '@mui/material'
 import Loader from '../../../utils/Loader'
 import moment from 'moment'
-import useDataAgentObjectives from '../../../hooks/useAgentDataObjectives'
 import Card from './Card'
+import hooks from '../../../hooks'
 
 const List = () => {
-  const { isLoading, data } = useDataAgentObjectives('visit')
+  const { isLoading, data } = hooks.agent.useDataAgentObjectives('visit')
   return (
     <MuiCard sx={{ marginTop: '50px' }}>
       <Grid

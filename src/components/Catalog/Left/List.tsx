@@ -2,11 +2,10 @@ import React from 'react'
 import { useCatalog } from '../../../store/catalog.store'
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import ProductCard from '../../ProductCard'
-import useDataCatalog from '../../../hooks/useDataCatalog'
-
+import hooks from '../../../hooks'
 const List = () => {
   const { listView } = useCatalog()
-  const { data, isLoading } = useDataCatalog()
+  const { data, isLoading } = hooks.useDataCatalog()
   return (
     <Grid container spacing={2}>
       {isLoading ? (

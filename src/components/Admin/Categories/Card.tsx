@@ -14,17 +14,17 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import LoginIcon from '@mui/icons-material/Login'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import { themeColors } from '../../../styles/mui'
-import useDataCategoryEdit from '../../../hooks/useAdminDataCategoryEdit'
+import hooks from '../../../hooks'
+
 interface CategoryEditItemProps {
   element: ICategory
 }
 
 const Card: FC<CategoryEditItemProps> = ({ element }) => {
   const [activeEdit, setActiveEdit] = useState<boolean>(false)
-  const { mutate, handleUpdate } = useDataCategoryEdit()
+  const { mutate, handleUpdate } = hooks.admin.useDataCategoryEdit()
   const [checked, setCheked] = useState(element.isPublished)
   const [title, setTitle] = useState(element.title)
   const [valueDebounced] = useDebounce(title, 1000)

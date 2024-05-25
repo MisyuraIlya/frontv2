@@ -1,16 +1,16 @@
 import React from 'react'
 import { Box, Container } from '@mui/material'
 import Loader from '../utils/Loader'
-import useDataClients from '../hooks/useAdminDataUsers'
 import { useParams } from 'react-router-dom'
 import Admin from '../components/Admin'
 import Utils from '../utils'
+import hooks from '../hooks'
 
 type RouteParams = {
   userRole: ROLE_TYPES
 }
 const Users = () => {
-  const { hydraPagination, isLoading } = useDataClients()
+  const { hydraPagination, isLoading } = hooks.admin.useDataUsers()
   const { userRole } = useParams<RouteParams>()
 
   let componentToRender: React.ReactNode

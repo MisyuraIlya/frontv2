@@ -1,10 +1,10 @@
 import React from 'react'
 import { Typography, List, ListItem, Paper, Box } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
-import useDataDocumentsItem from '../../../hooks/useDataDocumentsItem'
+import hooks from '../../../hooks'
 
 const Summary = () => {
-  const { data } = useDataDocumentsItem()
+  const { data } = hooks.useDataDocumentsItem()
   const totalTax = data?.totalTax ?? 0
   const totalPriceAfterTax = data?.totalPriceAfterTax ?? 0
   const totalAfterDiscount = data?.totalAfterDiscount ?? 0
