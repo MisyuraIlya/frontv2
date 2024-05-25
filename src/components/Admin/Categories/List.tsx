@@ -5,7 +5,7 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd'
-import { AdminCatalogService } from '../../../services/AdminCatalog.service'
+import { AdminCatalogService } from '../../../services/admin/AdminCatalog.service'
 import {
   Box,
   Paper,

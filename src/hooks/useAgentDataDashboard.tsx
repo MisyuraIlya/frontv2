@@ -1,11 +1,8 @@
 import useSWR from 'swr'
-import { useLocation, useParams } from 'react-router-dom'
-import { agentService } from '../services/agent.service'
-import { HydraHandler } from '../helpers/hydraHandler'
-import { agentProfileService } from '../services/agentProfile.service'
-
+import { useParams } from 'react-router-dom'
+import services from '../services'
 const fetchData = async (agentId: string, dateFrom: string, dateTo: string) => {
-  return await agentProfileService.getAgentObjective(
+  return await services.Agents.agentProfileService.getAgentObjective(
     1,
     null,
     null,
@@ -16,7 +13,7 @@ const fetchData = async (agentId: string, dateFrom: string, dateTo: string) => {
 }
 
 const fetchDataProfile = async (agentId: string) => {
-  return await agentProfileService.getAgentProfile(agentId)
+  return await services.Agents.agentProfileService.getAgentProfile(agentId)
 }
 
 type RouteParams = {
@@ -38,7 +35,7 @@ const useDataAgentDashboard = (weekFrom: string, weekTo: string) => {
 
   const updateObjective = async (obj: IAgentObjective) => {
     try {
-      await agentProfileService.updateAgentObjective(obj)
+      await services.Agents.agentProfileService.updateAgentObjective(obj)
     } catch (e) {
       console.log('[ERROR] error', e)
     } finally {

@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import CartServices from '../services/cart.services'
 import { onErrorAlert, onSuccessAlert } from '../utils/MySweetAlert'
 import moment from 'moment'
-import { AdminOrderService } from '../services/AdminOrders.service'
+import { AdminOrderService } from '../services/admin/AdminOrders.service'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
 
 interface useCartState {

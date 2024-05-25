@@ -22,7 +22,7 @@ import Radio from '@mui/material/Radio'
 import useDataNotification from '../../../hooks/useDataNotification'
 import { useAdminStore } from '../../../store/admin.store'
 import Modals from '../../Modals'
-import { NotificationsServices } from '../../../services/notifications.service'
+import { NotificationsServices } from '../../../services/admin/AdminNotifications.service'
 
 interface NotificationItemProps {
   element: INotification

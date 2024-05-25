@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { base64ToFile } from '../../../helpers/base64ToFile'
-import { AdminProductService } from '../../../services/AdminProducts.service'
-import { MediaObjectService } from '../../../services/AdminMediaObject.service'
+import { AdminProductService } from '../../../services/admin/AdminProducts.service'
+import { MediaObjectService } from '../../../services/admin/AdminMediaObject.service'
 import Utils from '../../../utils'
 import {
   Box,

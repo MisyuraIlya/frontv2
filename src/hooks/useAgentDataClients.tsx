@@ -1,14 +1,14 @@
 import useSWR from 'swr'
 import { useLocation, useParams } from 'react-router-dom'
-import { agentService } from '../services/agent.service'
 import { HydraHandler } from '../helpers/hydraHandler'
+import services from '../services'
 
 const fetchData = async (
   agentId: string,
   page: string = '1',
   search: string
 ) => {
-  return await agentService.getClients(agentId, page, search)
+  return await services.Agents.agentService.getClients(agentId, page, search)
 }
 
 type RouteParams = {

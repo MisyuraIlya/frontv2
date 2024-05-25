@@ -1,9 +1,9 @@
 import useSWR from 'swr'
 import { useLocation, useParams } from 'react-router-dom'
 import { HydraHandler } from '../helpers/hydraHandler'
-import { DocumentsService } from '../services/document.service'
 import moment from 'moment'
 import { useAuth } from '../store/auth.store'
+import services from '../services'
 
 type RouteParams = {
   documentType: IDocumentTypes
@@ -18,7 +18,7 @@ const fetchData = async (
   toDate: Date,
   page: string | number
 ): Promise<DocumentsResponse> => {
-  return await DocumentsService.GetDocuments(
+  return await services.DocumentsService.GetDocuments(
     user,
     documentType,
     fromDate,

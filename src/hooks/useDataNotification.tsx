@@ -1,9 +1,10 @@
 import useSWR from 'swr'
-import { NotificationsServices } from '../services/notifications.service'
 import moment from 'moment'
 import { onAsk } from '../utils/MySweetAlert'
+import services from '../services'
 const fetchData = async () => {
-  const data = await NotificationsServices.fetchNotifications()
+  const data =
+    await services.Admin.AdminNotificationsServices.fetchNotifications()
   return data
 }
 
@@ -30,19 +31,19 @@ const useDataNotification = () => {
         newObject.image = object?.image['@id']
       }
     }
-    await NotificationsServices.createItem(newObject)
+    await services.Admin.AdminNotificationsServices.createItem(newObject)
     mutate()
   }
 
   const updateMutation = async (obj: INotification) => {
-    await NotificationsServices.updateItem(obj)
+    await services.Admin.AdminNotificationsServices.updateItem(obj)
     mutate()
   }
 
   const deleteMutation = async (id: string | number) => {
     const ask = await onAsk('למחוק שורה זו?', '')
     if (ask) {
-      await NotificationsServices.deleteItem(id)
+      await services.Admin.AdminNotificationsServices.deleteItem(id)
       mutate()
     }
   }

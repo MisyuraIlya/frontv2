@@ -1,8 +1,8 @@
 import useSWR, { SWRConfiguration } from 'swr'
-import { CatalogServices } from '../services/catalog.service'
 import { useLocation, useParams } from 'react-router-dom'
 import { HydraHandler } from '../helpers/hydraHandler'
 import { useAuth } from '../store/auth.store'
+import services from '../services'
 
 const fetchData = async (
   lvl1: string | number,
@@ -12,7 +12,7 @@ const fetchData = async (
   documentType: CatalogDocumentType,
   user: IUser
 ): Promise<GetCatalogResponse> => {
-  return await CatalogServices.GetCatalog(
+  return await services.CatalogService.GetCatalog(
     lvl1,
     lvl2,
     lvl3,

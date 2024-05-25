@@ -1,9 +1,12 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
-import { agentProfileService } from '../services/agentProfile.service'
+import services from '../services'
 
 const fetchData = async (agentId: string, year: string) => {
-  return await agentProfileService.getAgentTargets(agentId, year)
+  return await services.Agents.agentProfileService.getAgentTargets(
+    agentId,
+    year
+  )
 }
 
 type RouteParams = {
@@ -20,7 +23,7 @@ const useDataAgentTargets = (year: string) => {
 
   const createTarget = async (obj: IAgentTaget) => {
     try {
-      await agentProfileService.createAgentTarget(obj)
+      await services.Agents.agentProfileService.createAgentTarget(obj)
     } catch (e) {
       console.log('[ERROR] error', e)
     } finally {
@@ -30,7 +33,7 @@ const useDataAgentTargets = (year: string) => {
 
   const updateTarget = async (obj: IAgentTaget) => {
     try {
-      await agentProfileService.updateAgentTarget(obj)
+      await services.Agents.agentProfileService.updateAgentTarget(obj)
     } catch (e) {
       console.log('[ERROR] error', e)
     } finally {

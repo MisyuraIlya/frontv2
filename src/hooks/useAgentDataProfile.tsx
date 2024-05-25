@@ -1,9 +1,9 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
-import { agentProfileService } from '../services/agentProfile.service'
+import services from '../services'
 
 const fetchDataProfile = async (agentId: string) => {
-  return await agentProfileService.getAgentProfile(agentId)
+  return await services.Agents.agentProfileService.getAgentProfile(agentId)
 }
 
 type RouteParams = {

@@ -1,12 +1,12 @@
 import useSWR from 'swr'
-import { CatalogServices } from '../services/catalog.service'
+import services from '../services'
 import { useAuth } from '../store/auth.store'
 
 const fetchData = async (
   userExId: string,
   sku: string
 ): Promise<GetPurchaseHistoryItem> => {
-  return await CatalogServices.GetPurchaseHistory(userExId, sku)
+  return await services.CatalogService.GetPurchaseHistory(userExId, sku)
 }
 
 const useDataPurchesHistory = (sku: string) => {

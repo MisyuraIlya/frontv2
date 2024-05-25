@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { create } from 'zustand'
-import { NotificationsServices } from '../services/notifications.service'
+import { NotificationsServices } from '../services/admin/AdminNotifications.service'
 import { BROWSER_TPYES } from '../enums/browserTypes'
 
 interface OneSignalStoreState {

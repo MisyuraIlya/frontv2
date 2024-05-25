@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
-import { AdminProductService } from '../../../services/AdminProducts.service'
+import { AdminProductService } from '../../../services/admin/AdminProducts.service'
 import {
   Box,
   Grid,

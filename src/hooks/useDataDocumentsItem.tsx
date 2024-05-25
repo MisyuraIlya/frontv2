@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
-import { DocumentsService } from '../services/document.service'
 import { useAuth } from '../store/auth.store'
+import services from '../services'
 
 type RouteParams = {
   documentItemType: IDocumentTypes
@@ -13,7 +13,7 @@ const fetchData = async (
   id: string,
   user: IUser
 ) => {
-  return await DocumentsService.GetDocumentsItem(
+  return await services.DocumentsService.GetDocumentsItem(
     documentItemType as IDocumentTypes,
     id,
     user

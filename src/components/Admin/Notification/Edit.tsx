@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { base64ToFile } from '../../../helpers/base64ToFile'
-import { MediaObjectService } from '../../../services/AdminMediaObject.service'
+import { MediaObjectService } from '../../../services/admin/AdminMediaObject.service'
 import {
   TextField,
   TextareaAutosize,

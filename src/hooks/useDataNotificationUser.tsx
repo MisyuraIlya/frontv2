@@ -1,12 +1,9 @@
 import useSWR from 'swr'
-import { NotificationsServices } from '../services/notifications.service'
-import moment from 'moment'
-import { onAsk } from '../utils/MySweetAlert'
-import { clientNotifications } from '../services/clientNotifications.service'
 import { useAuth } from '../store/auth.store'
+import services from '../services'
 
 const fetchData = async (userId: number | string) => {
-  return await clientNotifications.getNotificationByUserId(userId)
+  return await services.Notifications.getNotificationByUserId(userId)
 }
 
 const useDataNotificationUser = () => {
@@ -20,7 +17,7 @@ const useDataNotificationUser = () => {
     id: number
     isRead: boolean
   }) => {
-    await clientNotifications.updateNotification(obj)
+    await services.Notifications.updateNotification(obj)
     mutate()
   }
 

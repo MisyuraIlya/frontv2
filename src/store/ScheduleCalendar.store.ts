@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 import moment from 'moment'
-import { agentSheduleCalendarService } from '../services/agentSheduleCalendar.service'
+import { agentSheduleCalendarService } from '../services/agents/agentSheduleCalendar.service'
 import { onSuccessAlert } from '../utils/MySweetAlert'
-import { agentProfileService } from '../services/agentProfile.service'
+import { agentProfileService } from '../services/agents/agentProfile.service'
 interface ScheduleCalendarState {
   loading: boolean
   weekFrom: string

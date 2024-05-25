@@ -1,14 +1,18 @@
 import useSWR from 'swr'
 import { useLocation, useParams } from 'react-router-dom'
-import { AdminClinetsService } from '../services/AdminClients.service'
 import { HydraHandler } from '../helpers/hydraHandler'
+import services from '../services'
 
 const fetchData = async (
   userRole: ROLE_TYPES,
   page: string,
   search: string
 ) => {
-  return await AdminClinetsService.getUsers(userRole, page, search)
+  return await services.Admin.AdminClinetsService.getUsers(
+    userRole,
+    page,
+    search
+  )
 }
 
 type RouteParams = {

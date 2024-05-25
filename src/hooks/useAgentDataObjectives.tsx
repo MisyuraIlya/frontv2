@@ -1,8 +1,7 @@
 import useSWR from 'swr'
 import { useLocation, useParams } from 'react-router-dom'
-import { agentService } from '../services/agent.service'
 import { HydraHandler } from '../helpers/hydraHandler'
-import { agentProfileService } from '../services/agentProfile.service'
+import services from '../services'
 
 const fetchData = async (
   page: string = '1',
@@ -10,7 +9,7 @@ const fetchData = async (
   search: string,
   agentId: string
 ) => {
-  return await agentProfileService.getAgentObjective(
+  return await services.Agents.agentProfileService.getAgentObjective(
     page ?? 1,
     objective,
     search,
@@ -36,7 +35,7 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
 
   const createVisit = async (obj: IAgentObjective) => {
     try {
-      await agentProfileService.createAgentObjective(obj)
+      await services.Agents.agentProfileService.createAgentObjective(obj)
     } catch (e) {
       console.log('[ERROR] error', e)
     } finally {
@@ -46,7 +45,7 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
 
   const updateVisit = async (obj: IAgentObjective) => {
     try {
-      await agentProfileService.updateAgentObjective(obj)
+      await services.Agents.agentProfileService.updateAgentObjective(obj)
     } catch (e) {
       console.log('[ERROR] error', e)
     } finally {
@@ -56,7 +55,7 @@ const useDataAgentObjectives = (objective: objectiveTypes) => {
 
   const deleteVisit = async (id: number | string) => {
     try {
-      await agentProfileService.deleteAgentObjective(id)
+      await services.Agents.agentProfileService.deleteAgentObjective(id)
     } catch (e) {
       console.log('[ERROR] error', e)
     } finally {

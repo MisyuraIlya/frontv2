@@ -1,8 +1,8 @@
 import useSWR from 'swr'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../store/auth.store'
-import { DocumentsService } from '../services/document.service'
 import moment from 'moment'
+import services from '../services'
 
 type RouteParams = {
   dateFrom: string
@@ -14,7 +14,7 @@ const fetchData = async (
   toDate: Date,
   user: IUser
 ): Promise<CartessetResponse> => {
-  return await DocumentsService.GetCartesset(user, fromDate, toDate)
+  return await services.DocumentsService.GetCartesset(user, fromDate, toDate)
 }
 
 const useDataCartesset = () => {
