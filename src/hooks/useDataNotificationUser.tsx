@@ -11,8 +11,9 @@ const fetchData = async (userId: number | string) => {
 
 const useDataNotificationUser = () => {
   const { user } = useAuth()
-  const { data, isLoading, mutate } = useSWR(`api/notifications`, () =>
-    fetchData(user?.id!)
+  const { data, isLoading, mutate } = useSWR(
+    `api/notifications/${user?.id}`,
+    () => fetchData(user?.id!)
   )
 
   const updateNotificationUser = async (obj: {

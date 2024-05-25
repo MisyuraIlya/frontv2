@@ -20,15 +20,16 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import Radio from '@mui/material/Radio'
 import useDataNotification from '../../../hooks/useDataNotification'
-import { useNotificationStore } from '../../../store/notificationStore'
-import ModalWrapper from '../../Modals/ModalWrapper'
+import { useAdminNotification } from '../../../store/adminNotification.store'
+import Modals from '../../Modals'
+import { NotificationsServices } from '../../../services/notifications.service'
 
 interface NotificationItemProps {
   element: INotification
   index: number
 }
 const Card: FC<NotificationItemProps> = ({ element, index }) => {
-  const { setChoosedItem } = useNotificationStore()
+  const { setChoosedItem } = useAdminNotification()
   const [openModal, setOpenModal] = useState(false)
   const [selectedValue, setSelectedValue] = useState('')
 
@@ -38,9 +39,16 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
 
   const isButtonDisabled = selectedValue === ''
 
-  const handleSubmit = () => {
-    // Your submission logic here
-    console.log('Selected value:', selectedValue)
+  const handleSubmit = async () => {
+    // try {
+    //   const object = {
+    //     id: get().selectRadio,
+    //     values: get().choosedClients,
+    //   }
+    //   const response = await NotificationsServices.sendNotification(object)
+    // } catch (e) {
+    // } finally {
+    // }
   }
 
   const { createMutation, deleteMutation } = useDataNotification()
@@ -55,7 +63,7 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
         >
           <Box sx={{ display: 'flex', gap: '20px' }}>
             <Grid container spacing={2}>
-              <Grid item xs={2}>
+              <Grid item xs={4}>
                 <img
                   src={
                     element?.image?.filePath
@@ -64,12 +72,13 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
                         element?.image?.filePath
                       : process.env.REACT_APP_MEDIA + '/placeholder.jpg'
                   }
+                  width={'100px'}
                 />
               </Grid>
-              <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography variant="body2">{element.title}</Typography>
               </Grid>
-              <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography variant="body2">
                   {moment(element?.createdAt).format('DD-MM-YYYY HH:mm')}
                 </Typography>
@@ -115,7 +124,7 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <ModalWrapper
+      <Modals.ModalWrapper
         active={openModal}
         setActive={setOpenModal}
         height={18}
@@ -155,7 +164,7 @@ const Card: FC<NotificationItemProps> = ({ element, index }) => {
             שלח
           </Button>
         </Box>
-      </ModalWrapper>
+      </Modals.ModalWrapper>
     </>
   )
 }

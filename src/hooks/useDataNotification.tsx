@@ -3,7 +3,8 @@ import { NotificationsServices } from '../services/notifications.service'
 import moment from 'moment'
 import { onAsk } from '../shared/MySweetAlert'
 const fetchData = async () => {
-  return await NotificationsServices.fetchNotifications()
+  const data = await NotificationsServices.fetchNotifications()
+  return data
 }
 
 const useDataNotification = () => {

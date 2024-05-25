@@ -46,6 +46,17 @@ const RouterApp = () => {
               element={<DocumentsItemPage />}
             />
             <Route path={URLS.CARTESSET.ROUTER} element={<CartessetPage />} />
+
+            <Route
+              path={URLS.AGENT_CLIENTS.ROUTER}
+              element={<AgentClinets />}
+            />
+            <Route
+              path={URLS.AGENT_DASHBOARD.ROUTER}
+              element={<AgentDashboard />}
+            />
+
+            {/* ADMIN */}
             <Route
               path={URLS.ADMIN_EDIT_CATALOG.ROUTER}
               element={<CategoryEdit />}
@@ -58,14 +69,6 @@ const RouterApp = () => {
             <Route
               path={URLS.ADMIN_NOTIFICATIONS.ROUTER}
               element={<NotificationPage />}
-            />
-            <Route
-              path={URLS.AGENT_CLIENTS.ROUTER}
-              element={<AgentClinets />}
-            />
-            <Route
-              path={URLS.AGENT_DASHBOARD.ROUTER}
-              element={<AgentDashboard />}
             />
           </Route>
         </Routes>

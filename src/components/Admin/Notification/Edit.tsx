@@ -10,7 +10,7 @@ import {
   Paper,
   Box,
 } from '@mui/material'
-import { useNotificationStore } from '../../../store/notificationStore'
+import { useAdminNotification } from '../../../store/adminNotification.store'
 import AddIcon from '@mui/icons-material/Add'
 import useDataNotification from '../../../hooks/useDataNotification'
 import Utils from '../../../utils'
@@ -21,7 +21,7 @@ interface LeftSideForm {
 }
 
 const Edit = () => {
-  const { choosedItem, setChoosedItem } = useNotificationStore()
+  const { choosedItem, setChoosedItem } = useAdminNotification()
   const { updateMutation, createMutation } = useDataNotification()
   const {
     register,

@@ -46,6 +46,7 @@ export const NotificationsServices = {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/api/notifications`
     )
+    console.log('response', response)
     return response.data
   },
 
