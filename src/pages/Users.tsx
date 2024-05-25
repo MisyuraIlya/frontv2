@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Container } from '@mui/material'
-import Loader from '../shared/Loader'
+import Loader from '../utils/Loader'
 import useDataClients from '../hooks/useAdminDataUsers'
 import { useParams } from 'react-router-dom'
 import Admin from '../components/Admin'

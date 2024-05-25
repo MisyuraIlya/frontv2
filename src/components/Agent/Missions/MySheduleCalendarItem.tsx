@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
-import { HourOfDay } from '../../../../store/ScheduleCalendar.store'
-import MissionModal from './UpdateMissionModal'
+import { HourOfDay } from '../../../store/ScheduleCalendar.store'
+import Modals from '../../Modals'
 
 type DayOfWeek = 'ראשון' | 'שני' | 'שלישי' | 'רביעי' | 'חמישי' | 'שישי' | 'שבת'
 
@@ -55,7 +55,7 @@ const MySheduleCalendarItem: FC<MySheduleCalendarItemProps> = ({
           </div>
         </div>
       </div>
-      <MissionModal item={event} open={open} setOpen={setOpen} />
+      <Modals.Agent.Mission.Update item={event} open={open} setOpen={setOpen} />
     </>
   )
 }

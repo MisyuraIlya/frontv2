@@ -1,7 +1,7 @@
 import Filter from './Filter'
-import Shedular from './Shedular'
+import Schedule from './Schedule'
 
 export default {
   Filter: Filter,
-  Shedular: Shedular,
+  Schedule: Schedule,
 }

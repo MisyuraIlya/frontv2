@@ -1,5 +1,5 @@
 import React from 'react'
-import Loader from '../shared/Loader'
+import Loader from '../utils/Loader'
 import { Container } from '@mui/material'
 import useDataAgentClients from '../hooks/useAgentDataClients'
 import Utils from '../utils'

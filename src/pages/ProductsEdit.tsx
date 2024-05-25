@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
-import Loader from '../shared/Loader'
+import Loader from '../utils/Loader'
 import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import useDataProductsEdit from '../hooks/useAdminDataProductsEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'

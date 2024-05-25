@@ -1,18 +1,18 @@
-import { Card, Grid, IconButton, Typography } from '@mui/material'
 import React, { FC, useState } from 'react'
+import { Card as MuiCard, Grid, IconButton, Typography } from '@mui/material'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
-import VisitPopUp from './VisitPopUp'
 
+import Modals from '../../Modals'
 interface VisitItem {
   item: IAgentObjective
   index: number
 }
 
-const VisitItem: FC<VisitItem> = ({ item, index }) => {
+const Card: FC<VisitItem> = ({ item, index }) => {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <Card
+      <MuiCard
         key={index}
         sx={{
           padding: '20px',
@@ -84,10 +84,10 @@ const VisitItem: FC<VisitItem> = ({ item, index }) => {
             </IconButton>
           </Grid>
         </Grid>
-      </Card>
-      <VisitPopUp open={open} setOpen={setOpen} item={item} />
+      </MuiCard>
+      <Modals.Agent.Visit.Create open={open} setOpen={setOpen} item={item} />
     </>
   )
 }
 
-export default VisitItem
+export default Card

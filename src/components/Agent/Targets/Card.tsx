@@ -2,32 +2,32 @@ import React, { FC, useState } from 'react'
 import {
   Box,
   Button,
-  Card,
+  Card as MuiCard,
   Grid,
   IconButton,
   TextField,
   Typography,
 } from '@mui/material'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
-import { numberWithCommas } from '../../../../helpers/numberWithCommas'
-import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-import { useAuth } from '../../../../store/useAuthStore'
+import { numberWithCommas } from '../../../helpers/numberWithCommas'
+import Modals from '../../Modals'
+import { useAuth } from '../../../store/useAuthStore'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
-import { themeColors } from '../../../../styles/mui'
-import useDataAgentTargets from '../../../../hooks/useAgentDataTargets'
-import useDataAgentObjectives from '../../../../hooks/useAgentDataObjectives'
-import { onSuccessAlert } from '../../../../shared/MySweetAlert'
+import { themeColors } from '../../../styles/mui'
+import useDataAgentTargets from '../../../hooks/useAgentDataTargets'
+import useDataAgentObjectives from '../../../hooks/useAgentDataObjectives'
+import { onSuccessAlert } from '../../../utils/MySweetAlert'
 
 interface TargetItemProps {
   item: IAgentTaget
   index: number
 }
-const TargetItem: FC<TargetItemProps> = ({ item, index }) => {
+const Card: FC<TargetItemProps> = ({ item, index }) => {
   const [open, setOpen] = useState(false)
   const [number, setNumber] = useState(item.targetValue)
-  const { agent } = useAuth()
+  const { user } = useAuth()
   const { createTarget, updateTarget } = useDataAgentTargets(item.year!)
   const { isLoading, data } = useDataAgentObjectives('visit')
 
@@ -74,7 +74,7 @@ const TargetItem: FC<TargetItemProps> = ({ item, index }) => {
 
   return (
     <>
-      <Card
+      <MuiCard
         key={index}
         sx={{
           margin: '20px',
@@ -121,16 +121,21 @@ const TargetItem: FC<TargetItemProps> = ({ item, index }) => {
             </IconButton>
           </Grid>
         </Grid>
-      </Card>
+      </MuiCard>
 
-      <ModalWrapper active={open} setActive={setOpen} width={28} height={40}>
+      <Modals.ModalWrapper
+        active={open}
+        setActive={setOpen}
+        width={28}
+        height={40}
+      >
         <Box>
           <Typography variant="h5">עדכון יעד</Typography>
           <Box sx={{ display: 'flex', gap: '20px', margin: '20px 0' }}>
             <TextField
               variant="outlined"
               sx={{ border: '1px solid #d6e0ed', borderRadius: '20px' }}
-              value={agent?.name}
+              value={user?.name}
               InputProps={{
                 startAdornment: (
                   <Box sx={{ padding: '0 10px' }}>
@@ -185,9 +190,9 @@ const TargetItem: FC<TargetItemProps> = ({ item, index }) => {
             </Button>
           </Box>
         </Box>
-      </ModalWrapper>
+      </Modals.ModalWrapper>
     </>
   )
 }
 
-export default TargetItem
+export default Card

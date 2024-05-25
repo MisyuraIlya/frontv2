@@ -1,13 +1,10 @@
 import React from 'react'
-import AgentsList from '../modules/Agent/components/AgentList'
-import { Box, Container, Grid } from '@mui/material'
+import { Box, Container, Fab, Grid } from '@mui/material'
 import { Tab, Tabs } from '../utils/tabs'
-import AgentMissions from '../modules/Agent/Tabs/AgentMissions'
-import AgentVisits from '../modules/Agent/Tabs/AgentVisits'
-import AgentTargets from '../modules/Agent/Tabs/AgentTargets'
-import AgentDashBoard from '../modules/Agent/Tabs/AgentDashBoard'
-import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
+import Utils from '../utils'
 import Agent from '../components/Agent'
+import AddIcon from '@mui/icons-material/Add'
+
 const AgentDashboard = () => {
   const components = [
     {
@@ -26,7 +23,21 @@ const AgentDashboard = () => {
       component: (
         <>
           <Agent.Missions.Filter />
-          <Agent.Missions.Shedular />
+          <Agent.Missions.Schedule />
+          <Fab
+            color="primary"
+            aria-label="add"
+            sx={{
+              position: 'fixed',
+              right: '50px',
+              bottom: '50px',
+              borderRadius: '5px',
+              width: '80px',
+              height: '80px',
+            }}
+          >
+            <AddIcon style={{ fontSize: '50px' }} />
+          </Fab>
         </>
       ),
     },
@@ -34,9 +45,7 @@ const AgentDashboard = () => {
       title: 'תבניות ביקורים',
       component: (
         <>
-          <Agent.Visits.Filter />
           <Agent.Visits.List />
-          <Agent.Visits.Pagination />
         </>
       ),
     },
@@ -45,7 +54,7 @@ const AgentDashboard = () => {
       component: (
         <>
           <Agent.Targets.Filter />
-          <Agent.Targets.List />
+          {/* <Agent.Targets.List /> */}
         </>
       ),
     },
@@ -53,7 +62,7 @@ const AgentDashboard = () => {
 
   return (
     <Container maxWidth="xl">
-      <BreadCrumbsUtil array={[]} />
+      <Utils.BreadCrumbsUtil array={[]} />
       <Grid container spacing={2}>
         <Grid item sm={3} xs={12}>
           {/* {(isSuperAgent || isAdmin) &&  */}

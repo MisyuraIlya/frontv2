@@ -20,7 +20,7 @@ import {
 } from '../../../../helpers/arrayOfMonths'
 import moment from 'moment'
 import SearchUserList from '../../../../utils/SearchInput/SearchUserList'
-import { onAsk, onSuccessAlert } from '../../../../shared/MySweetAlert'
+import { onAsk, onSuccessAlert } from '../../../../utils/MySweetAlert'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 
 type EditAndCreateVisitForm = {
@@ -33,7 +33,7 @@ type EditAndCreateVisitForm = {
   hourTo: string
 }
 
-const VisitPopUp = ({
+const Create = ({
   item,
   open,
   setOpen,
@@ -42,7 +42,7 @@ const VisitPopUp = ({
   open: boolean
   setOpen: (bool: boolean) => void
 }) => {
-  const { agent } = useAuth()
+  const { user } = useAuth()
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null)
   const { createVisit, updateVisit, deleteVisit } =
     useDataAgentObjectives('visit')
@@ -76,9 +76,9 @@ const VisitPopUp = ({
       updateVisit(item)
       onSuccessAlert('ביקור עודכן בהצלחה', '')
     } else {
-      if (selectedUser && agent) {
+      if (selectedUser && user) {
         let obj: IAgentObjective = {
-          agent: agent,
+          agent: user,
           client: selectedUser,
           isCompleted: false,
           completedAt: null,
@@ -295,4 +295,4 @@ const VisitPopUp = ({
   )
 }
 
-export default VisitPopUp
+export default Create

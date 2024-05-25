@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import moment from 'moment'
 import { agentSheduleCalendarService } from '../services/agentSheduleCalendar.service'
-import { onSuccessAlert } from '../shared/MySweetAlert'
+import { onSuccessAlert } from '../utils/MySweetAlert'
 import { agentProfileService } from '../services/agentProfile.service'
 interface ScheduleCalendarState {
   loading: boolean

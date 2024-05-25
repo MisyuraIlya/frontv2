@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { NotificationsServices } from '../services/notifications.service'
 import moment from 'moment'
-import { onAsk } from '../shared/MySweetAlert'
+import { onAsk } from '../utils/MySweetAlert'
 const fetchData = async () => {
   const data = await NotificationsServices.fetchNotifications()
   return data

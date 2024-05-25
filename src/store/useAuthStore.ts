@@ -6,7 +6,7 @@ import {
   saveToStorage,
   updateAccessToken,
 } from '../helpers/auth.helper'
-import { onErrorAlert, onSuccessAlert } from '../shared/MySweetAlert'
+import { onErrorAlert, onSuccessAlert } from '../utils/MySweetAlert'
 import { persist, createJSONStorage, PersistOptions } from 'zustand/middleware'
 
 interface AuthState {

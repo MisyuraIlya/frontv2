@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import 'react-loading-skeleton/dist/skeleton.css'
 import useDataUsers from '../../../hooks/useAdminDataUsers'
-import Loader from '../../../shared/Loader'
+import Loader from '../../../utils/Loader'
 import { useParams } from 'react-router-dom'
 import Card from './Card'
 

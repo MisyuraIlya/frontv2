@@ -9,9 +9,10 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import { themeColors } from '../../../../styles/mui'
 import useDataAgentMissions from '../../../../hooks/useAgentDataMissions'
 import { useMyScheduleCalendar } from '../../../../store/ScheduleCalendar.store'
-import { onSuccessAlert } from '../../../../shared/MySweetAlert'
+import { onSuccessAlert } from '../../../../utils/MySweetAlert'
 import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-const MissionModal = ({
+
+const Update = ({
   open,
   setOpen,
   item,
@@ -219,10 +220,12 @@ const MissionModal = ({
         )}
       </ModalWrapper>
       {choosed && (
-        <MissionModal open={secondOpen} setOpen={handleClose} item={choosed} />
+        <>
+          {/* <MissionModal open={secondOpen} setOpen={handleClose} item={choosed} /> */}
+        </>
       )}
     </>
   )
 }
 
-export default MissionModal
+export default Update

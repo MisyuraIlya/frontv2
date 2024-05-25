@@ -4,7 +4,7 @@ import ModalWrapper from './ModalWrapper'
 import PayPopUp from './PayPopUp'
 import ImageModal from './ImageModal'
 import HistoryPurchse from './HistoryPurchse'
-
+import Agent from './Agent'
 export default {
   Auth: Auth,
   Product: Product,
@@ -12,4 +12,5 @@ export default {
   PayPopUp: PayPopUp,
   ImageModal: ImageModal,
   HistoryPurchse: HistoryPurchse,
+  Agent: Agent,
 }

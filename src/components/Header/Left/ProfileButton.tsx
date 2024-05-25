@@ -19,7 +19,7 @@ import { useAuth } from '../../../store/useAuthStore'
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation'
 import { useModals } from '../../../provider/ModalProvider'
 import { useCart } from '../../../store/cart.store'
-import { onAsk } from '../../../shared/MySweetAlert'
+import { onAsk } from '../../../utils/MySweetAlert'
 
 const clientURL = {
   PROFILE: {

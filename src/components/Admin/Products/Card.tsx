@@ -25,7 +25,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'
 import useDataProductsEdit from '../../../hooks/useAdminDataProductsEdit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { onAsk } from '../../../shared/MySweetAlert'
+import { onAsk } from '../../../utils/MySweetAlert'
 
 interface ProductsEditItemProps {
   element: IProduct

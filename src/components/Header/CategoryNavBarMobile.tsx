@@ -1,18 +1,8 @@
 import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import {
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Typography,
-  Grid,
-  ListItemButton,
-  ListItemIcon,
-} from '@mui/material'
-import { themeColors } from '../../../../styles/mui'
-import useDataCategories from '../../../../hooks/useClientDataCategories'
+import { useParams } from 'react-router-dom'
+import { Container, List, ListItem, ListItemText, Paper } from '@mui/material'
+import { themeColors } from '../../styles/mui'
+import useDataCategories from '../../hooks/useClientDataCategories'
 import CategoryNavItem from './CategoryNavItem'
 
 const CategoryNavBarMobile = () => {

@@ -9,7 +9,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
-import SearchInput from './SearchInput'
+import SearchInput from '.'
 import useSWR from 'swr'
 import { userService } from '../../services/user.service'
 import { useDebounce } from 'use-debounce'

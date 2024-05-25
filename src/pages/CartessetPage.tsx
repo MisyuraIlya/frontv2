@@ -1,5 +1,5 @@
 import React from 'react'
-import Loader from '../shared/Loader'
+import Loader from '../utils/Loader'
 import useDataCartesset from '../hooks/useDataCartesset'
 import Utils from '../utils'
 import Documents from '../components/Documents'

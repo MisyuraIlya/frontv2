@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCart } from '../../../store/cart.store'
-import { onAsk } from '../../../shared/MySweetAlert'
+import { onAsk } from '../../../utils/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { Box, Button, Container, Typography } from '@mui/material'

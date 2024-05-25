@@ -1,19 +1,16 @@
-import moment from 'moment'
 import React, { useState } from 'react'
-import MobileMyScheduleCalendar from './MobileMyScheduleCalendar'
 import {
-  HourOfDay,
   useMyScheduleCalendar,
-} from '../../../../store/ScheduleCalendar.store'
-import Loader from '../../../../shared/Loader'
-import { ConvertHebrewNameDayToWeekDateByWeekName } from '../../../../helpers/ScheduleCalendar.helper'
-import { useMobile } from '../../../../store/mobile.store'
+  HourOfDay,
+} from '../../../store/ScheduleCalendar.store'
+import Loader from '../../../utils/Loader'
+import { ConvertHebrewNameDayToWeekDateByWeekName } from '../../../helpers/ScheduleCalendar.helper'
+import { useMobile } from '../../../provider/MobileProvider'
 import './MyScheduleCalendar.styles.scss'
-import useDataAgentMissions from '../../../../hooks/useAgentDataMissions'
-import MissionModal from './UpdateMissionModal'
+import useDataAgentMissions from '../../../hooks/useAgentDataMissions'
 import MySheduleCalendarItem from './MySheduleCalendarItem'
 
-const MyScheduleCalendar = () => {
+const Schedule = () => {
   const { daysOfWeek, hoursOfDay, weekFrom, weekTo, loading } =
     useMyScheduleCalendar()
   const { isMobile } = useMobile()
@@ -73,10 +70,10 @@ const MyScheduleCalendar = () => {
           </div>
         </div>
       ) : (
-        <MobileMyScheduleCalendar />
+        <>{/* <MobileMyScheduleCalendar /> */}</>
       )}
     </>
   )
 }
 
-export default MyScheduleCalendar
+export default Schedule

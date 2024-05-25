@@ -11,9 +11,9 @@ import { useAuth } from '../store/useAuthStore'
 import { useOneSignalStore } from '../store/oneSignalStore'
 
 interface NotificationsContextType {
-  handleRemoveIosPromt: () => void
-  removeIosPromt: boolean
-  setRemoveIosPromt: (val: boolean) => void
+  // handleRemoveIosPromt: () => void
+  // removeIosPromt: boolean
+  // setRemoveIosPromt: (val: boolean) => void
 }
 
 const NotificationsContext = createContext<NotificationsContextType | null>(
@@ -38,62 +38,62 @@ const NotificationsProvider: FC<NotificationsProviderProps> = ({
   children,
 }) => {
   const { user } = useAuth()
-  const [removeIosPromt, setRemoveIosPromt] = useState<boolean>(
-    localStorage.removeIosPromt ? false : true
-  )
-  const { registerClient, isUserRegistered } = useOneSignalStore()
+  // const [removeIosPromt, setRemoveIosPromt] = useState<boolean>(
+  //   localStorage.removeIosPromt ? false : true
+  // )
+  // const { registerClient, isUserRegistered } = useOneSignalStore()
 
-  const handleRemoveIosPromt = () => {
-    localStorage.removeItem('removeIosPromt')
-  }
+  // const handleRemoveIosPromt = () => {
+  //   localStorage.removeItem('removeIosPromt')
+  // }
 
-  const handleBrowser = () => {
-    setTimeout(() => {
-      const appId = 'ff5e7738-0527-4d59-9382-13901391053a'
-      const requestNotificationPermission = async () => {
-        try {
-          if (window?.OneSignal) {
-            await window?.OneSignal?.registerForPushNotifications()
-            const playerId = await window?.OneSignal?.getUserId()
-            if (playerId) {
-              localStorage.setItem('appId', playerId)
-            }
-          } else {
-            // alert("OneSignal is not available.");
-          }
-        } catch (error) {
-          // alert("Error requesting notification permission: "+ error);
-        }
-      }
-      window?.OneSignal?.init({
-        appId: appId,
-      })
+  // const handleBrowser = () => {
+  //   setTimeout(() => {
+  //     const appId = 'ff5e7738-0527-4d59-9382-13901391053a'
+  //     const requestNotificationPermission = async () => {
+  //       try {
+  //         if (window?.OneSignal) {
+  //           await window?.OneSignal?.registerForPushNotifications()
+  //           const playerId = await window?.OneSignal?.getUserId()
+  //           if (playerId) {
+  //             localStorage.setItem('appId', playerId)
+  //           }
+  //         } else {
+  //           // alert("OneSignal is not available.");
+  //         }
+  //       } catch (error) {
+  //         // alert("Error requesting notification permission: "+ error);
+  //       }
+  //     }
+  //     window?.OneSignal?.init({
+  //       appId: appId,
+  //     })
 
-      requestNotificationPermission()
+  //     requestNotificationPermission()
 
-      return () => {
-        window?.OneSignal?.clearEventHandlers()
-      }
-    }, 10000)
-  }
+  //     return () => {
+  //       window?.OneSignal?.clearEventHandlers()
+  //     }
+  //   }, 10000)
+  // }
 
-  useEffect(() => {
-    if (!isUserRegistered) {
-      handleBrowser()
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!isUserRegistered) {
+  //     handleBrowser()
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    if (user?.extId) {
-      const localAppId = localStorage.appId
-      registerClient(user?.extId, localAppId, 'web')
-    }
-  }, [user?.extId])
+  // useEffect(() => {
+  //   if (user?.extId) {
+  //     const localAppId = localStorage.appId
+  //     registerClient(user?.extId, localAppId, 'web')
+  //   }
+  // }, [user?.extId])
 
   const value = {
-    handleRemoveIosPromt,
-    removeIosPromt,
-    setRemoveIosPromt,
+    // handleRemoveIosPromt,
+    // removeIosPromt,
+    // setRemoveIosPromt,
   }
 
   return (

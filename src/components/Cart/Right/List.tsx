@@ -18,7 +18,7 @@ import {
 } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { onAsk } from '../../../shared/MySweetAlert'
+import { onAsk } from '../../../utils/MySweetAlert'
 import { useAuth } from '../../../store/useAuthStore'
 
 const List = () => {

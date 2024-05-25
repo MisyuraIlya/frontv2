@@ -27,7 +27,7 @@ import {
   onAsk,
   onErrorAlert,
   onSuccessAlert,
-} from '../../../shared/MySweetAlert'
+} from '../../../utils/MySweetAlert'
 
 import { useForm, Controller } from 'react-hook-form'
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt'

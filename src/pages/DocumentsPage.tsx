@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Container } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import Loader from '../shared/Loader'
+import Loader from '../utils/Loader'
 import useDataDocuments from '../hooks/useDataDocuments'
 import { findDocumentTypeTitle } from '../helpers/handleBreadCrumbs'
 import Documents from '../components/Documents'
