@@ -1,5 +1,7 @@
-import Categories from './Categories'
+import Filter from './Filter'
+import List from './List'
 
 export default {
-  Categories: Categories,
+  Filter: Filter,
+  List: List,
 }

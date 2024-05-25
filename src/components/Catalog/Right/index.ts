@@ -1,9 +1,5 @@
-import Filter from './Filter'
-import List from './List'
-import Pagination from './Pagination'
+import Categories from './Categories'
 
 export default {
-  Filter: Filter,
-  List: List,
-  Pagination: Pagination,
+  Categories: Categories,
 }
