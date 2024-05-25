@@ -2,17 +2,14 @@ import React from 'react'
 import Loader from '../shared/Loader'
 import { Container } from '@mui/material'
 import useDataAgentClients from '../hooks/useAgentDataClients'
-import PaginationUtil from '../utils/PaginationUtil'
-import AgentClientsList from '../modules/Agent/components/agentClients/AgentClientsList'
-import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
-import AgentClientsFilter from '../modules/Agent/components/agentClients/AgentClientsFilter'
+import Utils from '../utils'
 import Agent from '../components/Agent'
 const AgentClinets = () => {
   const { hydraPagination, isLoading } = useDataAgentClients()
 
   return (
-    <Container maxWidth="lg">
-      <BreadCrumbsUtil
+    <Container maxWidth="lg" sx={{ marginTop: '20px' }}>
+      <Utils.BreadCrumbsUtil
         array={[
           {
             title: 'לקוחות שלי',
@@ -20,13 +17,12 @@ const AgentClinets = () => {
           },
         ]}
       />
-      {/* {isLoading && <Loader />}
-      <AgentClientsFilter />
-      <AgentClientsList />
-      {hydraPagination && <PaginationUtil hydraPagination={hydraPagination} />} */}
+      {isLoading && <Loader />}
       <Agent.Clients.Filter />
       <Agent.Clients.List />
-      <Agent.Clients.Pagination />
+      {hydraPagination && (
+        <Utils.PaginationUtil hydraPagination={hydraPagination} />
+      )}
     </Container>
   )
 }

@@ -21,11 +21,11 @@ const useDataAgentClients = () => {
   const page = urlSearchParams.get('page')
   const search = urlSearchParams.get('search')
   const { agentId } = useParams<RouteParams>()
+
   const { data, error, isLoading, isValidating, mutate } = useSWR(
     `api/agentClients/${agentId}?page=${page}&${search}`,
     () => fetchData(agentId!, page!, search!)
   )
-
   let hydraPagination
   if (data) {
     hydraPagination = HydraHandler.paginationHandler(data)

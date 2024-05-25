@@ -75,7 +75,7 @@ export const URLS = {
   },
 
   AGENT_CLIENTS: {
-    LINK: ``,
+    LINK: '/agentClients',
     LABEL: 'לקוחות',
     ROUTER: '/agentClients/:agentId',
   },

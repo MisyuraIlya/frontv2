@@ -1,10 +1,16 @@
 import React from 'react'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 import { IconButton, Tooltip } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { URLS } from '../../../enums/urls'
+import { useAuth } from '../../../store/useAuthStore'
 
 const ClientsButton = () => {
+  const navigate = useNavigate()
+  const { user } = useAuth()
   return (
     <IconButton
+      onClick={() => navigate(`${URLS.AGENT_CLIENTS.LINK}/${user?.id}?page=1`)}
       sx={{
         height: '50px',
         width: '50px',

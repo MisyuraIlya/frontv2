@@ -12,15 +12,8 @@ import { themeColors } from '../../../styles/mui'
 import { useModals } from '../../../provider/ModalProvider'
 
 const Options = () => {
-  const {
-    cart,
-    setCart,
-    selectedMode,
-    saveDarft,
-    comment,
-    setComment,
-    sendOrder,
-  } = useCart()
+  const { cart, setCart, selectedMode, saveDarft } = useCart()
+
   const { user } = useAuth()
   const navigate = useNavigate()
   let from = moment().subtract(1, 'months').format('YYYY-MM-DD')
