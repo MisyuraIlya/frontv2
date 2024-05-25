@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelectedProduct } from '../../../modules/Modals/store/selecterdProduct.store'
+import { useSelectedProduct } from '../../../store/selecterdProduct.store'
 import { Box, Divider, Grid, IconButton, Typography, Link } from '@mui/material'
 import PriceBlockPopUp from './PriceBlockPopUp'
 import InsertLinkOutlinedIcon from '@mui/icons-material/InsertLinkOutlined'

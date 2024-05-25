@@ -4,7 +4,6 @@ import RegistrationForm from './RegistrationForm'
 import ForgotPasswordStepOne from './ForgotPasswordStepOne'
 import ForgotPasswordStepTwo from './ForgotPasswordStepTwo'
 import ValidationForm from './ValidationForm'
-import NewB2bCustomer from './NewB2bCustomer'
 import { Box, IconButton, Modal, Paper } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { useAuth } from '../../../store/useAuthStore'
@@ -47,7 +46,6 @@ const Auth: FC<AuthPopUpProps> = ({ active, setActive }) => {
         {action === 'forgotPassordStepOne' && <ForgotPasswordStepOne />}
         {action === 'forgotPassordStepTwo' && <ForgotPasswordStepTwo />}
         {action === 'validation' && <ValidationForm />}
-        {action === 'registerNewClient' && <NewB2bCustomer />}
       </Paper>
     </Modal>
   )

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import ModalWrapper from '../../../../components/Modals/ModalWrapper'
-import { useSelectedProduct } from '../../store/selecterdProduct.store'
+import { useSelectedProduct } from '../../../../store/selecterdProduct.store'
 import moment from 'moment'
 import {
   Box,

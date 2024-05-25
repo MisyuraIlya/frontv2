@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelectedProduct } from '../../../modules/Modals/store/selecterdProduct.store'
+import { useSelectedProduct } from '../../../store/selecterdProduct.store'
 
 const AdditionalImages = () => {
   const { selectedProd, changeDefaultImage } = useSelectedProduct()

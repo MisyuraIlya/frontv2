@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelectedProduct } from '../../../modules/Modals/store/selecterdProduct.store'
+import { useSelectedProduct } from '../../../store/selecterdProduct.store'
 import AdditionalImages from './AdditionalImages'
 import { useModals } from '../../../provider/ModalProvider'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
