@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 import { Box, Card, Grid, Typography } from '@mui/material'
-import MyCheapButton from '../../../utils/MyCheapButton'
+import Utils from '../../../utils'
 import moment from 'moment'
 import hooks from '../../../hooks'
 
@@ -90,7 +90,7 @@ const Daily = () => {
                   <Typography variant="h6">בוצע</Typography>
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                  <MyCheapButton>{completedVisits}</MyCheapButton>
+                  <Utils.MyCheapButton>{completedVisits}</Utils.MyCheapButton>
                 </Grid>
               </Grid>
               <Grid container spacing={2} sx={{ marginTop: '5px' }}>
@@ -106,7 +106,7 @@ const Daily = () => {
                   <Typography variant="h6">לביצוע</Typography>
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                  <MyCheapButton>{totalVisits}</MyCheapButton>
+                  <Utils.MyCheapButton>{totalVisits}</Utils.MyCheapButton>
                 </Grid>
               </Grid>
             </Box>
@@ -146,7 +146,7 @@ const Daily = () => {
                   <Typography variant="h6">בוצע</Typography>
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                  <MyCheapButton>{completedTasks}</MyCheapButton>
+                  <Utils.MyCheapButton>{completedTasks}</Utils.MyCheapButton>
                 </Grid>
               </Grid>
               <Grid container spacing={2} sx={{ marginTop: '5px' }}>
@@ -162,7 +162,7 @@ const Daily = () => {
                   <Typography variant="h6">לביצוע</Typography>
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                  <MyCheapButton>{totalTasks}</MyCheapButton>
+                  <Utils.MyCheapButton>{totalTasks}</Utils.MyCheapButton>
                 </Grid>
               </Grid>
             </Box>

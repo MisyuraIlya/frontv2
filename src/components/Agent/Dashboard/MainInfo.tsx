@@ -5,9 +5,8 @@ import { Box, Card, Grid, Typography } from '@mui/material'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent'
 import LegendToggleIcon from '@mui/icons-material/LegendToggle'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
-import MyCheapButton from '../../../utils/MyCheapButton'
 import hooks from '../../../hooks'
-
+import Utils from '../../../utils'
 const MainInfo = () => {
   const { isAdmin, isSuperAgent } = useAuth()
   const { data } = hooks.agent.useDataAgentProfile()
@@ -35,9 +34,9 @@ const MainInfo = () => {
                   <Typography variant="body2">{'סה״כ חודשי'}</Typography>
                 </Grid>
                 <Grid item xs={5}>
-                  <MyCheapButton>
+                  <Utils.MyCheapButton>
                     {numberWithCommas(data?.totalPriceMonth)}
-                  </MyCheapButton>
+                  </Utils.MyCheapButton>
                 </Grid>
               </Grid>
             </Grid>
@@ -50,9 +49,9 @@ const MainInfo = () => {
                   <Typography variant="body2">{'סה״כ שנתי'}</Typography>
                 </Grid>
                 <Grid item xs={5}>
-                  <MyCheapButton>
+                  <Utils.MyCheapButton>
                     {numberWithCommas(data?.totalPriceYear)}
-                  </MyCheapButton>
+                  </Utils.MyCheapButton>
                 </Grid>
               </Grid>
             </Grid>
@@ -65,9 +64,9 @@ const MainInfo = () => {
                   <Typography variant="body2">{'סל ממוצע'}</Typography>
                 </Grid>
                 <Grid item xs={5}>
-                  <MyCheapButton>
+                  <Utils.MyCheapButton>
                     {numberWithCommas(data?.averageBasket)}
-                  </MyCheapButton>
+                  </Utils.MyCheapButton>
                 </Grid>
               </Grid>
             </Grid>
@@ -80,9 +79,9 @@ const MainInfo = () => {
                 {'סה״כ יומי'}
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
-                <MyCheapButton>
+                <Utils.MyCheapButton>
                   {numberWithCommas(data?.totalPriceDay)}
-                </MyCheapButton>
+                </Utils.MyCheapButton>
               </Box>
             </Grid>
             <Grid item xs={6} sx={{ gap: '5px' }}>
@@ -90,9 +89,9 @@ const MainInfo = () => {
                 {'כמות עסקאות יומי'}
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
-                <MyCheapButton>
+                <Utils.MyCheapButton>
                   {numberWithCommas(data?.totalDayCount)}
-                </MyCheapButton>
+                </Utils.MyCheapButton>
               </Box>
             </Grid>
             <Grid item xs={6} sx={{ gap: '5px' }}>
@@ -100,9 +99,9 @@ const MainInfo = () => {
                 {'סה"כ משימות'}
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
-                <MyCheapButton>
+                <Utils.MyCheapButton>
                   {numberWithCommas(data?.totalMissions)}
-                </MyCheapButton>
+                </Utils.MyCheapButton>
               </Box>
             </Grid>
             <Grid item xs={6} sx={{ gap: '5px' }}>
@@ -110,9 +109,9 @@ const MainInfo = () => {
                 {'עמידה ביעד'}
               </Typography>
               <Box className="centered" sx={{ marginTop: '5px' }}>
-                <MyCheapButton>
+                <Utils.MyCheapButton>
                   {numberWithCommas(data?.targetPrecent)}
-                </MyCheapButton>
+                </Utils.MyCheapButton>
               </Box>
             </Grid>
           </Grid>
