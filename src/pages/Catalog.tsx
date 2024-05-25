@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid, Container, useMediaQuery, Box, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import useDataCategories from '../hooks/useClientDataCategories'
+import useDataCategories from '../hooks/useDataCategories'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
 import Utils from '../utils'
 import CatalogComponent from '../components/Catalog'
-import useDataCatalog from '../hooks/useClientDataCatalog'
+import useDataCatalog from '../hooks/useDataCatalog'
 import { themeColors } from '../styles/mui'
 
 const Catalog = () => {

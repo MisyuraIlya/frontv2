@@ -21,7 +21,8 @@
       "jsx": "react-jsx"
     },
     "include": [
-      "src"
-, "src/modules/Admin/components/Clients/.tsx"    ]
-  }
+      "src", 
+      "src/modules/Admin/components/Clients/.tsx"    
+    ]
+}
   

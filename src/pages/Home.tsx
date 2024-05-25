@@ -2,7 +2,7 @@ import React from 'react'
 import { useAuth } from '../store/useAuthStore'
 import { Box, Container } from '@mui/material'
 import Home from '../components/Home'
-import useDataCatalog from '../hooks/useClientDataCatalog'
+import useDataCatalog from '../hooks/useDataCatalog'
 const HomePage = () => {
   const { user } = useAuth()
 

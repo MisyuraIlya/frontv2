@@ -9,7 +9,7 @@ import {
   ToggleButtonGroup,
 } from '@mui/material'
 
-import useDataCatalog from '../../../hooks/useClientDataCatalog'
+import useDataCatalog from '../../../hooks/useDataCatalog'
 import GridViewIcon from '@mui/icons-material/GridView'
 import TocIcon from '@mui/icons-material/Toc'
 import Utils from '../../../utils'

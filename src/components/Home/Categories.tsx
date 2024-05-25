@@ -18,7 +18,7 @@ import { themeColors, themeSettings } from '../../styles/mui'
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined'
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined'
-import useDataCategories from '../../hooks/useClientDataCategories'
+import useDataCategories from '../../hooks/useDataCategories'
 const Categories = () => {
   const { data } = useDataCategories()
   const swiperRef = useRef(null)

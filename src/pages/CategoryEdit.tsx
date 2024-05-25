@@ -5,7 +5,7 @@ import BreadCrumbsUtil from '../utils/BreadCrumbsUtil'
 import { Box, Container } from '@mui/material'
 import useDataCategoryEdit from '../hooks/useAdminDataCategoryEdit'
 import { findCategoryTitleById } from '../helpers/handleBreadCrumbs'
-import useDataCategories from '../hooks/useClientDataCategories'
+import useDataCategories from '../hooks/useDataCategories'
 import Admin from '../components/Admin'
 
 const CategoryEdit = () => {

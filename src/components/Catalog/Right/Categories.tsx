@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { List, ListItem, ListItemText } from '@mui/material'
 import { themeColors } from '../../../styles/mui'
-import useDataCategories from '../../../hooks/useClientDataCategories'
+import useDataCategories from '../../../hooks/useDataCategories'
 
 const Categories = () => {
   const { data } = useDataCategories()
