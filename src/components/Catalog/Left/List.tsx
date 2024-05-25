@@ -1,135 +1,52 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { List as MuiList, ListItem, ListItemText } from '@mui/material'
-import { themeColors } from '../../../styles/mui'
-import useDataCategories from '../../../hooks/useClientDataCategories'
+import { useCatalog } from '../../../store/CatalogStore'
+import { Box, Grid, Skeleton, Typography } from '@mui/material'
+import ProductCard from '../../ProductCard'
+import useDataCatalog from '../../../hooks/useClientDataCatalog'
+
 const List = () => {
-  const { data } = useDataCategories()
-  const { lvl1, lvl2, lvl3, documentType } = useParams()
-  const location = useLocation()
-  const navigate = useNavigate()
-
-  const handlePush = (
-    lvl1: ICategory,
-    lvl2: ICategory,
-    currentItem: ICategory
-  ) => {
-    if (currentItem.lvlNumber === 2) {
-      navigate(
-        `/client/${documentType}/${lvl1.id}/${lvl2.id}/0${location.search}?page=1`
-      )
-    }
-    if (currentItem.lvlNumber === 3) {
-      navigate(
-        `/client/${documentType}/${lvl1.id}/${lvl2.id}/${currentItem?.id}/${location.search}?page=1`
-      )
-    }
-  }
-
+  const { listView } = useCatalog()
+  const { data, isLoading } = useDataCatalog()
   return (
-    <>
-      <MuiList>
-        {data?.['hydra:member']?.map((lvl1Cat, key1) => {
-          if (lvl1Cat.lvlNumber === 1) {
-            return (
-              <>
-                <ListItem
-                  key={key1}
-                  onClick={() =>
-                    navigate(`/client/${documentType}/${lvl1Cat.id}/0/0?page=1`)
-                  }
-                  sx={{ cursor: 'pointer' }}
-                >
-                  <ListItemText
-                    primary={lvl1Cat.title}
-                    sx={{
-                      '& span': {
-                        textDecoration:
-                          lvl1 === lvl1Cat.id.toString() ? 'underline' : 'none',
-                        fontWeight: lvl1 === lvl1Cat.id.toString() ? 600 : 500,
-                        color:
-                          lvl1 === lvl1Cat.id.toString()
-                            ? themeColors.secondary
-                            : 'black',
-                      },
-                    }}
-                  />
-                </ListItem>
-                {lvl1 === lvl1Cat.id.toString() && (
-                  <MuiList sx={{ marginLeft: '30px' }}>
-                    {lvl1Cat?.categories?.map((lvl2Cat, key2) => {
-                      return (
-                        <>
-                          <ListItem
-                            key={key2}
-                            sx={{ cursor: 'pointer' }}
-                            onClick={() =>
-                              handlePush(lvl1Cat, lvl2Cat, lvl2Cat)
-                            }
-                          >
-                            <ListItemText
-                              primary={lvl2Cat.title}
-                              sx={{
-                                '& span': {
-                                  textDecoration:
-                                    lvl2 === lvl2Cat.id.toString()
-                                      ? 'underline'
-                                      : 'none',
-                                  fontWeight:
-                                    lvl2 === lvl2Cat.id.toString() ? 600 : 500,
-                                  color:
-                                    lvl2 === lvl2Cat.id.toString()
-                                      ? themeColors.secondary
-                                      : 'black',
-                                },
-                              }}
-                            />
-                          </ListItem>
-                          {lvl2 === lvl2Cat.id.toString() && (
-                            <List sx={{ marginLeft: '60px' }}>
-                              {lvl2Cat?.categories?.map((lvl3Cat, key3) => (
-                                <ListItem
-                                  key={key3}
-                                  sx={{ cursor: 'pointer' }}
-                                  onClick={() =>
-                                    handlePush(lvl1Cat, lvl2Cat, lvl3Cat)
-                                  }
-                                >
-                                  <ListItemText
-                                    primary={lvl3Cat.title}
-                                    sx={{
-                                      '& span': {
-                                        textDecoration:
-                                          lvl3 === lvl3Cat.id.toString()
-                                            ? 'underline'
-                                            : 'none',
-                                        fontWeight:
-                                          lvl3 === lvl3Cat.id.toString()
-                                            ? 600
-                                            : 500,
-                                        color:
-                                          lvl3 === lvl3Cat.id.toString()
-                                            ? themeColors.secondary
-                                            : 'black',
-                                      },
-                                    }}
-                                  />
-                                </ListItem>
-                              ))}
-                            </List>
-                          )}
-                        </>
-                      )
-                    })}
-                  </MuiList>
-                )}
-              </>
-            )
-          }
-        })}
-      </MuiList>
-    </>
+    <Grid container spacing={2}>
+      {isLoading ? (
+        <>
+          {Array.from({ length: 24 }).map((_, index) => (
+            <Grid item xs={3} key={index}>
+              <Skeleton
+                variant="rounded"
+                height={120}
+                sx={{ margin: '5px 0' }}
+              />
+              <Skeleton
+                variant="rounded"
+                height={120}
+                sx={{ margin: '5px 0' }}
+              />
+              <Skeleton variant="rounded" height={60} />
+            </Grid>
+          ))}
+        </>
+      ) : (
+        <>
+          {data?.['hydra:member']?.map((product, index) => (
+            <Grid
+              item
+              xs={listView == 'list' ? 12 : 6}
+              key={index}
+              sm={listView == 'list' ? 12 : 3}
+            >
+              <ProductCard product={product} />
+            </Grid>
+          ))}
+        </>
+      )}
+      {data?.['hydra:member']?.length == 0 && (
+        <Box className="centered">
+          <Typography variant="body1">לא נמאו מוצרים</Typography>
+        </Box>
+      )}
+    </Grid>
   )
 }
 
