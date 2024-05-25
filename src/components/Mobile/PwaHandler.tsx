@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
-import './IssueHandler.styles.scss'
-import { useNotifications } from '../../../../provider/PushNotification'
-import { useMobile } from '../../../../store/mobile.store'
+import { useMobile } from '../../provider/MobileProvider'
 
 interface IssueHandlerProps {
   title: string
@@ -9,20 +7,19 @@ interface IssueHandlerProps {
   needPlatrofm: IBrowser
 }
 
-const IssueHandler: FC<IssueHandlerProps> = ({ title, link, needPlatrofm }) => {
+const PwaHandler: FC<IssueHandlerProps> = ({ title, link, needPlatrofm }) => {
   const iconChrome = 'https://shanishenhav.online/app/img/chrome.png'
   const iconSafari = 'https://shanishenhav.online/app/img/safari.png'
   const googlePlay = 'https://shanishenhav.online/app/img/GooglePlay.png'
   const { isIPhone } = useMobile()
   return (
     <div className="IssueHandler">
-      <div>
+      {/* <div>
         <div className="centered">
           {needPlatrofm == 'Safari' && <img src={iconSafari} />}
           {needPlatrofm == 'Chrome' && <img src={iconChrome} />}
         </div>
         <div className="content">
-          {/* {title} */}
           <h2>אנו תומכים</h2>
           <h2>אך ורק בדפדפן מסוג {needPlatrofm}</h2>
           <h2>במכשירי {isIPhone ? 'Apple' : 'Android'}</h2>
@@ -34,11 +31,7 @@ const IssueHandler: FC<IssueHandlerProps> = ({ title, link, needPlatrofm }) => {
             <h4>ההתקנה שמופיעות למטה</h4>
           </div>
         )}
-        {/* {link &&
-                    <div className='centered'>
-                        <span> להורדת דפדפן לחץ  <a href={link}>כאן</a></span>
-                    </div>
-                } */}
+
         {needPlatrofm == 'Chrome' && (
           <div className="content" style={{ paddingTop: '10px' }}>
             <h4>או לחץ על הקישור</h4>
@@ -49,9 +42,9 @@ const IssueHandler: FC<IssueHandlerProps> = ({ title, link, needPlatrofm }) => {
             </a>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }
 
-export default IssueHandler
+export default PwaHandler

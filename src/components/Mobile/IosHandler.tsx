@@ -1,26 +1,27 @@
 import React from 'react'
-import { useNotifications } from '../../../../provider/PushNotification'
-import './IosHandler.styles.scss'
-import IssueHandler from '../IssueHandler/IssueHandler'
-import { useMobile } from '../../../../store/mobile.store'
-import { useOneSignalStore } from '../../../../store/oneSignalStore'
+// import { useNotifications } from '../../provider/PushNotification'
+import { useMobile } from '../../provider/MobileProvider'
+// import { useOneSignalStore } from '../../../../store/oneSignalStore'
+import PwaHandler from './PwaHandler'
+import { useOneSignalStore } from '../../store/oneSignalStore'
 
 const IosHandler = () => {
-  const { isPwa } = useMobile()
-  const { detectBrowser } = useOneSignalStore()
-  const { handleRemoveIosPromt, removeIosPromt } = useNotifications()
+  const { isPwa, detectBrowser } = useMobile()
+  //   const { handleRemoveIosPromt, removeIosPromt } = useNotifications()
   const iconFirst = 'https://shanishenhav.online/app/img/shareSafariIcon.png'
+
   function isUsingChromeOniPhone() {
     const userAgent = window.navigator.userAgent
     return /CriOS/i.test(userAgent)
   }
+
   return (
     <>
       {detectBrowser() === 'Safari' && !isUsingChromeOniPhone() ? (
         <>
           {!isPwa && (
             <>
-              {removeIosPromt ? (
+              {/* {removeIosPromt ? (
                 <div
                   className="IosHandler"
                   onClick={() => handleRemoveIosPromt()}
@@ -36,12 +37,12 @@ const IosHandler = () => {
                     <div className="triangle-down"></div>
                   </div>
                 </div>
-              ) : null}
+              ) : null} */}
             </>
           )}
         </>
       ) : (
-        <IssueHandler
+        <PwaHandler
           title={'אנחנו תומכים רק בדפדפן SAFARI'}
           link={''}
           needPlatrofm={'Safari'}

@@ -15,7 +15,6 @@ interface OneSignalStoreState {
   getOneSignalNotifications: (userExtId: string) => void
   registerClient: (userExtId: string, appId: string, platform: string) => void
   handleIsRead: (id: number | string, value: boolean) => void
-  detectBrowser: () => IBrowser
 }
 
 export const useOneSignalStore = create<OneSignalStoreState>((set, get) => ({
@@ -71,23 +70,4 @@ export const useOneSignalStore = create<OneSignalStoreState>((set, get) => ({
   },
 
   handleIsRead: (id: number | string, value: boolean) => {},
-
-  detectBrowser: (): IBrowser => {
-    const nav = navigator.userAgent
-    if (nav.indexOf('Chrome') > -1) {
-      return 'Chrome'
-    } else if (nav.indexOf('Firefox') > -1) {
-      return 'Firefox'
-    } else if (nav.indexOf('Safari') > -1) {
-      return 'Safari'
-    } else if (nav.indexOf('Edge') > -1) {
-      return 'Edge'
-    } else if (nav.indexOf('Opera') > -1) {
-      return 'Opera'
-    } else if (nav.indexOf('Trident') > -1) {
-      return 'Trident'
-    } else {
-      return 'Unknown'
-    }
-  },
 }))

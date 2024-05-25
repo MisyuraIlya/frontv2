@@ -16,15 +16,14 @@ import { themeColors } from '../styles/mui'
 import { useAuth } from '../store/useAuthStore'
 import { onAsk } from '../shared/MySweetAlert'
 import { useNavigate } from 'react-router-dom'
-import NotificationContainer from '../modules/PushNotifications/components/NotificationContainer/NotificationContainer'
+import NotificationContainer from './NotificationContainer'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 import { useModals } from '../provider/ModalProvider'
-import ProfileMenu from '../modules/Header/components/LeftComponent/components/ProfileMenu'
 
 const BottomNavigationMobile = () => {
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
-  const { user, agent, logOut, isAgent } = useAuth()
+  const { user, logOut, isAgent } = useAuth()
   const { setOpenAuthModal } = useModals()
   const [openDrawver, setOpenDrawver] = useState(false)
   const navigate = useNavigate()
@@ -68,19 +67,6 @@ const BottomNavigationMobile = () => {
     <>
       {isMobile && (
         <>
-          {open && (
-            <Paper
-              elevation={4}
-              sx={{
-                position: 'fixed',
-                left: '10px',
-                bottom: '55px',
-                zIndex: 101,
-              }}
-            >
-              <ProfileMenu />
-            </Paper>
-          )}
           <Paper
             sx={{
               position: 'fixed',
@@ -127,7 +113,7 @@ const BottomNavigationMobile = () => {
                 />
               )}
             </BottomNavigation>
-            {agent && agent.id !== user?.id && (
+            {/* {agent && agent.id !== user?.id && (
               <Box
                 className="centered"
                 sx={{
@@ -140,7 +126,7 @@ const BottomNavigationMobile = () => {
                   {user?.extId} - {user?.name}
                 </Typography>
               </Box>
-            )}
+            )} */}
           </Paper>
           <Drawer
             anchor="right"
